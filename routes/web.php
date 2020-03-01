@@ -26,3 +26,15 @@ Route::get('/about-us', function () {
 Route::get('/contact', function () {
     return view('pages/contact');
 });
+
+Route::get('/logout', function () {
+    return view('pages/contact');
+});
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+// sign out
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

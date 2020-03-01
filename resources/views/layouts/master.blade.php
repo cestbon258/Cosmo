@@ -78,7 +78,7 @@
                 <!-- Nav Start -->
                 <div class="classynav">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ url('index') }}">Home</a></li>
                         <!--<li><a href="#">Pages</a>
                         <ul class="dropdown">
                         <li><a href="index.html">Home</a></li>
@@ -99,7 +99,7 @@
         <li><a href="elements.html">Elements</a></li>
     </ul>
 </li>-->
-<li><a href="about-us.html">About Us</a></li>
+<li><a href="{{ url('about-us') }}">About Us</a></li>
 <li><a href="listings.html">Properties</a></li>
 <li><a href="blog.html">Blog</a></li>
 <!--<li><a href="#">Mega Menu</a>
