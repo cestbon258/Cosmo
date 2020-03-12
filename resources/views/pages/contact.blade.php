@@ -52,18 +52,19 @@
                    <!-- Contact Form Area -->
                    <div class="col-12 col-lg-8">
                        <div class="contact-form">
-                           <form action="#" method="post">
+                           <form action="{{ route('contact') }}" method="POST">
+                               @csrf
                                <div class="form-group">
-                                   <input type="text" class="form-control" name="text" id="contact-name" placeholder="Your Name">
+                                   <input type="text" class="form-control" name="name" id="contact-name" placeholder="Your Name" required>
                                </div>
                                <div class="form-group">
-                                   <input type="number" class="form-control" name="number" id="contact-number" placeholder="Your Phone">
+                                   <input type="tel" class="form-control" name="phone" id="contact-number" placeholder="Your Phone">
                                </div>
                                <div class="form-group">
-                                   <input type="email" class="form-control" name="email" id="contact-email" placeholder="Your Email">
+                                   <input type="email" class="form-control" name="email" id="contact-email" placeholder="Your Email" required>
                                </div>
                                <div class="form-group">
-                                   <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Your Message"></textarea>
+                                   <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
                                </div>
                                <button type="submit" class="btn south-btn">Send Message</button>
                            </form>

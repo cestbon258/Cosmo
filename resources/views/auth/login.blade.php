@@ -1,11 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.master')
+@section('title', 'Login')
 
 @section('content')
+<div style="padding-top: 200px;"></div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">{{ __('Sign In') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -54,7 +56,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    {{ __('Sign In') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
@@ -64,10 +66,18 @@
                                 @endif
                             </div>
                         </div>
+                        <br>
+                        <div class="form-group row mb-0" style="height:48px;">
+                            <div class="col-md-8 offset-md-4">
+                                <span>{{ __('New to Cosmos') }} ?</span>
+                                <a class="btn btn-link" href="{{ route('register') }}"> {{ __('Sign up now') }}</a>.
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div style="padding-top: 200px;"></div>
 @endsection
