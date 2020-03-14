@@ -2,7 +2,7 @@
 @section('title', 'Login')
 
 @section('content')
-<div style="padding-top: 200px;"></div>
+{{-- <div style="padding-top: 200px;"></div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -79,5 +79,79 @@
         </div>
     </div>
 </div>
-<div style="padding-top: 200px;"></div>
+<div style="padding-top: 200px;"></div> --}}
+
+
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+        <div class="col-md-8 col-lg-6">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-8 mx-auto">
+                            <h3 class="login-heading mb-4">Welcome back!</h3>
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+
+                                <div class="form-label-group">
+                                    <input id="inputEmail" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="{{ __('E-Mail Address') }}" required autocomplete="email" autofocus>
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                    <label for="inputEmail">{{ __('E-Mail Address') }}</label>
+                                </div>
+
+                                <div class="form-label-group">
+                                    <input id="inputPassword" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="current-password">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                    <label for="inputPassword">{{ __('Password') }}</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input class="custom-control-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="custom-control-label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-lg primary-btn btn-block btn-login text-uppercase font-weight-bold mb-2">
+                                    {{ __('Sign In') }}
+                                </button>
+
+                                @if (Route::has('password.request'))
+                                    <div class="text-center">
+                                        <a class="small" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
+                                    </div>
+                                @endif
+                                <br>
+                                <div class="text-center">
+                                    <span>{{ __('New to Cosmo') }} ?</span>
+                                    <a class="small" href="{{ route('register') }}"> {{ __('Sign up now') }}</a>.
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+
+</style>
 @endsection

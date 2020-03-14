@@ -17,6 +17,8 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('sb-admin/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 </head>
 <body id="page-top">
     {{-- <div id="app">
@@ -90,7 +92,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Cosmos') }}</div>
+        <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Cosmo') }}</div>
     </a>
 
     <!-- Divider -->
@@ -366,7 +368,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <img class="img-profile rounded-circle" src="{{ url('storage/'.Auth::user()->profile_img)}}" onerror="this.onerror=null;this.src='{{ url('img/icons/profile.png') }}';">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

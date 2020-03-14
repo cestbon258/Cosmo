@@ -47,9 +47,13 @@ Route::get('/logout', function () {
 });
 
 
+Route::get('storage/{filename}', function ($filename)
+{
+    return Image::make(storage_path('uploads/' . $filename))->response();
+});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 // sign out
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
