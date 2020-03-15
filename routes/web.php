@@ -49,7 +49,7 @@ Route::get('/logout', function () {
 
 Route::get('storage/{filename}', function ($filename)
 {
-    return Image::make(storage_path('uploads/' . $filename))->response();
+    return Image::make(storage_path('profiles/' . $filename))->response();
 });
 
 Auth::routes();

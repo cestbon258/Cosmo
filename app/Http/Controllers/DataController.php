@@ -35,7 +35,7 @@ class DataController extends Controller
 
         $_FILES["profileImage"]["name"] = $newFileName. "." .$request->profileImage->getClientOriginalExtension();
 
-        $target_file = $target_dir .'/uploads'.'/'. basename($_FILES["profileImage"]["name"]);
+        $target_file = $target_dir .'/profile'.'/'. basename($_FILES["profileImage"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         echo '<pre>'.print_r($target_file, 1).'</pre>';
@@ -161,21 +161,58 @@ class DataController extends Controller
 
     public function create_property(Request $request)
     {
+        $user = Auth::user();
+
         $this->validate($request, [
-            'customFile' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'houseImg.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        if ($request->hasFile('customFile')) {
-            $image = $request->file('customFile');
-            $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/uploads');
-            $image->move($destinationPath, $name);
-            // $this->save();
+        $string = str_random(40); // random string
+        $house_id = md5($string . time()); // image foloder name and house id
 
-            return back()->with('success','Image Upload successfully');
+        if ($request->hasFile('houseImg')) {
+            foreach ($request->file('houseImg') as $key => $image) {
+
+                $name = md5($image->getClientOriginalName() . time());
+                // $image      = $request->file('houseImg');
+                $fileName   = $name . '.' . $image->getClientOriginalExtension();
+
+
+                $img = Image::make($image->getRealPath());
+                // $img->resize(120, 120, function ($constraint) {
+                //     $constraint->aspectRatio();
+                // });
+                $img->resize(1000, 724);
+
+                $img->stream(); // <-- Key point
+
+                Storage::disk('uploads')->put($house_id.'/'.$fileName, $img);
+                $imgArray[] = $fileName;
+            }
+
         }
+        $imgJson = json_encode($imgArray);
+        echo '<pre>'.print_r($_POST, 1).'</pre>';
+        echo '<pre>'.print_r($house_id, 1).'</pre>';
+        echo '<pre>'.print_r($imgJson, 1).'</pre>';
+
+
+
+
+        // echo '<pre>'.print_r( $request->file('customFile'), 1).'</pre>';
+
+        // if ($request->hasFile('customFile')) {
+        //     $image = $request->file('customFile');
+        //     $name = time().'.'.$image->getClientOriginalExtension();
+        //     $destinationPath = public_path('/uploads');
+        //     $image->move($destinationPath, $name);
+        //     // $this->save();
+        //
+        //     return back()->with('success','Image Upload successfully');
+        // }
 
 
         // echo '<pre>'.print_r($_POST, 1).'</pre>';
+        // return View::make('create-property');
     }
 }

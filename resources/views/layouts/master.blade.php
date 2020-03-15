@@ -11,6 +11,7 @@
     <title>Cosmo - Global Real Estate - @yield('title')</title>
     <!-- Favicon  -->
     <link rel="icon" href="{{ asset('img/core-img/favicon.ico') }}">
+    <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('style.css')}}">

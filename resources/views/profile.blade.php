@@ -96,7 +96,7 @@
     overflow: hidden;
     width: 128px;
     height: 128px;
-    border: 8px solid rgba(255, 255, 255, 0.7);
+    border: 6px solid rgba(230, 230, 230, 0.7);
     /* position: absolute; */
     /* top: 72px; */
 }
