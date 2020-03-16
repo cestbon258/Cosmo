@@ -49,7 +49,7 @@ return [
         ],
         'uploads' => [
             'driver' => 'local',
-            'root'   => storage_path ('house'),
+            'root'   => storage_path ('houses'),
         ],
 
         'public' => [

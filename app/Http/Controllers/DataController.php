@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use Auth;
 use View;
 use Session;
 use DB;
 use Redirect;
 use Hash;
-use App\User;
 use Storage;
 use Image;
 
@@ -35,7 +35,7 @@ class DataController extends Controller
 
         $_FILES["profileImage"]["name"] = $newFileName. "." .$request->profileImage->getClientOriginalExtension();
 
-        $target_file = $target_dir .'/profile'.'/'. basename($_FILES["profileImage"]["name"]);
+        $target_file = $target_dir .'/profiles'.'/'. basename($_FILES["profileImage"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         echo '<pre>'.print_r($target_file, 1).'</pre>';
@@ -99,8 +99,8 @@ class DataController extends Controller
     				'name' => $new_name,
                     'profile_img' => $profile_img
     			]);
-                Session::flash('status', 'Profile update successful!');
-                Session::flash('alert-class', 'alert-success');
+            Session::flash('status', 'Profile update successful!');
+            Session::flash('alert-class', 'alert-success');
         } else {
             Session::flash('status', 'Profile cannot be updated!');
             Session::flash('alert-class', 'alert-danger');
@@ -145,8 +145,8 @@ class DataController extends Controller
 				Session::flash('status', 'New password cannot be same as old password!');
                 Session::flash('alert-class', 'alert-danger');
 			} else {
-				$user_email = Auth::User()->email;
-				$obj_user = User::find($user_email);
+				$user_id = Auth::User()->id;
+				$obj_user = User::find($user_id);
 				$obj_user->password = Hash::make($_POST['newPasswordB']);
 				$obj_user->save();
 				Session::flash('status', 'Change password successful!');
@@ -192,6 +192,32 @@ class DataController extends Controller
 
         }
         $imgJson = json_encode($imgArray);
+
+
+        DB::table('houses')
+        ->insert(
+                [
+                    'user_id'    => $user->id,
+                    'house_code' => $house_id,
+                    'title'      => $_POST['title'],
+                    'purpose'    => $_POST['usage'],
+                    'time'       => $_POST['time'],
+                    'country'    => $_POST['country'],
+                    'city'       => $_POST['city'],
+                    'address'    => $_POST['address'],
+                    'measurement'=> $_POST['measure'],
+                    'bedroom'    => $_POST['bedroom'],
+                    'pictures'   => $imgJson,
+                    'price'      => $_POST['price'],
+                    'size'       => $_POST['size'],
+                    'bathroom'   => $_POST['bathroom'],
+                    'description'=> $_POST['description']
+                ]
+            );
+
+        Session::flash('status', 'Profile update successful!');
+        Session::flash('alert-class', 'alert-success');
+
         echo '<pre>'.print_r($_POST, 1).'</pre>';
         echo '<pre>'.print_r($house_id, 1).'</pre>';
         echo '<pre>'.print_r($imgJson, 1).'</pre>';

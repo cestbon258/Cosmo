@@ -41,15 +41,34 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" class="form-control" name="title" autocomplete="off" placeholder="Name of property" required>
+                                <label for="title">Name of property</label>
+                                <input type="text" class="form-control" name="title" autocomplete="off" placeholder="Name" required>
                                 <div class="invalid-feedback">
                                     Please input a title.
                                 </div>
                             </div>
 
+                            <label for="date">Property for</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="usage" value="sale" checked>
+                                <label class="form-check-label">Sale</label>
+                            </div>
+
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="usage" value="rent">
+                                <label class="form-check-label">Rent</label>
+                            </div>
+
                             <div class="form-group">
-                                <label for="date">Year of built</label>
+                                <label for="price">Price</label>
+                                <input type="number" class="form-control" name="price" autocomplete="off" required>
+                                <div class="invalid-feedback">
+                                    Please specify the price.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date">Year of Built</label>
                                 <input type="month" class="form-control" name="time" autocomplete="off" required>
                                 <div class="invalid-feedback">
                                     Please specify the year.
@@ -80,7 +99,34 @@
                             <div class="form-group">
                                 <label for="address">Address</label>
                                 <input type="text" class="form-control" name="address" autocomplete="off" placeholder="Address" required>
+                                <div class="invalid-feedback">
+                                    Please specify the address.
+                                </div>
                             </div>
+
+                            <label>Size</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" name="size" autocomplete="off" placeholder="Size" required>
+                                        <div class="invalid-feedback">
+                                            Please specify the size.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <select class="form-control" name="measure" required>
+                                            <option>sq ft</option>
+                                            <option>m<sup>2</sup></option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please specify the No. of bathroom.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -123,7 +169,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" name="submit" class="btn btn-primary">Create</button>
+                            <button type="submit" name="submit" class="btn btn-primary">Create property</button>
                         </div>
                     </div>
                 </div>
