@@ -2,8 +2,12 @@
 
 @section('title', 'Home')
 
+@section('specificScript')
+    <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
+@stop
 
 @section('content')
+
 
     <!-- ##### Hero Area Start ##### -->
     <section class="hero-area">
@@ -287,216 +291,53 @@
             </div>
 
             <div class="row">
+                @foreach ($properties as $key => $property)
+                    <!-- Single Featured Property -->
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
+                            <!-- Property Thumbnail -->
+                            <div class="property-thumb">
+                                <img src="{{url('images/'.$property->house_code.'/'.$property->pictures)}}" alt="">
 
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="img/bg-img/feature1.jpg" alt="">
-
-                            <div class="tag">
-                                <span>For Sale</span>
+                                <div class="tag">
+                                    <span>For {{$property->purpose}}</span>
+                                </div>
+                                @auth
+                                    <div class="list-price">
+                                        <p>${{$property->price}}</p>
+                                    </div>
+                                @endauth
                             </div>
-                            @auth
-                                <div class="list-price">
-                                    <p>$945 679</p>
-                                </div>
-                            @endauth
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Villa in Los Angeles</h5>
-                            <p class="location"><img src="img/icons/location.png" alt="">Upper Road 3411, no.34 CA</p>
-                            <p>Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                <div class="new-tag">
-                                    <img src="img/icons/new.png" alt="">
-                                </div>
-                                <div class="bathroom">
-                                    <img src="img/icons/bathtub.png" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="garage">
-                                    <img src="img/icons/garage.png" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="space">
-                                    <img src="img/icons/space.png" alt="">
-                                    <span>120 sq ft</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="200ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="img/bg-img/feature2.jpg" alt="">
-
-                            <div class="tag">
-                                <span>For Sale</span>
-                            </div>
-                            @auth
-                                <div class="list-price">
-                                    <p>$945 679</p>
-                                </div>
-                            @endauth
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Town House in Los Angeles</h5>
-                            <p class="location"><img src="img/icons/location.png" alt="">Upper Road 3411, no.34 CA</p>
-                            <p>Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                <div class="new-tag">
-                                    <img src="img/icons/new.png" alt="">
-                                </div>
-                                <div class="bathroom">
-                                    <img src="img/icons/bathtub.png" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="garage">
-                                    <img src="img/icons/garage.png" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="space">
-                                    <img src="img/icons/space.png" alt="">
-                                    <span>120 sq ft</span>
+                            <!-- Property Content -->
+                            <div class="property-content">
+                                <a href="{{ url('property/'.$property->house_code) }}"><h5>{{$property->title}}</h5></a>
+                                <p class="location"><img src="img/icons/location.png" alt="">{{$property->address}}</p>
+                                <p>{{$property->description}}</p>
+                                <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                    <div class="new-tag">
+                                        <img src="img/icons/new.png" alt="">
+                                    </div>
+                                    <div class="bathroom">
+                                        <img src="img/icons/bathtub.png" alt="">
+                                        <span>{{$property->bathroom}}</span>
+                                    </div>
+                                    <div class="garage">
+                                        <img src="img/icons/garage.png" alt="">
+                                        <span>{{$property->bedroom}}</span>
+                                    </div>
+                                    <div class="space">
+                                        <img src="img/icons/space.png" alt="">
+                                        <span>{{$property->size}} {{$property->measurement}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
 
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="300ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="img/bg-img/feature3.jpg" alt="">
 
-                            <div class="tag">
-                                <span>For Sale</span>
-                            </div>
-                            @auth
-                                <div class="list-price">
-                                    <p>$945 679</p>
-                                </div>
-                            @endauth
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Town House in Los Angeles</h5>
-                            <p class="location"><img src="img/icons/location.png" alt="">Upper Road 3411, no.34 CA</p>
-                            <p>Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                <div class="new-tag">
-                                    <img src="img/icons/new.png" alt="">
-                                </div>
-                                <div class="bathroom">
-                                    <img src="img/icons/bathtub.png" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="garage">
-                                    <img src="img/icons/garage.png" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="space">
-                                    <img src="img/icons/space.png" alt="">
-                                    <span>120 sq ft</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="400ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="img/bg-img/feature4.jpg" alt="">
-
-                            <div class="tag">
-                                <span>For Sale</span>
-                            </div>
-                            @auth
-                                <div class="list-price">
-                                    <p>$945 679</p>
-                                </div>
-                            @endauth
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Villa in Los Angeles</h5>
-                            <p class="location"><img src="img/icons/location.png" alt="">Upper Road 3411, no.34 CA</p>
-                            <p>Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                <div class="new-tag">
-                                    <img src="img/icons/new.png" alt="">
-                                </div>
-                                <div class="bathroom">
-                                    <img src="img/icons/bathtub.png" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="garage">
-                                    <img src="img/icons/garage.png" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="space">
-                                    <img src="img/icons/space.png" alt="">
-                                    <span>120 sq ft</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Featured Property -->
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="500ms">
-                        <!-- Property Thumbnail -->
-                        <div class="property-thumb">
-                            <img src="img/bg-img/feature5.jpg" alt="">
-
-                            <div class="tag">
-                                <span>For Sale</span>
-                            </div>
-                            <div class="list-price">
-                                <p>$945 679</p>
-                            </div>
-                        </div>
-                        <!-- Property Content -->
-                        <div class="property-content">
-                            <h5>Town House in Los Angeles</h5>
-                            <p class="location"><img src="img/icons/location.png" alt="">Upper Road 3411, no.34 CA</p>
-                            <p>Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada.</p>
-                            <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                <div class="new-tag">
-                                    <img src="img/icons/new.png" alt="">
-                                </div>
-                                <div class="bathroom">
-                                    <img src="img/icons/bathtub.png" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="garage">
-                                    <img src="img/icons/garage.png" alt="">
-                                    <span>2</span>
-                                </div>
-                                <div class="space">
-                                    <img src="img/icons/space.png" alt="">
-                                    <span>120 sq ft</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Featured Property -->
+                {{-- <!-- Single Featured Property -->
                 <div class="col-12 col-md-6 col-xl-4">
                     <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="600ms">
                         <!-- Property Thumbnail -->
@@ -536,14 +377,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
     <!-- ##### Featured Properties Area End ##### -->
 
     <!-- ##### Call To Action Area Start ##### -->
-    <section class="call-to-action-area bg-fixed bg-overlay-black" style="background-image: url(img/bg-img/cta.jpg)">
+    <section class="call-to-action-area bg-fixed bg-overlay-black" style="background-image: url( {{url('img/bg-img/cta.jpg')}} )">
         <div class="container h-100">
             <div class="row align-items-center h-100">
                 <div class="col-12">

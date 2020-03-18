@@ -2,8 +2,12 @@
 
 @section('title', 'About Us')
 
+@section('specificScript')
+    <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
+@stop
 
 @section('content')
+
     <!-- ##### About Content Wrapper Start ##### -->
     <section class="about-content-wrapper section-padding-100">
         <div class="container">

@@ -11,7 +11,17 @@
     <title>Cosmo - Global Real Estate - @yield('title')</title>
     <!-- Favicon  -->
     <link rel="icon" href="{{ asset('img/core-img/favicon.ico') }}">
-    <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+    {{--
+        ####this js will affect the original js liberary,
+        only include in specific pages,
+        instead of set it globally####
+
+        <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
+     --}}
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('style.css')}}">
@@ -48,7 +58,7 @@
     }
 
     .bg-image {
-      background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
+      background-image: url( {{ url('https://source.unsplash.com/WEQbe2jBg40/600x1200') }} );
       background-size: cover;
       background-position: center;
     }
@@ -164,7 +174,7 @@
                     </div>
                     <div class="phone-number d-flex">
                         <div class="icon">
-                            <img src="img/icons/phone-call.png" alt="">
+                            <img src="{{ url('img/icons/phone-call.png') }}" alt="">
                         </div>
                         <div class="number">
                             <a href="tel:+45 677 8993000 223">+45 677 8993000 223</a>
@@ -295,13 +305,15 @@
 </header>
 
 <div>
+    @yield('specificScript')
+
     @yield('content')
 </div>
 
 
 
 <!-- ##### Footer Area Start ##### -->
-<footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url(img/bg-img/cta.jpg);">
+<footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url( {{ url('img/bg-img/cta.jpg') }} );">
     <!-- Main Footer Area -->
     <div class="main-footer-area">
         <div class="container">
@@ -315,9 +327,9 @@
                             <h6>About Us</h6>
                         </div>
 
-                        <img src="img/bg-img/footer.jpg" alt="">
+                        <img src="{{ url('img/bg-img/footer.jpg') }}" alt="">
                         <div class="footer-logo my-4">
-                            <img src="img/core-img/logo.png" alt="">
+                            <img src="{{ url('img/core-img/logo.png') }}" alt="">
                         </div>
                         <p>Integer nec bibendum lacus. Suspen disse dictum enim sit amet libero males uada feugiat. Praesent malesuada.</p>
                     </div>
@@ -340,9 +352,9 @@
                         </div>
                         <!-- Address -->
                         <div class="address">
-                            <h6><img src="img/icons/phone-call.png" alt=""> +45 677 8993000 223</h6>
-                            <h6><img src="img/icons/envelope.png" alt=""> office@template.com</h6>
-                            <h6><img src="img/icons/location.png" alt=""> Main Str. no 45-46, b3, 56832, Los Angeles, CA</h6>
+                            <h6><img src="{{ url('img/icons/phone-call.png') }}" alt=""> +45 677 8993000 223</h6>
+                            <h6><img src="{{ url('img/icons/envelope.png') }}" alt=""> office@template.com</h6>
+                            <h6><img src="{{ url('img/icons/location.png') }}" alt=""> Main Str. no 45-46, b3, 56832, Los Angeles, CA</h6>
                         </div>
                     </div>
                 </div>
@@ -384,15 +396,15 @@
                         <div class="featured-properties-slides owl-carousel">
                             <!-- Single Slide -->
                             <div class="single-featured-properties-slide">
-                                <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
+                                <a href="#"><img src="{{ url('img/bg-img/fea-product.jpg') }}" alt=""></a>
                             </div>
                             <!-- Single Slide -->
                             <div class="single-featured-properties-slide">
-                                <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
+                                <a href="#"><img src="{{ url('img/bg-img/fea-product.jpg') }}" alt=""></a>
                             </div>
                             <!-- Single Slide -->
                             <div class="single-featured-properties-slide">
-                                <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
+                                <a href="#"><img src="{{ url('img/bg-img/fea-product.jpg') }}" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -412,7 +424,8 @@
     <!-- ##### Footer Area End ##### -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script> --}}
+
     <!-- Popper js -->
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <!-- Bootstrap js -->

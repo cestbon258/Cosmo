@@ -16,8 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{ asset('sb-admin/sb-admin-2.min.css') }}" rel="stylesheet">
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 <body id="page-top">
@@ -380,7 +379,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('sb-admin/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('sb-admin/jquery.min.js') }}"></script> --}}
 
     <script src="{{ asset('sb-admin/bootstrap.bundle.min.js') }}"></script>
 

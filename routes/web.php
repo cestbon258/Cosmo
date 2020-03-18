@@ -15,9 +15,7 @@
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('pages/index');
-})->name('/');
+Route::get('/', 'DataController@home')->name('/');
 
 Route::get('/about-us', function () {
     return view('pages/about-us');
@@ -30,6 +28,10 @@ Route::get('/contact', function () {
 Route::get('/create-property', function () {
     return view('pages/create-property');
 })->name('create-property');
+
+Route::get('/property-list', 'DataController@property_list')->name('my-property');
+
+Route::get('/property/{houseCode}', 'DataController@property');
 
 Route::post('/create-property', 'DataController@create_property');
 
@@ -50,6 +52,24 @@ Route::get('/logout', function () {
 Route::get('storage/{filename}', function ($filename)
 {
     return Image::make(storage_path('profiles/' . $filename))->response();
+});
+
+
+Route::get('/images/{folder}/{filename}', function ($folder,$filename)
+{
+    $path = storage_path('houses/' . $folder .'/'. $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
 });
 
 Auth::routes();

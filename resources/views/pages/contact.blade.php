@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
-@section('title', 'About Us')
+@section('title', 'Contact Us')
 
+@section('specificScript')
+    <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
+@stop
 
 @section('content')
 

@@ -15,6 +15,23 @@ use Image;
 
 class DataController extends Controller
 {
+    public function home()
+    {
+
+        $allProperty = DB::table('houses')
+            ->get();
+
+        // get first image from json
+        foreach ($allProperty as $key => $property) {
+            $picArray = json_decode($property->pictures);
+            $property->pictures = $picArray[0];
+        }
+
+        // echo '<pre>'.print_r($allProperty, 1).'</pre>';
+
+        return View::make('pages/index')->with(array("properties"=>$allProperty));
+    }
+
     public function profile()
     {
 
@@ -183,16 +200,24 @@ class DataController extends Controller
                 //     $constraint->aspectRatio();
                 // });
                 $img->resize(1000, 724);
-
                 $img->stream(); // <-- Key point
 
                 Storage::disk('uploads')->put($house_id.'/'.$fileName, $img);
+
+                // should have thumbnails
+                $thumb = Image::make($image->getRealPath());
+                $thumb->resize(125, 90.5);
+                $thumb->stream(); // <-- Key point
+
+                Storage::disk('uploads')->put($house_id.'/thumbnails'.'/'.$fileName, $thumb);
                 $imgArray[] = $fileName;
             }
 
         }
         $imgJson = json_encode($imgArray);
-
+        // convert to date
+        $date = date_create($_POST['time']);
+        $newDate= date_format($date,"Y-m-d");;
 
         DB::table('houses')
         ->insert(
@@ -201,7 +226,7 @@ class DataController extends Controller
                     'house_code' => $house_id,
                     'title'      => $_POST['title'],
                     'purpose'    => $_POST['usage'],
-                    'time'       => $_POST['time'],
+                    'time'       => $newDate,
                     'country'    => $_POST['country'],
                     'city'       => $_POST['city'],
                     'address'    => $_POST['address'],
@@ -218,9 +243,10 @@ class DataController extends Controller
         Session::flash('status', 'Profile update successful!');
         Session::flash('alert-class', 'alert-success');
 
-        echo '<pre>'.print_r($_POST, 1).'</pre>';
-        echo '<pre>'.print_r($house_id, 1).'</pre>';
-        echo '<pre>'.print_r($imgJson, 1).'</pre>';
+        return back();
+
+        // echo '<pre>'.print_r($_POST, 1).'</pre>';
+        // echo '<pre>'.print_r($newDate, 1).'</pre>';
 
 
 
@@ -241,4 +267,41 @@ class DataController extends Controller
         // echo '<pre>'.print_r($_POST, 1).'</pre>';
         // return View::make('create-property');
     }
+
+
+    public function property_list()
+    {
+        $user = Auth::user();
+
+        $myProperty = DB::table('houses')
+            ->select('house_code', 'title', 'pictures', 'created_at')
+            ->where('user_id', $user->id)
+            ->get();
+
+
+        echo '<pre>'.print_r($myProperty, 1).'</pre>';
+
+        return View::make('pages/property-list')->with(array('user' => $user, "properties"=>$myProperty));
+    }
+
+
+    public function property($houseCode)
+    {
+        $user = Auth::user();
+
+        $myProperty = DB::table('houses')
+            ->where('house_code', $houseCode)
+            ->first();
+
+        $picArray = json_decode($myProperty->pictures);
+
+        $myProperty->pictures = $picArray;
+
+
+        // echo '<pre>'.print_r($myProperty, 1).'</pre>';
+
+        return View::make('pages/property')->with(array('user' => $user, "property"=>$myProperty));
+    }
+
+
 }
