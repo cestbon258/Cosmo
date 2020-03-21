@@ -1,6 +1,10 @@
 @extends('layouts.master')
 @section('title', 'Login')
 
+@section('specificScript')
+    <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
+@stop
+
 @section('content')
 {{-- <div style="padding-top: 200px;"></div>
 <div class="container">

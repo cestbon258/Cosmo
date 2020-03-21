@@ -17,26 +17,13 @@
     .slide .item{
         margin-bottom: 60px;
     }
-    .content-slider li{
-        background-color: #ed3020;
-        text-align: center;
-        color: #FFF;
-    }
-    .content-slider h3 {
-        margin: 0;
-        padding: 70px 0;
-    }
-    .slide{
+    /* .slide{
         width: 800px;
-    }
+    } */
     </style>
     <script src="{{asset("js/lightslider.js")}}"></script>
     <script>
         $(document).ready(function() {
-            $("#content-slider").lightSlider({
-                loop:true,
-                keyPress:true
-            });
             $('#image-gallery').lightSlider({
                 gallery:true,
                 item:1,
@@ -45,6 +32,12 @@
                 speed:500,
                 auto:true,
                 loop:true,
+                pauseOnHover:true,
+                slideEndAnimation:true,
+                enableTouch:true,
+                enableDrag:true,
+                // easing: 'linear',
+                cssEasing:'ease',
                 onSliderLoad: function() {
                     $('#image-gallery').removeClass('cS-hidden');
                 }
@@ -59,12 +52,12 @@
                 <div class="col-12 col-sm-6 col-md-6">
                     <div class="slide">
                         <div class="item">
-                            <div class="clearfix" style="max-width:474px;">
+                            <div class="clearfix" style="max-width:600px;">
                                 <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
 
-                                    @foreach ($property->pictures as $key => $value)
-                                        <li data-thumb="{{url('images/'.$property->house_code.'/'.$value)}}">
-                                            <img src="{{url('images/'.$property->house_code.'/'.$value)}}" />
+                                    @foreach ($property->pictures as $key => $picture)
+                                        <li data-thumb="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$picture)}}">
+                                            <img src="{{url('images/'.$property->house_code.'/'.$picture)}}" onerror="this.onerror=null;this.src='{{ url('img/icons/default.png') }}';" />
                                         </li>
                                     @endforeach
 

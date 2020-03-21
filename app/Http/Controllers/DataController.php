@@ -181,7 +181,8 @@ class DataController extends Controller
         $user = Auth::user();
 
         $this->validate($request, [
-            'houseImg.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'houseImg.*' => 'required|image|mimes:jpeg,png,jpg',
+            // 'houseImg.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $string = str_random(40); // random string
@@ -206,7 +207,7 @@ class DataController extends Controller
 
                 // should have thumbnails
                 $thumb = Image::make($image->getRealPath());
-                $thumb->resize(125, 90.5);
+                $thumb->resize(350, 250);
                 $thumb->stream(); // <-- Key point
 
                 Storage::disk('uploads')->put($house_id.'/thumbnails'.'/'.$fileName, $thumb);
@@ -274,7 +275,6 @@ class DataController extends Controller
         $user = Auth::user();
 
         $myProperty = DB::table('houses')
-            ->select('house_code', 'title', 'pictures', 'created_at')
             ->where('user_id', $user->id)
             ->get();
 
@@ -301,6 +301,27 @@ class DataController extends Controller
         // echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/property')->with(array('user' => $user, "property"=>$myProperty));
+    }
+
+    public function edit_property($houseCode)
+    {
+        $user = Auth::user();
+
+        $myProperty = DB::table('houses')
+            ->where('house_code', $houseCode)
+            ->first();
+
+        $dateValue = $myProperty->time;
+        $time=strtotime($dateValue);
+        $temp=date("Y-m",$time);
+        $myProperty->time = $temp;
+
+        $picArray = json_decode($myProperty->pictures);
+        $myProperty->pictures = $picArray;
+
+        echo '<pre>'.print_r($myProperty, 1).'</pre>';
+
+        return View::make('pages/edit-property')->with(array('user' => $user, "property"=>$myProperty));
     }
 
 
