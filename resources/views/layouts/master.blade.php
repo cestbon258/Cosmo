@@ -26,14 +26,14 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('style.css')}}">
     <style>
-    .single-featured-property:hover img{
+    /* .single-featured-property:hover img{
         -webkit-transition-duration: 1000ms;
         -o-transition-duration: 1000ms;
         transition-duration: 1000ms;
         -webkit-transform: scale(1.2);
         -ms-transform: scale(1.2);
         transform: scale(1.2);
-    }
+    } */
     .single-property-area .property-thumb img {
         -webkit-transition-duration: 1000ms;
         -o-transition-duration: 1000ms;
@@ -58,7 +58,7 @@
     }
 
     .bg-image {
-      background-image: url( {{ url('https://source.unsplash.com/WEQbe2jBg40/600x1200') }} );
+      background-image: url( {{ url('img/bg-img/hero5.jpg') }} );
       background-size: cover;
       background-position: center;
     }
@@ -159,6 +159,15 @@
         color: #777;
       }
     }
+
+    @media (min-width: 767.98px) {
+        #sign-up-btn {
+            margin-top: 12px;
+        }
+    }
+
+
+
     </style>
 </head>
 <body>
@@ -276,11 +285,12 @@
                     <li><a href="{{ route('dashboard')}}">Dashboard</a></li>
                     <li><a href="{{ route('profile')}}">Profile</a></li>
 
-                    <li><a href="{{ url('/logout') }}"><button type="button" class="btn primary-btn btn-md btn-block mt-2">Sign Out</button></a></li>
+                    <li><a href="{{ url('/logout') }}"><button type="button" class="btn btn-outline-secondary btn-block mt-2">Sign Out</button></a></li>
                 </ul>
             </li>
         @else
-            <li><a href="{{ url('/login') }}"><button type="button" class="btn primary-btn btn-md text-uppercase">Sign In</button></a></li>
+            <li><a href="{{ url('/login') }}"><button type="button" class="btn btn-light btn-md btn-block text-uppercase">Log In</button></a></li>
+            <li id="sign-up-btn"><a href="{{ url('/register') }}"><button type="button" class="btn btn-outline-light btn-md btn-block text-uppercase">Sign Up</button></a></li>
         @endauth
 
 

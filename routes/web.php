@@ -16,6 +16,7 @@
 // });
 Auth::routes(['verify' => true]);
 
+
 Route::get('/', 'DataController@home')->name('/');
 
 Route::get('/about-us', function () {
@@ -40,7 +41,8 @@ Route::get('/edit-property/{houseCode}', 'DataController@edit_property');
 Route::post('/contact', 'MailController@contact_us');
 
 
-Route::get('/profile', 'DataController@profile')->name('profile');
+Route::get('/profile', 'DataController@profile')->name('profile')->middleware('verified');
+
 Route::post('/profile/update', 'DataController@profile_update')->name('profile/update');
 
 Route::get('/change-password', 'DataController@change_password')->name('change-password');
