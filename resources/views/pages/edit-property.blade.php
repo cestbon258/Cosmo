@@ -16,27 +16,40 @@
             </div>
         @endif
 
-        <form enctype="multipart/form-data" method="POST" action="{{ route('create-property') }}" class="needs-validation" novalidate>
+        <form enctype="multipart/form-data" method="POST" action="{{ url('edit-property/'.$property->house_code) }}" class="needs-validation" novalidate>
             @csrf
             <div class="container">
 
                 <div class="col">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                          <h6 class="m-0 font-weight-bold text-primary">Create Property</h6>
+                          <h6 class="m-0 font-weight-bold text-primary">Edit Property</h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-2 imgUp">
-                                    <div class="imagePreview"></div>
-                                    <label class="btn btn-primary-custom">
-                                        Upload
-                                        <input type="file" accept="image/*" class="uploadFile img" name="houseImg[]" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" required>
-                                        <div class="invalid-feedback">
-                                            Please upload at least an image.
+                                @foreach ($property->pictures as $key => $picture)
+                                    @if($key == 0)
+                                        <div class="col-sm-3 imgUp">
+                                            <div class="imagePreview" style="background:url( {{url('images/'.$property->house_code.'/'.$picture)}} ); background-position: center center; background-size: cover; background-repeat: no-repeat;"></div>
+                                            <input name="orignImg[]"value="{{$picture}}" hidden>
+
+                                            {{-- <label class="btn btn-primary-custom">
+                                                Change Image
+                                                <input type="file" accept="image/*" class="uploadFile img" name="houseImg[]" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                                            </label> --}}
+                                            <i class="fa fa-times del"></i>
+
                                         </div>
-                                    </label>
-                                </div>
+                                        {{-- <i class="fa fa-plus imgAdd"></i> --}}
+                                    @else
+                                        <div class="col-sm-3 imgUp">
+                                            <div class="imagePreview" style="background:url( {{url('images/'.$property->house_code.'/'.$picture)}} ); background-position: center center; background-size: cover; background-repeat: no-repeat;"></div>
+                                            <input name="orignImg[]"value="{{$picture}}" hidden>
+                                            <i class="fa fa-times del"></i>
+                                        </div>
+                                    @endif
+
+                                @endforeach
                                 <i class="fa fa-plus imgAdd"></i>
                             </div>
 
@@ -178,7 +191,7 @@
 
 
 
-
+{{--
     <style>
 
     .imagePreview {
@@ -233,7 +246,7 @@
     </style>
     <script>
     $(".imgAdd").click(function(){
-        $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-2 imgUp"><div class="imagePreview"></div><label class="btn btn-primary-custom">Upload<input type="file" accept="image/*" class="uploadFile img" name="houseImg[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
+        $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-3 imgUp"><div class="imagePreview"></div><label class="btn btn-primary-custom">Upload<input type="file" accept="image/*" class="uploadFile img" name="houseImg[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
     });
 
     $(document).on("click", "i.del" , function() {
@@ -278,5 +291,5 @@
         });
       }, false);
     })();
-    </script>
+    </script> --}}
 @stop

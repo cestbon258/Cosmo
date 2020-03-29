@@ -6,6 +6,7 @@
 @stop
 
 @section('content')
+
 {{-- <div style="padding-top: 200px;"></div>
 <div class="container">
     <div class="row justify-content-center">
@@ -155,7 +156,11 @@
     </div>
 </div>
 
-<style type="text/css">
-
+<style>
+    .bg-image {
+      background-image: url( {{ url('img/bg-img/hero5.jpg') }} );
+      background-size: cover;
+      background-position: center;
+    }
 </style>
 @endsection

@@ -10,7 +10,7 @@
 
     {{-- <title>{{ config('app.name', 'Cosmos') }}</title> --}}
     <title>Cosmo - Global Real Estate - @yield('title')</title>
-    <link rel="icon" href="{{ asset('img/core-img/favicon.ico') }}">
+    <link rel="icon" href="{{ asset('logo/favicon.ico') }}">
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('sb-admin/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -25,8 +25,10 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <style>
         .theme-primary {
-            background-color: #ff0000;
+            background-color: #212529;
+            /* opacity: .8; */
             /* background-image: linear-gradient(180deg,#ff0000 10%,#fb4747 100%); */
+            background-image: linear-gradient(#212529, #737373);
             background-size: cover;
         }
     </style>
@@ -43,7 +45,8 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    {{-- <i class="fas fa-laugh-wink"></i> --}}
+                    <img style="width:80px; height:auto;" src="{{ url('logo/logo.png') }}">
                 </div>
                 <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Cosmo') }}</div>
             </a>
@@ -57,17 +60,19 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Center</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('create-property') }}">
-                <i class="fas fa-plus-circle"></i>
-                <span>Create Property</span></a>
-            </li>
+            @if (Auth::user()->role == 0 || Auth::user()->role == 2)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('create-property') }}">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Create Property</span></a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('property-list') }}">
-                <i class="fas fa-home"></i>
-                <span>My Properties</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('property-list') }}">
+                    <i class="fas fa-home"></i>
+                    <span>My Properties</span></a>
+                </li>
+            @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -243,5 +248,111 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('sb-admin/sb-admin-2.min.js') }}"></script>
+
+
+
+    <style>
+
+    .imagePreview {
+        width: 100%;
+        height: 180px;
+        background-position: center center;
+        background:url(img/icons/default-2.jpg);
+        background-color:#fff;
+        background-size: cover;
+        background-repeat:no-repeat;
+        display: inline-block;
+        box-shadow:0px -3px 6px 2px rgba(0,0,0,0.2);
+    }
+    .btn-primary-custom
+    {
+      display:block;
+      border-radius:0px;
+      box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
+      margin-top:-5px;
+      color:#fff;
+      background-color:#980000;
+    }
+    .imgUp
+    {
+      margin-bottom:15px;
+    }
+    .del
+    {
+      position:absolute;
+      top:0px;
+      right:15px;
+      width:30px;
+      height:30px;
+      text-align:center;
+      line-height:30px;
+      background-color:rgba(255,255,255,0.6);
+      cursor:pointer;
+    }
+    .imgAdd
+    {
+      width:30px;
+      height:30px;
+      border-radius:50%;
+      background-color:#980000;
+      color:#fff;
+      box-shadow:0px 0px 2px 1px rgba(0,0,0,0.2);
+      text-align:center;
+      line-height:30px;
+      margin-top:0px;
+      cursor:pointer;
+      font-size:15px;
+    }
+
+    </style>
+    <script>
+    $(".imgAdd").click(function(){
+        $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-3 imgUp"><div class="imagePreview"></div><label class="btn btn-primary-custom">Upload<input type="file" accept="image/*" class="uploadFile img" name="houseImg[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
+    });
+
+    $(document).on("click", "i.del" , function() {
+        $(this).parent().remove();
+    });
+
+    $(function() {
+        $(document).on("change",".uploadFile", function()
+        {
+            var uploadFile = $(this);
+            var files = !!this.files ? this.files : [];
+            if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+            if (/^image/.test( files[0].type)){ // only image file
+                var reader = new FileReader(); // instance of the FileReader
+                reader.readAsDataURL(files[0]); // read the local file
+
+                reader.onloadend = function(){ // set image data as background of div
+                    //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                    uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+                }
+            }
+
+        });
+    });
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+    </script>
+
 </body>
 </html>

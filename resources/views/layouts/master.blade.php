@@ -10,7 +10,7 @@
 
     <title>Cosmo - Global Real Estate - @yield('title')</title>
     <!-- Favicon  -->
-    <link rel="icon" href="{{ asset('img/core-img/favicon.ico') }}">
+    <link rel="icon" href="{{ asset('logo/favicon.ico') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
@@ -25,146 +25,9 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('style.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/custom-style.css')}}">
     <style>
-    /* .single-featured-property:hover img{
-        -webkit-transition-duration: 1000ms;
-        -o-transition-duration: 1000ms;
-        transition-duration: 1000ms;
-        -webkit-transform: scale(1.2);
-        -ms-transform: scale(1.2);
-        transform: scale(1.2);
-    } */
-    .single-property-area .property-thumb img {
-        -webkit-transition-duration: 1000ms;
-        -o-transition-duration: 1000ms;
-        transition-duration: 1000ms;
-        border-radius: 5px 5px 0 0;
-        width: 100%;
-    }
-    .primary-btn {
-      background-color: #947054;
-      color: #fff;
-    }
 
-
-    :root {
-      --input-padding-x: 1.5rem;
-      --input-padding-y: 0.75rem;
-    }
-
-    .login,
-    .image {
-      min-height: 100vh;
-    }
-
-    .bg-image {
-      background-image: url( {{ url('img/bg-img/hero5.jpg') }} );
-      background-size: cover;
-      background-position: center;
-    }
-
-    .login-heading {
-      font-weight: 300;
-    }
-
-    .btn-login {
-      font-size: 0.9rem;
-      letter-spacing: 0.05rem;
-      padding: 0.75rem 1rem;
-      border-radius: 2rem;
-    }
-
-    .form-label-group {
-      position: relative;
-      margin-bottom: 1rem;
-    }
-
-    .form-label-group>input,
-    .form-label-group>label {
-      padding: var(--input-padding-y) var(--input-padding-x);
-      height: auto;
-      border-radius: 2rem;
-    }
-
-    .form-label-group>label {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-      width: 100%;
-      margin-bottom: 0;
-      /* Override default `<label>` margin */
-      line-height: 1.5;
-      color: #495057;
-      cursor: text;
-      /* Match the input under the label */
-      border: 1px solid transparent;
-      border-radius: .25rem;
-      transition: all .1s ease-in-out;
-    }
-
-    .form-label-group input::-webkit-input-placeholder {
-      color: transparent;
-    }
-
-    .form-label-group input:-ms-input-placeholder {
-      color: transparent;
-    }
-
-    .form-label-group input::-ms-input-placeholder {
-      color: transparent;
-    }
-
-    .form-label-group input::-moz-placeholder {
-      color: transparent;
-    }
-
-    .form-label-group input::placeholder {
-      color: transparent;
-    }
-
-    .form-label-group input:not(:placeholder-shown) {
-      padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
-      padding-bottom: calc(var(--input-padding-y) / 3);
-    }
-
-    .form-label-group input:not(:placeholder-shown)~label {
-      padding-top: calc(var(--input-padding-y) / 3);
-      padding-bottom: calc(var(--input-padding-y) / 3);
-      font-size: 12px;
-      color: #777;
-    }
-
-    /* Fallback for Edge
-    -------------------------------------------------- */
-
-    @supports (-ms-ime-align: auto) {
-      .form-label-group>label {
-        display: none;
-      }
-      .form-label-group input::-ms-input-placeholder {
-        color: #777;
-      }
-    }
-
-    /* Fallback for IE
-    -------------------------------------------------- */
-
-    @media all and (-ms-high-contrast: none),
-    (-ms-high-contrast: active) {
-      .form-label-group>label {
-        display: none;
-      }
-      .form-label-group input:-ms-input-placeholder {
-        color: #777;
-      }
-    }
-
-    @media (min-width: 767.98px) {
-        #sign-up-btn {
-            margin-top: 12px;
-        }
-    }
 
 
 
@@ -174,7 +37,7 @@
         <!-- ##### Header Area Start ##### -->
         <header class="header-area">
 
-        @auth
+        {{-- @auth
             <!-- Top Header Area -->
             <div class="top-header-area">
                 <div class="h-100 d-md-flex justify-content-between align-items-center">
@@ -191,7 +54,7 @@
                     </div>
                 </div>
             </div>
-        @endauth
+        @endauth --}}
 
 <!-- Main Header Area -->
 <div class="main-header-area" id="stickyHeader">
@@ -200,7 +63,7 @@
         <nav class="classy-navbar justify-content-between" id="southNav">
 
             <!-- Logo -->
-            <a class="nav-brand" href="{{ url('/') }}"><img src="{{ url("img/core-img/logo.png") }}" alt=""></a>
+            <a class="nav-brand" href="{{ url('/') }}"><img class="w-logo" src="{{ url("logo/logo.png") }}" alt=""></a>
 
             <!-- Navbar Toggler -->
             <div class="classy-navbar-toggler">
@@ -284,13 +147,17 @@
                 <ul class="dropdown">
                     <li><a href="{{ route('dashboard')}}">Dashboard</a></li>
                     <li><a href="{{ route('profile')}}">Profile</a></li>
-
-                    <li><a href="{{ url('/logout') }}"><button type="button" class="btn btn-outline-secondary btn-block mt-2">Sign Out</button></a></li>
+                    <li><a href="{{ url('/logout') }}">Sign Out</a></li>
+                    {{-- button  --}}
+                    {{-- <li><a href="{{ url('/logout') }}"><button type="button" class="btn btn-outline-light btn-block mt-2">Sign Out</button></a></li> --}}
                 </ul>
             </li>
         @else
-            <li><a href="{{ url('/login') }}"><button type="button" class="btn btn-light btn-md btn-block text-uppercase">Log In</button></a></li>
-            <li id="sign-up-btn"><a href="{{ url('/register') }}"><button type="button" class="btn btn-outline-light btn-md btn-block text-uppercase">Sign Up</button></a></li>
+            {{-- button  --}}
+            {{-- <li><a href="{{ url('/login') }}"><button type="button" class="btn btn-light btn-md btn-block text-uppercase">Log In</button></a></li>
+            <li id="sign-up-btn"><a href="{{ url('/register') }}"><button type="button" class="btn btn-outline-light btn-md btn-block text-uppercase">Sign Up</button></a></li> --}}
+            <li><a href="{{ url('/login') }}">Log In</a></li>
+            <li><a href="{{ url('/register') }}">Sign Up</a></li>
         @endauth
 
 
@@ -337,9 +204,9 @@
                             <h6>About Us</h6>
                         </div>
 
-                        <img src="{{ url('img/bg-img/footer.jpg') }}" alt="">
+                        <img src="{{ url('img/bg-img/footer.jpg') }}">
                         <div class="footer-logo my-4">
-                            <img src="{{ url('img/core-img/logo.png') }}" alt="">
+                            <img class="w-logo" src="{{ url('logo/logo.png') }}">
                         </div>
                         <p>Integer nec bibendum lacus. Suspen disse dictum enim sit amet libero males uada feugiat. Praesent malesuada.</p>
                     </div>

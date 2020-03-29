@@ -17,19 +17,33 @@ class DataController extends Controller
 {
     public function home()
     {
+        if (Auth::check()) {
+            $user = Auth::user();
+            $role = $user->role;
 
-        $allProperty = DB::table('houses')
-            ->get();
+            if ($role == 4) {
+                $allProperties = DB::table('houses')
+                    ->where('purpose', 'rent')
+                    ->get();
+            } else {
+                $allProperties = DB::table('houses')
+                    ->get();
+            }
+
+        } else {
+            $allProperties = DB::table('houses')
+                ->get();
+        }
 
         // get first image from json
-        foreach ($allProperty as $key => $property) {
+        foreach ($allProperties as $key => $property) {
             $picArray = json_decode($property->pictures);
             $property->pictures = $picArray[0];
         }
 
-        // echo '<pre>'.print_r($allProperty, 1).'</pre>';
+        // echo '<pre>'.print_r($role, 1).'</pre>';
 
-        return View::make('pages/index')->with(array("properties"=>$allProperty));
+        return View::make('pages/index')->with(array("properties"=>$allProperties));
     }
 
     public function profile()
@@ -180,6 +194,9 @@ class DataController extends Controller
     {
         $user = Auth::user();
 
+        ini_set('memory_limit','256M');
+
+
         $this->validate($request, [
             'houseImg.*' => 'required|image|mimes:jpeg,png,jpg',
             // 'houseImg.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -211,7 +228,7 @@ class DataController extends Controller
                 $thumb->stream(); // <-- Key point
 
                 Storage::disk('uploads')->put($house_id.'/thumbnails'.'/'.$fileName, $thumb);
-                $imgArray[] = $fileName;
+                $imgArray[] = $fileName; // temp array to store name of images
             }
 
         }
@@ -279,7 +296,7 @@ class DataController extends Controller
             ->get();
 
 
-        echo '<pre>'.print_r($myProperty, 1).'</pre>';
+        // echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/property-list')->with(array('user' => $user, "properties"=>$myProperty));
     }
@@ -322,6 +339,100 @@ class DataController extends Controller
         echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/edit-property')->with(array('user' => $user, "property"=>$myProperty));
+    }
+
+
+    public function update_property(Request $request, $houseCode)
+    {
+        $user = Auth::user();
+
+        ini_set('memory_limit','256M');
+
+        // get image json from database
+        $data = DB::table('houses')
+            ->select('pictures')
+            ->where('house_code', $houseCode)
+            ->first();
+
+        $picArray= json_decode($data->pictures);
+
+
+        // // check new images upload
+        // if ($request->hasFile('houseImg')) {
+        //     foreach ($request->file('houseImg') as $key => $image) {
+        //
+        //         $name = md5($image->getClientOriginalName() . time());
+        //         $fileName   = $name . '.' . $image->getClientOriginalExtension();
+        //
+        //         $img = Image::make($image->getRealPath());
+        //         $img->resize(1000, 724);
+        //         $img->stream(); // <-- Key point
+        //
+        //         Storage::disk('uploads')->put($houseCode.'/'.$fileName, $img);
+        //
+        //         // thumbnails
+        //         $thumb = Image::make($image->getRealPath());
+        //         $thumb->resize(350, 250);
+        //         $thumb->stream(); // <-- Key point
+        //
+        //         Storage::disk('uploads')->put($houseCode.'/thumbnails'.'/'.$fileName, $thumb);
+        //         $imgArray[] = $fileName; // temp array to store name of images
+        //     }
+        //
+        //     echo '<pre>'.print_r($request->file(), 1).'</pre>';
+        // } else {
+        //     echo "NO HOUSE IMG";
+        // }
+
+        $imgArray[] = "test.jpg";
+        // check origin images
+        if ( !empty($_POST['orignImg']) ) {
+            // compare with pictures in db
+            $result = array_diff($picArray, $_POST['orignImg']);
+
+            echo "string";
+            echo '<pre>'.print_r($result, 1).'</pre>';
+
+            // delete images, not yet finished 
+            if( !empty($result) ){
+                foreach ($result as $key => $img) {
+
+                }
+            }
+
+            // image to be stored into database
+            foreach ($_POST['orignImg'] as $key => $img) {
+                $imgArray[] = $img;
+            }
+
+
+        } else {
+            echo "=========";
+        }
+
+
+        //
+        // $myProperty = DB::table('houses')
+        //     ->where('house_code', $houseCode)
+        //     ->first();
+        //
+        // $dateValue = $myProperty->time;
+        // $time=strtotime($dateValue);
+        // $temp=date("Y-m",$time);
+        // $myProperty->time = $temp;
+        //
+        // $picArray = json_decode($myProperty->pictures);
+        // $myProperty->pictures = $picArray;
+
+        // echo '<pre>'.print_r($request->file(), 1).'</pre>';
+
+        // DB::table('houses')
+        //     ->where('id', 1)
+        //     ->update(['votes' => 1]);
+
+        echo '<pre>'.print_r($imgArray, 1).'</pre>';
+
+        // return View::make('pages/edit-property')->with(array('user' => $user, "property"=>$myProperty));
     }
 
 

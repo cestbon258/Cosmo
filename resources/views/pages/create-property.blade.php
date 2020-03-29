@@ -27,7 +27,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-2 imgUp">
+                                <div class="col-sm-3 imgUp">
                                     <div class="imagePreview"></div>
                                     <label class="btn btn-primary-custom">
                                         Upload
@@ -179,7 +179,7 @@
 
 
 
-    <style>
+    {{-- <style>
 
     .imagePreview {
         width: 100%;
@@ -198,6 +198,8 @@
       border-radius:0px;
       box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
       margin-top:-5px;
+      color:#fff;
+      background-color:#980000;
     }
     .imgUp
     {
@@ -220,7 +222,7 @@
       width:30px;
       height:30px;
       border-radius:50%;
-      background-color:#4bd7ef;
+      background-color:#980000;
       color:#fff;
       box-shadow:0px 0px 2px 1px rgba(0,0,0,0.2);
       text-align:center;
@@ -233,7 +235,7 @@
     </style>
     <script>
     $(".imgAdd").click(function(){
-        $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-2 imgUp"><div class="imagePreview"></div><label class="btn btn-primary-custom">Upload<input type="file" accept="image/*" class="uploadFile img" name="houseImg[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
+        $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-3 imgUp"><div class="imagePreview"></div><label class="btn btn-primary-custom">Upload<input type="file" accept="image/*" class="uploadFile img" name="houseImg[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
     });
 
     $(document).on("click", "i.del" , function() {
@@ -278,5 +280,5 @@
         });
       }, false);
     })();
-    </script>
+    </script> --}}
 @stop

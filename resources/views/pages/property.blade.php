@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> --}}
 
     <style>
         .carousel-indicators img {
@@ -18,19 +18,19 @@
         }
     </style>
 
-    <div style="height:180px;"></div>
+    <div style="height:120px;"></div>
 
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-7">
+            <div class="col-sm-7 mb-4">
 
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
+                <div id="sliderIndicators" class="carousel slide" data-ride="carousel">
+                    {{-- <ol class="carousel-indicators">
                         @foreach ($property->pictures as $key => $picture)
-                            <img data-target="#carouselExampleIndicators" data-slide-to="{{$key}}" class="active" src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$picture)}}" style="height:50px; width:100px;">
+                            <img data-target="#sliderIndicators" data-slide-to="{{$key}}" class="active" src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$picture)}}" style="height:50px; width:100px;">
                         @endforeach
-                    </ol>
+                    </ol> --}}
                     <div class="carousel-inner">
                         @foreach ($property->pictures as $key => $picture)
                             <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
@@ -38,15 +38,25 @@
                             </div>
                         @endforeach
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#sliderIndicators" role="button" data-slide="prev">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                           <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#sliderIndicators" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
+                    {{-- <center> --}}
+                        {{-- <div style="overflow-x: auto; width:100%;"> --}}
+                            <ol class="carousel-indicators" style="position: relative; bottom:-4px; overflow-x:auto; margin-left:0; margin-right:0;">
+                                @foreach ($property->pictures as $key => $picture)
+                                    <img data-target="#sliderIndicators" data-slide-to="{{$key}}" class="{{$key==0 ? 'active' : ''}} px-1" src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$picture)}}" style="height:50px; width:100px; border-radius:6px;">
+                                @endforeach
+                            </ol>
+                        {{-- </div> --}}
+                    {{-- </center> --}}
                 </div>
+
             </div>
             <div class="col-sm-5">
                 <div class="card">

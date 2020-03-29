@@ -7,11 +7,20 @@
 @stop
 
 @section('content')
-
+    <style>
+        video {
+            height: auto;
+            width: 100%;
+            object-fit: fill;
+        }
+    </style>
 
     <!-- ##### Hero Area Start ##### -->
     <section class="hero-area">
-        <div class="hero-slides owl-carousel">
+        <video autoplay="autoplay" muted="muted" loop="loop" playsinline>
+            <source src="{{ URL::asset('logo/cosmo_v4.mp4') }}" type="video/mp4">
+        </video>
+        {{-- <div class="hero-slides owl-carousel">
             <!-- Single Hero Slide -->
             <div class="single-hero-slide bg-img" style="background-image: url(img/bg-img/hero1.jpg);">
                 <div class="container h-100">
@@ -48,7 +57,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </section>
     <!-- ##### Hero Area End ##### -->
 
@@ -297,7 +306,11 @@
                         <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
                             <!-- Property Thumbnail -->
                             <div class="property-thumb">
-                                <img src="{{url('images/'.$property->house_code.'/'.$property->pictures)}}" alt="">
+                                @auth
+                                    <a href="{{ url('property/'.$property->house_code) }}"><img src="{{url('images/'.$property->house_code.'/'.$property->pictures)}}"></a>
+                                @else
+                                    <a href="{{ url('login') }}"><img src="{{url('images/'.$property->house_code.'/'.$property->pictures)}}"><a>
+                                @endauth
 
                                 <div class="tag">
                                     <span>For {{$property->purpose}}</span>
@@ -310,9 +323,21 @@
                             </div>
                             <!-- Property Content -->
                             <div class="property-content">
-                                <a href="{{ url('property/'.$property->house_code) }}"><h5>{{$property->title}}</h5></a>
+                                @auth
+                                    <a href="{{ url('property/'.$property->house_code) }}"><h5>{{$property->title}}</h5></a>
+                                @else
+                                    <a href="{{ url('login') }}"><h5>{{$property->title}}</h5></a>
+                                @endauth
                                 <p class="location"><img src="img/icons/location.png" alt="">{{$property->address}}</p>
-                                <p>{{$property->description}}</p>
+                                <div style="height: 120px;">
+                                    <p class="text-wrapper text-left" style="margin-bottom: 0;">{{$property->description}}</p>
+                                    @auth
+                                        <a href="{{ url('property/'.$property->house_code) }}">Read More</a>
+                                    @else
+                                        <a href="{{ url('login') }}">Read More</a>
+                                    @endauth
+                                </div>
+
                                 <div class="property-meta-data d-flex align-items-end justify-content-between">
                                     <div class="new-tag">
                                         <img src="img/icons/new.png" alt="">
