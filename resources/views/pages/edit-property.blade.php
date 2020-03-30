@@ -5,20 +5,12 @@
 @section('content')
 
 
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-              <strong>Whoops!</strong> There were some problems with your input.<br><br>
-              <ul>
-                    @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                    @endforeach
-              </ul>
-            </div>
-        @endif
+
 
         <form enctype="multipart/form-data" method="POST" action="{{ url('edit-property/'.$property->house_code) }}" class="needs-validation" novalidate>
             @csrf
             <div class="container">
+                @include('layouts.alert')
 
                 <div class="col">
                     <div class="card shadow mb-4">

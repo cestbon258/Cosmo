@@ -12,6 +12,7 @@ use Redirect;
 use Hash;
 use Storage;
 use Image;
+// use Illuminate\Support\Facades\Storage;
 
 class DataController extends Controller
 {
@@ -24,14 +25,19 @@ class DataController extends Controller
             if ($role == 4) {
                 $allProperties = DB::table('houses')
                     ->where('purpose', 'rent')
+                    ->where('status', 1)
+                    ->orderBy('updated_at', 'desc')
                     ->get();
             } else {
                 $allProperties = DB::table('houses')
+                    ->where('status', 1)
+                    ->orderBy('updated_at', 'desc')
                     ->get();
             }
 
         } else {
             $allProperties = DB::table('houses')
+                ->orderBy('updated_at', 'desc')
                 ->get();
         }
 
@@ -59,66 +65,66 @@ class DataController extends Controller
         $user = Auth::user();
 
 
-    if($request->hasFile('profileImage')){
-        $target_dir = storage_path();
-        // convert original file name to new file name
-        $newFileName = md5($request->profileImage->getClientOriginalName() . time());
+        if($request->hasFile('profileImage')){
+            $target_dir = storage_path();
+            // convert original file name to new file name
+            $newFileName = md5($request->profileImage->getClientOriginalName() . time());
 
-        $_FILES["profileImage"]["name"] = $newFileName. "." .$request->profileImage->getClientOriginalExtension();
+            $_FILES["profileImage"]["name"] = $newFileName. "." .$request->profileImage->getClientOriginalExtension();
 
-        $target_file = $target_dir .'/profiles'.'/'. basename($_FILES["profileImage"]["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        echo '<pre>'.print_r($target_file, 1).'</pre>';
+            $target_file = $target_dir .'/profiles'.'/'. basename($_FILES["profileImage"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            // echo '<pre>'.print_r($target_file, 1).'</pre>';
 
-        // Check if image file is a actual image or fake image
-        if(isset($_POST["submit"])) {
-            $check = getimagesize($_FILES["profileImage"]["tmp_name"]);
-            if($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-            } else {
-                echo "File is not an image.";
+            // Check if image file is a actual image or fake image
+            if(isset($_POST["submit"])) {
+                $check = getimagesize($_FILES["profileImage"]["tmp_name"]);
+                if($check !== false) {
+                    echo "File is an image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } else {
+                    echo "File is not an image.";
+                    $uploadOk = 0;
+                }
+            }
+            // Check if file already exists
+            if (file_exists($target_file)) {
+                echo "Sorry, file already exists.";
                 $uploadOk = 0;
             }
-        }
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
-        }
-        // Check file size
-        if ($_FILES["profileImage"]["size"] > 500000) {
-            echo "Sorry, your file is too large.";
-            $uploadOk = 0;
-        }
-        // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif" ) {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-            $uploadOk = 0;
-        }
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
-        } else {
-
-            // Storage::put($_FILES["profileImage"]["tmp_name"], $path);
-            // Storage::disk('local')->put("test", $_FILES["profileImage"]["name"]);
-            if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $target_file)) {
-                // resize the image to a height of 200 and constrain aspect ratio (auto width)
-                $img = Image::make($target_file);
-                $img->resize(null, 500, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-                $img->save();
-                echo "The file ". basename( $_FILES["profileImage"]["name"]). " has been uploaded.";
+            // Check file size
+            if ($_FILES["profileImage"]["size"] > 500000) {
+                echo "Sorry, your file is too large.";
+                $uploadOk = 0;
+            }
+            // Allow certain file formats
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif" ) {
+                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                $uploadOk = 0;
+            }
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+                echo "Sorry, your file was not uploaded.";
+            // if everything is ok, try to upload file
             } else {
-                echo "Sorry, there was an error uploading your file.";
+
+                // Storage::put($_FILES["profileImage"]["tmp_name"], $path);
+                // Storage::disk('local')->put("test", $_FILES["profileImage"]["name"]);
+                if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $target_file)) {
+                    // resize the image to a height of 200 and constrain aspect ratio (auto width)
+                    $img = Image::make($target_file);
+                    $img->resize(null, 500, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $img->save();
+                    echo "The file ". basename( $_FILES["profileImage"]["name"]). " has been uploaded.";
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                }
             }
         }
-    }
 
         $profile_img = $_FILES["profileImage"]["name"] ? $_FILES["profileImage"]["name"] : $user->profile_img;
         $new_name = $_POST['name'];
@@ -141,8 +147,6 @@ class DataController extends Controller
 
     public function change_password()
     {
-        // $user = Auth::user();
-        // echo '<pre>'.print_r($user, 1).'</pre>';
         return View::make('change-password');
     }
 
@@ -262,28 +266,6 @@ class DataController extends Controller
         Session::flash('alert-class', 'alert-success');
 
         return back();
-
-        // echo '<pre>'.print_r($_POST, 1).'</pre>';
-        // echo '<pre>'.print_r($newDate, 1).'</pre>';
-
-
-
-
-        // echo '<pre>'.print_r( $request->file('customFile'), 1).'</pre>';
-
-        // if ($request->hasFile('customFile')) {
-        //     $image = $request->file('customFile');
-        //     $name = time().'.'.$image->getClientOriginalExtension();
-        //     $destinationPath = public_path('/uploads');
-        //     $image->move($destinationPath, $name);
-        //     // $this->save();
-        //
-        //     return back()->with('success','Image Upload successfully');
-        // }
-
-
-        // echo '<pre>'.print_r($_POST, 1).'</pre>';
-        // return View::make('create-property');
     }
 
 
@@ -296,7 +278,7 @@ class DataController extends Controller
             ->get();
 
 
-        // echo '<pre>'.print_r($myProperty, 1).'</pre>';
+        echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/property-list')->with(array('user' => $user, "properties"=>$myProperty));
     }
@@ -336,9 +318,27 @@ class DataController extends Controller
         $picArray = json_decode($myProperty->pictures);
         $myProperty->pictures = $picArray;
 
-        echo '<pre>'.print_r($myProperty, 1).'</pre>';
+        // echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/edit-property')->with(array('user' => $user, "property"=>$myProperty));
+    }
+
+
+    public function delete_property()
+    {
+        $user = Auth::user();
+        if ( Auth::check() ){
+
+            DB::table('houses')
+                ->where('house_code', $_POST['property'])
+                ->where('user_id', $user->id)
+                ->delete();
+
+            Storage::disk('uploads')->deleteDirectory($_POST['property']);
+        }
+
+        return redirect('property-list')->with('status', 'The property has been deleted');
+
     }
 
 
@@ -357,46 +357,16 @@ class DataController extends Controller
         $picArray= json_decode($data->pictures);
 
 
-        // // check new images upload
-        // if ($request->hasFile('houseImg')) {
-        //     foreach ($request->file('houseImg') as $key => $image) {
-        //
-        //         $name = md5($image->getClientOriginalName() . time());
-        //         $fileName   = $name . '.' . $image->getClientOriginalExtension();
-        //
-        //         $img = Image::make($image->getRealPath());
-        //         $img->resize(1000, 724);
-        //         $img->stream(); // <-- Key point
-        //
-        //         Storage::disk('uploads')->put($houseCode.'/'.$fileName, $img);
-        //
-        //         // thumbnails
-        //         $thumb = Image::make($image->getRealPath());
-        //         $thumb->resize(350, 250);
-        //         $thumb->stream(); // <-- Key point
-        //
-        //         Storage::disk('uploads')->put($houseCode.'/thumbnails'.'/'.$fileName, $thumb);
-        //         $imgArray[] = $fileName; // temp array to store name of images
-        //     }
-        //
-        //     echo '<pre>'.print_r($request->file(), 1).'</pre>';
-        // } else {
-        //     echo "NO HOUSE IMG";
-        // }
-
-        $imgArray[] = "test.jpg";
         // check origin images
         if ( !empty($_POST['orignImg']) ) {
-            // compare with pictures in db
+            // compare with pictures
             $result = array_diff($picArray, $_POST['orignImg']);
 
-            echo "string";
-            echo '<pre>'.print_r($result, 1).'</pre>';
-
-            // delete images, not yet finished 
+            // delete images
             if( !empty($result) ){
                 foreach ($result as $key => $img) {
-
+                    Storage::disk('uploads')->delete($houseCode.'/'.$img);
+                    Storage::disk('uploads')->delete($houseCode.'/thumbnails'.'/'.$img);
                 }
             }
 
@@ -405,32 +375,69 @@ class DataController extends Controller
                 $imgArray[] = $img;
             }
 
-
-        } else {
-            echo "=========";
         }
 
+        // check new images upload
+        if ($request->hasFile('houseImg')) {
+            foreach ($request->file('houseImg') as $key => $image) {
 
-        //
-        // $myProperty = DB::table('houses')
-        //     ->where('house_code', $houseCode)
-        //     ->first();
-        //
-        // $dateValue = $myProperty->time;
-        // $time=strtotime($dateValue);
-        // $temp=date("Y-m",$time);
-        // $myProperty->time = $temp;
-        //
-        // $picArray = json_decode($myProperty->pictures);
-        // $myProperty->pictures = $picArray;
+                $name = md5($image->getClientOriginalName() . time());
+                $fileName   = $name . '.' . $image->getClientOriginalExtension();
 
-        // echo '<pre>'.print_r($request->file(), 1).'</pre>';
+                $img = Image::make($image->getRealPath());
+                $img->resize(1000, 724);
+                $img->stream(); // <-- Key point
 
-        // DB::table('houses')
-        //     ->where('id', 1)
-        //     ->update(['votes' => 1]);
+                Storage::disk('uploads')->put($houseCode.'/'.$fileName, $img);
 
-        echo '<pre>'.print_r($imgArray, 1).'</pre>';
+                // thumbnails
+                $thumb = Image::make($image->getRealPath());
+                $thumb->resize(350, 250);
+                $thumb->stream(); // <-- Key point
+
+                Storage::disk('uploads')->put($houseCode.'/thumbnails'.'/'.$fileName, $thumb);
+                $imgArray[] = $fileName; // temp array to store name of images
+            }
+        }
+
+        if ( empty($imgArray) ) {
+            Session::flash('status', 'Opps! Please upload at least one picture!');
+            Session::flash('alert-class', 'alert-danger');
+
+            return back();
+        }
+
+        $imgJson = json_encode($imgArray);
+        // convert to date
+        $date = date_create($_POST['time']);
+        $newDate= date_format($date,"Y-m-d");;
+
+
+        DB::table('houses')
+            ->where('house_code', $houseCode)
+            ->update([
+                'title'      => $_POST['title'],
+                'purpose'    => $_POST['usage'],
+                'time'       => $newDate,
+                'country'    => $_POST['country'],
+                'city'       => $_POST['city'],
+                'address'    => $_POST['address'],
+                'measurement'=> $_POST['measure'],
+                'bedroom'    => $_POST['bedroom'],
+                'pictures'   => $imgJson,
+                'price'      => $_POST['price'],
+                'size'       => $_POST['size'],
+                'bathroom'   => $_POST['bathroom'],
+                'description'=> $_POST['description']
+            ]);
+
+
+        Session::flash('status', 'Property has been update! ');
+        Session::flash('alert-class', 'alert-success');
+
+        return back();
+
+        // echo '<pre>'.print_r($_POST, 1).'</pre>';
 
         // return View::make('pages/edit-property')->with(array('user' => $user, "property"=>$myProperty));
     }

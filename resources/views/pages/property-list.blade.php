@@ -29,18 +29,31 @@
                                     <td> {{$property->address}} </td>
                                     <td> {{$property->updated_at}} </td>
                                     <td>
-                                        <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round"></span>
-                                        </label>
+                                        @if (Auth::user()->role == 0)
+                                            <label class="switch">
+                                                <input type="checkbox" {{$property->status == 1 ? "checked" : ''}}>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        @else
+                                            <span>{{$property->status == 1 ? 'Approved' : 'Pending'}}</span>
+                                        @endif
                                     </td>
                                     <td>
                                         <a href="{{ url('edit-property/'.$property->house_code) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
 
                                         {{-- <a href="property/{{$property->house_code}}"><button type="button" class="btn btn-outline-danger btn-sm" >Delete</button></a> --}}
 
+                                        <a href="{{ route('delete-property') }}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('delete-property').submit();">
+                                            <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+                                        </a>
 
-                                        <a href="www.google.com" class="btn btn-outline-danger btn-sm" onclick="deleteProperty(event);" data-toggle="modal" data-target="#deleteModalCenter">Delete</button></a>
+                                        <form id="delete-property" action="{{ route('delete-property') }}" method="POST" style="display: none;">
+                                            @csrf
+                                            <input name="property" value="{{$property->house_code}}" hidden>
+                                        </form>
+
                                     </td>
                                 </tr>
                             @endforeach

@@ -37,6 +37,7 @@ Route::get('/property/{houseCode}', 'DataController@property');
 
 Route::post('/create-property', 'DataController@create_property');
 Route::get('/edit-property/{houseCode}', 'DataController@edit_property');
+Route::post('/delete-property', 'DataController@delete_property')->name('delete-property');
 
 Route::post('/edit-property/{houseCode}', 'DataController@update_property');
 
