@@ -9,7 +9,7 @@
 
         <form enctype="multipart/form-data" method="POST" action="{{ url('edit-property/'.$property->house_code) }}" class="needs-validation" novalidate>
             @csrf
-            <div class="container">
+            <div class="container-fluid">
                 @include('layouts.alert')
 
                 <div class="col">

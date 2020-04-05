@@ -13,6 +13,56 @@
             width: 100%;
             object-fit: fill;
         }
+
+
+
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+        }
+        .grid-image {
+            cursor: pointer;
+        }
+        .grid-image div p{
+            display: none;
+            color:white;
+            -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            -o-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .grid-image div span{
+            display: none;
+            transition: opacity 1s ease-out;
+            color:white;
+        }
+        .grid-image img {
+            width:100%;
+            opacity:.8;
+        }
+        .grid-image div span{
+            -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            -o-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .grid-image:hover{
+            background-color: transparent !important;
+            /* opacity: 0.4 !important; */
+            background-color: black !important;
+        }
+        .grid-image:hover div span{
+            display: block !important;
+        }
+        .grid-image:hover div p{
+            display: block !important;
+        }
+        .grid-image:hover img {
+            opacity:.4 !important;
+        }
+
+
     </style>
 
     <!-- ##### Hero Area Start ##### -->
@@ -307,9 +357,9 @@
                             <!-- Property Thumbnail -->
                             <div class="property-thumb">
                                 @auth
-                                    <a href="{{ url('property/'.$property->house_code) }}"><img src="{{url('images/'.$property->house_code.'/'.$property->pictures)}}"></a>
+                                    <a href="{{ url('property/'.$property->house_code) }}"><img src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
                                 @else
-                                    <a href="{{ url('login') }}"><img src="{{url('images/'.$property->house_code.'/'.$property->pictures)}}"><a>
+                                    <a href="{{ url('login') }}"><img src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
                                 @endauth
 
                                 <div class="tag">
@@ -416,7 +466,7 @@
                     <div class="cta-content text-center">
                         <h2 class="wow fadeInUp" data-wow-delay="300ms">Are you looking for a place to rent?</h2>
                         <h6 class="wow fadeInUp" data-wow-delay="400ms">Suspendisse dictum enim sit amet libero malesuada feugiat.</h6>
-                        <a href="#" class="btn south-btn mt-50 wow fadeInUp" data-wow-delay="500ms">Search</a>
+                        {{-- <a href="#" class="btn south-btn mt-50 wow fadeInUp" data-wow-delay="500ms">Search</a> --}}
                     </div>
                 </div>
             </div>
@@ -425,7 +475,7 @@
     <!-- ##### Call To Action Area End ##### -->
 
     <!-- ##### Testimonials Area Start ##### -->
-    <section class="south-testimonials-area section-padding-100">
+    {{-- <section class="south-testimonials-area section-padding-100">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -476,11 +526,51 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- ##### Testimonials Area End ##### -->
 
+    <section>
+        <div class="row">
+                <div class="col-xl-4 col-md-6 px-0 grid-image">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;">Trousdale Estates</h4>
+                        <p>The alluring homes of Trousdale Estates offer some of the most exceptional views Beverly Hills has to offer.</p>
+                        <span class="btn btn-link">Read More</span>
+                    </div>
+                    <img src="//res.cloudinary.com/luxuryp/image/upload/q_auto:good,f_auto/w_700/ohj0enc1kmcmgyjgnajj.jpg">
+                </div>
+                <div class="col-xl-4 col-md-6 px-0 grid-image">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;">Trousdale Estates</h4>
+                        <p>The alluring homes of Trousdale Estates offer some of the most exceptional views Beverly Hills has to offer.</p>
+                        <span class="btn btn-link">Read More</span>
+                    </div>
+                    <img src="//res.cloudinary.com/luxuryp/image/upload/q_auto:good,f_auto/w_700/ohj0enc1kmcmgyjgnajj.jpg">
+                </div>
+                <div class="col-xl-4 col-md-6 px-0 grid-image">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;">Trousdale Estates</h4>
+                        <p>The alluring homes of Trousdale Estates offer some of the most exceptional views Beverly Hills has to offer.</p>
+                        <span class="btn btn-link">Read More</span>
+                    </div>
+                    <img src="//res.cloudinary.com/luxuryp/image/upload/q_auto:good,f_auto/w_700/ohj0enc1kmcmgyjgnajj.jpg">
+                </div>
+            {{-- <div class="col-xl-4 col-md-6 px-0 grid-image">
+                <div class="text-center centered" style="z-index: 1; color:blue;"><h4 style="color:white;">Trousdale Estates</h4><p style="display: none; color:white;">The alluring homes of Trousdale Estates offer some of the most exceptional views Beverly Hills has to offer.</p><span class="btn btn-link" style="display: none; color:white;">Read More</span></div>
+                <img src="//res.cloudinary.com/luxuryp/image/upload/q_auto:good,f_auto/w_700/ohj0enc1kmcmgyjgnajj.jpg" style="width:100%; opacity:.8;">
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 grid-image">
+                <div class="text-center centered" style="z-index: 1; color:blue;"><h4 style="color:white;">Trousdale Estates</h4><p style="display: none; color:white;">The alluring homes of Trousdale Estates offer some of the most exceptional views Beverly Hills has to offer.</p><span class="btn btn-link" style="display: none; color:white;">Read More</span></div>
+                <img src="//res.cloudinary.com/luxuryp/image/upload/q_auto:good,f_auto/w_700/ohj0enc1kmcmgyjgnajj.jpg" style="width:100%;  opacity:.8;">
+            </div> --}}
+
+        </div>
+    </section>
+    {{-- <section>
+        <a href="communities/trousdale-estates" class="grid community-grid-item"><div class="grid-text"><h4>Trousdale Estates</h4><p>The alluring homes of Trousdale Estates offer some of the most exceptional views Beverly Hills has to offer.</p><span class="btn btn-link">Read More</span></div><img alt="" src="//res.cloudinary.com/luxuryp/image/upload/q_auto:good,f_auto/w_700/ohj0enc1kmcmgyjgnajj.jpg" class="grid-image cover"></a>
+    </section> --}}
     <!-- ##### Editor Area Start ##### -->
-    <section class="south-editor-area d-flex align-items-center">
+    {{-- <section class="south-editor-area d-flex align-items-center">
         <!-- Editor Content -->
         <div class="editor-content-area">
             <!-- Section Heading -->
@@ -503,6 +593,6 @@
         <div class="editor-thumbnail">
             <img src="img/bg-img/editor.jpg" alt="">
         </div>
-    </section>
+    </section> --}}
     <!-- ##### Editor Area End ##### -->
 @stop

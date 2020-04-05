@@ -18,7 +18,7 @@
 
         <form enctype="multipart/form-data" method="POST" action="{{ route('create-property') }}" class="needs-validation" novalidate>
             @csrf
-            <div class="container">
+            <div class="container-fluid">
 
                 <div class="col">
                     <div class="card shadow mb-4">
@@ -75,24 +75,44 @@
                                 </div>
                             </div>
 
-                            <label for="country">Country</label>
+
                             <div class="row">
+
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <select class="form-control" id="country-selected" name="country" required>
+                                            @foreach ($districts as $key => $district)
+                                                <option>{{$district->country}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    {{-- <div class="form-group">
                                         <input type="text" class="form-control" name="country" autocomplete="off" placeholder="Country" required>
                                         <div class="invalid-feedback">
                                             Please specify the country.
                                         </div>
-                                    </div>
-
+                                    </div> --}}
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="city">City</label>
+                                        @foreach ($districts as $key => $district)
+                                        <select class="form-control" id="{{$district->country}}" name="city">
+                                                <option disabled>---{{$district->country}}---</option>
+                                            @foreach ($district->city as $keyy => $value)
+                                                <option>{{$value}}</option>
+                                            @endforeach
+                                        </select>
+                                        @endforeach
+                                    </div>
+
+                                    {{-- <div class="form-group">
                                         <input type="text" class="form-control" name="city" autocomplete="off" placeholder="City" required>
                                         <div class="invalid-feedback">
                                             Please specify the city.
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
 
@@ -177,7 +197,18 @@
         </form>
 
 
+        <script>
+            $('#USA').hide();
+            $('#UK').hide();
+            $('#country-selected').change(function() {
+                $('#Australia').hide();
+                $('#USA').hide();
+                $('#UK').hide();
 
+                let country = $( this ).val();
+                $('#'+country).show();
+            });
+        </script>
 
     {{-- <style>
 
@@ -199,7 +230,7 @@
       box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
       margin-top:-5px;
       color:#fff;
-      background-color:#980000;
+      background-color:#947054;
     }
     .imgUp
     {
@@ -222,7 +253,7 @@
       width:30px;
       height:30px;
       border-radius:50%;
-      background-color:#980000;
+      background-color:#947054;
       color:#fff;
       box-shadow:0px 0px 2px 1px rgba(0,0,0,0.2);
       text-align:center;

@@ -196,92 +196,133 @@ class DataController extends Controller
 
     public function create_property(Request $request)
     {
-        $user = Auth::user();
 
-        ini_set('memory_limit','256M');
+        $method = $request->method();
+        if ($request->isMethod('get')) {
+            $districts = DB::table('districts')
+                ->get();
 
-
-        $this->validate($request, [
-            'houseImg.*' => 'required|image|mimes:jpeg,png,jpg',
-            // 'houseImg.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-        $string = str_random(40); // random string
-        $house_id = md5($string . time()); // image foloder name and house id
-
-        if ($request->hasFile('houseImg')) {
-            foreach ($request->file('houseImg') as $key => $image) {
-
-                $name = md5($image->getClientOriginalName() . time());
-                // $image      = $request->file('houseImg');
-                $fileName   = $name . '.' . $image->getClientOriginalExtension();
-
-
-                $img = Image::make($image->getRealPath());
-                // $img->resize(120, 120, function ($constraint) {
-                //     $constraint->aspectRatio();
-                // });
-                $img->resize(1000, 724);
-                $img->stream(); // <-- Key point
-
-                Storage::disk('uploads')->put($house_id.'/'.$fileName, $img);
-
-                // should have thumbnails
-                $thumb = Image::make($image->getRealPath());
-                $thumb->resize(350, 250);
-                $thumb->stream(); // <-- Key point
-
-                Storage::disk('uploads')->put($house_id.'/thumbnails'.'/'.$fileName, $thumb);
-                $imgArray[] = $fileName; // temp array to store name of images
+            foreach ($districts as $key => $district) {
+                $district->city = json_decode($district->city);
             }
 
+            return View::make('pages/create-property')->with(array("districts"=>$districts));
         }
-        $imgJson = json_encode($imgArray);
-        // convert to date
-        $date = date_create($_POST['time']);
-        $newDate= date_format($date,"Y-m-d");;
 
-        DB::table('houses')
-        ->insert(
-                [
-                    'user_id'    => $user->id,
-                    'house_code' => $house_id,
-                    'title'      => $_POST['title'],
-                    'purpose'    => $_POST['usage'],
-                    'time'       => $newDate,
-                    'country'    => $_POST['country'],
-                    'city'       => $_POST['city'],
-                    'address'    => $_POST['address'],
-                    'measurement'=> $_POST['measure'],
-                    'bedroom'    => $_POST['bedroom'],
-                    'pictures'   => $imgJson,
-                    'price'      => $_POST['price'],
-                    'size'       => $_POST['size'],
-                    'bathroom'   => $_POST['bathroom'],
-                    'description'=> $_POST['description']
-                ]
-            );
+        if ($request->isMethod('post')) {
 
-        Session::flash('status', 'Profile update successful!');
-        Session::flash('alert-class', 'alert-success');
+            $user = Auth::user();
 
-        return back();
+            ini_set('memory_limit','256M');
+
+
+            $this->validate($request, [
+                'houseImg.*' => 'required|image|mimes:jpeg,png,jpg',
+                // 'houseImg.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            $string = str_random(40); // random string
+            $house_id = md5($string . time()); // image foloder name and house id
+
+            if ($request->hasFile('houseImg')) {
+                foreach ($request->file('houseImg') as $key => $image) {
+
+                    $name = md5($image->getClientOriginalName() . time());
+                    // $image      = $request->file('houseImg');
+                    $fileName   = $name . '.' . $image->getClientOriginalExtension();
+
+
+                    $img = Image::make($image->getRealPath());
+                    // $img->resize(120, 120, function ($constraint) {
+                    //     $constraint->aspectRatio();
+                    // });
+                    $img->resize(1000, 724);
+                    $img->stream(); // <-- Key point
+
+                    Storage::disk('uploads')->put($house_id.'/'.$fileName, $img);
+
+                    // should have thumbnails
+                    $thumb = Image::make($image->getRealPath());
+                    $thumb->resize(350, 250);
+                    $thumb->stream(); // <-- Key point
+
+                    Storage::disk('uploads')->put($house_id.'/thumbnails'.'/'.$fileName, $thumb);
+                    $imgArray[] = $fileName; // temp array to store name of images
+                }
+
+            }
+            $imgJson = json_encode($imgArray);
+            // convert to date
+            $date = date_create($_POST['time']);
+            $newDate= date_format($date,"Y-m-d");;
+
+            DB::table('houses')
+            ->insert(
+                    [
+                        'user_id'    => $user->id,
+                        'house_code' => $house_id,
+                        'title'      => $_POST['title'],
+                        'purpose'    => $_POST['usage'],
+                        'time'       => $newDate,
+                        'country'    => $_POST['country'],
+                        'city'       => $_POST['city'],
+                        'address'    => $_POST['address'],
+                        'measurement'=> $_POST['measure'],
+                        'bedroom'    => $_POST['bedroom'],
+                        'pictures'   => $imgJson,
+                        'price'      => $_POST['price'],
+                        'size'       => $_POST['size'],
+                        'bathroom'   => $_POST['bathroom'],
+                        'description'=> $_POST['description']
+                    ]
+                );
+
+            Session::flash('status', 'Profile update successful!');
+            Session::flash('alert-class', 'alert-success');
+
+            return back();
+        }
     }
 
 
     public function property_list()
     {
         $user = Auth::user();
+        $role = $user->role;
 
-        $myProperty = DB::table('houses')
-            ->where('user_id', $user->id)
-            ->get();
+        if ($role == 2) {
+            $myProperty = DB::table('houses')
+                ->where('user_id', $user->id)
+                ->get();
+        }
+        // admin
+        if ($role == 0) {
+            $myProperty = DB::table('houses')
+                ->get();
+        }
 
-
-        echo '<pre>'.print_r($myProperty, 1).'</pre>';
+        // echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/property-list')->with(array('user' => $user, "properties"=>$myProperty));
     }
+
+    public function publish_property()
+    {
+
+        $status = ($_POST['publish']==0) ? 1 : 0;
+
+        DB::table('houses')
+            ->where('house_code', $_POST['houseCode'])
+            ->update([
+                'status' => $status,
+            ]);
+
+        Session::flash('status', 'Property has been published! ');
+        Session::flash('alert-class', 'alert-success');
+
+        return back();
+    }
+
 
 
     public function property($houseCode)
@@ -392,7 +433,7 @@ class DataController extends Controller
 
                 // thumbnails
                 $thumb = Image::make($image->getRealPath());
-                $thumb->resize(350, 250);
+                $thumb->resize(550, 350);
                 $thumb->stream(); // <-- Key point
 
                 Storage::disk('uploads')->put($houseCode.'/thumbnails'.'/'.$fileName, $thumb);

@@ -3,7 +3,7 @@
 @section('title', 'Properties')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -17,7 +17,7 @@
                                 <th>Purpose for</th>
                                 <th>Address</th>
                                 <th>Date Modified</th>
-                                <th>Is Published</th>
+                                <th>Is Public</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -31,9 +31,15 @@
                                     <td>
                                         @if (Auth::user()->role == 0)
                                             <label class="switch">
-                                                <input type="checkbox" {{$property->status == 1 ? "checked" : ''}}>
+                                                <input type="checkbox" {{$property->status == 1 ? "checked" : ''}} onchange="event.preventDefault();
+                                                document.getElementById('publish-{{$property->id}}').submit();">
                                                 <span class="slider round"></span>
                                             </label>
+                                            <form id="publish-{{$property->id}}" action="{{ route('publish-property') }}" method="POST" style="display: none;">
+                                                @csrf
+                                                <input name="publish" value="{{$property->status}}" hidden>
+                                                <input name="houseCode" value="{{$property->house_code}}" hidden>
+                                            </form>
                                         @else
                                             <span>{{$property->status == 1 ? 'Approved' : 'Pending'}}</span>
                                         @endif
@@ -45,11 +51,11 @@
 
                                         <a href="{{ route('delete-property') }}"
                                             onclick="event.preventDefault();
-                                            document.getElementById('delete-property').submit();">
+                                            document.getElementById('pid-{{$property->id}}').submit();">
                                             <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
                                         </a>
 
-                                        <form id="delete-property" action="{{ route('delete-property') }}" method="POST" style="display: none;">
+                                        <form id="pid-{{$property->id}}" action="{{ route('delete-property') }}" method="POST" style="display: none;">
                                             @csrf
                                             <input name="property" value="{{$property->house_code}}" hidden>
                                         </form>
@@ -90,7 +96,7 @@
     $(document).ready(function() {
         $('#propert-table').DataTable({
             "columnDefs": [ {
-                  "targets": [5],
+                  "targets": [1, 4, 5],
                   "orderable": false,
             } ],
             // "responsive": true,
@@ -100,10 +106,6 @@
 
     } );
 
-    function deleteProperty(e) {
-        console.log(e);
-        e.preventDefault();
-    }
 
 
     </script>

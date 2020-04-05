@@ -27,11 +27,15 @@ Route::get('/contact', function () {
     return view('pages/contact');
 })->name('contact');
 
-Route::get('/create-property', function () {
-    return view('pages/create-property');
-})->name('create-property');
+// Route::get('/create-property', function () {
+//     return view('pages/create-property');
+// })->name('create-property');
+
+Route::get('/create-property', 'DataController@create_property')->name('create-property');
 
 Route::get('/property-list', 'DataController@property_list')->name('property-list');
+
+Route::post('/publish-property', 'DataController@publish_property')->name('publish-property');
 
 Route::get('/property/{houseCode}', 'DataController@property');
 

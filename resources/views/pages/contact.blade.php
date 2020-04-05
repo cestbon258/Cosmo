@@ -32,6 +32,15 @@
                    </div>
                </div>
 
+               @if (session('status'))
+                   <div class="alert {{session('alert-class')}} alert-dismissible fade show" role="alert">
+                       {{ session('status') }}
+                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                       </button>
+                   </div>
+               @endif
+
                <div class="row">
                    <div class="col-12 col-lg-4">
                        <div class="content-sidebar">

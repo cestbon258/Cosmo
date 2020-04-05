@@ -271,7 +271,7 @@
       box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
       margin-top:-5px;
       color:#fff;
-      background-color:#980000;
+      background-color:#947054;
     }
     .imgUp
     {
@@ -294,7 +294,7 @@
       width:30px;
       height:30px;
       border-radius:50%;
-      background-color:#980000;
+      background-color:#947054;
       color:#fff;
       box-shadow:0px 0px 2px 1px rgba(0,0,0,0.2);
       text-align:center;

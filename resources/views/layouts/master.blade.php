@@ -8,7 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Cosmo - Global Real Estate - @yield('title')</title>
+    <title>Cosmo - Global Real Estate | @yield('title')</title>
+    {{-- <meta http-equiv="cache-control" content="max-age=0" /> --}}
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
     <!-- Favicon  -->
     <link rel="icon" href="{{ asset('logo/favicon.ico') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -103,8 +107,8 @@
             </ul>
         </li>-->
         <li><a href="{{ route('about-us') }}">About Us</a></li>
-        <li><a href="listings.html">Properties</a></li>
-        <li><a href="blog.html">Blog</a></li>
+        {{-- <li><a href="listings.html">Properties</a></li>
+        <li><a href="blog.html">Blog</a></li> --}}
         <!--<li><a href="#">Mega Menu</a>
         <div class="megamenu">
         <ul class="single-mega cn-col-4">
