@@ -183,10 +183,18 @@
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" name="description" rows="6" required></textarea>
-                                <div class="invalid-feedback">
+                                <textarea name="description" id="editor"></textarea>
+                                <script>
+                                    ClassicEditor
+                                        .create(document.querySelector('#editor'))
+                                        .catch(error => {
+                                            console.error(error);
+                                        });
+                                </script>
+                                {{-- <textarea class="form-control" name="description" rows="6" required></textarea> --}}
+                                {{-- <div class="invalid-feedback">
                                     Please give some information about the house.
-                                </div>
+                                </div> --}}
                             </div>
 
                             <button type="submit" name="submit" class="btn btn-primary">Create property</button>
@@ -209,6 +217,11 @@
                 $('#'+country).show();
             });
         </script>
+        <style>
+        .ck-editor__editable_inline {
+            min-height: 300px;
+        }
+        </style>
 
     {{-- <style>
 

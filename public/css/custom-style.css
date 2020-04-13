@@ -143,6 +143,39 @@
     height: 60px;
 }
 
+.footer-logo img {
+    width: 180px;
+    height: auto;
+}
+
+.wechat {
+    color: #65c20d;
+    padding-right: 6px;
+    vertical-align: bottom;
+}
+.qrcode-wechat {
+    border-radius: 8px;
+}
+.ig {
+    /* color: #E1306C; */
+    color: #fff;
+    padding-right: 12px;
+}
+.fb {
+    /* color: #3b5998; */
+    color: #fff;
+    padding-right: 12px;
+}
+.linkedin {
+    /* color: #0e76a8; */
+    color: #fff;
+    padding-right: 12px;
+}
+.youtube {
+    /* color: #c4302b; */
+    color: #fff;
+}
+
 .text-wrapper {
     display: block;
     display: -webkit-box;

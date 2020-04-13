@@ -45,9 +45,10 @@ class DataController extends Controller
         foreach ($allProperties as $key => $property) {
             $picArray = json_decode($property->pictures);
             $property->pictures = $picArray[0];
+            $property->description = str_limit($property->description, 200);
         }
 
-        // echo '<pre>'.print_r($role, 1).'</pre>';
+        // echo '<pre>'.print_r($allProperties, 1).'</pre>';
 
         return View::make('pages/index')->with(array("properties"=>$allProperties));
     }

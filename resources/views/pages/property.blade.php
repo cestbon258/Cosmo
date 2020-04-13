@@ -23,7 +23,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-7 mb-4">
+            <div class="col-md-7 mb-4">
 
                 <div id="sliderIndicators" class="carousel slide" data-ride="carousel">
                     {{-- <ol class="carousel-indicators">
@@ -34,7 +34,7 @@
                     <div class="carousel-inner">
                         @foreach ($property->pictures as $key => $picture)
                             <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
-                                <img class="d-block w-100" src="{{url('images/'.$property->house_code.'/'.$picture)}}" onerror="this.onerror=null;this.src='{{ url('img/icons/default.png') }}';" style="border-radius:4px;">
+                                <img class="d-block w-100" id="property-images" src="{{url('images/'.$property->house_code.'/'.$picture)}}" onerror="this.onerror=null;this.src='{{ url('img/icons/default.png') }}';" style="border-radius:4px;">
                             </div>
                         @endforeach
                     </div>
@@ -48,20 +48,22 @@
                     </a>
                     {{-- <center> --}}
                         {{-- <div style="overflow-x: auto; width:100%;"> --}}
-                            <ol class="carousel-indicators" style="position: relative; bottom:-4px; overflow-x:auto; margin-left:0; margin-right:0;">
+                        <center>
+                            <ol class="carousel-indicators" style="position: relative; bottom:-4px; overflow-x:auto; margin-left:0; margin-right:0; justify-content: unset !important;">
                                 @foreach ($property->pictures as $key => $picture)
-                                    <img data-target="#sliderIndicators" data-slide-to="{{$key}}" class="{{$key==0 ? 'active' : ''}} px-1" src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$picture)}}" style="height:50px; width:100px; border-radius:6px;">
+                                    <img data-target="#sliderIndicators" data-slide-to="{{$key}}" class="{{$key==0 ? 'active' : ''}} px-1" src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$picture)}}" style="height:60px; width:100px; border-radius:6px;">
                                 @endforeach
                             </ol>
+                        </center>
                         {{-- </div> --}}
                     {{-- </center> --}}
                 </div>
 
             </div>
-            <div class="col-sm-5">
-                <div class="card">
+            <div class="col-md-5 mb-4">
+                <div class="card" style="height: 100%;">
                   <div class="card-body">
-                    <h3 class="card-title">{{$property->title}}</h3>
+                    <h5 class="card-title">{{$property->title}}</h5>
                     <hr>
                     <div><h6 style="color:red;">${{$property->price}}</h6></div>
                     <hr>
@@ -69,36 +71,69 @@
 
                     <h6 class="card-info-text">Facilities</h6>
                     <div class="row">
-                        <div class="col-md-2 new-tag">
+                        <div class="col-6 new-tag">
                             <img src="{{url('img/icons/new.png')}}" alt="">
                         </div>
-                        <div class="col-md-auto bathroom">
+                        <div class="col-6 bathroom">
                             <img src="{{url('img/icons/bathtub.png')}}" alt="">
                             <span>{{$property->bathroom}}</span>
                         </div>
                     </div>
+
                     <div class="row">
-                        <div class="col-md-2 garage">
+                        <div class="col-6 garage">
                             <img src="{{url('img/icons/garage.png')}}" alt="">
                             <span>{{$property->bedroom}}</span>
                         </div>
-                        <div class="col-md-auto space">
+                        <div class="col-6 space">
                             <img src="{{url('img/icons/space.png')}}" alt="">
                             <span>{{$property->size}} {{$property->measurement}}</span>
                         </div>
                     </div>
                     <br>
-                    <h6 class="card-info-text">Description</h6>
-                    <div>{{$property->description}}</div>
-                    <br><br>
                   </div>
                 </div>
 
             </div>
         </div>
+        <div class="card">
+            <h5 class="card-header">Description</h5>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">
+                    <div>{!!html_entity_decode($property->description)!!}</div>
+                </p>
+            </div>
+        </div>
     </div>
 
     <div style="height:140px;"></div>
+
+    <style>
+        ul,
+        ol {
+            margin: 12px !important;
+            li {
+                list-style: inside !important;
+            }
+        }
+
+        ul li, ol li {
+            margin: 12px !important;
+            list-style: inside !important;
+        }
+
+        .footer-widget-area ul, ol {
+            margin: 0 !important;
+            li {
+                list-style: none !important;
+            }
+        }
+        .footer-widget-area ul li, ol li {
+            margin: 0 !important;
+            list-style: none !important;
+        }
+    </style>
 
 
 @stop

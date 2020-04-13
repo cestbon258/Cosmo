@@ -45,18 +45,18 @@
                    <div class="col-12 col-lg-4">
                        <div class="content-sidebar">
                            <!-- Office Hours -->
-                           <div class="weekly-office-hours">
+                           {{-- <div class="weekly-office-hours">
                                <ul>
                                    <li class="d-flex align-items-center justify-content-between"><span>Monday - Friday</span> <span>09 AM - 19 PM</span></li>
                                    <li class="d-flex align-items-center justify-content-between"><span>Saturday</span> <span>09 AM - 14 PM</span></li>
                                    <li class="d-flex align-items-center justify-content-between"><span>Sunday</span> <span>Closed</span></li>
                                </ul>
-                           </div>
+                           </div> --}}
                            <!-- Address -->
                            <div class="address mt-30">
-                               <h6><img src="img/icons/phone-call.png" alt=""> +45 677 8993000 223</h6>
-                               <h6><img src="img/icons/envelope.png" alt=""> office@template.com</h6>
-                               <h6><img src="img/icons/location.png" alt=""> Main Str. no 45-46, b3, 56832,<br>Los Angeles, CA</h6>
+                               {{-- <h6><img src="img/icons/phone-call.png" alt=""> +45 677 8993000 223</h6> --}}
+                               <h6><img src="img/icons/envelope.png" alt=""> cs@icosmo.co</h6>
+                               {{-- <h6><img src="img/icons/location.png" alt=""> Main Str. no 45-46, b3, 56832,<br>Los Angeles, CA</h6> --}}
                            </div>
                        </div>
                    </div>

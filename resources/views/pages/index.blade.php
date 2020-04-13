@@ -29,6 +29,7 @@
         .grid-image div p{
             display: none;
             color:white;
+            padding:0 12px;
             -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             -o-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -41,6 +42,7 @@
         .grid-image img {
             width:100%;
             opacity:.8;
+            height: 280px !important;
         }
         .grid-image div span{
             -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -61,7 +63,6 @@
         .grid-image:hover img {
             opacity:.4 !important;
         }
-
 
     </style>
 
@@ -112,7 +113,7 @@
     <!-- ##### Hero Area End ##### -->
 
     <!-- ##### Advance Search Area Start ##### -->
-    <div class="south-search-area">
+    {{-- <div class="south-search-area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -334,7 +335,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- ##### Advance Search Area End ##### -->
 
     <!-- ##### Featured Properties Area Start ##### -->
@@ -357,9 +358,9 @@
                             <!-- Property Thumbnail -->
                             <div class="property-thumb">
                                 @auth
-                                    <a href="{{ url('property/'.$property->house_code) }}"><img src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
+                                    <a href="{{ url('property/'.$property->house_code) }}"><img style="width: 100%;" src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
                                 @else
-                                    <a href="{{ url('login') }}"><img src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
+                                    <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
                                 @endauth
 
                                 <div class="tag">
@@ -374,13 +375,14 @@
                             <!-- Property Content -->
                             <div class="property-content">
                                 @auth
-                                    <a href="{{ url('property/'.$property->house_code) }}"><h5>{{$property->title}}</h5></a>
+                                    <a href="{{ url('property/'.$property->house_code) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
                                 @else
-                                    <a href="{{ url('login') }}"><h5>{{$property->title}}</h5></a>
+                                    <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
                                 @endauth
-                                <p class="location"><img src="img/icons/location.png" alt="">{{$property->address}}</p>
+                                <div style="height:80px;"><p class="location"><img src="img/icons/location.png" alt="">{{$property->address}}</p></div>
                                 <div style="height: 120px;">
-                                    <p class="text-wrapper text-left" style="margin-bottom: 0;">{{$property->description}}</p>
+                                    {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
+                                    <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
                                     @auth
                                         <a href="{{ url('property/'.$property->house_code) }}">Read More</a>
                                     @else
@@ -530,31 +532,227 @@
     <!-- ##### Testimonials Area End ##### -->
 
     <section>
-        <div class="row">
-                <div class="col-xl-4 col-md-6 px-0 grid-image">
-                    <div class="text-center centered" style="z-index: 1;">
-                        <h4 style="color:white;">Trousdale Estates</h4>
-                        <p>The alluring homes of Trousdale Estates offer some of the most exceptional views Beverly Hills has to offer.</p>
-                        <span class="btn btn-link">Read More</span>
-                    </div>
-                    <img src="//res.cloudinary.com/luxuryp/image/upload/q_auto:good,f_auto/w_700/ohj0enc1kmcmgyjgnajj.jpg">
+        <div class="row" style="margin: 0;">
+            {{-- <div class="col-xl-4 col-md-6 px-0 grid-image">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Perth</h4>
+                    <p><i>The Perth Cultural Centre occupies its own central precinct, including a theatre, library and the Art Gallery of Western Australia.</i></p>
+                    <span class="btn btn-link">Read More</span>
                 </div>
-                <div class="col-xl-4 col-md-6 px-0 grid-image">
-                    <div class="text-center centered" style="z-index: 1;">
-                        <h4 style="color:white;">Trousdale Estates</h4>
-                        <p>The alluring homes of Trousdale Estates offer some of the most exceptional views Beverly Hills has to offer.</p>
-                        <span class="btn btn-link">Read More</span>
-                    </div>
-                    <img src="//res.cloudinary.com/luxuryp/image/upload/q_auto:good,f_auto/w_700/ohj0enc1kmcmgyjgnajj.jpg">
+                <img src="{{url('img/gallery/Australia/perth-1200x720.jpg')}}">
+            </div> --}}
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Bristane</h4>
                 </div>
-                <div class="col-xl-4 col-md-6 px-0 grid-image">
-                    <div class="text-center centered" style="z-index: 1;">
-                        <h4 style="color:white;">Trousdale Estates</h4>
-                        <p>The alluring homes of Trousdale Estates offer some of the most exceptional views Beverly Hills has to offer.</p>
-                        <span class="btn btn-link">Read More</span>
-                    </div>
-                    <img src="//res.cloudinary.com/luxuryp/image/upload/q_auto:good,f_auto/w_700/ohj0enc1kmcmgyjgnajj.jpg">
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/Brisbane.jpg')}}">
+                <div class="mask">
+                    <h2>Bristane</h2>
+                    <p><i>An "energetic river town on the way up, with an edgy arts scene, pumping nightlife and great coffee and restaurants”.</i></p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Gold Coast</h4>
+                </div>
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/gold-coast.jpg')}}">
+                <div class="mask">
+                    <h2>Gold Coast</h2>
+                    <p><i>Famed for its long sandy beaches, surfing spots and elaborate system of inland canals and waterways.</i></p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Melborne</h4>
+                </div>
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/melbourne.jpg')}}">
+                <div class="mask">
+                    <h2>Melborne</h2>
+                    <p><i>Compact and diverse, Melbourne and Victoria is a perfect playground for adventurers and wildlife lovers, foodies and residents.</i></p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Perth</h4>
+                </div>
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/perth.jpg')}}">
+                <div class="mask">
+                    <h2>Perth</h2>
+                    <p><i>The Perth Cultural Centre occupies its own central precinct, including a theatre, library and the Art Gallery of Western Australia.</i></p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Sydney</h4>
+                </div>
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/sydney.jpg')}}">
+                <div class="mask">
+                    <h2>Sydney</h2>
+                    <p>A true melting pot, and one of Australia’s most iconic cities; home to many of the country’s most famous landmarks and with a fascinating history.</p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Leeds</h4>
+                </div>
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/leeds.jpg')}}">
+                <div class="mask">
+                    <h2>Leeds</h2>
+                    <p><i>Leeds plays host to world class culture, incredible shopping, stunning architecture and a varied housing stock.</i></p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Liverpool</h4>
+                </div>
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/liverpool.jpg')}}">
+                <div class="mask">
+                    <h2>Liverpool</h2>
+                    <p><i>A vibrant, growing city with history, architecture, it has a bustling centre, the countryside, the beach and, of course, the Beatles.</i></p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">London</h4>
+                </div>
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/london.jpg')}}">
+                <div class="mask">
+                    <h2>London</h2>
+                    <p><i>London is the most ethnically diverse city in the world due to the UK's history as a global power and its international business focus.</i></p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Manchester</h4>
+                </div>
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/manchester.jpg')}}">
+                <div class="mask">
+                    <h2>Manchester</h2>
+                    <p><i>Youthful, diverse, energetic and bursting with character.</i></p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Sheffield</h4>
+                </div>
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/sheffield.jpg')}}">
+                <div class="mask">
+                    <h2>Sheffield</h2>
+                    <p><i>From a distance and up close, it’s beautiful, our views are spectacular, our food and drink are inspirational.</i></p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Log Angeles</h4>
+                </div>
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/US/los-angeles.jpg')}}">
+                <div class="mask">
+                    <h2>Log Angeles</h2>
+                    <p><i>Eternal sunshine, beautiful beaches, luxurious living, and endless culture.</i></p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Miami</h4>
+                </div>
+                <img style="height:280px; width:100%;" src="{{url('img/gallery/US/miami.jpg')}}">
+                <div class="mask">
+                    <h2>Miami</h2>
+                    <p><i>A city with its amazing cultural spots and breathtaking beaches, to its varied cuisine and wide assortment of nightlife and entertainment options.</i></p>
+                    {{-- <a href="#" class="info">Read More</a> --}}
+                </div>
+            </div>
+
+            {{-- <div class="col-xl-4 col-md-6 px-0 grid-image">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Leeds</h4>
+                    <p><i>Leeds plays host to world class culture, incredible shopping, stunning architecture and a varied housing stock.</i></p>
+                    <span class="btn btn-link">Read More</span>
+                </div>
+                <img src="{{url('img/gallery/UK/leeds.jpg')}}">
+            </div> --}}
+            {{-- <div class="col-xl-4 col-md-6 px-0 grid-image">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Leeds</h4>
+                    <p><i>Leeds plays host to world class culture, incredible shopping, stunning architecture and a varied housing stock.</i></p>
+                    <span class="btn btn-link">Read More</span>
+                </div>
+                <img src="{{url('img/gallery/UK/leeds.jpg')}}">
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">London</h4>
+                </div>
+                <img  style="height:280px; width:100%;" src="{{url('img/gallery/UK/london.jpg')}}">
+                <div class="mask">
+                    <h2>London</h2>
+                    <p><i>London is the most ethnically diverse city in the world due to the UK's history as a global power and its international business focus.</i></p>
+                    <a href="#" class="info">Read More</a>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 grid-image">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">liverpool</h4>
+                    <p><i>A vibrant, growing city with history, architecture, it has a bustling centre, the countryside, the beach and, of course, the Beatles.</i></p>
+                    <span class="btn btn-link">Read More</span>
+                </div>
+                <img src="{{url('img/gallery/UK/liverpool.jpg')}}">
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Miami</h4>
+                </div>
+                <img  style="height:280px; width:100%;" src="{{url('img/gallery/US/Miami-1024x547.jpg')}}">
+                <div class="mask">
+                    <h2>Miami</h2>
+                    <p><i>A city with its amazing cultural spots and breathtaking beaches, to its varied cuisine and wide assortment of nightlife and entertainment options.</i></p>
+                    <a href="#" class="info">Read More</a>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 px-0 grid-image">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Manchester</h4>
+                    <p><i>Youthful, diverse, energetic and bursting with character.</i></p>
+                    <span class="btn btn-link">Read More</span>
+                </div>
+                <img src="{{url('img/gallery/UK/manchester.jpg')}}">
+            </div>
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Sheffield</h4>
+                </div>
+                <img  style="height:280px; width:100%;" src="{{url('img/gallery/UK/sheffield.jpg')}}">
+                <div class="mask">
+                    <h2>Sheffield</h2>
+                    <p><i>From a distance and up close, it’s beautiful, our views are spectacular, our food and drink are inspirational.</i></p>
+                    <a href="#" class="info">Read More</a>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 px-0 grid-image">
+                <div class="text-center centered" style="z-index: 1;">
+                    <h4 style="color:white;">Gold Coast</h4>
+                    <p><i>Famed for its long sandy beaches, surfing spots and elaborate system of inland canals and waterways.</i></p>
+                    <span class="btn btn-link">Read More</span>
+                </div>
+                <img src="{{url('img/gallery/Australia/gold-coast.jpg')}}">
+            </div> --}}
+
+
+
+
             {{-- <div class="col-xl-4 col-md-6 px-0 grid-image">
                 <div class="text-center centered" style="z-index: 1; color:blue;"><h4 style="color:white;">Trousdale Estates</h4><p style="display: none; color:white;">The alluring homes of Trousdale Estates offer some of the most exceptional views Beverly Hills has to offer.</p><span class="btn btn-link" style="display: none; color:white;">Read More</span></div>
                 <img src="//res.cloudinary.com/luxuryp/image/upload/q_auto:good,f_auto/w_700/ohj0enc1kmcmgyjgnajj.jpg" style="width:100%; opacity:.8;">

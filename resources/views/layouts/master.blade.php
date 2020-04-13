@@ -16,8 +16,11 @@
     <!-- Favicon  -->
     <link rel="icon" href="{{ asset('logo/favicon.ico') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
 
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style_common.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style10.css') }}" />
 
     {{--
         ####this js will affect the original js liberary,
@@ -168,15 +171,15 @@
         </ul>
 
         <!-- Search Form -->
-        <div class="south-search-form">
+        {{-- <div class="south-search-form">
             <form action="#" method="post">
                 <input type="search" name="search" id="search" placeholder="Search Anything ...">
                 <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
-        </div>
+        </div> --}}
 
         <!-- Search Button -->
-        <a href="#" class="searchbtn"><i class="fa" aria-hidden="true"></i></a>
+        {{-- <a href="#" class="searchbtn"><i class="fa" aria-hidden="true"></i></a> --}}
         </div>
         <!-- Nav End -->
         </div>
@@ -208,11 +211,11 @@
                             <h6>About Us</h6>
                         </div>
 
-                        <img src="{{ url('img/bg-img/footer.jpg') }}">
+                        {{-- <img src="{{ url('img/bg-img/footer.jpg') }}"> --}}
                         <div class="footer-logo my-4">
-                            <img class="w-logo" src="{{ url('logo/logo.png') }}">
+                            <img src="{{ url('logo/logo.png') }}">
                         </div>
-                        <p>Integer nec bibendum lacus. Suspen disse dictum enim sit amet libero males uada feugiat. Praesent malesuada.</p>
+                        <p>A real estate service platform specialise in sourcing commercial/residential properties around the world for investors and homebuyers.</p>
                     </div>
                 </div>
 
@@ -221,9 +224,21 @@
                     <div class="footer-widget-area mb-100">
                         <!-- Widget Title -->
                         <div class="widget-title">
-                            <h6>Hours</h6>
+                            <h6>Contact Us</h6>
                         </div>
-                        <!-- Office Hours -->
+                        <div>
+                            <img class="qrcode-wechat" src="{{ url('img/icons/wechat.jpg') }}">
+                        </div>
+                        <div class="mt-3">
+                            <a href="https://www.facebook.com/icosmo.co/" target="_blank"><i class="fa fa-facebook-square fa-3x fb"></i></a>
+                            <a href="https://www.instagram.com/icosmo.co/?fbclid=IwAR1tD44E-iESdx10U8a38jgaWocXDLitukGxYi_KN2NmFZcNFbZPalxBtRw" target="_blank"><i class="fa fa-instagram fa-3x ig"></i></a>
+                            <a href="https://www.linkedin.com/company/icosmo" target="_blank"><i class="fa fa-linkedin-square fa-3x linkedin"></i></a>
+                            <i class="fa fa-youtube fa-3x youtube"></i>
+                        </div>
+                        <div class="mt-3">
+                            <h4 style="color:#fff;"><i class="fa fa-envelope"></i> cs@icosmo.co</h4>
+                        </div>
+                        {{-- <!-- Office Hours -->
                         <div class="weekly-office-hours">
                             <ul>
                                 <li class="d-flex align-items-center justify-content-between"><span>Monday - Friday</span> <span>09 AM - 19 PM</span></li>
@@ -236,7 +251,7 @@
                             <h6><img src="{{ url('img/icons/phone-call.png') }}" alt=""> +45 677 8993000 223</h6>
                             <h6><img src="{{ url('img/icons/envelope.png') }}" alt=""> office@template.com</h6>
                             <h6><img src="{{ url('img/icons/location.png') }}" alt=""> Main Str. no 45-46, b3, 56832, Los Angeles, CA</h6>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -249,18 +264,13 @@
                         </div>
                         <!-- Nav -->
                         <ul class="useful-links-nav d-flex align-items-center">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">About us</a></li>
+                            <li><a href="{{ route('/') }}">Home</a></li>
+                            <li><a href="{{ route('about-us') }}">About us</a></li>
                             <li><a href="#">Services</a></li>
                             <li><a href="#">Properties</a></li>
                             <li><a href="#">Listings</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                            <li><a href="#">Properties</a></li>
                             <li><a href="#">Blog</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Elements</a></li>
+                            <li><a href="{{ route('contact') }}">Contact</a></li>
                             <li><a href="#">FAQ</a></li>
                         </ul>
                     </div>

@@ -476,8 +476,8 @@ img {
   @media only screen and (max-width: 767px) {
     .main-header-area {
       height: 70px; } }
-  .main-header-area .classy-nav-container {
-    background-color: transparent; }
+  /* .main-header-area .classy-nav-container {
+    background-color: transparent; } */
   .main-header-area .classy-navbar {
     height: 90px;
     padding: .5em 60px; }

@@ -168,7 +168,16 @@
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" name="description" rows="6" required> {{$property->description}}</textarea>
+                                <textarea name="description" id="editor" {!!html_entity_decode($property->description)!!}></textarea>
+                                <script>
+                                    ClassicEditor
+                                        .create(document.querySelector('#editor'))
+                                        .catch(error => {
+                                            console.error(error);
+                                        });
+                                </script>
+                                {{-- <textarea class="form-control" name="description" rows="6" required> </textarea> --}}
+
                                 <div class="invalid-feedback">
                                     Please give some information about the house.
                                 </div>
