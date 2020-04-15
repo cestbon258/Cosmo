@@ -543,18 +543,18 @@
             </div> --}}
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">Bristane</h4>
+                    <h4 style="color:white;" class="text-uppercase">Brisbane</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/Brisbane.jpg')}}">
                 <div class="mask">
-                    <h2>Bristane</h2>
+                    <h2>Brisbane</h2>
                     <p><i>An "energetic river town on the way up, with an edgy arts scene, pumping nightlife and great coffee and restaurants”.</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">Gold Coast</h4>
+                    <h4 style="color:white;" class="text-uppercase">Gold Coast</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/gold-coast.jpg')}}">
                 <div class="mask">
@@ -565,7 +565,7 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">Melborne</h4>
+                    <h4 style="color:white;" class="text-uppercase">Melborne</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/melbourne.jpg')}}">
                 <div class="mask">
@@ -576,7 +576,7 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">Perth</h4>
+                    <h4 style="color:white;" class="text-uppercase">Perth</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/perth.jpg')}}">
                 <div class="mask">
@@ -587,7 +587,7 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">Sydney</h4>
+                    <h4 style="color:white;" class="text-uppercase">Sydney</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/sydney.jpg')}}">
                 <div class="mask">
@@ -598,7 +598,7 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">Leeds</h4>
+                    <h4 style="color:white;" class="text-uppercase">Leeds</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/leeds.jpg')}}">
                 <div class="mask">
@@ -609,7 +609,7 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">Liverpool</h4>
+                    <h4 style="color:white;" class="text-uppercase">Liverpool</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/liverpool.jpg')}}">
                 <div class="mask">
@@ -620,7 +620,7 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">London</h4>
+                    <h4 style="color:white;" class="text-uppercase">London</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/london.jpg')}}">
                 <div class="mask">
@@ -631,7 +631,7 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">Manchester</h4>
+                    <h4 style="color:white;" class="text-uppercase">Manchester</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/manchester.jpg')}}">
                 <div class="mask">
@@ -642,7 +642,7 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">Sheffield</h4>
+                    <h4 style="color:white;" class="text-uppercase">Sheffield</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/sheffield.jpg')}}">
                 <div class="mask">
@@ -653,7 +653,7 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">Log Angeles</h4>
+                    <h4 style="color:white;" class="text-uppercase">Log Angeles</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/US/los-angeles.jpg')}}">
                 <div class="mask">
@@ -664,7 +664,7 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;">Miami</h4>
+                    <h4 style="color:white;" class="text-uppercase">Miami</h4>
                 </div>
                 <img style="height:280px; width:100%;" src="{{url('img/gallery/US/miami.jpg')}}">
                 <div class="mask">

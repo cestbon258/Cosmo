@@ -4,7 +4,14 @@
 
 @section('content')
     <div class="container-fluid">
+
         <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">All Properties</li>
+                </ol>
+            </nav>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">All Properties</h6>
@@ -13,6 +20,9 @@
                     <table id="propert-table" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
+                                @if (Auth::user()->role == 0)
+                                    <th>Creator</th>
+                                @endif
                                 <th>Name of Property</th>
                                 <th>Purpose for</th>
                                 <th>Address</th>
@@ -24,6 +34,9 @@
                         <tbody>
                             @foreach ($properties as $key => $property)
                                 <tr>
+                                    @if (Auth::user()->role == 0)
+                                        <td>{{$property->email}}</td>
+                                    @endif
                                     <td> {{$property->title}} </td>
                                     <td> {{$property->purpose}} </td>
                                     <td> {{$property->address}} </td>

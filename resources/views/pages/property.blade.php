@@ -47,7 +47,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                     {{-- <center> --}}
-                        {{-- <div style="overflow-x: auto; width:100%;"> --}}
+                        <div style="width:100%;">
                         <center>
                             <ol class="carousel-indicators" style="position: relative; bottom:-4px; overflow-x:auto; margin-left:0; margin-right:0; justify-content: unset !important;">
                                 @foreach ($property->pictures as $key => $picture)
@@ -55,7 +55,7 @@
                                 @endforeach
                             </ol>
                         </center>
-                        {{-- </div> --}}
+                        </div>
                     {{-- </center> --}}
                 </div>
 

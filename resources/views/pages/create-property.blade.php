@@ -5,22 +5,30 @@
 @section('content')
 
 
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-              <strong>Whoops!</strong> There were some problems with your input.<br><br>
-              <ul>
-                    @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                    @endforeach
-              </ul>
-            </div>
-        @endif
+
 
         <form enctype="multipart/form-data" method="POST" action="{{ route('create-property') }}" class="needs-validation" novalidate>
             @csrf
             <div class="container-fluid">
 
                 <div class="col">
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                          <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                          <ul>
+                                @foreach ($errors->all() as $error)
+                                  <li>{{ $error }}</li>
+                                @endforeach
+                          </ul>
+                        </div>
+                    @endif
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create Property</li>
+                        </ol>
+                    </nav>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                           <h6 class="m-0 font-weight-bold text-primary">Create Property</h6>
@@ -76,45 +84,19 @@
                             </div>
 
 
-                            <div class="row">
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="country">Country</label>
-                                        <select class="form-control" id="country-selected" name="country" required>
-                                            @foreach ($districts as $key => $district)
-                                                <option>{{$district->country}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    {{-- <div class="form-group">
-                                        <input type="text" class="form-control" name="country" autocomplete="off" placeholder="Country" required>
-                                        <div class="invalid-feedback">
-                                            Please specify the country.
-                                        </div>
-                                    </div> --}}
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="city">City</label>
-                                        @foreach ($districts as $key => $district)
-                                        <select class="form-control" id="{{$district->country}}" name="city">
-                                                <option disabled>---{{$district->country}}---</option>
-                                            @foreach ($district->city as $keyy => $value)
-                                                <option>{{$value}}</option>
-                                            @endforeach
-                                        </select>
-                                        @endforeach
-                                    </div>
-
-                                    {{-- <div class="form-group">
-                                        <input type="text" class="form-control" name="city" autocomplete="off" placeholder="City" required>
-                                        <div class="invalid-feedback">
-                                            Please specify the city.
-                                        </div>
-                                    </div> --}}
-                                </div>
+                            <div class="form-group">
+                                <label for="district">District</label>
+                                <select class="form-control" name="district">
+                                @foreach ($districts as $key => $district)
+                                        <option disabled>--- {{$district->country}} ---</option>
+                                    @foreach ($district->city as $keyy => $value)
+                                        <option value="{{$value}}|{{$district->country}}">{{$value}}</option>
+                                    @endforeach
+                                @endforeach
+                                </select>
                             </div>
+
 
                             <div class="form-group">
                                 <label for="address">Address</label>
@@ -204,19 +186,6 @@
             </div>
         </form>
 
-
-        <script>
-            $('#USA').hide();
-            $('#UK').hide();
-            $('#country-selected').change(function() {
-                $('#Australia').hide();
-                $('#USA').hide();
-                $('#UK').hide();
-
-                let country = $( this ).val();
-                $('#'+country).show();
-            });
-        </script>
         <style>
         .ck-editor__editable_inline {
             min-height: 300px;

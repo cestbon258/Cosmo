@@ -257,6 +257,10 @@ class DataController extends Controller
             $date = date_create($_POST['time']);
             $newDate= date_format($date,"Y-m-d");;
 
+            // get country and city from district
+            $district = $_POST['district'];
+            $districtArray = explode ("|", $district);
+
             DB::table('houses')
             ->insert(
                     [
@@ -265,8 +269,8 @@ class DataController extends Controller
                         'title'      => $_POST['title'],
                         'purpose'    => $_POST['usage'],
                         'time'       => $newDate,
-                        'country'    => $_POST['country'],
-                        'city'       => $_POST['city'],
+                        'country'    => $districtArray[1],
+                        'city'       => $districtArray[0],
                         'address'    => $_POST['address'],
                         'measurement'=> $_POST['measure'],
                         'bedroom'    => $_POST['bedroom'],
@@ -282,6 +286,8 @@ class DataController extends Controller
             Session::flash('alert-class', 'alert-success');
 
             return back();
+            // echo '<pre>'.print_r($_POST, 1).'</pre>';
+
         }
     }
 
@@ -299,10 +305,12 @@ class DataController extends Controller
         // admin
         if ($role == 0) {
             $myProperty = DB::table('houses')
+            ->join('users', 'houses.user_id', '=', 'users.id')
+            ->select('users.email', 'users.role', 'houses.id', 'houses.house_code', 'houses.title', 'houses.purpose', 'houses.time', 'houses.country', 'houses.city', 'houses.address', 'houses.updated_at', 'houses.created_at', 'houses.status')
                 ->get();
         }
 
-        // echo '<pre>'.print_r($myProperty, 1).'</pre>';
+        echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/property-list')->with(array('user' => $user, "properties"=>$myProperty));
     }
@@ -348,6 +356,15 @@ class DataController extends Controller
     {
         $user = Auth::user();
 
+        $districts = DB::table('districts')
+            ->get();
+
+
+        foreach ($districts as $key => $district) {
+            $district->city = json_decode($district->city);
+        }
+
+
         $myProperty = DB::table('houses')
             ->where('house_code', $houseCode)
             ->first();
@@ -360,9 +377,10 @@ class DataController extends Controller
         $picArray = json_decode($myProperty->pictures);
         $myProperty->pictures = $picArray;
 
+
         // echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
-        return View::make('pages/edit-property')->with(array('user' => $user, "property"=>$myProperty));
+        return View::make('pages/edit-property')->with(array('user' => $user, 'districts' => $districts, "property"=>$myProperty));
     }
 
 
@@ -454,6 +472,9 @@ class DataController extends Controller
         $date = date_create($_POST['time']);
         $newDate= date_format($date,"Y-m-d");;
 
+        // get country and city from district
+        $district = $_POST['district'];
+        $districtArray = explode ("|", $district);
 
         DB::table('houses')
             ->where('house_code', $houseCode)
@@ -461,8 +482,8 @@ class DataController extends Controller
                 'title'      => $_POST['title'],
                 'purpose'    => $_POST['usage'],
                 'time'       => $newDate,
-                'country'    => $_POST['country'],
-                'city'       => $_POST['city'],
+                'country'    => $districtArray[1],
+                'city'       => $districtArray[0],
                 'address'    => $_POST['address'],
                 'measurement'=> $_POST['measure'],
                 'bedroom'    => $_POST['bedroom'],
@@ -478,6 +499,7 @@ class DataController extends Controller
         Session::flash('alert-class', 'alert-success');
 
         return back();
+
 
         // echo '<pre>'.print_r($_POST, 1).'</pre>';
 

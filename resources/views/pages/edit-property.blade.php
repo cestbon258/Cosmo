@@ -5,14 +5,19 @@
 @section('content')
 
 
-
-
         <form enctype="multipart/form-data" method="POST" action="{{ url('edit-property/'.$property->house_code) }}" class="needs-validation" novalidate>
             @csrf
             <div class="container-fluid">
-                @include('layouts.alert')
-
                 <div class="col">
+                    @include('layouts.alert')
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('property-list') }}">All Properties</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Property</li>
+                        </ol>
+                    </nav>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                           <h6 class="m-0 font-weight-bold text-primary">Edit Property</h6>
@@ -80,26 +85,36 @@
                                 </div>
                             </div>
 
-                            <label for="country">Country</label>
-                            <div class="row">
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="country" autocomplete="off" value="{{$property->country}}" required>
-                                        <div class="invalid-feedback">
-                                            Please specify the country.
-                                        </div>
+                                        <label for="country">Country</label>
+                                        <select class="form-control" id="country-selected" name="country" required>
+                                            @foreach ($districts as $key => $district)
+                                                <option {{$property->country == $district->country ? 'selected' : '' }}>{{$district->country}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
-                                </div>
-                                <div class="col-md-6">
+                                </div> --}}
+                            <div class="form-group">
+                                <label for="district">District</label>
+                                <select class="form-control" name="district">
+                                @foreach ($districts as $key => $district)
+                                        <option disabled>--- {{$district->country}} ---</option>
+                                    @foreach ($district->city as $keyy => $value)
+                                        <option {{$property->city == $value ? 'selected' : ''}} value="{{$value}}|{{$district->country}}">{{$value}}</option>
+                                    @endforeach
+                                @endforeach
+                                </select>
+                            </div>
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="city" autocomplete="off" value="{{$property->city}}" required>
                                         <div class="invalid-feedback">
                                             Please specify the city.
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div> --}}
 
                             <div class="form-group">
                                 <label for="address">Address</label>
@@ -168,7 +183,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea name="description" id="editor" {!!html_entity_decode($property->description)!!}></textarea>
+                                <textarea name="description" id="editor" >{{$property->description}}</textarea>
                                 <script>
                                     ClassicEditor
                                         .create(document.querySelector('#editor'))
@@ -189,6 +204,12 @@
                 </div>
             </div>
         </form>
+
+        <style>
+        .ck-editor__editable_inline {
+            min-height: 300px;
+        }
+        </style>
 
 
 
