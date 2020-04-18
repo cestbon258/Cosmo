@@ -51,16 +51,16 @@
                                             <form id="publish-{{$property->id}}" action="{{ route('publish-property') }}" method="POST" style="display: none;">
                                                 @csrf
                                                 <input name="publish" value="{{$property->status}}" hidden>
-                                                <input name="houseCode" value="{{$property->house_code}}" hidden>
+                                                <input name="houseCode" value="{{$property->property_code}}" hidden>
                                             </form>
                                         @else
                                             <span>{{$property->status == 1 ? 'Approved' : 'Pending'}}</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ url('edit-property/'.$property->house_code) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
+                                        <a href="{{ url('edit-property/'.$property->property_code) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
 
-                                        {{-- <a href="property/{{$property->house_code}}"><button type="button" class="btn btn-outline-danger btn-sm" >Delete</button></a> --}}
+                                        {{-- <a href="property/{{$property->property_code}}"><button type="button" class="btn btn-outline-danger btn-sm" >Delete</button></a> --}}
 
                                         <a href="{{ route('delete-property') }}"
                                             onclick="event.preventDefault();
@@ -70,7 +70,7 @@
 
                                         <form id="pid-{{$property->id}}" action="{{ route('delete-property') }}" method="POST" style="display: none;">
                                             @csrf
-                                            <input name="property" value="{{$property->house_code}}" hidden>
+                                            <input name="property" value="{{$property->property_code}}" hidden>
                                         </form>
 
                                     </td>

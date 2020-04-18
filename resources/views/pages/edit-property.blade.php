@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'New House')
+@section('title', 'Create Property')
 
 @section('content')
 
 
-        <form enctype="multipart/form-data" method="POST" action="{{ url('edit-property/'.$property->house_code) }}" class="needs-validation" novalidate>
+        <form enctype="multipart/form-data" method="POST" action="{{ url('edit-property/'.$property->property_code) }}" class="needs-validation" novalidate>
             @csrf
             <div class="container-fluid">
                 <div class="col">
@@ -27,7 +27,7 @@
                                 @foreach ($property->pictures as $key => $picture)
                                     @if($key == 0)
                                         <div class="col-sm-3 imgUp">
-                                            <div class="imagePreview" style="background:url( {{url('images/'.$property->house_code.'/'.$picture)}} ); background-position: center center; background-size: cover; background-repeat: no-repeat;"></div>
+                                            <div class="imagePreview" style="background:url( {{url('storage/properties/'.$property->property_code.'/'.$picture)}} ); background-position: center center; background-size: cover; background-repeat: no-repeat;"></div>
                                             <input name="orignImg[]"value="{{$picture}}" hidden>
 
                                             {{-- <label class="btn btn-primary-custom">
@@ -40,7 +40,7 @@
                                         {{-- <i class="fa fa-plus imgAdd"></i> --}}
                                     @else
                                         <div class="col-sm-3 imgUp">
-                                            <div class="imagePreview" style="background:url( {{url('images/'.$property->house_code.'/'.$picture)}} ); background-position: center center; background-size: cover; background-repeat: no-repeat;"></div>
+                                            <div class="imagePreview" style="background:url( {{url('storage/properties/'.$property->property_code.'/'.$picture)}} ); background-position: center center; background-size: cover; background-repeat: no-repeat;"></div>
                                             <input name="orignImg[]"value="{{$picture}}" hidden>
                                             <i class="fa fa-times del"></i>
                                         </div>
@@ -79,7 +79,7 @@
 
                             <div class="form-group">
                                 <label for="date">Year of Built</label>
-                                <input type="month" class="form-control" name="time" autocomplete="off" value="{{$property->time}}" required>
+                                <input type="month" class="form-control" name="time" autocomplete="off" value="{{$property->time}}">
                                 <div class="invalid-feedback">
                                     Please specify the year.
                                 </div>
@@ -138,7 +138,7 @@
                                     <div class="form-group">
                                         <select class="form-control" name="measure" required>
                                             <option {{$property->measurement =='sq ft' ? 'selected' : ''}}>sq ft</option>
-                                            <option {{$property->measurement =='m2' ? 'selected' : ''}}>m<sup>2</sup></option>
+                                            <option {{$property->measurement =='m²' ? 'selected' : ''}}>m&#178;</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Please specify the No. of bathroom.
@@ -181,24 +181,23 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea name="description" id="editor" >{{$property->description}}</textarea>
+                                <textarea id="summernote" name="description">{{$property->description}}</textarea>
                                 <script>
-                                    ClassicEditor
-                                        .create(document.querySelector('#editor'))
-                                        .catch(error => {
-                                            console.error(error);
+                                    $(document).ready(function() {
+                                        $('#summernote').summernote({
+                                            height: 220,
                                         });
+                                    });
                                 </script>
-                                {{-- <textarea class="form-control" name="description" rows="6" required> </textarea> --}}
-
                                 <div class="invalid-feedback">
                                     Please give some information about the house.
                                 </div>
                             </div>
 
-                            <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </div>
                 </div>
@@ -206,9 +205,6 @@
         </form>
 
         <style>
-        .ck-editor__editable_inline {
-            min-height: 300px;
-        }
         </style>
 
 

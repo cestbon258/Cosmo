@@ -28,6 +28,10 @@
    display: block;
    position: relative;
 }
+.view.view-tenth img {
+    height:280px;
+    width:100%;
+}
 .view h2 {
    text-transform: uppercase;
    color: #fff;

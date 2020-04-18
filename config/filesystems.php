@@ -47,10 +47,15 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
-        'uploads' => [
-            'driver' => 'local',
-            'root'   => storage_path ('houses'),
-        ],
+
+        // 'uploads' => [
+        //     'driver' => 'local',
+        //     'root'   => storage_path ('houses')
+        // ],
+        // 'projects' => [
+        //     'driver' => 'local',
+        //     'root'   => storage_path ('projects')
+        // ],
 
         'public' => [
             'driver' => 'local',

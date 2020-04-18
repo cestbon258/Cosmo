@@ -7,64 +7,7 @@
 @stop
 
 @section('content')
-    <style>
-        video {
-            height: auto;
-            width: 100%;
-            object-fit: fill;
-        }
 
-
-
-        .centered {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            transform: translateY(-50%);
-        }
-        .grid-image {
-            cursor: pointer;
-        }
-        .grid-image div p{
-            display: none;
-            color:white;
-            padding:0 12px;
-            -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            -o-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .grid-image div span{
-            display: none;
-            transition: opacity 1s ease-out;
-            color:white;
-        }
-        .grid-image img {
-            width:100%;
-            opacity:.8;
-            height: 280px !important;
-        }
-        .grid-image div span{
-            -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            -o-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .grid-image:hover{
-            background-color: transparent !important;
-            /* opacity: 0.4 !important; */
-            background-color: black !important;
-        }
-        .grid-image:hover div span{
-            display: block !important;
-        }
-        .grid-image:hover div p{
-            display: block !important;
-        }
-        .grid-image:hover img {
-            opacity:.4 !important;
-        }
-
-    </style>
 
     <!-- ##### Hero Area Start ##### -->
     <section class="hero-area">
@@ -345,71 +288,133 @@
                 <div class="col-12">
                     <div class="section-heading wow fadeInUp">
                         <h2>Featured Properties</h2>
-                        <p>Suspendisse dictum enim sit amet libero malesuada feugiat.</p>
+                        {{-- <p>Suspendisse dictum enim sit amet libero malesuada feugiat.</p> --}}
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 @foreach ($properties as $key => $property)
-                    <!-- Single Featured Property -->
-                    <div class="col-12 col-md-6 col-xl-4">
-                        <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
-                            <!-- Property Thumbnail -->
-                            <div class="property-thumb">
-                                @auth
-                                    <a href="{{ url('property/'.$property->house_code) }}"><img style="width: 100%;" src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
-                                @else
-                                    <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('images/'.$property->house_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
-                                @endauth
-
-                                <div class="tag">
-                                    <span>For {{$property->purpose}}</span>
-                                </div>
-                                @auth
-                                    <div class="list-price">
-                                        <p>${{$property->price}}</p>
-                                    </div>
-                                @endauth
-                            </div>
-                            <!-- Property Content -->
-                            <div class="property-content">
-                                @auth
-                                    <a href="{{ url('property/'.$property->house_code) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                @else
-                                    <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                @endauth
-                                <div style="height:80px;"><p class="location"><img src="img/icons/location.png" alt="">{{$property->address}}</p></div>
-                                <div style="height: 120px;">
-                                    {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
-                                    <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
+                    @if ($property->project_type == 1)
+                        <!-- Single Featured Property -->
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
+                                <!-- Property Thumbnail -->
+                                <div class="property-thumb">
                                     @auth
-                                        <a href="{{ url('property/'.$property->house_code) }}">Read More</a>
+                                        <a href="{{ url('property/'.$property->property_code) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
                                     @else
-                                        <a href="{{ url('login') }}">Read More</a>
+                                        <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
+                                    @endauth
+
+                                    <div class="tag">
+                                        <span>For {{$property->purpose}}</span>
+                                    </div>
+                                    @auth
+                                        <div class="list-price">
+                                            <p>${{$property->price}}</p>
+                                        </div>
                                     @endauth
                                 </div>
+                                <!-- Property Content -->
+                                <div class="property-content">
+                                    @auth
+                                        <a href="{{ url('property/'.$property->property_code) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
+                                    @else
+                                        <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
+                                    @endauth
+                                    <div style="height:80px;"><p class="location"><img src="img/icons/location.png" alt="">{{$property->address}}</p></div>
+                                    <div style="height: 120px;">
+                                        {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
+                                        <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
+                                        @auth
+                                            <a href="{{ url('property/'.$property->property_code) }}">Read More</a>
+                                        @else
+                                            <a href="{{ url('login') }}">Read More</a>
+                                        @endauth
+                                    </div>
 
-                                <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                    <div class="new-tag">
-                                        <img src="img/icons/new.png" alt="">
-                                    </div>
-                                    <div class="bathroom">
-                                        <img src="img/icons/bathtub.png" alt="">
-                                        <span>{{$property->bathroom}}</span>
-                                    </div>
-                                    <div class="garage">
-                                        <img src="img/icons/garage.png" alt="">
-                                        <span>{{$property->bedroom}}</span>
-                                    </div>
-                                    <div class="space">
-                                        <img src="img/icons/space.png" alt="">
-                                        <span>{{$property->size}} {{$property->measurement}}</span>
+                                    <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                        <div class="new-tag">
+                                            <img src="img/icons/new.png" alt="">
+                                        </div>
+                                        <div class="bathroom">
+                                            <img src="img/icons/bathtub.png" alt="">
+                                            <span>{{$property->bathroom}}</span>
+                                        </div>
+                                        <div class="garage">
+                                            <img src="img/icons/garage.png" alt="">
+                                            <span>{{$property->bedroom}}</span>
+                                        </div>
+                                        <div class="space">
+                                            <img src="img/icons/space.png" alt="">
+                                            <span>{{$property->size}} {{$property->measurement}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <!-- Project Featured Property -->
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
+                                <!-- Property Thumbnail -->
+                                <div class="property-thumb">
+                                    @auth
+                                        <a href="{{ url('property/'.$property->property_code) }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
+                                    @else
+                                        <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
+                                    @endauth
+
+                                    {{-- <div class="tag">
+                                        <span>For {{$property->purpose}}</span>
+                                    </div>
+                                    @auth
+                                        <div class="list-price">
+                                            <p>${{$property->price}}</p>
+                                        </div>
+                                    @endauth --}}
+                                </div>
+                                <!-- Property Content -->
+                                <div class="property-content">
+                                    @auth
+                                        <a href="{{ url('property/'.$property->property_code) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
+                                    @else
+                                        <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
+                                    @endauth
+                                    <div style="height:80px;"><p class="location"><img src="img/icons/location.png" alt="">{{$property->address}}</p></div>
+                                    <div style="height: 120px;">
+                                        {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
+                                        <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
+                                        @auth
+                                            <a href="{{ url('property/'.$property->property_code) }}">Read More</a>
+                                        @else
+                                            <a href="{{ url('login') }}">Read More</a>
+                                        @endauth
+                                    </div>
+
+                                    <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                        <div style="height:27px;"></div>
+                                        {{-- <div class="new-tag">
+                                            <img src="img/icons/new.png" alt="">
+                                        </div> --}}
+                                        {{-- <div class="bathroom">
+                                            <img src="img/icons/bathtub.png" alt="">
+                                            <span>{{$property->bathroom}}</span>
+                                        </div>
+                                        <div class="garage">
+                                            <img src="img/icons/garage.png" alt="">
+                                            <span>{{$property->bedroom}}</span>
+                                        </div>
+                                        <div class="space">
+                                            <img src="img/icons/space.png" alt="">
+                                            <span>{{$property->size}} {{$property->measurement}}</span>
+                                        </div> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 @endforeach
 
 
@@ -467,7 +472,7 @@
                 <div class="col-12">
                     <div class="cta-content text-center">
                         <h2 class="wow fadeInUp" data-wow-delay="300ms">Are you looking for a place to rent?</h2>
-                        <h6 class="wow fadeInUp" data-wow-delay="400ms">Suspendisse dictum enim sit amet libero malesuada feugiat.</h6>
+                        {{-- <h6 class="wow fadeInUp" data-wow-delay="400ms">Suspendisse dictum enim sit amet libero malesuada feugiat.</h6> --}}
                         {{-- <a href="#" class="btn south-btn mt-50 wow fadeInUp" data-wow-delay="500ms">Search</a> --}}
                     </div>
                 </div>
@@ -545,7 +550,7 @@
                 <div class="text-center centered" style="z-index: 1;">
                     <h4 style="color:white;" class="text-uppercase">Brisbane</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/Brisbane.jpg')}}">
+                <img src="{{url('img/gallery/Australia/Brisbane.jpg')}}">
                 <div class="mask">
                     <h2>Brisbane</h2>
                     <p><i>An "energetic river town on the way up, with an edgy arts scene, pumping nightlife and great coffee and restaurants”.</i></p>
@@ -556,7 +561,7 @@
                 <div class="text-center centered" style="z-index: 1;">
                     <h4 style="color:white;" class="text-uppercase">Gold Coast</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/gold-coast.jpg')}}">
+                <img src="{{url('img/gallery/Australia/gold-coast.jpg')}}">
                 <div class="mask">
                     <h2>Gold Coast</h2>
                     <p><i>Famed for its long sandy beaches, surfing spots and elaborate system of inland canals and waterways.</i></p>
@@ -565,11 +570,11 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Melborne</h4>
+                    <h4 style="color:white;" class="text-uppercase">Melbourne</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/melbourne.jpg')}}">
+                <img src="{{url('img/gallery/Australia/melbourne.jpg')}}">
                 <div class="mask">
-                    <h2>Melborne</h2>
+                    <h2>melbourne</h2>
                     <p><i>Compact and diverse, Melbourne and Victoria is a perfect playground for adventurers and wildlife lovers, foodies and residents.</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
@@ -578,7 +583,7 @@
                 <div class="text-center centered" style="z-index: 1;">
                     <h4 style="color:white;" class="text-uppercase">Perth</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/perth.jpg')}}">
+                <img src="{{url('img/gallery/Australia/perth.jpg')}}">
                 <div class="mask">
                     <h2>Perth</h2>
                     <p><i>The Perth Cultural Centre occupies its own central precinct, including a theatre, library and the Art Gallery of Western Australia.</i></p>
@@ -589,7 +594,7 @@
                 <div class="text-center centered" style="z-index: 1;">
                     <h4 style="color:white;" class="text-uppercase">Sydney</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/Australia/sydney.jpg')}}">
+                <img src="{{url('img/gallery/Australia/sydney.jpg')}}">
                 <div class="mask">
                     <h2>Sydney</h2>
                     <p>A true melting pot, and one of Australia’s most iconic cities; home to many of the country’s most famous landmarks and with a fascinating history.</p>
@@ -600,7 +605,7 @@
                 <div class="text-center centered" style="z-index: 1;">
                     <h4 style="color:white;" class="text-uppercase">Leeds</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/leeds.jpg')}}">
+                <img src="{{url('img/gallery/UK/leeds.jpg')}}">
                 <div class="mask">
                     <h2>Leeds</h2>
                     <p><i>Leeds plays host to world class culture, incredible shopping, stunning architecture and a varied housing stock.</i></p>
@@ -611,7 +616,7 @@
                 <div class="text-center centered" style="z-index: 1;">
                     <h4 style="color:white;" class="text-uppercase">Liverpool</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/liverpool.jpg')}}">
+                <img src="{{url('img/gallery/UK/liverpool.jpg')}}">
                 <div class="mask">
                     <h2>Liverpool</h2>
                     <p><i>A vibrant, growing city with history, architecture, it has a bustling centre, the countryside, the beach and, of course, the Beatles.</i></p>
@@ -622,7 +627,7 @@
                 <div class="text-center centered" style="z-index: 1;">
                     <h4 style="color:white;" class="text-uppercase">London</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/london.jpg')}}">
+                <img src="{{url('img/gallery/UK/london.jpg')}}">
                 <div class="mask">
                     <h2>London</h2>
                     <p><i>London is the most ethnically diverse city in the world due to the UK's history as a global power and its international business focus.</i></p>
@@ -633,7 +638,7 @@
                 <div class="text-center centered" style="z-index: 1;">
                     <h4 style="color:white;" class="text-uppercase">Manchester</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/manchester.jpg')}}">
+                <img src="{{url('img/gallery/UK/manchester.jpg')}}">
                 <div class="mask">
                     <h2>Manchester</h2>
                     <p><i>Youthful, diverse, energetic and bursting with character.</i></p>
@@ -644,7 +649,7 @@
                 <div class="text-center centered" style="z-index: 1;">
                     <h4 style="color:white;" class="text-uppercase">Sheffield</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/UK/sheffield.jpg')}}">
+                <img src="{{url('img/gallery/UK/sheffield.jpg')}}">
                 <div class="mask">
                     <h2>Sheffield</h2>
                     <p><i>From a distance and up close, it’s beautiful, our views are spectacular, our food and drink are inspirational.</i></p>
@@ -655,7 +660,7 @@
                 <div class="text-center centered" style="z-index: 1;">
                     <h4 style="color:white;" class="text-uppercase">Log Angeles</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/US/los-angeles.jpg')}}">
+                <img src="{{url('img/gallery/US/los-angeles.jpg')}}">
                 <div class="mask">
                     <h2>Log Angeles</h2>
                     <p><i>Eternal sunshine, beautiful beaches, luxurious living, and endless culture.</i></p>
@@ -666,7 +671,7 @@
                 <div class="text-center centered" style="z-index: 1;">
                     <h4 style="color:white;" class="text-uppercase">Miami</h4>
                 </div>
-                <img style="height:280px; width:100%;" src="{{url('img/gallery/US/miami.jpg')}}">
+                <img src="{{url('img/gallery/US/miami.jpg')}}">
                 <div class="mask">
                     <h2>Miami</h2>
                     <p><i>A city with its amazing cultural spots and breathtaking beaches, to its varied cuisine and wide assortment of nightlife and entertainment options.</i></p>
@@ -793,4 +798,63 @@
         </div>
     </section> --}}
     <!-- ##### Editor Area End ##### -->
+
+    <style>
+        video {
+            height: auto;
+            width: 100%;
+            object-fit: fill;
+        }
+
+
+
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+        }
+        .grid-image {
+            cursor: pointer;
+        }
+        .grid-image div p{
+            display: none;
+            color:white;
+            padding:0 12px;
+            -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            -o-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .grid-image div span{
+            display: none;
+            transition: opacity 1s ease-out;
+            color:white;
+        }
+        .grid-image img {
+            width:100%;
+            opacity:.8;
+            height: 280px !important;
+        }
+        .grid-image div span{
+            -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            -o-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .grid-image:hover{
+            background-color: transparent !important;
+            /* opacity: 0.4 !important; */
+            background-color: black !important;
+        }
+        .grid-image:hover div span{
+            display: block !important;
+        }
+        .grid-image:hover div p{
+            display: block !important;
+        }
+        .grid-image:hover img {
+            opacity:.4 !important;
+        }
+
+    </style>
 @stop

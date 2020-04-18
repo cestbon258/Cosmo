@@ -226,17 +226,23 @@
                         <div class="widget-title">
                             <h6>Contact Us</h6>
                         </div>
+                        {{-- <div class="card text-center" style="width: 9rem;">
+                          <img class="card-img-top" src="{{ url('img/icons/qrcode-wechat.jpeg') }}">
+                          <div class="card-body" style="padding: 0.25rem;">
+                            <p class="card-text"><i class="fa fa-weixin fa-2x" style="color:#000201"></i></p>
+                          </div>
+                        </div> --}}
                         <div>
                             <img class="qrcode-wechat" src="{{ url('img/icons/wechat.jpg') }}">
                         </div>
                         <div class="mt-3">
-                            <a href="https://www.facebook.com/icosmo.co/" target="_blank"><i class="fa fa-facebook-square fa-3x fb"></i></a>
-                            <a href="https://www.instagram.com/icosmo.co/?fbclid=IwAR1tD44E-iESdx10U8a38jgaWocXDLitukGxYi_KN2NmFZcNFbZPalxBtRw" target="_blank"><i class="fa fa-instagram fa-3x ig"></i></a>
-                            <a href="https://www.linkedin.com/company/icosmo" target="_blank"><i class="fa fa-linkedin-square fa-3x linkedin"></i></a>
-                            <i class="fa fa-youtube fa-3x youtube"></i>
+                            <a href="https://www.facebook.com/icosmo.co/" target="_blank"><i class="fa fa-facebook-square fa-2x fb"></i></a>
+                            <a href="https://www.instagram.com/icosmo.co/?fbclid=IwAR1tD44E-iESdx10U8a38jgaWocXDLitukGxYi_KN2NmFZcNFbZPalxBtRw" target="_blank"><i class="fa fa-instagram fa-2x ig"></i></a>
+                            <a href="https://www.linkedin.com/company/icosmo" target="_blank"><i class="fa fa-linkedin-square fa-2x linkedin"></i></a>
+                            <i class="fa fa-youtube fa-2x youtube"></i>
                         </div>
                         <div class="mt-3">
-                            <h4 style="color:#fff;"><i class="fa fa-envelope"></i> cs@icosmo.co</h4>
+                            <h6 style="color:#fff;"><i class="fa fa-envelope"></i> cs@icosmo.co</h6>
                         </div>
                         {{-- <!-- Office Hours -->
                         <div class="weekly-office-hours">
@@ -308,7 +314,7 @@
         <!-- Copywrite Text -->
         <div class="copywrite-text d-flex align-items-center justify-content-center">
             <p>
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <a href="{{url('/')}}">Cosmo</a>
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a href="{{url('/')}}">COSMO Real Estate Limited</a>. All rights reserved
             </p>
         </div>
     </footer>

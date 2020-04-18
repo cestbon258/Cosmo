@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `houses` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `house_code` varchar(255) DEFAULT NULL,
+  `property_code` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `purpose` varchar(255) DEFAULT NULL,
   `time` date DEFAULT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE `houses` (
 -- Dumping data for table `houses`
 --
 
-INSERT INTO `houses` (`id`, `user_id`, `house_code`, `title`, `purpose`, `time`, `country`, `city`, `address`, `measurement`, `bedroom`, `pictures`, `price`, `size`, `bathroom`, `description`, `updated_at`, `created_at`, `status`) VALUES
+INSERT INTO `houses` (`id`, `user_id`, `property_code`, `title`, `purpose`, `time`, `country`, `city`, `address`, `measurement`, `bedroom`, `pictures`, `price`, `size`, `bathroom`, `description`, `updated_at`, `created_at`, `status`) VALUES
 (3, 2, '374eccdb3cca30384db5e1a17a2ff6df', '3 bed semi-detached house', 'rent', '2303-03-01', 'CA', 'Urben', 'Tonkin ST, No 32', 'sq ft', 0, '[\"969677fd14a6d764bd6663037225c89a.jpg\",\"f39cab1941c347013617e4c6be668ff3.jpg\",\"062afe17dc8b9b49b9025627889ea626.jpg\"]', 33, 232, 0, 'An extremely well-presented family home, located in the affluent area of Yeadon. Having three fantastic bedrooms, a beautiful open-plan kitchen and dining area. Alongside outstanding garden space, off street parking and excellent links to Yeadon\'s busy High Street - perfect for young families!', '2020-03-24 13:38:56', '2020-03-19 01:36:44', 1),
 (6, 2, '67e566faf518ffbf4b6a580c4f401d0c', '3 bed detached bungalow', 'sale', '3232-03-01', 'UK', 'Paris', 'ABC ST', 'sq ft', 0, '[\"cc5e6cb17187e65413286f53091b6692.jpg\"]', 23, 1231, 0, 'This property is offered at a reduced price for people aged over 60 through Homewise´s Home for Life Plan. Through the Home for Life Plan, anyone aged over sixty can purchase a lifetime lease on this property which discounts the price from its full market value.', '2020-03-30 14:42:18', '2020-03-24 21:50:27', 0),
 (7, 2, 'adf54587ba490121be2c7b814d02e128', 'test', 'sale', '3232-02-01', 'w', '123', 'adf', 'sq ft', 0, '[\"4b7141a9dbd67eb3c28b2b94874e24d5.jpg\",\"3483afa8574c889151ca09fde46a1db3.jpg\",\"1887ee8dba3f934f46cf99740cc2a410.jpg\",\"050cbb967f22247bb6c69c6eb7b45bf1.jpg\"]', 123, 2, 0, 'adfasd', '2020-03-28 10:46:53', '2020-03-28 18:46:53', 1),

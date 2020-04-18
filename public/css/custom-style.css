@@ -154,7 +154,8 @@
     vertical-align: bottom;
 }
 .qrcode-wechat {
-    border-radius: 8px;
+    width: 148px;
+    border-radius: 6px;
 }
 .ig {
     /* color: #E1306C; */

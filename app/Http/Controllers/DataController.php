@@ -45,7 +45,16 @@ class DataController extends Controller
         foreach ($allProperties as $key => $property) {
             $picArray = json_decode($property->pictures);
             $property->pictures = $picArray[0];
-            $property->description = str_limit($property->description, 200);
+            if ($property->features){
+                $property->features = json_decode($property->features);
+            }
+            if ($property->videos) {
+                $property->videos = json_decode($property->videos);
+            }
+            if ($property->files) {
+                $property->files = json_decode($property->files);
+            }
+            $property->description = str_limit(json_decode($property->description), 200);
         }
 
         // echo '<pre>'.print_r($allProperties, 1).'</pre>';
@@ -222,8 +231,8 @@ class DataController extends Controller
                 // 'houseImg.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
-            $string = str_random(40); // random string
-            $house_id = md5($string . time()); // image foloder name and house id
+            $property_code = str_random(128); // random string
+            // $property_code = md5($string . time()); // image foloder name and house id
 
             if ($request->hasFile('houseImg')) {
                 foreach ($request->file('houseImg') as $key => $image) {
@@ -240,22 +249,27 @@ class DataController extends Controller
                     $img->resize(1000, 724);
                     $img->stream(); // <-- Key point
 
-                    Storage::disk('uploads')->put($house_id.'/'.$fileName, $img);
+                    Storage::disk('public')->put('properties/'.$property_code.'/'.$fileName, $img);
 
                     // should have thumbnails
                     $thumb = Image::make($image->getRealPath());
                     $thumb->resize(350, 250);
                     $thumb->stream(); // <-- Key point
 
-                    Storage::disk('uploads')->put($house_id.'/thumbnails'.'/'.$fileName, $thumb);
+                    Storage::disk('public')->put('properties/'.$property_code.'/thumbnails'.'/'.$fileName, $thumb);
                     $imgArray[] = $fileName; // temp array to store name of images
                 }
 
             }
             $imgJson = json_encode($imgArray);
+
             // convert to date
-            $date = date_create($_POST['time']);
-            $newDate= date_format($date,"Y-m-d");;
+            if ($_POST['time']) {
+                $date = date_create($_POST['time']);
+                $newDate= date_format($date,"Y-m-d");;
+            } else {
+                $newDate = null;
+            }
 
             // get country and city from district
             $district = $_POST['district'];
@@ -265,7 +279,7 @@ class DataController extends Controller
             ->insert(
                     [
                         'user_id'    => $user->id,
-                        'house_code' => $house_id,
+                        'property_code' => $property_code,
                         'title'      => $_POST['title'],
                         'purpose'    => $_POST['usage'],
                         'time'       => $newDate,
@@ -278,11 +292,11 @@ class DataController extends Controller
                         'price'      => $_POST['price'],
                         'size'       => $_POST['size'],
                         'bathroom'   => $_POST['bathroom'],
-                        'description'=> $_POST['description']
+                        'description'=> json_encode($_POST['description'])
                     ]
                 );
 
-            Session::flash('status', 'Profile update successful!');
+            Session::flash('status', 'Property has been created successful!');
             Session::flash('alert-class', 'alert-success');
 
             return back();
@@ -296,7 +310,7 @@ class DataController extends Controller
     {
         $user = Auth::user();
         $role = $user->role;
-
+        // landlord
         if ($role == 2) {
             $myProperty = DB::table('houses')
                 ->where('user_id', $user->id)
@@ -306,11 +320,11 @@ class DataController extends Controller
         if ($role == 0) {
             $myProperty = DB::table('houses')
             ->join('users', 'houses.user_id', '=', 'users.id')
-            ->select('users.email', 'users.role', 'houses.id', 'houses.house_code', 'houses.title', 'houses.purpose', 'houses.time', 'houses.country', 'houses.city', 'houses.address', 'houses.updated_at', 'houses.created_at', 'houses.status')
+            ->select('users.email', 'users.role', 'houses.id', 'houses.property_code', 'houses.title', 'houses.purpose', 'houses.time', 'houses.country', 'houses.city', 'houses.address', 'houses.updated_at', 'houses.created_at', 'houses.status')
                 ->get();
         }
 
-        echo '<pre>'.print_r($myProperty, 1).'</pre>';
+        // echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/property-list')->with(array('user' => $user, "properties"=>$myProperty));
     }
@@ -321,7 +335,7 @@ class DataController extends Controller
         $status = ($_POST['publish']==0) ? 1 : 0;
 
         DB::table('houses')
-            ->where('house_code', $_POST['houseCode'])
+            ->where('property_code', $_POST['houseCode'])
             ->update([
                 'status' => $status,
             ]);
@@ -334,17 +348,27 @@ class DataController extends Controller
 
 
 
-    public function property($houseCode)
+    public function property($propertyCode)
     {
         $user = Auth::user();
 
         $myProperty = DB::table('houses')
-            ->where('house_code', $houseCode)
+            ->where('property_code', $propertyCode)
             ->first();
 
-        $picArray = json_decode($myProperty->pictures);
+        $myProperty->description= json_decode($myProperty->description);
+        $myProperty->pictures = json_decode($myProperty->pictures);
 
-        $myProperty->pictures = $picArray;
+        if ($myProperty->features) {
+            $myProperty->features = json_decode($myProperty->features);
+        }
+        if ($myProperty->videos) {
+            $myProperty->videos = json_decode($myProperty->videos);
+        }
+        if ($myProperty->files) {
+            $myProperty->files = json_decode($myProperty->files);
+        }
+
 
 
         // echo '<pre>'.print_r($myProperty, 1).'</pre>';
@@ -352,7 +376,7 @@ class DataController extends Controller
         return View::make('pages/property')->with(array('user' => $user, "property"=>$myProperty));
     }
 
-    public function edit_property($houseCode)
+    public function edit_property($propertyCode)
     {
         $user = Auth::user();
 
@@ -366,19 +390,25 @@ class DataController extends Controller
 
 
         $myProperty = DB::table('houses')
-            ->where('house_code', $houseCode)
+            ->where('property_code', $propertyCode)
             ->first();
 
-        $dateValue = $myProperty->time;
-        $time=strtotime($dateValue);
-        $temp=date("Y-m",$time);
-        $myProperty->time = $temp;
+        if ($myProperty->time) {
+            $dateValue = $myProperty->time;
+            $time=strtotime($dateValue);
+            $temp=date("Y-m",$time);
+            $myProperty->time = $temp;
+        }
+
+
+
+        $myProperty->description = json_decode($myProperty->description);
 
         $picArray = json_decode($myProperty->pictures);
         $myProperty->pictures = $picArray;
 
 
-        // echo '<pre>'.print_r($myProperty, 1).'</pre>';
+        echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/edit-property')->with(array('user' => $user, 'districts' => $districts, "property"=>$myProperty));
     }
@@ -390,11 +420,11 @@ class DataController extends Controller
         if ( Auth::check() ){
 
             DB::table('houses')
-                ->where('house_code', $_POST['property'])
+                ->where('property_code', $_POST['property'])
                 ->where('user_id', $user->id)
                 ->delete();
 
-            Storage::disk('uploads')->deleteDirectory($_POST['property']);
+            Storage::disk('public')->deleteDirectory('properties/'.$_POST['property']);
         }
 
         return redirect('property-list')->with('status', 'The property has been deleted');
@@ -402,7 +432,7 @@ class DataController extends Controller
     }
 
 
-    public function update_property(Request $request, $houseCode)
+    public function update_property(Request $request, $propertyCode)
     {
         $user = Auth::user();
 
@@ -411,7 +441,7 @@ class DataController extends Controller
         // get image json from database
         $data = DB::table('houses')
             ->select('pictures')
-            ->where('house_code', $houseCode)
+            ->where('property_code', $propertyCode)
             ->first();
 
         $picArray= json_decode($data->pictures);
@@ -425,8 +455,8 @@ class DataController extends Controller
             // delete images
             if( !empty($result) ){
                 foreach ($result as $key => $img) {
-                    Storage::disk('uploads')->delete($houseCode.'/'.$img);
-                    Storage::disk('uploads')->delete($houseCode.'/thumbnails'.'/'.$img);
+                    Storage::disk('public')->delete('properties/'.$propertyCode.'/'.$img);
+                    Storage::disk('public')->delete('properties/'.$propertyCode.'/thumbnails'.'/'.$img);
                 }
             }
 
@@ -448,14 +478,14 @@ class DataController extends Controller
                 $img->resize(1000, 724);
                 $img->stream(); // <-- Key point
 
-                Storage::disk('uploads')->put($houseCode.'/'.$fileName, $img);
+                Storage::disk('public')->put('properties/'.$propertyCode.'/'.$fileName, $img);
 
                 // thumbnails
                 $thumb = Image::make($image->getRealPath());
                 $thumb->resize(550, 350);
                 $thumb->stream(); // <-- Key point
 
-                Storage::disk('uploads')->put($houseCode.'/thumbnails'.'/'.$fileName, $thumb);
+                Storage::disk('public')->put('properties/'.$propertyCode.'/thumbnails'.'/'.$fileName, $thumb);
                 $imgArray[] = $fileName; // temp array to store name of images
             }
         }
@@ -468,16 +498,22 @@ class DataController extends Controller
         }
 
         $imgJson = json_encode($imgArray);
+
         // convert to date
-        $date = date_create($_POST['time']);
-        $newDate= date_format($date,"Y-m-d");;
+        if ($_POST['time']) {
+            $date = date_create($_POST['time']);
+            $newDate = date_format($date,"Y-m-d");;
+        } else {
+            $newDate = null;
+        }
+
 
         // get country and city from district
         $district = $_POST['district'];
         $districtArray = explode ("|", $district);
 
         DB::table('houses')
-            ->where('house_code', $houseCode)
+            ->where('property_code', $propertyCode)
             ->update([
                 'title'      => $_POST['title'],
                 'purpose'    => $_POST['usage'],
@@ -491,11 +527,11 @@ class DataController extends Controller
                 'price'      => $_POST['price'],
                 'size'       => $_POST['size'],
                 'bathroom'   => $_POST['bathroom'],
-                'description'=> $_POST['description']
+                'description'=> json_encode($_POST['description'])
             ]);
 
 
-        Session::flash('status', 'Property has been update! ');
+        Session::flash('status', 'Property has been updated! ');
         Session::flash('alert-class', 'alert-success');
 
         return back();

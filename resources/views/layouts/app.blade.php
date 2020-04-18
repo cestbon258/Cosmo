@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- <title>{{ config('app.name', 'Cosmos') }}</title> --}}
-    <title>Cosmo - Global Real Estate - @yield('title')</title>
+    <title>Cosmo - Global Real Estate | @yield('title')</title>
     <link rel="icon" href="{{ asset('logo/favicon.ico') }}">
 
     <!-- Custom fonts for this template-->
@@ -33,6 +33,10 @@
             background-size: cover;
         }
     </style>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.js"></script>
+
 </head>
 <body id="page-top" class="sidebar-toggled">
 
@@ -66,6 +70,12 @@
                     <a class="nav-link" href="{{ route('create-property') }}">
                     <i class="fas fa-plus-circle"></i>
                     <span>Create Property</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('create-project') }}">
+                    <i class="fas fa-plus-square"></i>
+                    <span>Create Project</span></a>
                 </li>
 
                 <li class="nav-item">
@@ -222,7 +232,7 @@
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <p>
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <a href="{{url('/')}}">Cosmo</a>
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a href="{{url('/')}}">COSMO Real Estate Limited</a>. All rights reserved
                         </p>
                     </div>
                 </div>
@@ -258,7 +268,7 @@
         width: 100%;
         height: 180px;
         background-position: center center;
-        background:url(img/icons/default-2.jpg);
+        background:url( {{ url('img/icons/default-2.jpg') }} );
         background-color:#fff;
         background-size: cover;
         background-repeat:no-repeat;
@@ -303,6 +313,19 @@
       margin-top:0px;
       cursor:pointer;
       font-size:15px;
+    }
+
+    /* Hide Arrows From Input Number */
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
     }
 
     </style>

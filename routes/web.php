@@ -47,6 +47,9 @@ Route::post('/edit-property/{houseCode}', 'DataController@update_property');
 
 Route::post('/contact', 'MailController@contact_us');
 
+Route::get('/create-project', 'ProjectController@create_project')->name('create-project');
+Route::post('/create-project', 'ProjectController@create_project')->name('create-project');
+
 
 Route::get('/profile', 'DataController@profile')->name('profile')->middleware('verified');
 
