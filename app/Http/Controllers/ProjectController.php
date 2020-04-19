@@ -42,7 +42,8 @@ class ProjectController extends Controller
 
             // image file validation (file format)
             $this->validate($request, [
-                'houseImg.*' => 'required|image|mimes:jpeg,png,jpg'
+                'houseImg.*' => 'image|mimes:jpeg,png,jpg'
+                // 'houseImg.*' => 'required|image|mimes:jpeg,png,jpg'
             ]);
             // video files validation (size)
             $this->validate($request, [
@@ -55,7 +56,7 @@ class ProjectController extends Controller
 
             // echo '<pre>'.print_r($_POST, 1).'</pre>';
             // echo '<pre>'.print_r($string, 1).'</pre>';
-
+            $imgArray = [];
             if ($request->hasFile('houseImg')) {
                 foreach ($request->file('houseImg') as $key => $image) {
 
@@ -79,9 +80,9 @@ class ProjectController extends Controller
                     Storage::disk('public')->put('projects/'.$property_code.'/thumbnails'.'/'.$fileName, $thumb);
                     $imgArray[] = $fileName; // temp array to store name of images
                 }
-
             }
 
+            $videoArray = [];
             if ($request->hasFile('videos')) {
                 foreach ($request->file('videos') as $key => $video) {
 
@@ -96,6 +97,7 @@ class ProjectController extends Controller
                 }
             }
 
+            $pdfArray = [];
             if ($request->hasFile('PDFs')) {
                 foreach ($request->file('PDFs') as $key => $pdf) {
 
@@ -108,11 +110,6 @@ class ProjectController extends Controller
                     $pdfArray[] = $fileName; // temp array to store name of videos
                 }
             }
-
-
-            $imgJson = json_encode($imgArray);
-            $videoJson= json_encode($videoArray);
-            $pdfJson= json_encode($pdfArray);
 
             // // convert to date
             // $date = date_create($_POST['time']);
@@ -132,9 +129,9 @@ class ProjectController extends Controller
                         'country'      => $districtArray[1],
                         'city'         => $districtArray[0],
                         'address'      => $_POST['address'],
-                        'pictures'     => $imgJson,
-                        'videos'       => $videoJson,
-                        'files'        => $pdfJson,
+                        'pictures'     => json_encode($imgArray),
+                        'videos'       => json_encode($videoArray),
+                        'files'        => json_encode($pdfArray),
                         'description'  => json_encode($_POST['description']),
                         'project_type' => 2,
                     ]

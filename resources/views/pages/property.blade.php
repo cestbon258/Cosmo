@@ -164,26 +164,35 @@
 
         {{-- Project --}}
         @if ($property->project_type == 2)
-            <div class="card mt-3">
-                <h5 class="card-header">Videos</h5>
-                <div class="card-body">
-                    @foreach ($property->videos as $key => $video)
-                        <video width="400" controls muted poster={{url('logo/logo.png')}}>
-                            <source src="{{ URL::asset('storage/projects/'.$property->property_code.'/videos'.'/'.$video) }}">
-                            Your browser does not support HTML5 video.
-                        </video>
-                    @endforeach
+            @if ( !empty($property->videos) )
+                <div class="card mt-3">
+                    <h5 class="card-header">Videos</h5>
+                    <div class="card-body">
+                        @foreach ($property->videos as $key => $video)
+                            <video controls muted poster={{url('logo/logo.png')}}>
+                                <source src="{{ URL::asset('storage/projects/'.$property->property_code.'/videos'.'/'.$video) }}">
+                                Your browser does not support HTML5 video.
+                            </video>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+            @endif
+            @if ( !empty($property->files) )
+                <div class="card mt-3">
+                    <h5 class="card-header">Brochure</h5>
+                    <div class="card-body">
+                        @foreach ($property->files as $key => $file)
+                            <object style="width:100%;" height="600" data="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}" type="application/pdf">
+                            This browser does not support PDFs. Please download the PDF to view it: <a href="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}">Download PDF</a>
+                            </object>
 
-            <div class="card mt-3">
-                <h5 class="card-header">Brochure</h5>
-                <div class="card-body">
-                    @foreach ($property->files as $key => $file)
-                        <object style="width:100%;" height="500" data="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}"></object>
-                    @endforeach
+                            {{-- <embed src="https://docs.google.com/viewer?url={{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}" type="application/pdf" width="100%" height="100%">
+
+                            <iframe src="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}">This browser does not support PDFs. Please download the PDF to view it: Download PDF</iframe> --}}
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+            @endif
         @endif
 
 
