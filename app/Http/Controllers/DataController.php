@@ -45,8 +45,8 @@ class DataController extends Controller
         foreach ($allProperties as $key => $property) {
             $picArray = json_decode($property->pictures);
             $property->pictures = $picArray[0];
-            if ($property->features){
-                $property->features = json_decode($property->features);
+            if ($property->features) {
+                $property->features = "";
             }
             if ($property->videos) {
                 $property->videos = json_decode($property->videos);
@@ -54,7 +54,11 @@ class DataController extends Controller
             if ($property->files) {
                 $property->files = json_decode($property->files);
             }
-            $property->description = str_limit(json_decode($property->description), 200);
+            if ($property->description) {
+                $description = json_decode($property->description);
+
+                $property->description = substr(strip_tags($description), 0, 150);
+            }
         }
 
         // echo '<pre>'.print_r($allProperties, 1).'</pre>';
@@ -408,7 +412,7 @@ class DataController extends Controller
         $myProperty->pictures = $picArray;
 
 
-        echo '<pre>'.print_r($myProperty, 1).'</pre>';
+        // echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/edit-property')->with(array('user' => $user, 'districts' => $districts, "property"=>$myProperty));
     }

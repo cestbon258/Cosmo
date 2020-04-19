@@ -149,13 +149,14 @@
                             </div>
 
 
-                            {{-- <div class="form-group">
+                             <div class="form-group">
                                 <label for="address">Address</label>
                                 <input type="text" class="form-control" name="address" autocomplete="off" placeholder="Address" required>
                                 <div class="invalid-feedback">
                                     Please specify the address.
                                 </div>
                             </div>
+                            {{--
 
                             <label>Size</label>
                             <div class="row">

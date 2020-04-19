@@ -88,9 +88,10 @@ class ProjectController extends Controller
                     // $name = md5($video->getClientOriginalName() . time());
                     $name = str_random(6);
 
+
                     $fileName   = $name . '.' . $video->getClientOriginalExtension();
 
-                    Storage::disk('public')->put('projects/'.$property_code.'/videos'.'/', $video);
+                    Storage::disk('public')->put('projects/'.$property_code.'/videos'.'/'.$fileName, file_get_contents($video));
                     $videoArray[] = $fileName; // temp array to store name of videos
                 }
             }
@@ -103,7 +104,7 @@ class ProjectController extends Controller
 
                     $fileName   = $name . '.' . $pdf->getClientOriginalExtension();
 
-                    Storage::disk('public')->put('projects/'.$property_code.'/pdf'.'/', $pdf);
+                    Storage::disk('public')->put('projects/'.$property_code.'/pdf'.'/'.$fileName, file_get_contents($pdf));
                     $pdfArray[] = $fileName; // temp array to store name of videos
                 }
             }
@@ -130,6 +131,7 @@ class ProjectController extends Controller
                         'features'     => json_encode($_POST['features']),
                         'country'      => $districtArray[1],
                         'city'         => $districtArray[0],
+                        'address'      => $_POST['address'],
                         'pictures'     => $imgJson,
                         'videos'       => $videoJson,
                         'files'        => $pdfJson,

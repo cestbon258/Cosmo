@@ -140,8 +140,6 @@
                       <div class="card-body">
                         <h5 class="card-title">{{$property->title}}</h5>
                         <hr>
-                        <div><h6 style="color:red;">${{$property->price}}</h6></div>
-                        <hr>
                         <br>
 
                         <h6 class="card-info-text">Features</h6>
