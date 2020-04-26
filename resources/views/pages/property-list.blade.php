@@ -6,6 +6,8 @@
     <div class="container-fluid">
 
         <div class="col">
+            @include('layouts.alert')
+            
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
@@ -51,27 +53,44 @@
                                             <form id="publish-{{$property->id}}" action="{{ route('publish-property') }}" method="POST" style="display: none;">
                                                 @csrf
                                                 <input name="publish" value="{{$property->status}}" hidden>
-                                                <input name="houseCode" value="{{$property->property_code}}" hidden>
+                                                <input name="propertyCode" value="{{$property->property_code}}" hidden>
                                             </form>
                                         @else
                                             <span>{{$property->status == 1 ? 'Approved' : 'Pending'}}</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ url('edit-property/'.$property->property_code) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
+                                        @if ($property->project_type == 1)
+                                            <a href="{{ url('edit-property/'.$property->property_code) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
+
+                                            <a href="{{ route('delete-property') }}"
+                                                onclick="event.preventDefault();
+                                                document.getElementById('pid-{{$property->id}}').submit();">
+                                                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+                                            </a>
+
+                                            <form id="pid-{{$property->id}}" action="{{ route('delete-property') }}" method="POST" style="display: none;">
+                                                @csrf
+                                                <input name="property" value="{{$property->property_code}}" hidden>
+                                            </form>
+                                        @else
+                                            <a href="{{ url('edit-project/'.$property->property_code) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
+
+                                            <a href="{{ route('delete-project') }}"
+                                                onclick="event.preventDefault();
+                                                document.getElementById('pid-{{$property->id}}').submit();">
+                                                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+                                            </a>
+
+                                            <form id="pid-{{$property->id}}" action="{{ route('delete-project') }}" method="POST" style="display: none;">
+                                                @csrf
+                                                <input name="property" value="{{$property->property_code}}" hidden>
+                                            </form>
+                                        @endif
 
                                         {{-- <a href="property/{{$property->property_code}}"><button type="button" class="btn btn-outline-danger btn-sm" >Delete</button></a> --}}
 
-                                        <a href="{{ route('delete-property') }}"
-                                            onclick="event.preventDefault();
-                                            document.getElementById('pid-{{$property->id}}').submit();">
-                                            <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
-                                        </a>
 
-                                        <form id="pid-{{$property->id}}" action="{{ route('delete-property') }}" method="POST" style="display: none;">
-                                            @csrf
-                                            <input name="property" value="{{$property->property_code}}" hidden>
-                                        </form>
 
                                     </td>
                                 </tr>

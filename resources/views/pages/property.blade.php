@@ -152,47 +152,66 @@
             </div>
         @endif
 
-        <div class="card">
-            <h5 class="card-header">Description</h5>
-            <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">
-                    <div>{!!html_entity_decode($property->description)!!}</div>
-                </p>
+
+        @if ( !empty($property->videos) )
+            <div class="card mt-3">
+                <h5 class="card-header">Videos</h5>
+                <div class="card-body">
+                    @foreach ($property->videos as $key => $video)
+                        <video controls muted poster={{url('logo/logo.png')}}>
+                            <source src="{{ URL::asset('storage/projects/'.$property->property_code.'/videos'.'/'.$video) }}">
+                            Your browser does not support HTML5 video.
+                        </video>
+                        <br><br>
+                    @endforeach
+                </div>
             </div>
-        </div>
+            <br>
+        @endif
 
-        {{-- Project --}}
-        @if ($property->project_type == 2)
-            @if ( !empty($property->videos) )
-                <div class="card mt-3">
-                    <h5 class="card-header">Videos</h5>
-                    <div class="card-body">
-                        @foreach ($property->videos as $key => $video)
-                            <video controls muted poster={{url('logo/logo.png')}}>
-                                <source src="{{ URL::asset('storage/projects/'.$property->property_code.'/videos'.'/'.$video) }}">
-                                Your browser does not support HTML5 video.
-                            </video>
-                        @endforeach
-                    </div>
+        @if ( !empty($property->description) )
+            <div class="card mt-3">
+                <h5 class="card-header">Description</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">
+                        <div>{!!html_entity_decode($property->description)!!}</div>
+                    </p>
                 </div>
-            @endif
-            @if ( !empty($property->files) )
-                <div class="card mt-3">
-                    <h5 class="card-header">Brochure</h5>
-                    <div class="card-body">
-                        @foreach ($property->files as $key => $file)
-                            <object style="width:100%;" height="600" data="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}" type="application/pdf">
-                            This browser does not support PDFs. Please download the PDF to view it: <a href="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}">Download PDF</a>
-                            </object>
+            </div>
+            <br>
+        @endif
 
-                            {{-- <embed src="https://docs.google.com/viewer?url={{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}" type="application/pdf" width="100%" height="100%">
 
-                            <iframe src="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}">This browser does not support PDFs. Please download the PDF to view it: Download PDF</iframe> --}}
-                        @endforeach
-                    </div>
+        @if ( !empty($property->files) )
+            <div class="card mt-3">
+                <h5 class="card-header">Brochure</h5>
+                <div class="card-body">
+                    @foreach ($property->files as $key => $file)
+                        {{-- <object style="width:100%;" height="600" data="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}" type="application/pdf">
+                        This browser does not support PDFs. Please download the PDF to view it: <a href="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}">Download PDF</a>
+                        </object> --}}
+
+                        {{-- <embed src="https://docs.google.com/viewer?url={{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}" type="application/pdf" width="100%" height="100%">
+
+                        <iframe src="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}">This browser does not support PDFs. Please download the PDF to view it: Download PDF</iframe> --}}
+                        {{-- <div class="scroll-wrapper">
+                        	<iframe src="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}#view=FitH">
+                                This browser does not support PDFs. Please download the PDF to view it: <a href="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}">Download PDF</a><br>
+                            </iframe>
+                        </div> --}}
+
+                        <div class="scroll-wrapper">
+                        	<iframe src="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}#view=FitH">
+                            </iframe>
+                        </div>
+
+                        <div class="float-right"><a href="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}" target="_blank">Download PDF</a></div><br>
+                        <br>
+                    @endforeach
                 </div>
-            @endif
+            </div>
+            <br>
         @endif
 
 
@@ -228,6 +247,16 @@
         .footer-widget-area ul li, ol li {
             margin: 0 !important;
             list-style: none !important;
+        }
+        .scroll-wrapper {
+          -webkit-overflow-scrolling: touch;
+          overflow-y: scroll;
+          /* important:  dimensions or positioning here! */
+        }
+        .scroll-wrapper iframe {
+            border: 0;
+            width: 100%;
+            height: 500px;
         }
     </style>
 

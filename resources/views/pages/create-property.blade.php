@@ -69,6 +69,36 @@
                                 <label class="form-check-label">Rent</label>
                             </div>
 
+
+                            <div class="control-group mt-3" id="fields">
+                                <label class="control-label">Upload Videos</label>
+                                <div class="controls">
+                                    <div class="entry input-group col-xs-3">
+                                        <input class="btn btn-light" name="videos[]" type="file" accept="video/*">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-success btn-add" type="button">
+                                            <i class="fas fa-plus"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="control-group mt-3">
+                                <label class="control-label">Upload PDFs</label>
+                                <div class="pdf-controls">
+                                    <div class="pdf-entry input-group col-xs-3">
+                                        <input class="btn btn-light" name="PDFs[]" type="file" accept="application/pdf">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-success btn-add-pdf" type="button">
+                                            <i class="fas fa-plus"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="price">Price</label>
                                 <input type="number" class="form-control" name="price" autocomplete="off" required>
@@ -185,8 +215,68 @@
         </form>
 
         <style>
-        .ck-editor__editable_inline {
-            min-height: 300px;
+        .entry:not(:first-of-type)
+        {
+            margin-top: 10px;
+        }
+        .pdf-entry:not(:first-of-type)
+        {
+            margin-top: 10px;
         }
         </style>
+
+        <script>
+        $(function(){
+            // videos
+            $(document).on('click', '.btn-add', function(e)
+            {
+                e.preventDefault();
+
+                var controlForm = $('.controls:first'),
+                    currentEntry = $(this).parents('.entry:first'),
+                    newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+                newEntry.find('input').val('');
+                controlForm.find('.entry:not(:last) .btn-add')
+                    .removeClass('btn-add').addClass('btn-remove')
+                    .removeClass('btn-success').addClass('btn-danger')
+                    .html('<i class="fas fa-minus"></i>');
+            }).on('click', '.btn-remove', function(e)
+            {
+              $(this).parents('.entry:first').remove();
+
+                e.preventDefault();
+                return false;
+            });
+
+
+            // PDFs
+            $(document).on('click', '.btn-add-pdf', function(e)
+            {
+                e.preventDefault();
+
+                var controlForm = $('.pdf-controls:first'),
+                    currentEntry = $(this).parents('.pdf-entry:first'),
+                    newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+                newEntry.find('input').val('');
+                controlForm.find('.pdf-entry:not(:last) .btn-add-pdf')
+                    .removeClass('btn-add-pdf').addClass('btn-remove-pdf')
+                    .removeClass('btn-success').addClass('btn-danger')
+                    .html('<i class="fas fa-minus"></i>');
+            }).on('click', '.btn-remove-pdf', function(e)
+            {
+              $(this).parents('.pdf-entry:first').remove();
+
+                e.preventDefault();
+                return false;
+            });
+
+            // // Add the following code if you want the name of the file appear on select
+            // $(".custom-file-input").on("change", function() {
+            //     var fileName = $(this).val().split("\\").pop();
+            //     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            // });
+        });
+        </script>
 @stop

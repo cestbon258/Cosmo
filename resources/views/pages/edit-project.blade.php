@@ -5,7 +5,7 @@
 @section('content')
 
 
-        <form enctype="multipart/form-data" method="POST" action="{{ url('edit-property/'.$property->property_code) }}" class="needs-validation" novalidate>
+        <form enctype="multipart/form-data" method="POST" action="{{ url('edit-project/'.$property->property_code) }}" class="needs-validation" novalidate>
             @csrf
             <div class="container-fluid">
                 <div class="col">
@@ -15,19 +15,19 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('property-list') }}">All Properties</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit Property</li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Project</li>
                         </ol>
                     </nav>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                          <h6 class="m-0 font-weight-bold text-primary">Edit Property</h6>
+                          <h6 class="m-0 font-weight-bold text-primary">Edit Project</h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 @foreach ($property->pictures as $key => $picture)
                                     @if($key == 0)
                                         <div class="col-sm-3 imgUp">
-                                            <div class="imagePreview" style="background:url( {{url('storage/properties/'.$property->property_code.'/'.$picture)}} ); background-position: center center; background-size: cover; background-repeat: no-repeat;"></div>
+                                            <div class="imagePreview" style="background:url( {{url('storage/projects/'.$property->property_code.'/'.$picture)}} ); background-position: center center; background-size: cover; background-repeat: no-repeat;"></div>
                                             <input name="originImg[]"value="{{$picture}}" hidden>
 
                                             {{-- <label class="btn btn-primary-custom">
@@ -40,7 +40,7 @@
                                         {{-- <i class="fa fa-plus imgAdd"></i> --}}
                                     @else
                                         <div class="col-sm-3 imgUp">
-                                            <div class="imagePreview" style="background:url( {{url('storage/properties/'.$property->property_code.'/'.$picture)}} ); background-position: center center; background-size: cover; background-repeat: no-repeat;"></div>
+                                            <div class="imagePreview" style="background:url( {{url('storage/projects/'.$property->property_code.'/'.$picture)}} ); background-position: center center; background-size: cover; background-repeat: no-repeat;"></div>
                                             <input name="originImg[]"value="{{$picture}}" hidden>
                                             <i class="fa fa-times del"></i>
                                         </div>
@@ -58,31 +58,16 @@
                                 </div>
                             </div>
 
-                            <label for="date">Property for</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="usage" value="sale" {{$property->purpose == 'sale' ? 'checked' : ''}}>
-                                <label class="form-check-label">Sale</label>
-                            </div>
-
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="radio" name="usage" value="rent" {{$property->purpose == 'rent' ? 'checked' : ''}}>
-                                <label class="form-check-label">Rent</label>
-                            </div>
-
                             <div class="form-group">
-                                <label for="price">Price</label>
-                                <input type="number" class="form-control" name="price" autocomplete="off" value="{{$property->price}}" required>
-                                <div class="invalid-feedback">
-                                    Please specify the price.
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="date">Year of Built</label>
-                                <input type="month" class="form-control" name="time" autocomplete="off" value="{{$property->time}}">
-                                <div class="invalid-feedback">
-                                    Please specify the year.
-                                </div>
+                                <label>Features</label>
+                                <textarea id="summernote" name="features">{{$property->features}}</textarea>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('#summernote').summernote({
+                                            height: 220,
+                                        });
+                                    });
+                                </script>
                             </div>
 
                             <div class="control-group mt-3" id="fields">
@@ -93,7 +78,7 @@
                                             <div class="controls" style="margin-bottom:10px;">
                                                 <div class="entry input-group col-xs-3">
                                                     <video controls muted style="width:300px; height:auto;" >
-                                                        <source src="{{ URL::asset('storage/properties/'.$property->property_code.'/videos'.'/'.$video) }}">
+                                                        <source src="{{ URL::asset('storage/projects/'.$property->property_code.'/videos'.'/'.$video) }}">
                                                         Your browser does not support HTML5 video.
                                                     </video>
                                                     <input class="btn btn-light" name="originVideos[]" readonly value="{{$video}}">
@@ -130,7 +115,7 @@
                                         <div class="pdf-controls" style="margin-bottom:10px;">
                                             <div class="pdf-entry input-group col-xs-3">
                                                 <div class="scroll-wrapper">
-                                                    <iframe src="{{ URL::asset('storage/properties/'.$property->property_code.'/pdf'.'/'.$file) }}#view=FitH">
+                                                	<iframe src="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}#view=FitH">
                                                     </iframe>
                                                 </div>
                                                 <input class="btn btn-light" name="originPDFs[]" readonly value="{{$file}}">
@@ -168,7 +153,7 @@
                                     </div>
 
                                 </div> --}}
-                            <div class="form-group">
+                            <div class="form-group mt-3">
                                 <label for="district">District</label>
                                 <select class="form-control" name="district">
                                 @foreach ($districts as $key => $district)
@@ -196,7 +181,7 @@
                                 </div>
                             </div>
 
-                            <label>Size</label>
+                            {{-- <label>Size</label>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -252,21 +237,18 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea id="summernote" name="description">{{$property->description}}</textarea>
+                                <textarea id="summernote2" name="description">{{$property->description}}</textarea>
                                 <script>
                                     $(document).ready(function() {
-                                        $('#summernote').summernote({
+                                        $('#summernote2').summernote({
                                             height: 220,
                                         });
                                     });
                                 </script>
-                                <div class="invalid-feedback">
-                                    Please give some information about the house.
-                                </div>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Update</button>

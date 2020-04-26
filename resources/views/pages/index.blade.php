@@ -301,11 +301,11 @@
                             <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
-                                    @auth
+                                    {{-- @auth --}}
                                         <a href="{{ url('property/'.$property->property_code) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
-                                    @else
+                                    {{-- @else
                                         <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
-                                    @endauth
+                                    @endauth --}}
 
                                     <div class="tag">
                                         <span>For {{$property->purpose}}</span>
@@ -318,20 +318,20 @@
                                 </div>
                                 <!-- Property Content -->
                                 <div class="property-content">
-                                    @auth
+                                    {{-- @auth --}}
                                         <a href="{{ url('property/'.$property->property_code) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    @else
+                                    {{-- @else
                                         <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    @endauth
+                                    @endauth --}}
                                     <div style="height:80px;"><p class="location"><img src="img/icons/location.png" alt="">{{$property->address}}</p></div>
                                     <div style="height: 120px;">
                                         {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
                                         <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
-                                        @auth
+                                        {{-- @auth --}}
                                             <a href="{{ url('property/'.$property->property_code) }}">Read More</a>
-                                        @else
+                                        {{-- @else
                                             <a href="{{ url('login') }}">Read More</a>
-                                        @endauth
+                                        @endauth --}}
                                     </div>
 
                                     <div class="property-meta-data d-flex align-items-end justify-content-between">
@@ -360,11 +360,12 @@
                             <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
-                                    @auth
+                                    {{-- @auth --}}
                                         <a href="{{ url('property/'.$property->property_code) }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
-                                    @else
+                                    {{-- @else
                                         <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
-                                    @endauth
+                                    @endauth --}}
+
 
                                     {{-- <div class="tag">
                                         <span>For {{$property->purpose}}</span>
@@ -377,20 +378,20 @@
                                 </div>
                                 <!-- Property Content -->
                                 <div class="property-content">
-                                    @auth
+                                    {{-- @auth --}}
                                         <a href="{{ url('property/'.$property->property_code) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    @else
+                                    {{-- @else
                                         <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    @endauth
+                                    @endauth --}}
                                     <div style="height:80px;"><p class="location"><img src="img/icons/location.png" alt="">{{$property->address}}</p></div>
                                     <div style="height: 120px;">
                                         {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
                                         <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
-                                        @auth
+                                        {{-- @auth --}}
                                             <a href="{{ url('property/'.$property->property_code) }}">Read More</a>
-                                        @else
+                                        {{-- @else
                                             <a href="{{ url('login') }}">Read More</a>
-                                        @endauth
+                                        @endauth --}}
                                     </div>
 
                                     <div class="property-meta-data d-flex align-items-end justify-content-between">
@@ -658,11 +659,11 @@
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Log Angeles</h4>
+                    <h4 style="color:white;" class="text-uppercase">LOS ANGELES</h4>
                 </div>
                 <img src="{{url('img/gallery/US/los-angeles.jpg')}}">
                 <div class="mask">
-                    <h2>Log Angeles</h2>
+                    <h2>LOS ANGELES</h2>
                     <p><i>Eternal sunshine, beautiful beaches, luxurious living, and endless culture.</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>

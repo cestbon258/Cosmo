@@ -26,83 +26,92 @@ Route::get('/about-us', function () {
 Route::get('/contact', function () {
     return view('pages/contact');
 })->name('contact');
-
-// Route::get('/create-property', function () {
-//     return view('pages/create-property');
-// })->name('create-property');
-
-Route::get('/create-property', 'DataController@create_property')->name('create-property');
-
-Route::get('/property-list', 'DataController@property_list')->name('property-list');
-
-Route::post('/publish-property', 'DataController@publish_property')->name('publish-property');
-
-Route::get('/property/{houseCode}', 'DataController@property');
-
-Route::post('/create-property', 'DataController@create_property');
-Route::get('/edit-property/{houseCode}', 'DataController@edit_property');
-Route::post('/delete-property', 'DataController@delete_property')->name('delete-property');
-
-Route::post('/edit-property/{houseCode}', 'DataController@update_property');
-
 Route::post('/contact', 'MailController@contact_us');
 
-Route::get('/create-project', 'ProjectController@create_project')->name('create-project');
-Route::post('/create-project', 'ProjectController@create_project')->name('create-project');
 
 
-Route::get('/profile', 'DataController@profile')->name('profile')->middleware('verified');
+Route::group(['middleware' => 'auth'], function () {
+    // Route::group(['prefix' => 'admin'], function(){
 
-Route::post('/profile/update', 'DataController@profile_update')->name('profile/update');
+        Route::get('/property/{propertyCode}', 'DataController@property');
 
-Route::get('/change-password', 'DataController@change_password')->name('change-password');
-Route::post('/change-password/update', 'DataController@change_password_update')->name('change-password/update');
+        Route::get('/property-list', 'DataController@property_list')->name('property-list');
+        Route::post('/publish-property', 'DataController@publish_property')->name('publish-property');
+
+        // property
+        Route::get('/create-property', 'DataController@create_property')->name('create-property');
+        Route::post('/create-property', 'DataController@create_property');
+        Route::get('/edit-property/{propertyCode}', 'DataController@edit_property');
+        Route::post('/edit-property/{propertyCode}', 'DataController@update_property');
+        Route::post('/delete-property', 'DataController@delete_property')->name('delete-property');
+
+        // project
+        Route::get('/create-project', 'ProjectController@create_project')->name('create-project');
+        Route::post('/create-project', 'ProjectController@create_project')->name('create-project');
+        Route::get('/edit-project/{propertyCode}', 'ProjectController@edit_project');
+        Route::post('/edit-project/{propertyCode}', 'ProjectController@update_project');
+        Route::post('/delete-project', 'ProjectController@delete_project')->name('delete-project');
+
+        // profile
+        Route::get('/profile', 'DataController@profile')->name('profile')->middleware('verified');
+        Route::post('/profile/update', 'DataController@profile_update')->name('profile/update');
+
+        // password
+        Route::get('/change-password', 'DataController@change_password')->name('change-password');
+        Route::post('/change-password/update', 'DataController@change_password_update')->name('change-password/update');
+
+    // });
+});
+
+
+
+
+
 
 Route::get('/logout', function () {
     return view('pages/contact');
 });
 
 
-Route::get('storage/{filename}', function ($filename)
-{
+Route::get('storage/{filename}', function ($filename) {
     return Image::make(storage_path('profiles/' . $filename))->response();
 });
 
 
-Route::get('/images/{folder}/{filename}', function ($folder,$filename)
-{
-    $path = storage_path('houses/' . $folder .'/'. $filename);
-
-    if (!File::exists($path)) {
-        abort(404);
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
-
-
-Route::get('/images/{folder}/thumbnails/{filename}', function ($folder,$filename)
-{
-    $path = storage_path('houses/' . $folder .'/thumbnails'.'/'. $filename);
-
-    if (!File::exists($path)) {
-        abort(404);
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
+// Route::get('/images/{folder}/{filename}', function ($folder,$filename)
+// {
+//     $path = storage_path('houses/' . $folder .'/'. $filename);
+//
+//     if (!File::exists($path)) {
+//         abort(404);
+//     }
+//
+//     $file = File::get($path);
+//     $type = File::mimeType($path);
+//
+//     $response = Response::make($file, 200);
+//     $response->header("Content-Type", $type);
+//
+//     return $response;
+// });
+//
+//
+// Route::get('/images/{folder}/thumbnails/{filename}', function ($folder,$filename)
+// {
+//     $path = storage_path('houses/' . $folder .'/thumbnails'.'/'. $filename);
+//
+//     if (!File::exists($path)) {
+//         abort(404);
+//     }
+//
+//     $file = File::get($path);
+//     $type = File::mimeType($path);
+//
+//     $response = Response::make($file, 200);
+//     $response->header("Content-Type", $type);
+//
+//     return $response;
+// });
 
 Auth::routes();
 
