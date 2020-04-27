@@ -71,7 +71,7 @@
                             </div>
 
                             <div class="control-group mt-3" id="fields">
-                                <label class="control-label">Upload Videos</label>
+                                <label class="control-label">Upload Videos (Max. 20MB)</label>
                                 @if ($property->videos)
                                     @foreach ($property->videos as $key => $video)
 

@@ -37,6 +37,7 @@ class DataController extends Controller
 
         } else {
             $allProperties = DB::table('houses')
+                ->where('status', 1)
                 ->orderBy('updated_at', 'desc')
                 ->get();
         }
@@ -56,8 +57,10 @@ class DataController extends Controller
             }
             if ($property->description) {
                 $description = json_decode($property->description);
-
-                $property->description = substr(strip_tags($description), 0, 150);
+                $removeTag= str_replace("&nbsp;"," ", $description);
+                $removeTag2 = str_replace(".  "," ", $removeTag);
+                $removeTag3 = str_replace("· "," ", $removeTag2);
+                $property->description = substr(strip_tags($removeTag3), 0, 180);
             }
         }
 
@@ -328,9 +331,10 @@ class DataController extends Controller
                         'address'    => $_POST['address'],
                         'measurement'=> $_POST['measure'],
                         'bedroom'    => $_POST['bedroom'],
-                        'pictures'     => json_encode($imgArray),
-                        'videos'       => json_encode($videoArray),
-                        'files'        => json_encode($pdfArray),
+                        'pictures'   => json_encode($imgArray),
+                        'videos'     => json_encode($videoArray),
+                        'files'      => json_encode($pdfArray),
+                        'currency'   => $_POST['currency'],
                         'price'      => $_POST['price'],
                         'size'       => $_POST['size'],
                         'bathroom'   => $_POST['bathroom'],
@@ -665,6 +669,7 @@ class DataController extends Controller
                 'pictures'   => $imgJson,
                 'videos'     => $videoJson,
                 'files'      => $pdfJson,
+                'currency'   => $_POST['currency'],
                 'price'      => $_POST['price'],
                 'size'       => $_POST['size'],
                 'bathroom'   => $_POST['bathroom'],

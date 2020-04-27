@@ -312,7 +312,7 @@
                                     </div>
                                     @auth
                                         <div class="list-price">
-                                            <p>${{$property->price}}</p>
+                                            <p>{{ number_format($property->price, 2, '.', ',') }} {{$property->currency}}</p>
                                         </div>
                                     @endauth
                                 </div>

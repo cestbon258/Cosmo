@@ -70,7 +70,7 @@
                             </div>
 
                             <div class="control-group mt-3" id="fields">
-                                <label class="control-label">Upload Videos</label>
+                                <label class="control-label">Upload Videos (Max. 20MB)</label>
                                 <div class="controls">
                                     <div class="entry input-group col-xs-3">
                                         <input class="btn btn-light" name="videos[]" type="file" accept="video/*">

@@ -69,11 +69,30 @@
                                 <label class="form-check-label">Rent</label>
                             </div>
 
-                            <div class="form-group">
-                                <label for="price">Price</label>
-                                <input type="number" class="form-control" name="price" autocomplete="off" value="{{$property->price}}" required>
-                                <div class="invalid-feedback">
-                                    Please specify the price.
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="currency">Currency</label>
+                                        <select class="form-control" name="currency" required>
+                                            <option {{$property->currency =='AUD' ? 'selected' : ''}}>AUD</option>
+                                            <option {{$property->currency =='CBP' ? 'selected' : ''}}>CBP</option>
+                                            <option {{$property->currency =='HKD' ? 'selected' : ''}}>HKD</option>
+                                            <option {{$property->currency =='RMB' ? 'selected' : ''}}>RMB</option>
+                                            <option {{$property->currency =='USD' ? 'selected' : ''}}>USD</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please specify the currency.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="price">Price</label>
+                                        <input type="number" class="form-control" name="price" autocomplete="off" value="{{$property->price}}" required>
+                                        <div class="invalid-feedback">
+                                            Please specify the price.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -86,7 +105,7 @@
                             </div>
 
                             <div class="control-group mt-3" id="fields">
-                                <label class="control-label">Upload Videos</label>
+                                <label class="control-label">Upload Videos (Max. 20MB)</label>
                                 @if ($property->videos)
                                     @foreach ($property->videos as $key => $video)
 
@@ -230,6 +249,13 @@
                                             <option {{$property->bedroom =='3' ? 'selected' : ''}}>3</option>
                                             <option {{$property->bedroom =='4' ? 'selected' : ''}}>4</option>
                                             <option {{$property->bedroom =='5' ? 'selected' : ''}}>5</option>
+                                            <option {{$property->bedroom =='6' ? 'selected' : ''}}>6</option>
+                                            <option {{$property->bedroom =='7' ? 'selected' : ''}}>7</option>
+                                            <option {{$property->bedroom =='8' ? 'selected' : ''}}>8</option>
+                                            <option {{$property->bedroom =='9' ? 'selected' : ''}}>9</option>
+                                            <option {{$property->bedroom =='10' ? 'selected' : ''}}>10</option>
+                                            <option {{$property->bedroom =='10+' ? 'selected' : ''}}>10+</option>
+
                                         </select>
                                         <div class="invalid-feedback">
                                             Please specify the No. of bedroom.
@@ -242,10 +268,15 @@
                                         <select class="form-control" name="bathroom" required>
                                             <option {{$property->bathroom =='0' ? 'selected' : ''}}>0</option>
                                             <option {{$property->bathroom =='1' ? 'selected' : ''}}>1</option>
+                                            <option {{$property->bathroom =='1.5' ? 'selected' : ''}}>1.5</option>
                                             <option {{$property->bathroom =='2' ? 'selected' : ''}}>2</option>
+                                            <option {{$property->bathroom =='2.5' ? 'selected' : ''}}>2.5</option>
                                             <option {{$property->bathroom =='3' ? 'selected' : ''}}>3</option>
+                                            <option {{$property->bathroom =='3.5' ? 'selected' : ''}}>3.5</option>
                                             <option {{$property->bathroom =='4' ? 'selected' : ''}}>4</option>
+                                            <option {{$property->bathroom =='4.5' ? 'selected' : ''}}>4.5</option>
                                             <option {{$property->bathroom =='5' ? 'selected' : ''}}>5</option>
+                                            <option {{$property->bathroom =='5.5' ? 'selected' : ''}}>5.5</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Please specify the No. of bathroom.

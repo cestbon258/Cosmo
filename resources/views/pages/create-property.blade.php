@@ -71,7 +71,7 @@
 
 
                             <div class="control-group mt-3" id="fields">
-                                <label class="control-label">Upload Videos</label>
+                                <label class="control-label">Upload Videos (Max. 20MB)</label>
                                 <div class="controls">
                                     <div class="entry input-group col-xs-3">
                                         <input class="btn btn-light" name="videos[]" type="file" accept="video/*">
@@ -99,11 +99,30 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="price">Price</label>
-                                <input type="number" class="form-control" name="price" autocomplete="off" required>
-                                <div class="invalid-feedback">
-                                    Please specify the price.
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="currency">Currency</label>
+                                        <select class="form-control" name="currency" required>
+                                            <option>AUD</option>
+                                            <option>CBP</option>
+                                            <option>HKD</option>
+                                            <option>RMB</option>
+                                            <option>USD</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please specify the currency.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="price">Price</label>
+                                        <input type="number" class="form-control" name="price" autocomplete="off" required>
+                                        <div class="invalid-feedback">
+                                            Please specify the price.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -172,6 +191,13 @@
                                             <option>3</option>
                                             <option>4</option>
                                             <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>10+</option>
+
                                         </select>
                                         <div class="invalid-feedback">
                                             Please specify the No. of bedroom.
@@ -184,10 +210,15 @@
                                         <select class="form-control" name="bathroom" required>
                                             <option>0</option>
                                             <option>1</option>
+                                            <option>1.5</option>
                                             <option>2</option>
+                                            <option>2.5</option>
                                             <option>3</option>
+                                            <option>3.5</option>
                                             <option>4</option>
+                                            <option>4.5</option>
                                             <option>5</option>
+                                            <option>5.5</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Please specify the No. of bathroom.
