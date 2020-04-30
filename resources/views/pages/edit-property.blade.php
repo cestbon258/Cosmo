@@ -5,7 +5,7 @@
 @section('content')
 
 
-        <form enctype="multipart/form-data" method="POST" action="{{ url('edit-property/'.$property->property_code) }}" class="needs-validation" novalidate>
+        <form enctype="multipart/form-data" method="POST" action="{{ route('update-property', [app()->getLocale(), $property->property_code]) }}" class="needs-validation" novalidate>
             @csrf
             <div class="container-fluid">
                 <div class="col">
@@ -13,8 +13,8 @@
 
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('property-list') }}">All Properties</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard', app()->getLocale()) }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('property-list', app()->getLocale()) }}">All Properties</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Edit Property</li>
                         </ol>
                     </nav>

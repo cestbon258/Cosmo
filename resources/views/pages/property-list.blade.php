@@ -7,10 +7,10 @@
 
         <div class="col">
             @include('layouts.alert')
-            
+
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('dashboard', app()->getLocale())}}">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page">All Properties</li>
                 </ol>
             </nav>
@@ -50,7 +50,7 @@
                                                 document.getElementById('publish-{{$property->id}}').submit();">
                                                 <span class="slider round"></span>
                                             </label>
-                                            <form id="publish-{{$property->id}}" action="{{ route('publish-property') }}" method="POST" style="display: none;">
+                                            <form id="publish-{{$property->id}}" action="{{ route('publish-property', app()->getLocale()) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 <input name="publish" value="{{$property->status}}" hidden>
                                                 <input name="propertyCode" value="{{$property->property_code}}" hidden>
@@ -61,28 +61,28 @@
                                     </td>
                                     <td>
                                         @if ($property->project_type == 1)
-                                            <a href="{{ url('edit-property/'.$property->property_code) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
+                                            <a href="{{ route('edit-property', [app()->getLocale(), $property->property_code]) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
 
-                                            <a href="{{ route('delete-property') }}"
+                                            <a href="{{ route('delete-property', app()->getLocale()) }}"
                                                 onclick="event.preventDefault();
                                                 document.getElementById('pid-{{$property->id}}').submit();">
                                                 <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
                                             </a>
 
-                                            <form id="pid-{{$property->id}}" action="{{ route('delete-property') }}" method="POST" style="display: none;">
+                                            <form id="pid-{{$property->id}}" action="{{ route('delete-property', app()->getLocale()) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 <input name="property" value="{{$property->property_code}}" hidden>
                                             </form>
                                         @else
-                                            <a href="{{ url('edit-project/'.$property->property_code) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
+                                            <a href="{{ route('edit-project', [app()->getLocale(), $property->property_code]) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
 
-                                            <a href="{{ route('delete-project') }}"
+                                            <a href="{{ route('delete-project', app()->getLocale()) }}"
                                                 onclick="event.preventDefault();
                                                 document.getElementById('pid-{{$property->id}}').submit();">
                                                 <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
                                             </a>
 
-                                            <form id="pid-{{$property->id}}" action="{{ route('delete-project') }}" method="POST" style="display: none;">
+                                            <form id="pid-{{$property->id}}" action="{{ route('delete-project', app()->getLocale()) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 <input name="property" value="{{$property->property_code}}" hidden>
                                             </form>

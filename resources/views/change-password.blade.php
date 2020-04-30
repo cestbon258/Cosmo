@@ -7,13 +7,13 @@
         <div class="col">
             @include('layouts.alert')
 
-            
+
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Change Password</h6>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('change-password/update') }}">
+                    <form method="POST" action="{{ route('change-password-update', app()->getLocale()) }}">
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputPassword1">Original Password</label>

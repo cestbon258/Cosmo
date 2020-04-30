@@ -9,7 +9,7 @@
 @section('content')
 
     <!-- ##### Breadcumb Area Start ##### -->
-       <section class="breadcumb-area bg-img" style="background-image: url(img/bg-img/hero1.jpg);">
+       <section class="breadcumb-area bg-img" style="background-image: url({{ url('img/bg-img/hero1.jpg') }});">
            <div class="container h-100">
                <div class="row h-100 align-items-center">
                    <div class="col-12">
@@ -55,7 +55,7 @@
                            <!-- Address -->
                            <div class="address mt-30">
                                {{-- <h6><img src="img/icons/phone-call.png" alt=""> +45 677 8993000 223</h6> --}}
-                               <h6><img src="img/icons/envelope.png" alt=""> cs@icosmo.co</h6>
+                               <h6><img src="{{ url('img/icons/envelope.png') }}" alt=""> cs@icosmo.co</h6>
                                {{-- <h6><img src="img/icons/location.png" alt=""> Main Str. no 45-46, b3, 56832,<br>Los Angeles, CA</h6> --}}
                            </div>
                        </div>
@@ -64,7 +64,7 @@
                    <!-- Contact Form Area -->
                    <div class="col-12 col-lg-8">
                        <div class="contact-form">
-                           <form action="{{ route('contact') }}" method="POST">
+                           <form action="{{ route('contact', app()->getLocale()) }}" method="POST">
                                @csrf
                                <div class="form-group">
                                    <input type="text" class="form-control" name="name" id="contact-name" placeholder="Your Name" required>

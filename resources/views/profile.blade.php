@@ -35,7 +35,7 @@
                   <h6 class="m-0 font-weight-bold text-primary">Profile</h6>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('profile/update') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('profile/update', app()->getLocale()) }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">

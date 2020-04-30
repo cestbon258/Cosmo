@@ -317,7 +317,7 @@
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
                                     {{-- @auth --}}
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
+                                        <a href="{{ url('property/'.$property->property_code) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
                                     {{-- @else
                                         <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
                                     @endauth --}}
@@ -334,7 +334,7 @@
                                 <!-- Property Content -->
                                 <div class="property-content">
                                     {{-- @auth --}}
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
+                                        <a href="{{ url('property/'.$property->property_code) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
                                     {{-- @else
                                         <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
                                     @endauth --}}
@@ -343,7 +343,7 @@
                                         {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
                                         <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
                                         {{-- @auth --}}
-                                            <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">Read More</a>
+                                            <a href="{{ url('property/'.$property->property_code) }}">Read More</a>
                                         {{-- @else
                                             <a href="{{ url('login') }}">Read More</a>
                                         @endauth --}}
@@ -376,7 +376,7 @@
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
                                     {{-- @auth --}}
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
+                                        <a href="{{ url('property/'.$property->property_code) }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
                                     {{-- @else
                                         <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
                                     @endauth --}}
@@ -394,7 +394,7 @@
                                 <!-- Property Content -->
                                 <div class="property-content">
                                     {{-- @auth --}}
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
+                                        <a href="{{ url('property/'.$property->property_code) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
                                     {{-- @else
                                         <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
                                     @endauth --}}
@@ -403,7 +403,7 @@
                                         {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
                                         <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
                                         {{-- @auth --}}
-                                            <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">Read More</a>
+                                            <a href="{{ url('property/'.$property->property_code) }}">Read More</a>
                                         {{-- @else
                                             <a href="{{ url('login') }}">Read More</a>
                                         @endauth --}}

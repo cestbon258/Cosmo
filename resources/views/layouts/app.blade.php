@@ -61,25 +61,25 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('dashboard') }}">
+                <a class="nav-link" href="{{ route('dashboard', app()->getLocale()) }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Center</span></a>
             </li>
             @if (Auth::user()->role == 0 || Auth::user()->role == 2)
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('create-property') }}">
+                    <a class="nav-link" href="{{ route('create-property', app()->getLocale()) }}">
                     <i class="fas fa-plus-circle"></i>
                     <span>Create Property</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('create-project') }}">
+                    <a class="nav-link" href="{{ route('create-project', app()->getLocale()) }}">
                     <i class="fas fa-plus-square"></i>
                     <span>Create Project</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('property-list') }}">
+                    <a class="nav-link" href="{{ route('property-list', app()->getLocale()) }}">
                     <i class="fas fa-home"></i>
                     <span>My Properties</span></a>
                 </li>
@@ -95,12 +95,12 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('profile') }}">
+                <a class="nav-link" href="{{ route('profile', app()->getLocale()) }}">
                 <i class="fas fa-fw fa-user"></i>
                 <span>Profile</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('change-password') }}">
+                <a class="nav-link" href="{{ route('change-password', app()->getLocale()) }}">
                 <i class="fas fa-fw fa-key"></i>
                 <span>Change Password</span></a>
             </li>
@@ -200,14 +200,14 @@
                                     Profile
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item" href="{{ route('logout', app()->getLocale()) }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout', app()->getLocale()) }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </div>

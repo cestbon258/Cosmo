@@ -16,8 +16,11 @@ use Image;
 
 class DataController extends Controller
 {
-    public function home()
+
+
+    public function home(Request $request)
     {
+
         if (Auth::check()) {
             $user = Auth::user();
             $role = $user->role;
@@ -67,6 +70,13 @@ class DataController extends Controller
         // echo '<pre>'.print_r($allProperties, 1).'</pre>';
 
         return View::make('pages/index')->with(array("properties"=>$allProperties));
+    }
+
+
+
+    public function about_us()
+    {
+        return View::make('pages/about-us');
     }
 
     public function profile()
@@ -394,7 +404,7 @@ class DataController extends Controller
 
 
 
-    public function property($propertyCode)
+    public function property($locale, $propertyCode)
     {
         $user = Auth::user();
 
@@ -415,14 +425,12 @@ class DataController extends Controller
             $myProperty->files = json_decode($myProperty->files);
         }
 
-
-
         // echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/property')->with(array('user' => $user, "property"=>$myProperty));
     }
 
-    public function edit_property($propertyCode)
+    public function edit_property($locale, $propertyCode)
     {
         $user = Auth::user();
 
@@ -475,7 +483,7 @@ class DataController extends Controller
     }
 
 
-    public function update_property(Request $request, $propertyCode)
+    public function update_property(Request $request, $locale, $propertyCode)
     {
         $user = Auth::user();
 

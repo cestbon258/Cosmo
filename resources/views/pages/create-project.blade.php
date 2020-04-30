@@ -6,7 +6,7 @@
 
 
 
-        <form enctype="multipart/form-data" method="POST" action="{{ route('create-project') }}" class="needs-validation" novalidate>
+        <form enctype="multipart/form-data" method="POST" action="{{ route('create-project', app()->getLocale()) }}" class="needs-validation" novalidate>
             @csrf
             <div class="container-fluid">
 
@@ -26,7 +26,7 @@
 
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard', app()->getLocale()) }}">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Create Project</li>
                         </ol>
                     </nav>

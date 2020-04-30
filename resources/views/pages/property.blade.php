@@ -66,7 +66,7 @@
                       <div class="card-body">
                         <h5 class="card-title">{{$property->title}}</h5>
                         <hr>
-                        <div><h6 style="color:red;">{{ number_format($property->price, 2, '.', ',') }} {{$property->currency}}</h6></div>
+                        <div><h6 style="color:red;">{{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</h6></div>
                         <hr>
                         <br>
 
@@ -159,7 +159,11 @@
                 <div class="card-body">
                     @foreach ($property->videos as $key => $video)
                         <video controls muted poster={{url('logo/logo.png')}}>
-                            <source src="{{ URL::asset('storage/projects/'.$property->property_code.'/videos'.'/'.$video) }}">
+                            @if ($property->project_type == 1)
+                                <source src="{{ URL::asset('storage/properties/'.$property->property_code.'/videos'.'/'.$video) }}">
+                            @else
+                                <source src="{{ URL::asset('storage/projects/'.$property->property_code.'/videos'.'/'.$video) }}">
+                            @endif
                             Your browser does not support HTML5 video.
                         </video>
                         <br><br>
@@ -188,25 +192,19 @@
                 <h5 class="card-header">Brochure</h5>
                 <div class="card-body">
                     @foreach ($property->files as $key => $file)
-                        {{-- <object style="width:100%;" height="600" data="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}" type="application/pdf">
-                        This browser does not support PDFs. Please download the PDF to view it: <a href="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}">Download PDF</a>
-                        </object> --}}
-
-                        {{-- <embed src="https://docs.google.com/viewer?url={{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}" type="application/pdf" width="100%" height="100%">
-
-                        <iframe src="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}">This browser does not support PDFs. Please download the PDF to view it: Download PDF</iframe> --}}
-                        {{-- <div class="scroll-wrapper">
-                        	<iframe src="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}#view=FitH">
-                                This browser does not support PDFs. Please download the PDF to view it: <a href="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}">Download PDF</a><br>
-                            </iframe>
-                        </div> --}}
 
                         <div class="scroll-wrapper">
-                        	<iframe src="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}#view=FitH">
-                            </iframe>
-                        </div>
+                            @if ($property->project_type == 1)
+                                <iframe src="{{ url('storage/properties/'.$property->property_code.'/pdf'.'/'.$file) }}#view=FitH">
+                                </iframe>
+                                <div class="float-right"><a href="{{ URL::asset('storage/properties/'.$property->property_code.'/pdf'.'/'.$file) }}" target="_blank">Download PDF</a></div><br>
 
-                        <div class="float-right"><a href="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}" target="_blank">Download PDF</a></div><br>
+                            @else
+                                <iframe src="{{ url('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}#view=FitH">
+                                </iframe>
+                                <div class="float-right"><a href="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}" target="_blank">Download PDF</a></div><br>
+                            @endif
+                        </div>
                         <br>
                     @endforeach
                 </div>

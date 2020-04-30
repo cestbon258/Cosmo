@@ -1,6 +1,6 @@
 <!-- Stored in resources/views/layouts/master.blade.php -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -70,7 +70,7 @@
         <nav class="classy-navbar justify-content-between" id="southNav">
 
             <!-- Logo -->
-            <a class="nav-brand" href="{{ url('/') }}"><img class="w-logo" src="{{ url("logo/logo.png") }}" alt=""></a>
+            <a class="nav-brand" href="{{ route('/', app()->getLocale()) }}"><img class="w-logo" src="{{ url("logo/logo.png") }}" alt=""></a>
 
             <!-- Navbar Toggler -->
             <div class="classy-navbar-toggler">
@@ -88,7 +88,7 @@
                 <!-- Nav Start -->
                 <div class="classynav">
                     <ul>
-                        <li><a href="{{ route('/') }}">Home</a></li>
+                        <li><a href="{{ route('/', app()->getLocale()) }}">@lang('home.home')</a></li>
                         <!--<li><a href="#">Pages</a>
                         <ul class="dropdown">
                         <li><a href="index.html">Home</a></li>
@@ -109,7 +109,7 @@
         <li><a href="elements.html">Elements</a></li>
             </ul>
         </li>-->
-        <li><a href="{{ route('about-us') }}">About Us</a></li>
+        <li><a href="{{ route('about-us', app()->getLocale()) }}">@lang('home.about_us')</a></li>
         {{-- <li><a href="listings.html">Properties</a></li>
         <li><a href="blog.html">Blog</a></li> --}}
         <!--<li><a href="#">Mega Menu</a>
@@ -148,23 +148,20 @@
         </ul>
         </div>
         </li>-->
-        <li><a href="{{ route('contact') }}">Contact</a></li>
+        <li><a href="{{ route('contact', app()->getLocale()) }}">@lang('home.contact')</a></li>
         @auth
             <li><a href="#">My Account</a>
                 <ul class="dropdown">
-                    <li><a href="{{ route('dashboard')}}">Dashboard</a></li>
-                    <li><a href="{{ route('profile')}}">Profile</a></li>
-                    <li><a href="{{ url('/logout') }}">Sign Out</a></li>
+                    <li><a href="{{ route('dashboard', app()->getLocale())}}">Dashboard</a></li>
+                    <li><a href="{{ route('profile', app()->getLocale())}}">Profile</a></li>
+                    <li><a href="{{ route('logout', app()->getLocale()) }}">Sign Out</a></li>
                     {{-- button  --}}
                     {{-- <li><a href="{{ url('/logout') }}"><button type="button" class="btn btn-outline-light btn-block mt-2">Sign Out</button></a></li> --}}
                 </ul>
             </li>
         @else
-            {{-- button  --}}
-            {{-- <li><a href="{{ url('/login') }}"><button type="button" class="btn btn-light btn-md btn-block text-uppercase">Log In</button></a></li>
-            <li id="sign-up-btn"><a href="{{ url('/register') }}"><button type="button" class="btn btn-outline-light btn-md btn-block text-uppercase">Sign Up</button></a></li> --}}
-            <li><a href="{{ url('/login') }}">Log In</a></li>
-            <li><a href="{{ url('/register') }}">Sign Up</a></li>
+            <li><a href="{{ route('login', app()->getLocale()) }}">Log In</a></li>
+            <li><a href="{{ route('register', app()->getLocale()) }}">Sign Up</a></li>
         @endauth
 
 
@@ -270,13 +267,13 @@
                         </div>
                         <!-- Nav -->
                         <ul class="useful-links-nav d-flex align-items-center">
-                            <li><a href="{{ route('/') }}">Home</a></li>
-                            <li><a href="{{ route('about-us') }}">About us</a></li>
+                            <li><a href="{{ route('/', app()->getLocale()) }}">Home</a></li>
+                            <li><a href="{{ route('about-us', app()->getLocale()) }}">About us</a></li>
                             <li><a href="#">Services</a></li>
                             <li><a href="#">Properties</a></li>
                             <li><a href="#">Listings</a></li>
                             <li><a href="#">Blog</a></li>
-                            <li><a href="{{ route('contact') }}">Contact</a></li>
+                            <li><a href="{{ route('contact', app()->getLocale()) }}">Contact</a></li>
                             <li><a href="#">FAQ</a></li>
                         </ul>
                     </div>
@@ -314,7 +311,7 @@
         <!-- Copywrite Text -->
         <div class="copywrite-text d-flex align-items-center justify-content-center">
             <p>
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a href="{{url('/')}}">COSMO Real Estate Limited</a>. All rights reserved
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a href="{{ route('/', app()->getLocale()) }}">COSMO Real Estate Limited</a>. All rights reserved
             </p>
         </div>
     </footer>

@@ -16,40 +16,42 @@
 // });
 Auth::routes(['verify' => true]);
 
+Route::redirect('/', '/en');
 
-Route::get('/', 'DataController@home')->name('/');
+Route::group(['prefix' => '{locale}'], function () {
 
-Route::get('/about-us', function () {
-    return view('pages/about-us');
-})->name('about-us');
+    Route::get('/', 'DataController@home')->name('/');
 
-Route::get('/contact', function () {
-    return view('pages/contact');
-})->name('contact');
-Route::post('/contact', 'MailController@contact_us');
+    Route::get('/about-us', 'DataController@about_us')->name('about-us');
 
+    Route::get('/contact', function () {
+        return view('pages/contact');
+    })->name('contact');
 
 
-Route::group(['middleware' => 'auth'], function () {
-    // Route::group(['prefix' => 'admin'], function(){
+    Route::group(['middleware' => 'auth'], function () {
 
-        Route::get('/property/{propertyCode}', 'DataController@property');
 
         Route::get('/property-list', 'DataController@property_list')->name('property-list');
         Route::post('/publish-property', 'DataController@publish_property')->name('publish-property');
 
+        Route::get('/property/{propertyCode}', 'DataController@property')->name('property');
+
+
+        // Route::get('/property', 'DataController@property')->name('property');
+
         // property
         Route::get('/create-property', 'DataController@create_property')->name('create-property');
         Route::post('/create-property', 'DataController@create_property');
-        Route::get('/edit-property/{propertyCode}', 'DataController@edit_property');
-        Route::post('/edit-property/{propertyCode}', 'DataController@update_property');
+        Route::get('/edit-property/{propertyCode}', 'DataController@edit_property')->name('edit-property');
+        Route::post('/edit-property/{propertyCode}', 'DataController@update_property')->name('update-property');
         Route::post('/delete-property', 'DataController@delete_property')->name('delete-property');
 
         // project
         Route::get('/create-project', 'ProjectController@create_project')->name('create-project');
         Route::post('/create-project', 'ProjectController@create_project')->name('create-project');
-        Route::get('/edit-project/{propertyCode}', 'ProjectController@edit_project');
-        Route::post('/edit-project/{propertyCode}', 'ProjectController@update_project');
+        Route::get('/edit-project/{propertyCode}', 'ProjectController@edit_project')->name('edit-project');
+        Route::post('/edit-project/{propertyCode}', 'ProjectController@update_project')->name('update-project');
         Route::post('/delete-project', 'ProjectController@delete_project')->name('delete-project');
 
         // profile
@@ -58,9 +60,28 @@ Route::group(['middleware' => 'auth'], function () {
 
         // password
         Route::get('/change-password', 'DataController@change_password')->name('change-password');
-        Route::post('/change-password/update', 'DataController@change_password_update')->name('change-password/update');
+        Route::post('/change-password/update', 'DataController@change_password_update')->name('change-password-update');
 
-    // });
+        Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+        Route::post('contact', 'MailController@contact_us');
+
+    });
+
+    Auth::routes();
+
+
+
+    // sign out
+    Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+    Route::get('/test', function () {
+        App::setLocale('cn');
+        dd(App::getLocale());
+    });
+
+
+
 });
 
 
@@ -68,9 +89,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-Route::get('/logout', function () {
-    return view('pages/contact');
-});
 
 
 Route::get('storage/{filename}', function ($filename) {
@@ -112,9 +130,3 @@ Route::get('storage/{filename}', function ($filename) {
 //
 //     return $response;
 // });
-
-Auth::routes();
-
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-// sign out
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

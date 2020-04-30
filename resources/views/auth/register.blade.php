@@ -23,7 +23,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register', app()->getLocale()) }}">
                         @csrf
 
                         <div class="form-group row">

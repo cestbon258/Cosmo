@@ -7,7 +7,7 @@
 
 
 
-        <form enctype="multipart/form-data" method="POST" action="{{ route('create-property') }}" class="needs-validation" novalidate>
+        <form enctype="multipart/form-data" method="POST" action="{{ route('create-property', app()->getLocale()) }}" class="needs-validation" novalidate>
             @csrf
             <div class="container-fluid">
 
@@ -27,7 +27,7 @@
 
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard', app()->getLocale()) }}">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Create Property</li>
                         </ol>
                     </nav>
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mt-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="currency">Currency</label>

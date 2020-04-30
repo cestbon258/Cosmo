@@ -144,7 +144,7 @@ class ProjectController extends Controller
     }
 
 
-    public function edit_project($propertyCode)
+    public function edit_project($locale, $propertyCode)
     {
         $user = Auth::user();
 
@@ -198,7 +198,7 @@ class ProjectController extends Controller
     }
 
 
-    public function update_project(Request $request, $propertyCode)
+    public function update_project(Request $request, $locale, $propertyCode)
     {
         $user = Auth::user();
 

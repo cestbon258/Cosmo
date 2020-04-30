@@ -15,7 +15,7 @@
                 <div class="card-header">{{ __('Sign In') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login', app()->getLocale()) }}">
                         @csrf
 
                         <div class="form-group row">
@@ -96,7 +96,7 @@
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
                             <h3 class="login-heading mb-4">Welcome back!</h3>
-                            <form method="POST" action="{{ route('login') }}">
+                            <form method="POST" action="{{ route('login', app()->getLocale()) }}">
                                 @csrf
 
                                 <div class="form-label-group">
@@ -139,7 +139,7 @@
 
                                 @if (Route::has('password.request'))
                                     <div class="text-center">
-                                        <a class="small" href="{{ route('password.request') }}">
+                                        <a class="small" href="{{ route('password.request', app()->getLocale()) }}">
                                             {{ __('Forgot Your Password?') }}
                                         </a>
                                     </div>
@@ -147,7 +147,7 @@
                                 <br>
                                 <div class="text-center">
                                     <span>{{ __('New to Cosmo') }} ?</span>
-                                    <a class="small" href="{{ route('register') }}"> {{ __('Sign up now') }}</a>.
+                                    <a class="small" href="{{ route('register', app()->getLocale()) }}"> {{ __('Sign up now') }}</a>.
                                 </div>
                             </form>
                         </div>
