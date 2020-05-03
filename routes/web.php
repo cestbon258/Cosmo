@@ -28,6 +28,20 @@ Route::group(['prefix' => '{locale}'], function () {
         return view('pages/contact');
     })->name('contact');
 
+    Route::get('/terms', function () {
+        return view('pages/terms');
+    })->name('terms');
+
+    Route::get('/privacy', function () {
+        return view('pages/privacy');
+    })->name('privacy');
+
+    Route::get('/disclaimer', function () {
+        return view('pages/disclaimer');
+    })->name('disclaimer');
+
+    Route::get('/search', 'DataController@search')->name('search');
+
 
     Route::group(['middleware' => 'auth'], function () {
 
@@ -74,13 +88,6 @@ Route::group(['prefix' => '{locale}'], function () {
 
     // sign out
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-    Route::get('/test', function () {
-        App::setLocale('cn');
-        dd(App::getLocale());
-    });
-
-
 
 });
 

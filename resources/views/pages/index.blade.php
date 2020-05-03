@@ -66,34 +66,99 @@
                             <p>Search for your home</p>
                         </div>
                         <!-- Search Form -->
-                        <form action="#" method="post" id="advanceSearch">
+                        <form action="{{ route('search', app()->getLocale()) }}" method="get" id="advanceSearch">
+                            {{-- @csrf --}}
+
                             <div class="row">
 
-                                <div class="col-12 col-md-4 col-lg-3">
+                                {{-- <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <input type="input" class="form-control" name="input" placeholder="Keyword">
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
-                                        <select class="form-control" id="cities">
-                                            <option>All Cities</option>
-                                            <option>Riga</option>
-                                            <option>Melbourne</option>
-                                            <option>Vienna</option>
-                                            <option>Vancouver</option>
-                                            <option>Toronto</option>
-                                            <option>Calgary</option>
-                                            <option>Adelaide</option>
-                                            <option>Perth</option>
-                                            <option>Auckland</option>
-                                            <option>Helsinki</option>
+                                        <select class="form-control" onchange="getCities()" id="country" name="country">
+                                            <option>All Countries</option>
+                                            @foreach ($districts as $key => $district)
+                                                <option id="Country-{{$district->country}}"> {{$district->country}} </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <select class="form-control" id="city" name="city">
+                                            <option>All Cities</option>
+                                            @foreach ($districts as $key => $district)
+                                                    <option disabled>--- {{$district->country}} ---</option>
+                                                @foreach ($district->city as $keyy => $value)
+                                                    <option value="{{$value}}">{{$value}}</option>
+                                                @endforeach
+                                            @endforeach
+                                        </select>
+                                    </div>
+{{--
+                                    @foreach ($districts as $key => $district)
+
+                                    <div class="form-group" id="{{$district->country}}-City" style="display:none;">
+
+
+                                        <select class="form-control" id="city" name="city" >
+                                            <option>All Cities</option>
+                                                    <option disabled>--- {{$district->country}} ---</option>
+                                                @foreach ($district->city as $keyy => $value)
+                                                    <option value="{{$value}}|{{$district->country}}">{{$value}}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                    @endforeach --}}
+
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <select class="form-control" id="bedrooms" name="bedroom">
+                                            <option>Bedrooms</option>
+                                            <option>0</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>10+</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <select class="form-control" id="bathrooms" name="bathroom">
+                                            <option>Bathrooms</option>
+                                            <option>0</option>
+                                            <option>1</option>
+                                            <option>1.5</option>
+                                            <option>2</option>
+                                            <option>2.5</option>
+                                            <option>3</option>
+                                            <option>3.5</option>
+                                            <option>4</option>
+                                            <option>4.5</option>
+                                            <option>5</option>
+                                            <option>5.5</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                {{-- <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <select class="form-control" id="catagories">
                                             <option>All Catagories</option>
@@ -104,9 +169,9 @@
                                             <option>Store</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
 
-                                <div class="col-12 col-md-4 col-lg-3">
+                                {{-- <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <select class="form-control" id="offers">
                                             <option>All Offers</option>
@@ -117,9 +182,9 @@
                                             <option>10% OFF</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
 
-                                <div class="col-12 col-md-4 col-xl-3">
+                                {{-- <div class="col-12 col-md-4 col-xl-3">
                                     <div class="form-group">
                                         <select class="form-control" id="listings">
                                             <option>All Listings</option>
@@ -130,54 +195,40 @@
                                             <option>Listings 5</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
 
-                                <div class="col-12 col-md-4 col-xl-2">
-                                    <div class="form-group">
-                                        <select class="form-control" id="bedrooms">
-                                            <option>Bedrooms</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5+</option>
-                                        </select>
-                                    </div>
-                                </div>
 
-                                <div class="col-12 col-md-4 col-xl-2">
-                                    <div class="form-group">
-                                        <select class="form-control" id="bathrooms">
-                                            <option>Bathrooms</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5+</option>
-                                        </select>
-                                    </div>
-                                </div>
+
+
 
                                 <div class="col-12 col-md-8 col-lg-12 col-xl-5 d-flex">
+
                                     <!-- Space Range -->
                                     <div class="slider-range">
-                                        <div data-min="120" data-max="820" data-unit=" sq. ft" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="120" data-value-max="820">
+                                        {{-- <input type="range" min="1" max="100" value="50" class="slider" name="priceRange" id="priceRange"> --}}
+
+                                        <div data-min="10" data-max="10000" data-unit="" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="10" data-value-max="10000">
                                             <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                         </div>
-                                        <div class="range">120 sq. ft - 820 sq. ft</div>
+                                        <div>
+                                            <span style="font-size:10px;">Price: </span>
+                                            <span class="range" id="priceRange">10 - 10000</span>
+                                            <input id="priceRangeValue" name="priceRange" hidden>
+                                        </div>
                                     </div>
 
+
                                     <!-- Distance Range -->
-                                    <div class="slider-range">
+                                    {{-- <div class="slider-range">
                                         <div data-min="10" data-max="1300" data-unit=" mil" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="10" data-value-max="1300">
                                             <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                         </div>
                                         <div class="range">10 mil - 1300 mil</div>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="col-12 search-form-second-steps">
@@ -263,14 +314,15 @@
                                 </div>
 
                                 <div class="col-12 d-flex justify-content-between align-items-end">
-                                    <!-- More Filter -->
                                     <div class="more-filter">
-                                        <a href="#" id="moreFilter">+ More filters</a>
+                                        {{-- <a href="#" id="moreFilter">+ More filters</a> --}}
                                     </div>
-                                    <!-- Submit -->
+
                                     <div class="form-group mb-0">
                                         <button type="submit" class="btn south-btn">Search</button>
                                     </div>
+                                </div>
+
                                 </div>
                             </div>
                         </form>
@@ -815,6 +867,33 @@
     </section> --}}
     <!-- ##### Editor Area End ##### -->
 
+    <script>
+
+        var districts = {!! json_encode($districts) !!};
+
+
+        function getCities (){
+            var selectedCountry = document.getElementById("country").value;
+
+            for (var i = 0; i < districts.length; i++) {
+                if (selectedCountry == districts[i]['country']) {
+                    console.log(districts[i]['city']);
+                }
+            }
+
+        }
+
+        var priceRange = document.getElementById("priceRange");
+        var priceRangeValue = document.getElementById("priceRangeValue");
+        priceRangeValue.value = priceRange.innerHTML;
+
+        $('#priceRange').on('DOMSubtreeModified',function(){
+            var priceRange = document.getElementById("priceRange");
+            var priceRangeValue = document.getElementById("priceRangeValue");
+            priceRangeValue.value = priceRange.innerHTML;
+        })
+
+    </script>
     <style>
         video {
             height: auto;
@@ -822,6 +901,10 @@
             object-fit: fill;
         }
 
+        .nice-select .list {
+            overflow-y: auto;
+            height: 250px;
+        }
 
 
         .centered {

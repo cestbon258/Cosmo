@@ -118,12 +118,16 @@ class ProjectController extends Controller
             $district = $_POST['district'];
             $districtArray = explode ("|", $district);
 
+            $facilities = !empty($_POST['facilities']) ? json_encode($_POST['facilities']) : null;
+
             DB::table('houses')
             ->insert(
                     [
                         'user_id'       => $user->id,
                         'property_code' => $property_code,
                         'title'         => $_POST['title'],
+                        'carpark'       => $_POST['carpark'],
+                        'facilities'    => $facilities,
                         'features'     => json_encode($_POST['features']),
                         'country'      => $districtArray[1],
                         'city'         => $districtArray[0],
@@ -168,7 +172,7 @@ class ProjectController extends Controller
             $myProperty->time = $temp;
         }
 
-
+        $myProperty->facilities = json_decode($myProperty->facilities);
         $myProperty->features = json_decode($myProperty->features);
         $myProperty->description = json_decode($myProperty->description);
         $myProperty->pictures = json_decode($myProperty->pictures);
@@ -382,12 +386,15 @@ class ProjectController extends Controller
         $imgJson = !empty($imgArray) ? json_encode($imgArray) : null;
         $videoJson = !empty($videoArray) ? json_encode($videoArray) : null;
         $pdfJson = !empty($pdfArray) ? json_encode($pdfArray) : null;
+        $facilities = !empty($_POST['facilities']) ? json_encode($_POST['facilities']) : null;
 
         DB::table('houses')
             ->where('property_code', $propertyCode)
             ->update(
                 [
-                    'title'         => $_POST['title'],
+                    'title'        => $_POST['title'],
+                    'carpark'      => $_POST['carpark'],
+                    'facilities'   => $facilities,
                     'features'     => json_encode($_POST['features']),
                     'country'      => $districtArray[1],
                     'city'         => $districtArray[0],

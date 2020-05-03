@@ -271,10 +271,11 @@
                             <li><a href="{{ route('about-us', app()->getLocale()) }}">About us</a></li>
                             <li><a href="#">Services</a></li>
                             <li><a href="#">Properties</a></li>
-                            <li><a href="#">Listings</a></li>
-                            <li><a href="#">Blog</a></li>
+                            <li><a href="{{ route('privacy', app()->getLocale()) }}">Privacy</a></li>
+                            <li><a href="{{ route('terms', app()->getLocale()) }}">Terms and Conditions</a></li>
+                            <li><a href="{{ route('disclaimer', app()->getLocale()) }}">Disclaimer & Liability</a></li>
                             <li><a href="{{ route('contact', app()->getLocale()) }}">Contact</a></li>
-                            <li><a href="#">FAQ</a></li>
+
                         </ul>
                     </div>
                 </div>

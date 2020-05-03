@@ -58,7 +58,74 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="carpark">Carpark</label>
+                                        <select class="form-control" name="carpark" required>
+                                            <option {{$property->carpark =='0' ? 'selected' : ''}}>0</option>
+                                            <option {{$property->carpark =='1' ? 'selected' : ''}}>1</option>
+                                            <option {{$property->carpark =='2' ? 'selected' : ''}}>2</option>
+                                            <option {{$property->carpark =='3' ? 'selected' : ''}}>3</option>
+                                            <option {{$property->carpark =='4' ? 'selected' : ''}}>4</option>
+                                            <option {{$property->carpark =='5' ? 'selected' : ''}}>5</option>
+                                            <option {{$property->carpark =='6' ? 'selected' : ''}}>6</option>
+                                            <option {{$property->carpark =='7' ? 'selected' : ''}}>7</option>
+                                            <option {{$property->carpark =='8' ? 'selected' : ''}}>8</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please specify the carpark.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label for="carpark">More Facilities</label>
+                            <div class="row" style="margin-left:4px;">
+                                <div class="form-check col-12 col-md-4 col-lg-3">
+                                  <input class="form-check-input facility" type="checkbox" value="Garden" name="facilities[]">
+                                  <label class="form-check-label">Garden</label>
+                                </div>
+                                <div class="form-check col-12 col-md-4 col-lg-3">
+                                  <input class="form-check-input facility" type="checkbox" value="Terrace" name="facilities[]">
+                                  <label class="form-check-label">Terrace</label>
+                                </div>
+                                <div class="form-check col-12 col-md-4 col-lg-3">
+                                  <input class="form-check-input facility" type="checkbox" value="Patio" name="facilities[]">
+                                  <label class="form-check-label">Patio</label>
+                                </div>
+                                <div class="form-check col-12 col-md-4 col-lg-3">
+                                  <input class="form-check-input facility" type="checkbox" value="Balcony" name="facilities[]">
+                                  <label class="form-check-label">Balcony</label>
+                                </div>
+                                <div class="form-check col-12 col-md-4 col-lg-3">
+                                  <input class="form-check-input facility" type="checkbox" value="Deck Area" name="facilities[]">
+                                  <label class="form-check-label">Deck Area</label>
+                                </div>
+                                <div class="form-check col-12 col-md-4 col-lg-3">
+                                  <input class="form-check-input facility" type="checkbox" value="Pool" name="facilities[]">
+                                  <label class="form-check-label">Pool</label>
+                                </div>
+                                <div class="form-check col-12 col-md-4 col-lg-3">
+                                  <input class="form-check-input facility" type="checkbox" value="Yard" name="facilities[]">
+                                  <label class="form-check-label">Yard</label>
+                                </div>
+                                <div class="form-check col-12 col-md-4 col-lg-3">
+                                  <input class="form-check-input facility" type="checkbox" value="Roof" name="facilities[]">
+                                  <label class="form-check-label">Roof</label>
+                                </div>
+                                <div class="form-check col-12 col-md-4 col-lg-3">
+                                  <input class="form-check-input facility" type="checkbox" value="Loft" name="facilities[]">
+                                  <label class="form-check-label">Loft</label>
+                                </div>
+                                <div class="form-check col-12 col-md-4 col-lg-3">
+                                  <input class="form-check-input facility" type="checkbox" value="Garage" name="facilities[]">
+                                  <label class="form-check-label">Garage</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-3">
                                 <label>Features</label>
                                 <textarea id="summernote" name="features">{{$property->features}}</textarea>
                                 <script>
@@ -328,6 +395,21 @@
                 e.preventDefault();
                 return false;
             });
+
+
+            // checked more facilities
+            let facilities = {!! json_encode($property->facilities) !!};
+            let facilityGroup = document.querySelectorAll(".facility");
+
+            for (var i = 0; i < facilityGroup.length; i++) {
+                if (facilities && facilities.length) {
+                    for (var j = 0; j < facilities.length; j++) {
+                        if ( facilityGroup[i].value == facilities[j] ) {
+                            facilityGroup[i].checked = true;
+                        }
+                    }
+                }
+            }
 
             // // Add the following code if you want the name of the file appear on select
             // $(".custom-file-input").on("change", function() {

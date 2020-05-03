@@ -67,9 +67,107 @@ class DataController extends Controller
             }
         }
 
-        // echo '<pre>'.print_r($allProperties, 1).'</pre>';
 
-        return View::make('pages/index')->with(array("properties"=>$allProperties));
+        $districts = DB::table('districts')
+            ->get();
+
+
+        foreach ($districts as $key => $district) {
+            $district->city = json_decode($district->city);
+        }
+
+        // echo '<pre>'.print_r($districts, 1).'</pre>';
+
+        return View::make('pages/index')->with(array("properties"=>$allProperties, "districts"=>$districts));
+    }
+
+    public function search(Request $request)
+    {
+        // get country and city from district
+        // $district = $_POST['city'];
+        // $districtArray = explode ("|", $district);
+        //
+        // $price = $_POST['priceRange'];
+        // $priceArray = explode (" - ", $price);
+
+        $query = DB::table('houses');
+
+        $country = $request->input('country');
+        $city = $request->input('city');
+
+        // search by specific country and All Citites
+        if ( !empty($country) && $country != 'All Countries' && $city == 'All Cities') {
+            $query->where('country', $country);
+            echo '<pre>'.print_r('$country', 1).'</pre>';
+        }
+
+        echo '<pre>'.print_r($country, 1).'</pre>';
+        echo '<pre>'.print_r($city, 1).'</pre>';
+
+
+        // $data = DB::select('SELECT * FROM houses WHERE country !=:country', ['country' => $country]);
+
+
+
+        // echo '<pre>'.print_r($request->country, 1).'</pre>';
+        //
+        //
+        // Search for a user based on their name.
+        // if ($request->has('country') or $request->has('city')) {
+        //     echo "stringing";
+        //
+        //     if ($request->country != "All Countries" or $request->country != "All Cities") {
+        //         $query->where('country', $request->input('country'));
+        //         $query->orwhere('city', $request->input('city'));
+        //     }
+        //
+        //     if ($request->country == "All Countries" or $request->country == "All Cities") {
+        //         echo '<pre>'.print_r('$data', 1).'</pre>';
+        //
+        //         echo "string";
+        //         $query->where('status', '<>', 1);
+        //     }
+        //
+        // }
+        //
+
+        if ($request->has('bedroom')) {
+            if ($request->bedroom != "Bedrooms") {
+                $query->where('bedroom', $request->input('bedroom'));
+            }
+        }
+
+        if ($request->has('bathroom')) {
+            if ($request->bedroom != "Bathrooms") {
+                $query->where('bathroom', $request->input('bathroom'));
+            }
+        }
+
+
+
+        // $result->where('text', 'like', '%'.$text.'%');
+        $data = $query->get();
+
+        echo '<pre>'.print_r($data, 1).'</pre>';
+
+
+        // // Search for a user based on their company.
+        // if ($request->has('company')) {
+        //     $user->where('company', $request->input('company'));
+        // }
+        //
+        // // Search for a user based on their city.
+        // if ($request->has('city')) {
+        //     $user->where('city', $request->input('city'));
+        // }
+        //
+        // // Continue for all of the filters.
+        //
+        // // Get the results and return them.
+        // return $user->get();
+
+        // echo '<pre>'.print_r($priceArray, 1).'</pre>';
+
     }
 
 
@@ -328,6 +426,8 @@ class DataController extends Controller
             $district = $_POST['district'];
             $districtArray = explode ("|", $district);
 
+            $facilities = !empty($_POST['facilities']) ? json_encode($_POST['facilities']) : null;
+
             DB::table('houses')
             ->insert(
                     [
@@ -335,6 +435,8 @@ class DataController extends Controller
                         'property_code' => $property_code,
                         'title'      => $_POST['title'],
                         'purpose'    => $_POST['usage'],
+                        'carpark'    => $_POST['carpark'],
+                        'facilities' => $facilities,
                         'time'       => $newDate,
                         'country'    => $districtArray[1],
                         'city'       => $districtArray[0],
@@ -454,6 +556,7 @@ class DataController extends Controller
             $myProperty->time = $temp;
         }
 
+        $myProperty->facilities = json_decode($myProperty->facilities);
         $myProperty->pictures = json_decode($myProperty->pictures);
         $myProperty->videos = json_decode($myProperty->videos);
         $myProperty->files = json_decode($myProperty->files);
@@ -658,16 +761,19 @@ class DataController extends Controller
             $newDate = null;
         }
 
-
         // get country and city from district
         $district = $_POST['district'];
         $districtArray = explode ("|", $district);
+
+        $facilities = !empty($_POST['facilities']) ? json_encode($_POST['facilities']) : null;
 
         DB::table('houses')
             ->where('property_code', $propertyCode)
             ->update([
                 'title'      => $_POST['title'],
                 'purpose'    => $_POST['usage'],
+                'carpark'    => $_POST['carpark'],
+                'facilities' => $facilities,
                 'time'       => $newDate,
                 'country'    => $districtArray[1],
                 'city'       => $districtArray[0],

@@ -70,6 +70,74 @@
                             </div>
 
 
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="carpark">Carpark</label>
+                                        <select class="form-control" name="carpark" required>
+                                            <option>0</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please specify the carpark.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <label for="carpark">More Facilities</label>
+                            <div class="row" style="margin-left:4px;">
+                                    <div class="form-check col-12 col-md-4 col-lg-3">
+                                      <input class="form-check-input" type="checkbox" value="Garden" name="facilities[]">
+                                      <label class="form-check-label">Garden</label>
+                                    </div>
+                                    <div class="form-check col-12 col-md-4 col-lg-3">
+                                      <input class="form-check-input" type="checkbox" value="Terrace" name="facilities[]">
+                                      <label class="form-check-label">Terrace</label>
+                                    </div>
+                                    <div class="form-check col-12 col-md-4 col-lg-3">
+                                      <input class="form-check-input" type="checkbox" value="Patio" name="facilities[]">
+                                      <label class="form-check-label">Patio</label>
+                                    </div>
+                                    <div class="form-check col-12 col-md-4 col-lg-3">
+                                      <input class="form-check-input" type="checkbox" value="Balcony" name="facilities[]">
+                                      <label class="form-check-label">Balcony</label>
+                                    </div>
+                                    <div class="form-check col-12 col-md-4 col-lg-3">
+                                      <input class="form-check-input" type="checkbox" value="Deck Area" name="facilities[]">
+                                      <label class="form-check-label">Deck Area</label>
+                                    </div>
+                                    <div class="form-check col-12 col-md-4 col-lg-3">
+                                      <input class="form-check-input" type="checkbox" value="Pool" name="facilities[]">
+                                      <label class="form-check-label">Pool</label>
+                                    </div>
+                                    <div class="form-check col-12 col-md-4 col-lg-3">
+                                      <input class="form-check-input" type="checkbox" value="Yard" name="facilities[]">
+                                      <label class="form-check-label">Yard</label>
+                                    </div>
+                                    <div class="form-check col-12 col-md-4 col-lg-3">
+                                      <input class="form-check-input" type="checkbox" value="Roof" name="facilities[]">
+                                      <label class="form-check-label">Roof</label>
+                                    </div>
+                                    <div class="form-check col-12 col-md-4 col-lg-3">
+                                      <input class="form-check-input" type="checkbox" value="Loft" name="facilities[]">
+                                      <label class="form-check-label">Loft</label>
+                                    </div>
+                                    <div class="form-check col-12 col-md-4 col-lg-3">
+                                      <input class="form-check-input" type="checkbox" value="Garage" name="facilities[]">
+                                      <label class="form-check-label">Garage</label>
+                                    </div>
+                            </div>
+
+
                             <div class="control-group mt-3" id="fields">
                                 <label class="control-label">Upload Videos (Max. 20MB)</label>
                                 <div class="controls">
@@ -105,7 +173,7 @@
                                         <label for="currency">Currency</label>
                                         <select class="form-control" name="currency" required>
                                             <option>AUD</option>
-                                            <option>CBP</option>
+                                            <option>GBP</option>
                                             <option>HKD</option>
                                             <option>RMB</option>
                                             <option>USD</option>
