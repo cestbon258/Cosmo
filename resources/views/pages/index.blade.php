@@ -157,6 +157,16 @@
                                     </div>
                                 </div>
 
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <select class="form-control" id="measures" name="measure">
+                                            <option>Measures</option>
+                                            <option>sq ft</option>
+                                            <option>m&#178;</option>
+                                        </select>
+                                    </div>
+                                </div>
+
 
                                 {{-- <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
@@ -201,21 +211,36 @@
 
 
 
-                                <div class="col-12 col-md-8 col-lg-12 col-xl-5 d-flex">
 
-                                    <!-- Space Range -->
+                                {{-- <div class="col-12 col-md-5 col-lg-12 col-xl-5 d-flex"> --}}
+                                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                    <!-- Price Range -->
                                     <div class="slider-range">
-                                        {{-- <input type="range" min="1" max="100" value="50" class="slider" name="priceRange" id="priceRange"> --}}
-
-                                        <div data-min="10" data-max="10000" data-unit="" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="10" data-value-max="10000">
+                                        <div data-min="1" data-max="1000000" data-unit="" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="1" data-value-max="1000000">
                                             <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                         </div>
                                         <div>
-                                            <span style="font-size:10px;">Price: </span>
-                                            <span class="range" id="priceRange">10 - 10000</span>
+                                            <span style="font-size:12px;">Price: </span>
+                                            <span class="range" id="priceRange">1 - 1000000</span>
                                             <input id="priceRangeValue" name="priceRange" hidden>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                                    <!-- Space Range -->
+                                    <div class="slider-range">
+                                        <div data-min="1" data-max="5000" data-unit="" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="1" data-value-max="5000">
+                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+                                        </div>
+                                        <div>
+                                            <span style="font-size:12px;">Size: </span>
+                                            <span class="range" id="sizeRange">1 - 5000</span>
+                                            <input id="sizeRangeValue" name="sizeRange" hidden>
                                         </div>
                                     </div>
 
@@ -230,6 +255,7 @@
                                         <div class="range">10 mil - 1300 mil</div>
                                     </div> --}}
                                 </div>
+
 
                                 <div class="col-12 search-form-second-steps">
                                     <div class="row">
@@ -882,7 +908,7 @@
             }
 
         }
-
+        // price range
         var priceRange = document.getElementById("priceRange");
         var priceRangeValue = document.getElementById("priceRangeValue");
         priceRangeValue.value = priceRange.innerHTML;
@@ -891,6 +917,17 @@
             var priceRange = document.getElementById("priceRange");
             var priceRangeValue = document.getElementById("priceRangeValue");
             priceRangeValue.value = priceRange.innerHTML;
+        })
+
+        // size range
+        var sizeRange = document.getElementById("sizeRange");
+        var sizeRangeValue = document.getElementById("sizeRangeValue");
+        sizeRangeValue.value = sizeRange.innerHTML;
+
+        $('#sizeRange').on('DOMSubtreeModified',function(){
+            var sizeRange = document.getElementById("sizeRange");
+            var sizeRangeValue = document.getElementById("sizeRangeValue");
+            sizeRangeValue.value = sizeRange.innerHTML;
         })
 
     </script>

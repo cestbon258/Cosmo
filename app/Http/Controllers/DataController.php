@@ -83,14 +83,15 @@ class DataController extends Controller
 
     public function search(Request $request)
     {
-        // get country and city from district
-        // $district = $_POST['city'];
-        // $districtArray = explode ("|", $district);
-        //
-        // $price = $_POST['priceRange'];
-        // $priceArray = explode (" - ", $price);
-
+        // DB table
         $query = DB::table('houses');
+
+        // get parameters
+        $priceRange = $request->input('priceRange');
+        $priceArray = explode (" - ", $priceRange);
+
+        $sizeRange = $request->input('sizeRange');
+        $sizeArray = explode (" - ", $sizeRange);
 
         $country = $request->input('country');
         $city = $request->input('city');
@@ -98,75 +99,81 @@ class DataController extends Controller
         // search by specific country and All Citites
         if ( !empty($country) && $country != 'All Countries' && $city == 'All Cities') {
             $query->where('country', $country);
-            echo '<pre>'.print_r('$country', 1).'</pre>';
         }
-
-        echo '<pre>'.print_r($country, 1).'</pre>';
-        echo '<pre>'.print_r($city, 1).'</pre>';
-
-
-        // $data = DB::select('SELECT * FROM houses WHERE country !=:country', ['country' => $country]);
-
-
-
-        // echo '<pre>'.print_r($request->country, 1).'</pre>';
-        //
-        //
-        // Search for a user based on their name.
-        // if ($request->has('country') or $request->has('city')) {
-        //     echo "stringing";
-        //
-        //     if ($request->country != "All Countries" or $request->country != "All Cities") {
-        //         $query->where('country', $request->input('country'));
-        //         $query->orwhere('city', $request->input('city'));
-        //     }
-        //
-        //     if ($request->country == "All Countries" or $request->country == "All Cities") {
-        //         echo '<pre>'.print_r('$data', 1).'</pre>';
-        //
-        //         echo "string";
-        //         $query->where('status', '<>', 1);
-        //     }
-        //
-        // }
-        //
-
+        // search by city, ignore country
+        if ( !empty($city) && $city != 'All Cities' ) {
+            $query->where('city', $city);
+        }
+        // search by price range, for getting only property, either one of them not equal to default value, they will run this below logic. Otherwise, will get all properties and projects
+        if ( ($priceArray[0] != 1) || ($priceArray[1] != 1000000) ) {
+            $query->where('price', '>=', $priceArray[0])
+                  ->where('price', '<=', $priceArray[1]);
+        }
+        // search by size range, for getting only property, either one of them not equal to default value, they will run this below logic. Otherwise, will get all properties and projects
+        if ( $sizeArray[0] != 1 || $sizeArray[1] != 5000) {
+            $query->where('size', '>=', $sizeArray[0])
+                  ->where('size', '<=', $sizeArray[1]);
+        }
+        // search by bedroom
         if ($request->has('bedroom')) {
             if ($request->bedroom != "Bedrooms") {
                 $query->where('bedroom', $request->input('bedroom'));
             }
         }
-
+        // search by bathroom
         if ($request->has('bathroom')) {
-            if ($request->bedroom != "Bathrooms") {
+            if ($request->bathroom != "Bathrooms") {
                 $query->where('bathroom', $request->input('bathroom'));
             }
         }
+        // search by measure
+        if ($request->has('measure')) {
+            if ($request->measure != "Measures") {
+                $query->where('measurement', $request->input('measure'));
+            }
+        }
+        // search by keyworkds
+        // $query->where('text', 'like', '%'.$text.'%');
+        $query->where('status', 1)
+              ->orderBy('updated_at', 'desc');
+        $allProperties = $query->get();
 
 
+        // get first image from json
+        foreach ($allProperties as $key => $property) {
+            $picArray = json_decode($property->pictures);
+            $property->pictures = $picArray[0];
+            if ($property->features) {
+                $property->features = "";
+            }
+            if ($property->videos) {
+                $property->videos = json_decode($property->videos);
+            }
+            if ($property->files) {
+                $property->files = json_decode($property->files);
+            }
+            if ($property->description) {
+                $description = json_decode($property->description);
+                $removeTag= str_replace("&nbsp;"," ", $description);
+                $removeTag2 = str_replace(".  "," ", $removeTag);
+                $removeTag3 = str_replace("· "," ", $removeTag2);
+                $property->description = substr(strip_tags($removeTag3), 0, 180);
+            }
+        }
 
-        // $result->where('text', 'like', '%'.$text.'%');
-        $data = $query->get();
-
-        echo '<pre>'.print_r($data, 1).'</pre>';
+        $districts = DB::table('districts')
+            ->get();
 
 
-        // // Search for a user based on their company.
-        // if ($request->has('company')) {
-        //     $user->where('company', $request->input('company'));
-        // }
-        //
-        // // Search for a user based on their city.
-        // if ($request->has('city')) {
-        //     $user->where('city', $request->input('city'));
-        // }
-        //
-        // // Continue for all of the filters.
-        //
-        // // Get the results and return them.
-        // return $user->get();
+        foreach ($districts as $key => $district) {
+            $district->city = json_decode($district->city);
+        }
 
-        // echo '<pre>'.print_r($priceArray, 1).'</pre>';
+        // echo '<pre>'.print_r($districts, 1).'</pre>';
+        // echo '<pre>'.print_r($allProperties, 1).'</pre>';
+
+        return View::make('pages/index')->with(array("properties"=>$allProperties, "districts"=>$districts));
+
 
     }
 
