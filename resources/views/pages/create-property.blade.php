@@ -167,6 +167,11 @@
                                 </div>
                             </div>
 
+                            <div class="form-group mt-3">
+                                <label for="url">VR URL</label>
+                                <input type="text" class="form-control" name="url" autocomplete="off" placeholder="url">
+                            </div>
+
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <div class="form-group">

@@ -120,6 +120,8 @@ class ProjectController extends Controller
 
             $facilities = !empty($_POST['facilities']) ? json_encode($_POST['facilities']) : null;
 
+            $vrURL = !empty($_POST['url']) ? $_POST['url'] : null;
+
             DB::table('houses')
             ->insert(
                     [
@@ -135,6 +137,7 @@ class ProjectController extends Controller
                         'pictures'     => json_encode($imgArray),
                         'videos'       => json_encode($videoArray),
                         'files'        => json_encode($pdfArray),
+                        'vr_url'       => $vrURL,
                         'description'  => json_encode($_POST['description']),
                         'project_type' => 2,
                     ]
@@ -388,6 +391,8 @@ class ProjectController extends Controller
         $pdfJson = !empty($pdfArray) ? json_encode($pdfArray) : null;
         $facilities = !empty($_POST['facilities']) ? json_encode($_POST['facilities']) : null;
 
+        $vrURL = !empty($_POST['url']) ? $_POST['url'] : null;
+
         DB::table('houses')
             ->where('property_code', $propertyCode)
             ->update(
@@ -402,6 +407,7 @@ class ProjectController extends Controller
                     'pictures'     => $imgJson,
                     'videos'       => $videoJson,
                     'files'        => $pdfJson,
+                    'vr_url'       => $vrURL,
                     'description'  => json_encode($_POST['description'])
                 ]
             );

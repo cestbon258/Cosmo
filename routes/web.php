@@ -42,7 +42,6 @@ Route::group(['prefix' => '{locale}'], function () {
 
     Route::get('/search', 'DataController@search')->name('search');
 
-
     Route::group(['middleware' => 'auth'], function () {
 
 

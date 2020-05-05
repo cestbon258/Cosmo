@@ -63,38 +63,39 @@
                 </div>
                 <div class="col-md-5 mb-4">
                     <div class="card" style="height: 100%;">
-                      <div class="card-body">
-                        <h5 class="card-title">{{$property->title}}</h5>
-                        <hr>
-                        <div><h6 style="color:red;">{{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</h6></div>
-                        <hr>
-                        <br>
+                        <div class="card-body">
+                            <h5 class="card-title">{{$property->title}}</h5>
+                            <hr>
+                            <div><h6 style="color:red;">{{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</h6></div>
+                            <hr>
+                            <br>
 
-                        <h6 class="card-info-text">Facilities</h6>
-                        <div class="row">
-                            <div class="col-6 new-tag">
-                                <img src="{{url('img/icons/new.png')}}" alt="">
+                            <h6 class="card-info-text">Facilities</h6>
+                            <div class="row">
+                                <div class="col-6 new-tag">
+                                    <img src="{{url('img/icons/new.png')}}" alt="">
+                                </div>
+                                <div class="col-6 bathroom">
+                                    <img src="{{url('img/icons/bathtub.png')}}" alt="">
+                                    <span>{{$property->bathroom}}</span>
+                                </div>
                             </div>
-                            <div class="col-6 bathroom">
-                                <img src="{{url('img/icons/bathtub.png')}}" alt="">
-                                <span>{{$property->bathroom}}</span>
+
+                            <div class="row">
+                                <div class="col-6 garage">
+                                    <img src="{{url('img/icons/garage.png')}}" alt="">
+                                    <span>{{$property->bedroom}}</span>
+                                </div>
+                                <div class="col-6 space">
+                                    <img src="{{url('img/icons/space.png')}}" alt="">
+                                    <span>{{$property->size}} {{$property->measurement}}</span>
+                                </div>
                             </div>
+                            <br>
                         </div>
 
-                        <div class="row">
-                            <div class="col-6 garage">
-                                <img src="{{url('img/icons/garage.png')}}" alt="">
-                                <span>{{$property->bedroom}}</span>
-                            </div>
-                            <div class="col-6 space">
-                                <img src="{{url('img/icons/space.png')}}" alt="">
-                                <span>{{$property->size}} {{$property->measurement}}</span>
-                            </div>
-                        </div>
-                        <br>
-                      </div>
+                        <a href="#">Request More Info</a>
                     </div>
-
                 </div>
             </div>
         @else
