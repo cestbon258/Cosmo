@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use Mail;
 use Session;
+use App\User;
+use Auth;
+use DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -48,4 +51,45 @@ class MailController extends Controller
 
         return back();
     }
+
+
+    public function request_more(Request $request)
+    {
+        $user = Auth::user();
+
+        $url = $request->propertyURL;
+
+        $data = array(
+            'url' => $url,
+            'email' => $user->email
+        );
+
+        $emailArray = array(
+            'cestbon258@gmail.com'
+            // "angelo@icosmo.co",
+            // "stephen@icosmo.co"
+        );
+
+
+        foreach ($emailArray as $email) {
+            // Mail::send([], [], function($message) use($html, $data) {
+            Mail::send('more-info', $data, function($message) use($data, $email) {
+                $message->to($email)->subject
+                    ('Cosmo - Global Real Estate');
+                $message->from('admin@icosmo.co', 'Cosmo');
+                // $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+            });
+        }
+
+
+        // echo '<pre>'.print_r($test, 1).'</pre>';
+
+        // print_r($user->email);
+        // return back();
+        return response()->json(['url' => $url, 'user' => $user->email]);
+
+    }
+
+
+
 }

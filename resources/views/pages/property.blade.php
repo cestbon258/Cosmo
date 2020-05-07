@@ -94,7 +94,7 @@
                             <br>
                         </div>
 
-                        <a href="#">Request More Info</a>
+                        <button class="requestMore">Request More Info</button>
                     </div>
                 </div>
             </div>
@@ -217,6 +217,28 @@
     </div>
 
     <div style="height:140px;"></div>
+
+    <script type="text/javascript">
+
+
+        $(".requestMore").click(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type:'POST',
+                // dataType: 'JSON',
+                // url:'https://postb.in/1588855925699-7338490695692',
+                url:'{{ route('request_more', app()->getLocale())}}',
+                data:{
+                   _token:'{{csrf_token()}}',
+                   propertyURL: window.location.href
+                },
+                success:function(data){
+                    console.log(data);
+                }
+            });
+    	});
+    </script>
 
     <style>
         video {

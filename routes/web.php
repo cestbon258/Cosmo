@@ -18,6 +18,8 @@ Auth::routes(['verify' => true]);
 
 Route::redirect('/', '/en');
 
+
+
 Route::group(['prefix' => '{locale}'], function () {
 
     Route::get('/', 'DataController@home')->name('/');
@@ -40,10 +42,11 @@ Route::group(['prefix' => '{locale}'], function () {
         return view('pages/disclaimer');
     })->name('disclaimer');
 
-    Route::get('/search', 'DataController@search')->name('search');
+    Route::post('/request-more', 'MailController@request_more')->name('request_more');
 
     Route::group(['middleware' => 'auth'], function () {
 
+        Route::get('/search', 'DataController@search')->name('search');
 
         Route::get('/property-list', 'DataController@property_list')->name('property-list');
         Route::post('/publish-property', 'DataController@publish_property')->name('publish-property');
