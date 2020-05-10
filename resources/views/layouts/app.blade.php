@@ -232,7 +232,7 @@
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <p>
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a href="{{url('/')}}">COSMO Real Estate Limited</a>. All rights reserved
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a href="{{ route('/', app()->getLocale()) }}">COSMO Real Estate Limited</a>. All rights reserved
                         </p>
                     </div>
                 </div>

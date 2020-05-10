@@ -13,10 +13,9 @@ return [
     |
     */
 
-    'home' => 'Home',
-    'about_us' => 'About Us',
-    'contact' => 'Contact',
-    'login' => 'Login',
-    'signup' => 'Sign Up',
-
+    'home' => '主頁',
+    'about_us' => '關於',
+    'contact' => '聯繫我們',
+    'login' => '登錄',
+    'signup' => '註冊帳戶',
 ];

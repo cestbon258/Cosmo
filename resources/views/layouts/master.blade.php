@@ -15,7 +15,7 @@
     <meta name="twitter:image" content="http://icosmo.co/logo/cosmo-logo.jpg">
     <meta name="twitter:card" content="cosmo-logo.jpeg">
     <!-- End social media tag -->
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
@@ -99,7 +99,7 @@
                 <!-- Nav Start -->
                 <div class="classynav">
                     <ul>
-                        <li><a href="{{ route('/', app()->getLocale()) }}">@lang('home.home')</a></li>
+                        <li><a href="{{ route('/', app()->getLocale()) }}">@lang('master.home')</a></li>
                         <!--<li><a href="#">Pages</a>
                         <ul class="dropdown">
                         <li><a href="index.html">Home</a></li>
@@ -120,7 +120,7 @@
         <li><a href="elements.html">Elements</a></li>
             </ul>
         </li>-->
-        <li><a href="{{ route('about-us', app()->getLocale()) }}">@lang('home.about_us')</a></li>
+        <li><a href="{{ route('about-us', app()->getLocale()) }}">@lang('master.about_us')</a></li>
         {{-- <li><a href="listings.html">Properties</a></li>
         <li><a href="blog.html">Blog</a></li> --}}
         <!--<li><a href="#">Mega Menu</a>
@@ -159,20 +159,18 @@
         </ul>
         </div>
         </li>-->
-        <li><a href="{{ route('contact', app()->getLocale()) }}">@lang('home.contact')</a></li>
+        <li><a href="{{ route('contact', app()->getLocale()) }}">@lang('master.contact')</a></li>
         @auth
-            <li><a href="#">My Account</a>
+            <li><a href="#">@lang('master.my_account')</a>
                 <ul class="dropdown">
-                    <li><a href="{{ route('dashboard', app()->getLocale())}}">Dashboard</a></li>
-                    <li><a href="{{ route('profile', app()->getLocale())}}">Profile</a></li>
-                    <li><a href="{{ route('logout', app()->getLocale()) }}">Sign Out</a></li>
-                    {{-- button  --}}
-                    {{-- <li><a href="{{ url('/logout') }}"><button type="button" class="btn btn-outline-light btn-block mt-2">Sign Out</button></a></li> --}}
+                    <li><a href="{{ route('dashboard', app()->getLocale()) }}">@lang('master.dashboard')</a></li>
+                    <li><a href="{{ route('profile', app()->getLocale()) }}">@lang('master.profile')</a></li>
+                    <li><a href="{{ route('logout', app()->getLocale()) }}">@lang('master.signout')</a></li>
                 </ul>
             </li>
         @else
-            <li><a href="{{ route('login', app()->getLocale()) }}">Log In</a></li>
-            <li><a href="{{ route('register', app()->getLocale()) }}">Sign Up</a></li>
+            <li><a href="{{ route('login', app()->getLocale()) }}">@lang('master.login')</a></li>
+            <li><a href="{{ route('register', app()->getLocale()) }}">@lang('master.signup')</a></li>
         @endauth
 
 
@@ -216,14 +214,14 @@
                     <div class="footer-widget-area mb-100">
                         <!-- Widget Title -->
                         <div class="widget-title">
-                            <h6>About Us</h6>
+                            <h6>@lang('master.about_us')</h6>
                         </div>
 
                         {{-- <img src="{{ url('img/bg-img/footer.jpg') }}"> --}}
                         <div class="footer-logo my-4">
                             <img src="{{ url('logo/logo.png') }}">
                         </div>
-                        <p>A real estate service platform specialise in sourcing commercial/residential properties around the world for investors and homebuyers.</p>
+                        <p>@lang('master.footer_description')</p>
                     </div>
                 </div>
 
@@ -232,7 +230,7 @@
                     <div class="footer-widget-area mb-100">
                         <!-- Widget Title -->
                         <div class="widget-title">
-                            <h6>Contact Us</h6>
+                            <h6>@lang('master.contact_us')</h6>
                         </div>
                         {{-- <div class="card text-center" style="width: 9rem;">
                           <img class="card-img-top" src="{{ url('img/icons/qrcode-wechat.jpeg') }}">
@@ -274,18 +272,18 @@
                     <div class="footer-widget-area mb-100">
                         <!-- Widget Title -->
                         <div class="widget-title">
-                            <h6>Useful Links</h6>
+                            <h6>@lang('master.links')</h6>
                         </div>
                         <!-- Nav -->
                         <ul class="useful-links-nav d-flex align-items-center">
-                            <li><a href="{{ route('/', app()->getLocale()) }}">Home</a></li>
-                            <li><a href="{{ route('about-us', app()->getLocale()) }}">About us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Properties</a></li>
-                            <li><a href="{{ route('privacy', app()->getLocale()) }}">Privacy</a></li>
-                            <li><a href="{{ route('terms', app()->getLocale()) }}">Terms and Conditions</a></li>
-                            <li><a href="{{ route('disclaimer', app()->getLocale()) }}">Disclaimer & Liability</a></li>
-                            <li><a href="{{ route('contact', app()->getLocale()) }}">Contact</a></li>
+                            <li><a href="{{ route('/', app()->getLocale()) }}">@lang('master.home')</a></li>
+                            <li><a href="{{ route('about-us', app()->getLocale()) }}">@lang('master.about_us')</a></li>
+                            <li><a href="#">@lang('master.services')</a></li>
+                            <li><a href="#">@lang('master.properties')</a></li>
+                            <li><a href="{{ route('privacy', app()->getLocale()) }}">@lang('master.privacy')</a></li>
+                            <li><a href="{{ route('terms', app()->getLocale()) }}">@lang('master.terms')</a></li>
+                            <li><a href="{{ route('disclaimer', app()->getLocale()) }}">@lang('master.disclaimer')</a></li>
+                            <li><a href="{{ route('contact', app()->getLocale()) }}">@lang('master.contact')</a></li>
 
                         </ul>
                     </div>
@@ -296,7 +294,7 @@
                     <div class="footer-widget-area mb-100">
                         <!-- Widget Title -->
                         <div class="widget-title">
-                            <h6>Featured Properties</h6>
+                            <h6>@lang('master.featured_properties')</h6>
                         </div>
                         <!-- Featured Properties Slides -->
                         <div class="featured-properties-slides owl-carousel">

@@ -5,7 +5,7 @@
     <p>{{ $url }}</p>
 
     <p>Device: Chrome on Windows</p>
-    <p>Verification code: 837654</p>
+    <p>{{ $phone }}</p>
 
     <p>If you did not attempt to sign in to your account, your password may be compromised. Visit https://github.com/settings/admin to create a new, strong password for your GitHub account.</p>
 

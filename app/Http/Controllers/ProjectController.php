@@ -143,6 +143,22 @@ class ProjectController extends Controller
                     ]
                 );
 
+            // assign property id
+            $property = DB::table('houses')
+                ->select('id')
+                ->where('property_code', $property_code)
+                ->first();
+
+            $pid = $property->id;
+            $prefix_str = "PJ-";
+            $property_id = sprintf("%s%08s", $prefix_str,$pid);
+
+            DB::table('houses')
+                ->where('property_code', $property_code)
+                ->update([
+                    'property_id' => $property_id,
+                ]);
+
             Session::flash('status', 'Project has been created successful!');
             Session::flash('alert-class', 'alert-success');
             return back();

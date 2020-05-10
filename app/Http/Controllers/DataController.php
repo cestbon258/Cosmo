@@ -126,10 +126,10 @@ class DataController extends Controller
                 $query->where('bathroom', $request->input('bathroom'));
             }
         }
-        // search by measure
-        if ($request->has('measure')) {
-            if ($request->measure != "Measures") {
-                $query->where('measurement', $request->input('measure'));
+        // search by unit
+        if ($request->has('unit')) {
+            if ($request->unit != "Unit") {
+                $query->where('measurement', $request->input('unit'));
             }
         }
         // search by keyworkds
@@ -463,6 +463,23 @@ class DataController extends Controller
                         'description'=> json_encode($_POST['description'])
                     ]
                 );
+
+            // assign property id
+            $property = DB::table('houses')
+                ->select('id')
+                ->where('property_code', $property_code)
+                ->first();
+
+            $pid = $property->id;
+            $prefix_str = "P-";
+            $property_id = sprintf("%s%08s", $prefix_str,$pid);
+
+            DB::table('houses')
+                ->where('property_code', $property_code)
+                ->update([
+                    'property_id' => $property_id,
+                ]);
+
 
             Session::flash('status', 'Property has been created successful!');
             Session::flash('alert-class', 'alert-success');

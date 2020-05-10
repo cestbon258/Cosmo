@@ -61,13 +61,15 @@ class MailController extends Controller
 
         $data = array(
             'url' => $url,
-            'email' => $user->email
+            'email' => $user->email,
+            'phone' => $user->phone_no
+
         );
 
         $emailArray = array(
-            'cestbon258@gmail.com'
-            // "angelo@icosmo.co",
-            // "stephen@icosmo.co"
+            'cestbon258@gmail.com',
+            'angelo@icosmo.co',
+            'stephen@icosmo.co'
         );
 
 

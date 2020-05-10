@@ -8,10 +8,12 @@
 
 @section('content')
 
+
     <!-- ##### About Content Wrapper Start ##### -->
     <section class="about-content-wrapper section-padding-100">
         <div class="container">
             <div class="row">
+
                 <div class="col-12 col-lg-8">
                     <div class="section-heading text-left wow fadeInUp" data-wow-delay="250ms">
                         <h2>We search for the perfect home</h2>
@@ -21,6 +23,8 @@
                         <img class="wow fadeInUp" data-wow-delay="350ms" src="{{ url('img/bg-img/about.jpg')}}" alt="">
                         {{-- <p class="wow fadeInUp" data-wow-delay="450ms">Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada. Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada feugiat. Praesent malesuada congue magna at finibus. In hac habitasse platea dictumst. Curabitur rhoncus auctor eleifend. Fusce venenatis diam urna, eu pharetra arcu varius ac. Etiam cursus turpis lectus, id iaculis risus tempor id. Phasellus fringilla nisl sed sem scelerisque, eget aliquam magna vehicula.</p> --}}
                     </div>
+                    <button>test</button>
+                    
                 </div>
 
                 <div class="col-12 col-lg-4">

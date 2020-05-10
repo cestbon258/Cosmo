@@ -63,7 +63,7 @@
                     <div class="advanced-search-form">
                         <!-- Search Title -->
                         <div class="search-title">
-                            <p>Search for your home</p>
+                            <p>@lang('index.search_text')</p>
                         </div>
                         <!-- Search Form -->
                         <form action="{{ route('search', app()->getLocale()) }}" method="get" id="advanceSearch">
@@ -80,7 +80,7 @@
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <select class="form-control" onchange="getCities()" id="country" name="country">
-                                            <option>All Countries</option>
+                                            <option>@lang('index.all_countries')</option>
                                             @foreach ($districts as $key => $district)
                                                 <option id="Country-{{$district->country}}"> {{$district->country}} </option>
                                             @endforeach
@@ -91,7 +91,7 @@
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <select class="form-control" id="city" name="city">
-                                            <option>All Cities</option>
+                                            <option>@lang('index.all_cities')</option>
                                             @foreach ($districts as $key => $district)
                                                     <option disabled>--- {{$district->country}} ---</option>
                                                 @foreach ($district->city as $keyy => $value)
@@ -121,7 +121,7 @@
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <select class="form-control" id="bedrooms" name="bedroom">
-                                            <option>Bedrooms</option>
+                                            <option>@lang('index.bedrooms')</option>
                                             <option>0</option>
                                             <option>1</option>
                                             <option>2</option>
@@ -141,7 +141,7 @@
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <select class="form-control" id="bathrooms" name="bathroom">
-                                            <option>Bathrooms</option>
+                                            <option>@lang('index.bathrooms')</option>
                                             <option>0</option>
                                             <option>1</option>
                                             <option>1.5</option>
@@ -159,8 +159,8 @@
 
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
-                                        <select class="form-control" id="measures" name="measure">
-                                            <option>Measures</option>
+                                        <select class="form-control" name="unit">
+                                            <option>@lang('index.unit')</option>
                                             <option>sq ft</option>
                                             <option>m&#178;</option>
                                         </select>
@@ -222,7 +222,7 @@
                                             <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                         </div>
                                         <div>
-                                            <span style="font-size:12px;">Price: </span>
+                                            <span style="font-size:12px;">@lang('index.price'): </span>
                                             <span class="range" id="priceRange">1 - 1000000</span>
                                             <input id="priceRangeValue" name="priceRange" hidden>
                                         </div>
@@ -238,7 +238,7 @@
                                             <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                         </div>
                                         <div>
-                                            <span style="font-size:12px;">Size: </span>
+                                            <span style="font-size:12px;">@lang('index.size'): </span>
                                             <span class="range" id="sizeRange">1 - 5000</span>
                                             <input id="sizeRangeValue" name="sizeRange" hidden>
                                         </div>
@@ -345,7 +345,7 @@
                                     </div>
 
                                     <div class="form-group mb-0">
-                                        <button type="submit" class="btn south-btn">Search</button>
+                                        <button type="submit" class="btn south-btn">@lang('index.search')</button>
                                     </div>
                                 </div>
 
@@ -379,7 +379,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading wow fadeInUp">
-                        <h2>Featured Properties</h2>
+                        <h2>@lang('index.featured_properties')</h2>
                         {{-- <p>Suspendisse dictum enim sit amet libero malesuada feugiat.</p> --}}
                     </div>
                 </div>
@@ -420,7 +420,7 @@
                                         {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
                                         <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
                                         {{-- @auth --}}
-                                            <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">Read More</a>
+                                            <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">@lang('index.read_more')</a>
                                         {{-- @else
                                             <a href="{{ url('login') }}">Read More</a>
                                         @endauth --}}
@@ -480,7 +480,7 @@
                                         {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
                                         <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
                                         {{-- @auth --}}
-                                            <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">Read More</a>
+                                            <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">@lang('index.read_more')</a>
                                         {{-- @else
                                             <a href="{{ url('login') }}">Read More</a>
                                         @endauth --}}
@@ -564,7 +564,7 @@
             <div class="row align-items-center h-100">
                 <div class="col-12">
                     <div class="cta-content text-center">
-                        <h2 class="wow fadeInUp" data-wow-delay="300ms">Are you looking for a place to rent?</h2>
+                        <h2 class="wow fadeInUp" data-wow-delay="300ms">@lang('index.are_you_looking_for')</h2>
                         {{-- <h6 class="wow fadeInUp" data-wow-delay="400ms">Suspendisse dictum enim sit amet libero malesuada feugiat.</h6> --}}
                         {{-- <a href="#" class="btn south-btn mt-50 wow fadeInUp" data-wow-delay="500ms">Search</a> --}}
                     </div>
@@ -641,133 +641,133 @@
             </div> --}}
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Brisbane</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.brisbane')</h4>
                 </div>
                 <img src="{{url('img/gallery/Australia/Brisbane.jpg')}}">
                 <div class="mask">
-                    <h2>Brisbane</h2>
-                    <p><i>An "energetic river town on the way up, with an edgy arts scene, pumping nightlife and great coffee and restaurants”.</i></p>
+                    <h2>@lang('index.brisbane')</h2>
+                    <p><i>@lang('index.brisbane_text')</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Gold Coast</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.gold_coast')</h4>
                 </div>
                 <img src="{{url('img/gallery/Australia/gold-coast.jpg')}}">
                 <div class="mask">
-                    <h2>Gold Coast</h2>
-                    <p><i>Famed for its long sandy beaches, surfing spots and elaborate system of inland canals and waterways.</i></p>
+                    <h2>@lang('index.gold_coast')</h2>
+                    <p><i>@lang('index.gold_coast_text')</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Melbourne</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.melbourne')</h4>
                 </div>
                 <img src="{{url('img/gallery/Australia/melbourne.jpg')}}">
                 <div class="mask">
-                    <h2>melbourne</h2>
-                    <p><i>Compact and diverse, Melbourne and Victoria is a perfect playground for adventurers and wildlife lovers, foodies and residents.</i></p>
+                    <h2>@lang('index.melbourne')</h2>
+                    <p><i>@lang('index.melbourne_text')</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Perth</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.perth')</h4>
                 </div>
                 <img src="{{url('img/gallery/Australia/perth.jpg')}}">
                 <div class="mask">
-                    <h2>Perth</h2>
-                    <p><i>The Perth Cultural Centre occupies its own central precinct, including a theatre, library and the Art Gallery of Western Australia.</i></p>
+                    <h2>@lang('index.perth')</h2>
+                    <p><i>@lang('index.perth_text')</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Sydney</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.sydney')</h4>
                 </div>
                 <img src="{{url('img/gallery/Australia/sydney.jpg')}}">
                 <div class="mask">
-                    <h2>Sydney</h2>
-                    <p>A true melting pot, and one of Australia’s most iconic cities; home to many of the country’s most famous landmarks and with a fascinating history.</p>
+                    <h2>@lang('index.sydney')</h2>
+                    <p>@lang('index.sydney_text')</p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Leeds</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.leeds')</h4>
                 </div>
                 <img src="{{url('img/gallery/UK/leeds.jpg')}}">
                 <div class="mask">
-                    <h2>Leeds</h2>
-                    <p><i>Leeds plays host to world class culture, incredible shopping, stunning architecture and a varied housing stock.</i></p>
+                    <h2>@lang('index.leeds')</h2>
+                    <p><i>@lang('index.leeds_text')</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Liverpool</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.liverpool')</h4>
                 </div>
                 <img src="{{url('img/gallery/UK/liverpool.jpg')}}">
                 <div class="mask">
-                    <h2>Liverpool</h2>
-                    <p><i>A vibrant, growing city with history, architecture, it has a bustling centre, the countryside, the beach and, of course, the Beatles.</i></p>
+                    <h2>@lang('index.liverpool')</h2>
+                    <p><i>@lang('index.liverpool_text')</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">London</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.london')</h4>
                 </div>
                 <img src="{{url('img/gallery/UK/london.jpg')}}">
                 <div class="mask">
-                    <h2>London</h2>
-                    <p><i>London is the most ethnically diverse city in the world due to the UK's history as a global power and its international business focus.</i></p>
+                    <h2>@lang('index.london')</h2>
+                    <p><i>@lang('index.london_text')</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Manchester</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.manchester')</h4>
                 </div>
                 <img src="{{url('img/gallery/UK/manchester.jpg')}}">
                 <div class="mask">
-                    <h2>Manchester</h2>
-                    <p><i>Youthful, diverse, energetic and bursting with character.</i></p>
+                    <h2>@lang('index.manchester')</h2>
+                    <p><i>@lang('index.manchester_text')</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Sheffield</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.sheffield')</h4>
                 </div>
                 <img src="{{url('img/gallery/UK/sheffield.jpg')}}">
                 <div class="mask">
-                    <h2>Sheffield</h2>
-                    <p><i>From a distance and up close, it’s beautiful, our views are spectacular, our food and drink are inspirational.</i></p>
+                    <h2>@lang('index.sheffield')</h2>
+                    <p><i>@lang('index.sheffield_text')</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">LOS ANGELES</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.los_angeles')</h4>
                 </div>
                 <img src="{{url('img/gallery/US/los-angeles.jpg')}}">
                 <div class="mask">
-                    <h2>LOS ANGELES</h2>
-                    <p><i>Eternal sunshine, beautiful beaches, luxurious living, and endless culture.</i></p>
+                    <h2>@lang('index.los_angeles')</h2>
+                    <p><i>@lang('index.los_angeles_text')</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
                 <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">Miami</h4>
+                    <h4 style="color:white;" class="text-uppercase">@lang('index.miami')</h4>
                 </div>
                 <img src="{{url('img/gallery/US/miami.jpg')}}">
                 <div class="mask">
-                    <h2>Miami</h2>
-                    <p><i>A city with its amazing cultural spots and breathtaking beaches, to its varied cuisine and wide assortment of nightlife and entertainment options.</i></p>
+                    <h2>@lang('index.miami')</h2>
+                    <p><i>@lang('index.miami_text')</i></p>
                     {{-- <a href="#" class="info">Read More</a> --}}
                 </div>
             </div>

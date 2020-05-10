@@ -92,9 +92,15 @@
                                 </div>
                             </div>
                             <br>
+                            <div class="row">
+                                <div class="col-6 col-md-6">
+                                    <button class="requestMore request-more-btn" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info</button>
+                                </div>
+                                <div class="col-6 col-md-6"></div>
+                            </div>
+
                         </div>
 
-                        <button class="requestMore">Request More Info</button>
                     </div>
                 </div>
             </div>
@@ -146,6 +152,13 @@
                         <h6 class="card-info-text">Features</h6>
                         <div><p>{!!html_entity_decode($property->features)!!}</p></div>
                         <br>
+                        
+                        <div class="row">
+                            <div class="col-6 col-md-6">
+                                <button class="requestMore request-more-btn" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info</button>
+                            </div>
+                            <div class="col-6 col-md-6"></div>
+                        </div>
                       </div>
                     </div>
 
@@ -278,6 +291,21 @@
             border: 0;
             width: 100%;
             height: 500px;
+        }
+
+
+        .request-more-btn.active, .request-more-btn:hover, .request-more-btn:focus {
+            color: #ffffff;
+            background-color: #000000;
+        }
+
+        .request-more-btn {
+            color: #ffffff;
+            font-size: 10px;
+            padding: 4px;
+            background-color: #947054;
+            border-radius: 0;
+            text-transform: uppercase;
         }
     </style>
 

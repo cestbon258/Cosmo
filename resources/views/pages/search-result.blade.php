@@ -115,8 +115,8 @@
 
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
-                                        <select class="form-control" id="measures" name="measure">
-                                            <option>Measures</option>
+                                        <select class="form-control" name="unit">
+                                            <option>Unit</option>
                                             <option>sq ft</option>
                                             <option>m&#178;</option>
                                         </select>
