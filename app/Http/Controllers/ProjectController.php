@@ -216,7 +216,7 @@ class ProjectController extends Controller
             Storage::disk('public')->deleteDirectory('projects/'.$_POST['property']);
         }
 
-        return redirect('property-list')->with('status', 'The project has been deleted');
+        return back()->with('status', 'The project has been deleted');
 
     }
 

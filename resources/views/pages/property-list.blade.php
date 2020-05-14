@@ -31,6 +31,7 @@
                                 <th>Date Modified</th>
                                 <th>Is Public</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,35 +64,40 @@
                                         @if ($property->project_type == 1)
                                             <a href="{{ route('edit-property', [app()->getLocale(), $property->property_code]) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
 
-                                            <a href="{{ route('delete-property', app()->getLocale()) }}"
-                                                onclick="event.preventDefault();
-                                                document.getElementById('pid-{{$property->id}}').submit();">
-                                                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
-                                            </a>
-
-                                            <form id="pid-{{$property->id}}" action="{{ route('delete-property', app()->getLocale()) }}" method="POST" style="display: none;">
-                                                @csrf
-                                                <input name="property" value="{{$property->property_code}}" hidden>
-                                            </form>
                                         @else
                                             <a href="{{ route('edit-project', [app()->getLocale(), $property->property_code]) }}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
-
-                                            <a href="{{ route('delete-project', app()->getLocale()) }}"
-                                                onclick="event.preventDefault();
-                                                document.getElementById('pid-{{$property->id}}').submit();">
-                                                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
-                                            </a>
-
-                                            <form id="pid-{{$property->id}}" action="{{ route('delete-project', app()->getLocale()) }}" method="POST" style="display: none;">
-                                                @csrf
-                                                <input name="property" value="{{$property->property_code}}" hidden>
-                                            </form>
                                         @endif
 
                                         {{-- <a href="property/{{$property->property_code}}"><button type="button" class="btn btn-outline-danger btn-sm" >Delete</button></a> --}}
 
+                                    </td>
+                                    <td>
+                                        @if ($property->project_type == 1)
 
+                                            {{-- <a href="{{ route('delete-property', app()->getLocale()) }}"
+                                                onclick="event.preventDefault();
+                                                document.getElementById('pid-{{$property->id}}').submit();">
+                                                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+                                            </a> --}}
 
+                                            <form id="pid-{{$property->id}}" action="{{ route('delete-property', app()->getLocale()) }}" method="POST" class="delete-form">
+                                                @csrf
+                                                <input name="property" value="{{$property->property_code}}" hidden>
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button></td>
+                                            </form>
+                                        @else
+                                            {{-- <a href="{{ route('delete-project', app()->getLocale()) }}"
+                                                onclick="event.preventDefault();
+                                                document.getElementById('pid-{{$property->id}}').submit();">
+                                                <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+                                            </a> --}}
+
+                                            <form id="pid-{{$property->id}}" action="{{ route('delete-project', app()->getLocale()) }}" method="POST" class="delete-form">
+                                                @csrf
+                                                <input name="property" value="{{$property->property_code}}" hidden>
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button></td>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -102,33 +108,14 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Warning</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Confrim to delete</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
+
 
     $(document).ready(function() {
         $('#propert-table').DataTable({
             "columnDefs": [ {
-                  "targets": [1, 4, 5],
+                  "targets": [1, 4, 5, 6, 7],
                   "orderable": false,
             } ],
             // "responsive": true,
@@ -136,7 +123,18 @@
             // "select": true
         });
 
+
+        $( ".delete-form" ).submit(function( event ) {
+            event.preventDefault();
+            if (confirm('Are you sure you want to delete this property/project?')){
+                this.submit();
+            }
+        });
+
+
     } );
+
+
 
 
 

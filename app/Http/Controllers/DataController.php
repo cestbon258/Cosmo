@@ -597,6 +597,7 @@ class DataController extends Controller
 
     public function delete_property()
     {
+
         $user = Auth::user();
         if ( Auth::check() ){
 
@@ -608,7 +609,10 @@ class DataController extends Controller
             Storage::disk('public')->deleteDirectory('properties/'.$_POST['property']);
         }
 
-        return redirect('property-list')->with('status', 'The property has been deleted', 'alert-class', 'alert-success');
+        Session::flash('status', 'The property has been deleted');
+        Session::flash('alert-class', 'alert-success');
+
+        return back();
 
     }
 

@@ -152,7 +152,7 @@
                         <h6 class="card-info-text">Features</h6>
                         <div><p>{!!html_entity_decode($property->features)!!}</p></div>
                         <br>
-                        
+
                         <div class="row">
                             <div class="col-6 col-md-6">
                                 <button class="requestMore request-more-btn" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info</button>
@@ -300,6 +300,7 @@
         }
 
         .request-more-btn {
+            border: 0px;
             color: #ffffff;
             font-size: 10px;
             padding: 4px;

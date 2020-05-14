@@ -92,6 +92,7 @@
                                     <div class="form-group">
                                         <select class="form-control" id="city" name="city">
                                             <option>@lang('index.all_cities')</option>
+
                                             @foreach ($districts as $key => $district)
                                                     <option disabled>--- {{$district->country}} ---</option>
                                                 @foreach ($district->city as $keyy => $value)
@@ -117,6 +118,15 @@
                                     @endforeach --}}
 
                                 </div>
+
+
+
+
+
+
+
+
+
 
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
@@ -895,8 +905,6 @@
     <script>
 
         var districts = {!! json_encode($districts) !!};
-
-
         function getCities (){
             var selectedCountry = document.getElementById("country").value;
 
@@ -905,8 +913,8 @@
                     console.log(districts[i]['city']);
                 }
             }
-
         }
+
         // price range
         var priceRange = document.getElementById("priceRange");
         var priceRangeValue = document.getElementById("priceRangeValue");
