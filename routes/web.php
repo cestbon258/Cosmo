@@ -24,6 +24,8 @@ Route::group(['prefix' => '{locale}'], function () {
 
     Route::get('/', 'DataController@home')->name('/');
 
+    Route::get('/property/{propertyCode}', 'DataController@property')->name('property');
+
     Route::get('/about-us', 'DataController@about_us')->name('about-us');
 
     Route::get('/contact', function () {
@@ -42,6 +44,8 @@ Route::group(['prefix' => '{locale}'], function () {
         return view('pages/disclaimer');
     })->name('disclaimer');
 
+
+
     Route::post('/request-more', 'MailController@request_more')->name('request_more');
 
     Route::group(['middleware' => 'auth'], function () {
@@ -51,7 +55,6 @@ Route::group(['prefix' => '{locale}'], function () {
         Route::get('/property-list', 'DataController@property_list')->name('property-list');
         Route::post('/publish-property', 'DataController@publish_property')->name('publish-property');
 
-        Route::get('/property/{propertyCode}', 'DataController@property')->name('property');
 
 
         // Route::get('/property', 'DataController@property')->name('property');

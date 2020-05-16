@@ -35,43 +35,19 @@
 
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
-                                        <select class="form-control" id="country" name="country">
-                                            <option>All Countries</option>
+                                        <select class="form-control" onchange="getCities()" id="country" name="country">
+                                            <option>@lang('index.all_countries')</option>
                                             @foreach ($districts as $key => $district)
-                                                <option id="Country-{{$district->country}}"> {{$district->country}} </option>
+                                                <option value="{{$district->country}}"> {{$district->country}} </option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <select class="form-control" id="city" name="city">
-                                            <option>All Cities</option>
-                                            @foreach ($districts as $key => $district)
-                                                    <option disabled>--- {{$district->country}} ---</option>
-                                                @foreach ($district->city as $keyy => $value)
-                                                    <option value="{{$value}}">{{$value}}</option>
-                                                @endforeach
-                                            @endforeach
                                         </select>
                                     </div>
-{{--
-                                    @foreach ($districts as $key => $district)
-
-                                    <div class="form-group" id="{{$district->country}}-City" style="display:none;">
-
-
-                                        <select class="form-control" id="city" name="city" >
-                                            <option>All Cities</option>
-                                                    <option disabled>--- {{$district->country}} ---</option>
-                                                @foreach ($district->city as $keyy => $value)
-                                                    <option value="{{$value}}|{{$district->country}}">{{$value}}</option>
-                                                @endforeach
-                                        </select>
-                                    </div>
-                                    @endforeach --}}
-
                                 </div>
 
                                 <div class="col-12 col-md-4 col-lg-3">
@@ -124,6 +100,13 @@
                                 </div>
 
 
+                                <div class="col-12 col-md-5 col-lg-12 col-xl-5 d-flex">
+                                    <div class="form-group">
+                                        <label for="formControlRange">Example Range input</label>
+                                        <input type="range" class="form-control-range" id="formControlRange">
+                                    </div>
+                                </div>
+
                                 {{-- <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <select class="form-control" id="catagories">
@@ -163,54 +146,6 @@
                                     </div>
                                 </div> --}}
 
-
-
-
-
-
-                                {{-- <div class="col-12 col-md-5 col-lg-12 col-xl-5 d-flex"> --}}
-                                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                    <!-- Price Range -->
-                                    <div class="slider-range">
-                                        <div data-min="1" data-max="1000000" data-unit="" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="1" data-value-max="1000000">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        </div>
-                                        <div>
-                                            <span style="font-size:12px;">Price: </span>
-                                            <span class="range" id="priceRange">1 - 1000000</span>
-                                            <input id="priceRangeValue" name="priceRange" hidden>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                    <!-- Space Range -->
-                                    <div class="slider-range">
-                                        <div data-min="1" data-max="5000" data-unit="" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="1" data-value-max="5000">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        </div>
-                                        <div>
-                                            <span style="font-size:12px;">Size: </span>
-                                            <span class="range" id="sizeRange">1 - 5000</span>
-                                            <input id="sizeRangeValue" name="sizeRange" hidden>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- Distance Range -->
-                                    {{-- <div class="slider-range">
-                                        <div data-min="10" data-max="1300" data-unit=" mil" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="10" data-value-max="1300">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        </div>
-                                        <div class="range">10 mil - 1300 mil</div>
-                                    </div> --}}
-                                </div>
 
 
                                 <div class="col-12 search-form-second-steps">
@@ -457,27 +392,45 @@
     </section>
 
     <script>
-        // price range
-        var priceRange = document.getElementById("priceRange");
-        var priceRangeValue = document.getElementById("priceRangeValue");
-        priceRangeValue.value = priceRange.innerHTML;
+        var districts = {!! json_encode($districts) !!};
 
-        $('#priceRange').on('DOMSubtreeModified',function(){
-            var priceRange = document.getElementById("priceRange");
-            var priceRangeValue = document.getElementById("priceRangeValue");
-            priceRangeValue.value = priceRange.innerHTML;
-        })
+        var cityList = document.getElementById("city");
+        var city = new Option('All Cities', 'All Cities');
+        cityList.options.add(city);
 
-        // size range
-        var sizeRange = document.getElementById("sizeRange");
-        var sizeRangeValue = document.getElementById("sizeRangeValue");
-        sizeRangeValue.value = sizeRange.innerHTML;
+        function getCities (){
+            var selectedCountry = document.getElementById("country").value;
+            var cityList = document.getElementById("city");
 
-        $('#sizeRange').on('DOMSubtreeModified',function(){
-            var sizeRange = document.getElementById("sizeRange");
-            var sizeRangeValue = document.getElementById("sizeRangeValue");
-            sizeRangeValue.value = sizeRange.innerHTML;
-        })
+
+            for (var i = 0; i < districts.length; i++) {
+                if (selectedCountry == districts[i]['country']) {
+                    // console.log(districts[i]['city']);
+                    var citiesArray = districts[i]['city'];
+
+                    var checkExist = citiesArray.includes("All Cities");
+                    if (!checkExist) {
+                        citiesArray.unshift("All Cities");
+                    }
+
+                    while (cityList.options.length) {
+                        cityList.remove(0);
+                    }
+
+                    for (i = 0; i < citiesArray.length; i++) {
+                        var city = new Option(citiesArray[i], citiesArray[i]);
+                        cityList.options.add(city);
+                    }
+                } else {
+                    while (cityList.options.length) {
+                        cityList.remove(0);
+                    }
+
+                    var city = new Option('All Cities', 'All Cities');
+                    cityList.options.add(city);
+                }
+            }
+        }
 
         function scrollWin() {
             // window.scrollTo(0, 600);
@@ -488,9 +441,6 @@
     </script>
 
     <style>
-        .nice-select .list {
-            overflow-y: auto;
-            height: 250px;
-        }
+
     </style>
 @stop

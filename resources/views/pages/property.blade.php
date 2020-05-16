@@ -6,6 +6,33 @@
     <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
 @stop
 
+<head>
+    <!-- Starts social media tag -->
+    @if ($property->project_type == 1)
+        <meta property="og:title" content="COSMO Real Estate Limited - {{$property->title}} / {{$property->address}}">
+        <meta property="og:description" content="{{$property->shortDesc}}...">
+        <meta name="image" property="og:image" content="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures[0])}}">
+
+        <meta property="og:url" content="{{ route('property', [app()->getLocale(), $property->property_code]) }}">
+        <meta name="twitter:title" content="COSMO Real Estate Limited - {{$property->title}} / {{$property->address}}">
+        <meta name="twitter:description" content="{{$property->shortDesc}}...">
+        <meta name="twitter:image" content="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures[0])}}">
+        <meta name="twitter:card" content="{{$property->pictures[0]}}">
+    @else
+        <meta property="og:title" content="COSMO Real Estate Limited - {{$property->title}} / {{$property->address}}">
+        <meta property="og:description" content="{{$property->shortDesc}}...">
+        <meta name="image" property="og:image" content="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures[0])}}">
+
+        <meta property="og:url" content="{{ route('property', [app()->getLocale(), $property->property_code]) }}">
+        <meta name="twitter:title" content="COSMO Real Estate Limited - {{$property->title}} / {{$property->address}}">
+        <meta name="twitter:description" content="{{$property->shortDesc}}...">
+        <meta name="twitter:image" content="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures[0])}}">
+        <meta name="twitter:card" content="{{$property->pictures[0]}}">
+    @endif
+    <!-- End social media tag -->
+</head>
+
+
 @section('content')
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> --}}
 
@@ -66,8 +93,10 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$property->title}}</h5>
                             <hr>
+                            @auth
                             <div><h6 style="color:red;">{{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</h6></div>
                             <hr>
+                            @endauth
                             <br>
 
                             <h6 class="card-info-text">Facilities</h6>
@@ -92,12 +121,14 @@
                                 </div>
                             </div>
                             <br>
+                            @auth
                             <div class="row">
                                 <div class="col-6 col-md-6">
                                     <button class="requestMore request-more-btn" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info</button>
                                 </div>
                                 <div class="col-6 col-md-6"></div>
                             </div>
+                            @endauth
 
                         </div>
 
@@ -152,13 +183,14 @@
                         <h6 class="card-info-text">Features</h6>
                         <div><p>{!!html_entity_decode($property->features)!!}</p></div>
                         <br>
-
+                        @auth
                         <div class="row">
                             <div class="col-6 col-md-6">
                                 <button class="requestMore request-more-btn" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info</button>
                             </div>
                             <div class="col-6 col-md-6"></div>
                         </div>
+                        @endauth
                       </div>
                     </div>
 
@@ -166,7 +198,7 @@
             </div>
         @endif
 
-
+        @auth
         @if ( !empty($property->videos) )
             <div class="card mt-3">
                 <h5 class="card-header">Videos</h5>
@@ -186,6 +218,7 @@
             </div>
             <br>
         @endif
+        @endauth
 
         @if ( !empty($property->description) )
             <div class="card mt-3">
@@ -200,7 +233,7 @@
             <br>
         @endif
 
-
+        @auth
         @if ( !empty($property->files) )
             <div class="card mt-3">
                 <h5 class="card-header">Brochure</h5>
@@ -225,6 +258,7 @@
             </div>
             <br>
         @endif
+        @endauth
 
 
     </div>

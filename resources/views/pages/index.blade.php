@@ -5,6 +5,18 @@
 @section('specificScript')
     <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
 @stop
+<head>
+    <!-- Starts social media tag -->
+    <meta property="og:title" content="COSMO Real Estate Limited">
+    <meta property="og:description" content="Your one-stop overseas property investments management platform">
+    <meta name="image" property="og:image" content="http://icosmo.co/logo/cosmo-logo.jpg">
+    <meta property="og:url" content="http://icosmo.co">
+    <meta name="twitter:title" content="COSMO Real Estate Limited ">
+    <meta name="twitter:description" content="Your one-stop overseas property investments management platform">
+    <meta name="twitter:image" content="http://icosmo.co/logo/cosmo-logo.jpg">
+    <meta name="twitter:card" content="cosmo-logo.jpeg">
+    <!-- End social media tag -->
+</head>
 
 @section('content')
 
@@ -82,50 +94,18 @@
                                         <select class="form-control" onchange="getCities()" id="country" name="country">
                                             <option>@lang('index.all_countries')</option>
                                             @foreach ($districts as $key => $district)
-                                                <option id="Country-{{$district->country}}"> {{$district->country}} </option>
+                                                <option value="{{$district->country}}"> {{$district->country}} </option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <select class="form-control" id="city" name="city">
-                                            <option>@lang('index.all_cities')</option>
-
-                                            @foreach ($districts as $key => $district)
-                                                    <option disabled>--- {{$district->country}} ---</option>
-                                                @foreach ($district->city as $keyy => $value)
-                                                    <option value="{{$value}}">{{$value}}</option>
-                                                @endforeach
-                                            @endforeach
+                                            <option> All Cities </option>
                                         </select>
                                     </div>
-{{--
-                                    @foreach ($districts as $key => $district)
-
-                                    <div class="form-group" id="{{$district->country}}-City" style="display:none;">
-
-
-                                        <select class="form-control" id="city" name="city" >
-                                            <option>All Cities</option>
-                                                    <option disabled>--- {{$district->country}} ---</option>
-                                                @foreach ($district->city as $keyy => $value)
-                                                    <option value="{{$value}}|{{$district->country}}">{{$value}}</option>
-                                                @endforeach
-                                        </select>
-                                    </div>
-                                    @endforeach --}}
-
                                 </div>
-
-
-
-
-
-
-
-
 
 
                                 <div class="col-12 col-md-4 col-lg-3">
@@ -177,6 +157,13 @@
                                     </div>
                                 </div>
 
+                                <div class="col-12 col-md-5 col-lg-12 col-xl-5 d-flex">
+                                    <div class="form-group">
+                                        <label for="formControlRange"><span id="priceText"></span></label>
+                                        <input type="range" class="form-control-range" min="0" max="10000" value="0" step="5000" id="priceRange">
+                                    </div>
+                                </div>
+
 
                                 {{-- <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
@@ -223,48 +210,6 @@
 
 
                                 {{-- <div class="col-12 col-md-5 col-lg-12 col-xl-5 d-flex"> --}}
-                                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                    <!-- Price Range -->
-                                    <div class="slider-range">
-                                        <div data-min="1" data-max="1000000" data-unit="" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="1" data-value-max="1000000">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        </div>
-                                        <div>
-                                            <span style="font-size:12px;">@lang('index.price'): </span>
-                                            <span class="range" id="priceRange">1 - 1000000</span>
-                                            <input id="priceRangeValue" name="priceRange" hidden>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-                                    <!-- Space Range -->
-                                    <div class="slider-range">
-                                        <div data-min="1" data-max="5000" data-unit="" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="1" data-value-max="5000">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        </div>
-                                        <div>
-                                            <span style="font-size:12px;">@lang('index.size'): </span>
-                                            <span class="range" id="sizeRange">1 - 5000</span>
-                                            <input id="sizeRangeValue" name="sizeRange" hidden>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- Distance Range -->
-                                    {{-- <div class="slider-range">
-                                        <div data-min="10" data-max="1300" data-unit=" mil" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="10" data-value-max="1300">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        </div>
-                                        <div class="range">10 mil - 1300 mil</div>
-                                    </div> --}}
-                                </div>
 
 
                                 <div class="col-12 search-form-second-steps">
@@ -417,14 +362,28 @@
                                             <p style="font-size:16px;">{{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
                                         </div>
                                     @endauth
+
+                                    <div>
+
+                                    </div>
                                 </div>
+
+                                <div class="meida-buttons">
+                                    <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i></a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
+                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a> --}}
+                                </div>
+
                                 <!-- Property Content -->
                                 <div class="property-content">
+
                                     {{-- @auth --}}
                                         <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
                                     {{-- @else
                                         <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
                                     @endauth --}}
+
                                     <div style="height:80px;"><p class="location"><img src="{{ url('img/icons/location.png') }}" alt="">{{$property->address}}</p></div>
                                     <div style="height: 120px;">
                                         {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
@@ -478,6 +437,14 @@
                                         </div>
                                     @endauth --}}
                                 </div>
+
+                                <div class="meida-buttons">
+                                    <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i></a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
+                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a> --}}
+                                </div>
+
                                 <!-- Property Content -->
                                 <div class="property-content">
                                     {{-- @auth --}}
@@ -905,37 +872,80 @@
     <script>
 
         var districts = {!! json_encode($districts) !!};
+
+        var cityList = document.getElementById("city");
+        var city = new Option('All Cities', 'All Cities');
+        cityList.options.add(city);
+
         function getCities (){
             var selectedCountry = document.getElementById("country").value;
+            var cityList = document.getElementById("city");
+
 
             for (var i = 0; i < districts.length; i++) {
                 if (selectedCountry == districts[i]['country']) {
-                    console.log(districts[i]['city']);
+                    // console.log(districts[i]['city']);
+                    var citiesArray = districts[i]['city'];
+
+                    var checkExist = citiesArray.includes("All Cities");
+                    if (!checkExist) {
+                        citiesArray.unshift("All Cities");
+                    }
+
+                    while (cityList.options.length) {
+                        cityList.remove(0);
+                    }
+
+                    for (i = 0; i < citiesArray.length; i++) {
+                        var city = new Option(citiesArray[i], citiesArray[i]);
+                        cityList.options.add(city);
+                    }
+                } else {
+                    while (cityList.options.length) {
+                        cityList.remove(0);
+                    }
+
+                    var city = new Option('All Cities', 'All Cities');
+                    cityList.options.add(city);
                 }
             }
         }
 
-        // price range
-        var priceRange = document.getElementById("priceRange");
-        var priceRangeValue = document.getElementById("priceRangeValue");
-        priceRangeValue.value = priceRange.innerHTML;
 
-        $('#priceRange').on('DOMSubtreeModified',function(){
-            var priceRange = document.getElementById("priceRange");
-            var priceRangeValue = document.getElementById("priceRangeValue");
-            priceRangeValue.value = priceRange.innerHTML;
-        })
+        var priceSlider = document.getElementById("priceRange");
+        var priceText = document.getElementById("priceText");
+        priceText.innerHTML = priceSlider.value;
 
-        // size range
-        var sizeRange = document.getElementById("sizeRange");
-        var sizeRangeValue = document.getElementById("sizeRangeValue");
-        sizeRangeValue.value = sizeRange.innerHTML;
+        priceSlider.oninput = function() {
+            priceText.innerHTML = this.value;
+        }
 
-        $('#sizeRange').on('DOMSubtreeModified',function(){
-            var sizeRange = document.getElementById("sizeRange");
-            var sizeRangeValue = document.getElementById("sizeRangeValue");
-            sizeRangeValue.value = sizeRange.innerHTML;
-        })
+
+        // // price range
+        // var priceRange = document.getElementById("priceRange");
+        // var priceRangeValue = document.getElementById("priceRangeValue");
+        // priceRangeValue.value = priceRange.innerHTML;
+        //
+        // $('#priceRange').on('DOMSubtreeModified',function(){
+        //     var priceRange = document.getElementById("priceRange");
+        //     var priceRangeValue = document.getElementById("priceRangeValue");
+        //     priceRangeValue.value = priceRange.innerHTML;
+        // })
+        //
+        // // size range
+        // var sizeRange = document.getElementById("sizeRange");
+        // var sizeRangeValue = document.getElementById("sizeRangeValue");
+        // sizeRangeValue.value = sizeRange.innerHTML;
+        //
+        // $('#sizeRange').on('DOMSubtreeModified',function(){
+        //     var sizeRange = document.getElementById("sizeRange");
+        //     var sizeRangeValue = document.getElementById("sizeRangeValue");
+        //     sizeRangeValue.value = sizeRange.innerHTML;
+        // })
+
+
+
+
 
     </script>
     <style>
@@ -944,12 +954,6 @@
             width: 100%;
             object-fit: fill;
         }
-
-        .nice-select .list {
-            overflow-y: auto;
-            height: 250px;
-        }
-
 
         .centered {
             position: absolute;
@@ -999,5 +1003,27 @@
             opacity:.4 !important;
         }
 
+        .meida-buttons {
+            position: absolute;
+            right: 0px;
+            background-color: lightgray;
+        }
+        .meida-buttons a {
+            text-align: center;
+            padding: 0 4px;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 20px;
+        }
+        .meida-buttons a:hover {
+            color: #000;
+        }
+
+        /* Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) {
+            #shareToWP {
+                display: none;
+            }
+        }
     </style>
 @stop

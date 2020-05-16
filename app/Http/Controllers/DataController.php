@@ -87,15 +87,16 @@ class DataController extends Controller
         $query = DB::table('houses');
 
         // get parameters
-        $priceRange = $request->input('priceRange');
-        $priceArray = explode (" - ", $priceRange);
-
-        $sizeRange = $request->input('sizeRange');
-        $sizeArray = explode (" - ", $sizeRange);
+        // $priceRange = $request->input('priceRange');
+        // $priceArray = explode (" - ", $priceRange);
+        //
+        // $sizeRange = $request->input('sizeRange');
+        // $sizeArray = explode (" - ", $sizeRange);
 
         $country = $request->input('country');
         $city = $request->input('city');
-
+        echo '<pre>'.print_r($country, 1).'</pre>';
+        echo '<pre>'.print_r($city, 1).'</pre>';
         // search by specific country and All Citites
         if ( !empty($country) && $country != 'All Countries' && $city == 'All Cities') {
             $query->where('country', $country);
@@ -105,15 +106,15 @@ class DataController extends Controller
             $query->where('city', $city);
         }
         // search by price range, for getting only property, either one of them not equal to default value, they will run this below logic. Otherwise, will get all properties and projects
-        if ( ($priceArray[0] != 1) || ($priceArray[1] != 1000000) ) {
-            $query->where('price', '>=', $priceArray[0])
-                  ->where('price', '<=', $priceArray[1]);
-        }
+        // if ( ($priceArray[0] != 1) || ($priceArray[1] != 1000000) ) {
+        //     $query->where('price', '>=', $priceArray[0])
+        //           ->where('price', '<=', $priceArray[1]);
+        // }
         // search by size range, for getting only property, either one of them not equal to default value, they will run this below logic. Otherwise, will get all properties and projects
-        if ( $sizeArray[0] != 1 || $sizeArray[1] != 5000) {
-            $query->where('size', '>=', $sizeArray[0])
-                  ->where('size', '<=', $sizeArray[1]);
-        }
+        // if ( $sizeArray[0] != 1 || $sizeArray[1] != 5000) {
+        //     $query->where('size', '>=', $sizeArray[0])
+        //           ->where('size', '<=', $sizeArray[1]);
+        // }
         // search by bedroom
         if ($request->has('bedroom')) {
             if ($request->bedroom != "Bedrooms") {
@@ -170,7 +171,7 @@ class DataController extends Controller
         }
 
         // echo '<pre>'.print_r($districts, 1).'</pre>';
-        // echo '<pre>'.print_r($allProperties, 1).'</pre>';
+        echo '<pre>'.print_r($allProperties, 1).'</pre>';
 
         return View::make('pages/search-result')->with(array("properties"=>$allProperties, "districts"=>$districts));
 
@@ -552,6 +553,13 @@ class DataController extends Controller
         }
         if ($myProperty->files) {
             $myProperty->files = json_decode($myProperty->files);
+        }
+
+        if ($myProperty->description) {
+           $removeTag= str_replace("&nbsp;"," ", $myProperty->description);
+           $removeTag2 = str_replace(".  "," ", $removeTag);
+           $removeTag3 = str_replace("· "," ", $removeTag2);
+           $myProperty->shortDesc = substr(strip_tags($removeTag3), 0, 180);
         }
 
         // echo '<pre>'.print_r($myProperty, 1).'</pre>';

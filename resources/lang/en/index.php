@@ -17,7 +17,7 @@ return [
     'all_countries' => 'All Countries',
     'all_cities' => 'All Cities',
     'bedrooms' => 'Bedrooms',
-    'bathrooms' => 'Bedrooms',
+    'bathrooms' => 'Bathrooms',
     'unit' => 'Unit',
     'price' => 'Price',
     'size' => 'Size',
