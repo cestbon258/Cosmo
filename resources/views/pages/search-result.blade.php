@@ -100,12 +100,24 @@
                                 </div>
 
 
-                                <div class="col-12 col-md-5 col-lg-12 col-xl-5 d-flex">
-                                    <div class="form-group">
-                                        <label for="formControlRange">Example Range input</label>
-                                        <input type="range" class="form-control-range" id="formControlRange">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-8 col-sm-12 col-lg-8 col-xl-8 d-flex">
+                                            <div class="form-group" style="width:100%;">
+                                                <input type="range" class="slider" min="0" max="10000000" value="0" step="5000" id="priceRange" name="price">
+                                                <label class="mt-1" for="formControlRange"><small>Price: </small><span id="priceText"></span></label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex">
+                                            <div class="form-group" style="width:100%;">
+                                                <input type="range" class="slider" min="0" max="10000" value="0" step="50" id="sizeRange" name="size">
+                                                <label class="mt-1" for="formControlRange"><small>Size: </small><span id="sizeText"></span></label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
 
                                 {{-- <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
@@ -286,6 +298,14 @@
                                         </div>
                                     @endauth
                                 </div>
+
+                                <div class="meida-buttons">
+                                    <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i></a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
+                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a> --}}
+                                </div>
+
                                 <!-- Property Content -->
                                 <div class="property-content">
                                     {{-- @auth --}}
@@ -346,6 +366,14 @@
                                         </div>
                                     @endauth --}}
                                 </div>
+
+                                <div class="meida-buttons">
+                                    <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i></a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
+                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a> --}}
+                                </div>
+                                
                                 <!-- Property Content -->
                                 <div class="property-content">
                                     {{-- @auth --}}
@@ -429,6 +457,40 @@
                     var city = new Option('All Cities', 'All Cities');
                     cityList.options.add(city);
                 }
+            }
+        }
+
+        // Price range
+        var priceSlider = document.getElementById("priceRange");
+        var priceText = document.getElementById("priceText");
+        if (priceSlider.value == 0) {
+            priceText.innerHTML = "Any";
+        } else {
+            priceText.innerHTML = priceSlider.value;
+        }
+
+        priceSlider.oninput = function() {
+            if (this.value == 0) {
+                priceText.innerHTML = "Any";
+            } else {
+                priceText.innerHTML = new Intl.NumberFormat().format(this.value);
+            }
+        }
+
+        // Size range
+        var sizeSlider = document.getElementById("sizeRange");
+        var sizeText = document.getElementById("sizeText");
+        if (sizeSlider.value == 0) {
+            sizeText.innerHTML = "Any";
+        } else {
+            sizeText.innerHTML = sizeSlider.value;
+        }
+
+        sizeSlider.oninput = function() {
+            if (this.value == 0) {
+                sizeText.innerHTML = "Any";
+            } else {
+                sizeText.innerHTML = new Intl.NumberFormat().format(this.value);
             }
         }
 

@@ -86,17 +86,10 @@ class DataController extends Controller
         // DB table
         $query = DB::table('houses');
 
-        // get parameters
-        // $priceRange = $request->input('priceRange');
-        // $priceArray = explode (" - ", $priceRange);
-        //
-        // $sizeRange = $request->input('sizeRange');
-        // $sizeArray = explode (" - ", $sizeRange);
 
         $country = $request->input('country');
         $city = $request->input('city');
-        echo '<pre>'.print_r($country, 1).'</pre>';
-        echo '<pre>'.print_r($city, 1).'</pre>';
+
         // search by specific country and All Citites
         if ( !empty($country) && $country != 'All Countries' && $city == 'All Cities') {
             $query->where('country', $country);
@@ -105,16 +98,21 @@ class DataController extends Controller
         if ( !empty($city) && $city != 'All Cities' ) {
             $query->where('city', $city);
         }
-        // search by price range, for getting only property, either one of them not equal to default value, they will run this below logic. Otherwise, will get all properties and projects
-        // if ( ($priceArray[0] != 1) || ($priceArray[1] != 1000000) ) {
-        //     $query->where('price', '>=', $priceArray[0])
-        //           ->where('price', '<=', $priceArray[1]);
-        // }
-        // search by size range, for getting only property, either one of them not equal to default value, they will run this below logic. Otherwise, will get all properties and projects
-        // if ( $sizeArray[0] != 1 || $sizeArray[1] != 5000) {
-        //     $query->where('size', '>=', $sizeArray[0])
-        //           ->where('size', '<=', $sizeArray[1]);
-        // }
+
+        // search by price
+        if ($request->has('price')) {
+            if ($request->price != 0) {
+                $query->where('price', '<=', $request->input('price'));
+            }
+        }
+
+        // search by price
+        if ($request->has('size')) {
+            if ($request->size != 0) {
+                $query->where('size', '<=', $request->input('size'));
+            }
+        }
+
         // search by bedroom
         if ($request->has('bedroom')) {
             if ($request->bedroom != "Bedrooms") {
@@ -171,7 +169,7 @@ class DataController extends Controller
         }
 
         // echo '<pre>'.print_r($districts, 1).'</pre>';
-        echo '<pre>'.print_r($allProperties, 1).'</pre>';
+        // echo '<pre>'.print_r($allProperties, 1).'</pre>';
 
         return View::make('pages/search-result')->with(array("properties"=>$allProperties, "districts"=>$districts));
 

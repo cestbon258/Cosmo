@@ -194,3 +194,113 @@
 .carousel-indicators .active {
     opacity: 1;
 }
+
+
+/* index css */
+video {
+    height: auto;
+    width: 100%;
+    object-fit: fill;
+}
+/* index -> grid images */
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
+.grid-image {
+    cursor: pointer;
+}
+.grid-image div p{
+    display: none;
+    color:white;
+    padding:0 12px;
+    -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.grid-image div span{
+    display: none;
+    transition: opacity 1s ease-out;
+    color:white;
+}
+.grid-image img {
+    width:100%;
+    opacity:.8;
+    height: 280px !important;
+}
+.grid-image div span{
+    -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.grid-image:hover{
+    background-color: transparent !important;
+    /* opacity: 0.4 !important; */
+    background-color: black !important;
+}
+.grid-image:hover div span{
+    display: block !important;
+}
+.grid-image:hover div p{
+    display: block !important;
+}
+.grid-image:hover img {
+    opacity:.4 !important;
+}
+/* index -> social media sharing */
+.meida-buttons {
+    position: absolute;
+    right: 0px;
+    background-color: lightgray;
+}
+.meida-buttons a {
+    text-align: center;
+    padding: 0 4px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 20px;
+}
+.meida-buttons a:hover {
+    color: #000;
+}
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    #shareToWP {
+        display: none;
+    }
+}
+
+/* index | search -> range slider */
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.slider:hover {
+    opacity: 1;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    /* border-radius: 50%; */
+    background: #947053;
+    cursor: pointer;
+}
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    /* border-radius: 50%; */
+    background: #947053;
+    cursor: pointer;
+}

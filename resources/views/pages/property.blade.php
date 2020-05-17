@@ -2,11 +2,8 @@
 
 @section('title', 'Property')
 
-@section('specificScript')
-    <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
-@stop
-
-<head>
+@section('sharing')
+    @parent
     <!-- Starts social media tag -->
     @if ($property->project_type == 1)
         <meta property="og:title" content="COSMO Real Estate Limited - {{$property->title}} / {{$property->address}}">
@@ -30,7 +27,12 @@
         <meta name="twitter:card" content="{{$property->pictures[0]}}">
     @endif
     <!-- End social media tag -->
-</head>
+@endsection
+
+@section('specificScript')
+    <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
+@stop
+
 
 
 @section('content')

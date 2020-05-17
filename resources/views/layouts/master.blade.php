@@ -5,21 +5,14 @@
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Starts social media tag -->
-    {{-- <meta property="og:title" content="COSMO Real Estate Limited">
-    <meta property="og:description" content="Your one-stop overseas property investments management platform">
-    <meta name="image" property="og:image" content="http://icosmo.co/logo/cosmo-logo.jpg">
-    <meta property="og:url" content="http://icosmo.co">
-    <meta name="twitter:title" content="COSMO Real Estate Limited ">
-    <meta name="twitter:description" content="Your one-stop overseas property investments management platform">
-    <meta name="twitter:image" content="http://icosmo.co/logo/cosmo-logo.jpg">
-    <meta name="twitter:card" content="cosmo-logo.jpeg"> --}}
-    <!-- End social media tag -->
+
+    @yield('sharing')
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>Cosmo - Global Real Estate | @yield('title')</title>
+
     {{-- <meta http-equiv="cache-control" content="max-age=0" /> --}}
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="0" />

@@ -1,11 +1,7 @@
 @extends('layouts.master')
 
-@section('title', 'Home')
-
-@section('specificScript')
-    <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
-@stop
-<head>
+@section('sharing')
+    @parent
     <!-- Starts social media tag -->
     <meta property="og:title" content="COSMO Real Estate Limited">
     <meta property="og:description" content="Your one-stop overseas property investments management platform">
@@ -16,7 +12,14 @@
     <meta name="twitter:image" content="http://icosmo.co/logo/cosmo-logo.jpg">
     <meta name="twitter:card" content="cosmo-logo.jpeg">
     <!-- End social media tag -->
-</head>
+
+@endsection
+
+@section('title', 'Home')
+
+@section('specificScript')
+    <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
+@stop
 
 @section('content')
 
@@ -157,12 +160,24 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-md-5 col-lg-12 col-xl-5 d-flex">
-                                    <div class="form-group">
-                                        <label for="formControlRange"><span id="priceText"></span></label>
-                                        <input type="range" class="form-control-range" min="0" max="10000" value="0" step="5000" id="priceRange">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-8 col-sm-12 col-lg-8 col-xl-8 d-flex">
+                                            <div class="form-group" style="width:100%;">
+                                                <input type="range" class="slider" min="0" max="10000000" value="0" step="5000" id="priceRange" name="price">
+                                                <label class="mt-1" for="formControlRange"><small>Price: </small><span id="priceText"></span></label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex">
+                                            <div class="form-group" style="width:100%;">
+                                                <input type="range" class="slider" min="0" max="10000" value="0" step="50" id="sizeRange" name="size">
+                                                <label class="mt-1" for="formControlRange"><small>Size: </small><span id="sizeText"></span></label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
 
 
                                 {{-- <div class="col-12 col-md-4 col-lg-3">
@@ -911,119 +926,38 @@
             }
         }
 
-
+        // Price range
         var priceSlider = document.getElementById("priceRange");
         var priceText = document.getElementById("priceText");
-        priceText.innerHTML = priceSlider.value;
+        if (priceSlider.value == 0) {
+            priceText.innerHTML = "Any";
+        } else {
+            priceText.innerHTML = priceSlider.value;
+        }
 
         priceSlider.oninput = function() {
-            priceText.innerHTML = this.value;
-        }
-
-
-        // // price range
-        // var priceRange = document.getElementById("priceRange");
-        // var priceRangeValue = document.getElementById("priceRangeValue");
-        // priceRangeValue.value = priceRange.innerHTML;
-        //
-        // $('#priceRange').on('DOMSubtreeModified',function(){
-        //     var priceRange = document.getElementById("priceRange");
-        //     var priceRangeValue = document.getElementById("priceRangeValue");
-        //     priceRangeValue.value = priceRange.innerHTML;
-        // })
-        //
-        // // size range
-        // var sizeRange = document.getElementById("sizeRange");
-        // var sizeRangeValue = document.getElementById("sizeRangeValue");
-        // sizeRangeValue.value = sizeRange.innerHTML;
-        //
-        // $('#sizeRange').on('DOMSubtreeModified',function(){
-        //     var sizeRange = document.getElementById("sizeRange");
-        //     var sizeRangeValue = document.getElementById("sizeRangeValue");
-        //     sizeRangeValue.value = sizeRange.innerHTML;
-        // })
-
-
-
-
-
-    </script>
-    <style>
-        video {
-            height: auto;
-            width: 100%;
-            object-fit: fill;
-        }
-
-        .centered {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            transform: translateY(-50%);
-        }
-        .grid-image {
-            cursor: pointer;
-        }
-        .grid-image div p{
-            display: none;
-            color:white;
-            padding:0 12px;
-            -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            -o-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .grid-image div span{
-            display: none;
-            transition: opacity 1s ease-out;
-            color:white;
-        }
-        .grid-image img {
-            width:100%;
-            opacity:.8;
-            height: 280px !important;
-        }
-        .grid-image div span{
-            -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            -o-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .grid-image:hover{
-            background-color: transparent !important;
-            /* opacity: 0.4 !important; */
-            background-color: black !important;
-        }
-        .grid-image:hover div span{
-            display: block !important;
-        }
-        .grid-image:hover div p{
-            display: block !important;
-        }
-        .grid-image:hover img {
-            opacity:.4 !important;
-        }
-
-        .meida-buttons {
-            position: absolute;
-            right: 0px;
-            background-color: lightgray;
-        }
-        .meida-buttons a {
-            text-align: center;
-            padding: 0 4px;
-            transition: all 0.3s ease;
-            color: white;
-            font-size: 20px;
-        }
-        .meida-buttons a:hover {
-            color: #000;
-        }
-
-        /* Large devices (desktops, 992px and up) */
-        @media (min-width: 992px) {
-            #shareToWP {
-                display: none;
+            if (this.value == 0) {
+                priceText.innerHTML = "Any";
+            } else {
+                priceText.innerHTML = new Intl.NumberFormat().format(this.value);
             }
         }
-    </style>
+
+        // Size range
+        var sizeSlider = document.getElementById("sizeRange");
+        var sizeText = document.getElementById("sizeText");
+        if (sizeSlider.value == 0) {
+            sizeText.innerHTML = "Any";
+        } else {
+            sizeText.innerHTML = sizeSlider.value;
+        }
+
+        sizeSlider.oninput = function() {
+            if (this.value == 0) {
+                sizeText.innerHTML = "Any";
+            } else {
+                sizeText.innerHTML = new Intl.NumberFormat().format(this.value);
+            }
+        }
+    </script>
 @stop

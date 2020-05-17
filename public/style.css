@@ -46,7 +46,7 @@
 @import url(css/magnific-popup.css);
 @import url(css/font-awesome.min.css);
 @import url(css/themify-icons.css);
-@import url(css/nice-select.css);
+/* @import url(css/nice-select.css); */
 @import url(css/jquery-ui.min.css);
 /* :: 3.0 Base CSS */
 * {
@@ -714,12 +714,12 @@ img {
     box-shadow: none;
     border: 1px solid #e1dddd; }
 
-.nice-select {
+/* .nice-select {
   line-height: 34px; }
   .nice-select .list {
     left: 0 !important;
     right: 0 !important;
-    border-radius: 0; }
+    border-radius: 0; } */
 
 .south-search-area {
   position: relative;
@@ -1251,7 +1251,7 @@ img {
 .listings-top-meta {
   position: relative;
   z-index: 100; }
-  .listings-top-meta .nice-select {
+  /* .listings-top-meta .nice-select {
     float: right;
     height: 34px;
     line-height: 34px;
@@ -1262,7 +1262,7 @@ img {
       z-index: 500; }
     .listings-top-meta .nice-select .option {
       min-height: 34px;
-      line-height: 34px; }
+      line-height: 34px; } */
   .listings-top-meta span {
     color: #323232;
     text-transform: uppercase;
