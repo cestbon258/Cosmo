@@ -411,6 +411,15 @@
                                     </div>
 
                                     <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                        @if ($property->vr_url)
+                                            <div>
+                                                @auth
+                                                    <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
+                                                @else
+                                                    <span style="font-size:16px;"><mark><i>VR</i></mark></span>
+                                                @endauth
+                                            </div>
+                                        @endif
                                         <div class="new-tag">
                                             <img src="{{ url('img/icons/new.png') }}" alt="">
                                         </div>
@@ -479,7 +488,19 @@
                                     </div>
 
                                     <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                        <div style="height:27px;"></div>
+
+                                            @if ($property->vr_url)
+                                                <div>
+                                                    @auth
+                                                        <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
+                                                    @else
+                                                        <span style="font-size:16px;"><mark><i>VR</i></mark></span>
+                                                    @endauth
+                                                </div>
+                                            @else
+                                                <div style="height:27px;"></div>
+                                            @endif
+
                                         {{-- <div class="new-tag">
                                             <img src="img/icons/new.png" alt="">
                                         </div> --}}

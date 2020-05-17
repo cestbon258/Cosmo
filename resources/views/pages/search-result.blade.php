@@ -325,6 +325,15 @@
                                     </div>
 
                                     <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                        @if ($property->vr_url)
+                                            <div>
+                                                @auth
+                                                    <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
+                                                @else
+                                                    <span style="font-size:16px;"><mark><i>VR</i></mark></span>
+                                                @endauth
+                                            </div>
+                                        @endif
                                         <div class="new-tag">
                                             <img src="{{ url('img/icons/new.png') }}" alt="">
                                         </div>
@@ -373,7 +382,7 @@
                                     {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a>
                                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a> --}}
                                 </div>
-                                
+
                                 <!-- Property Content -->
                                 <div class="property-content">
                                     {{-- @auth --}}
@@ -393,7 +402,17 @@
                                     </div>
 
                                     <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                        <div style="height:27px;"></div>
+                                        @if ($property->vr_url)
+                                            <div>
+                                                @auth
+                                                    <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
+                                                @else
+                                                    <span style="font-size:16px;"><mark><i>VR</i></mark></span>
+                                                @endauth
+                                            </div>
+                                        @else
+                                            <div style="height:27px;"></div>
+                                        @endif
                                         {{-- <div class="new-tag">
                                             <img src="img/icons/new.png" alt="">
                                         </div> --}}

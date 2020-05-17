@@ -23,8 +23,7 @@
                         <img class="wow fadeInUp" data-wow-delay="350ms" src="{{ url('img/bg-img/about.jpg')}}" alt="">
                         {{-- <p class="wow fadeInUp" data-wow-delay="450ms">Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada. Integer nec bibendum lacus. Suspendisse dictum enim sit amet libero malesuada feugiat. Praesent malesuada congue magna at finibus. In hac habitasse platea dictumst. Curabitur rhoncus auctor eleifend. Fusce venenatis diam urna, eu pharetra arcu varius ac. Etiam cursus turpis lectus, id iaculis risus tempor id. Phasellus fringilla nisl sed sem scelerisque, eget aliquam magna vehicula.</p> --}}
                     </div>
-                    <button>test</button>
-                    
+
                 </div>
 
                 <div class="col-12 col-lg-4">

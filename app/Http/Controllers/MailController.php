@@ -58,12 +58,14 @@ class MailController extends Controller
         $user = Auth::user();
 
         $url = $request->propertyURL;
+        $propertyID = $request->propertyID;
 
         $data = array(
             'url' => $url,
+            'property_id' => $propertyID,
             'email' => $user->email,
-            'phone' => $user->phone_no
-
+            'phone' => $user->phone_no,
+            'name' => $user->name
         );
 
         $emailArray = array(

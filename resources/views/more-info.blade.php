@@ -3,9 +3,13 @@
 @section('content')
     <p>Hey, {{ $email }}</p><br>
     <p>{{ $url }}</p>
+    <p>{{ $name }}</p>
+    <p>{{ $property_id }}</p>
+    <p>{{ $phone }}</p>
+    
+
 
     <p>Device: Chrome on Windows</p>
-    <p>{{ $phone }}</p>
 
     <p>If you did not attempt to sign in to your account, your password may be compromised. Visit https://github.com/settings/admin to create a new, strong password for your GitHub account.</p>
 

@@ -51,6 +51,11 @@
 
 
     <div class="container-fluid">
+        @guest
+            <div class="alert alert-info" role="alert">
+                Please <a href="#" class="alert-link"><a href="{{ route('login', app()->getLocale()) }}">@lang('master.login')</a></a> to know more details about this property!
+            </div>
+        @endguest
         {{-- project_type equal to 1 is not Project --}}
         @if ($property->project_type == 1)
             <div class="row">
@@ -93,6 +98,15 @@
                 <div class="col-md-5 mb-4">
                     <div class="card" style="height: 100%;">
                         <div class="card-body">
+                            @if ($property->vr_url)
+                                <div class="float-right">
+                                    @auth
+                                        <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
+                                    @else
+                                        <span style="font-size:16px;"><mark><i>VR</i></mark></span>
+                                    @endauth
+                                </div>
+                            @endif
                             <h5 class="card-title">{{$property->title}}</h5>
                             <hr>
                             @auth
@@ -122,14 +136,20 @@
                                     <span>{{$property->size}} {{$property->measurement}}</span>
                                 </div>
                             </div>
+                            @if ( !empty($property->facilities) )
+                                <hr>
+                                @foreach ($property->facilities as $key => $facility)
+                                    <div>{{$facility}}</div>
+                                @endforeach
+                            @endif
                             <br>
                             @auth
-                            <div class="row">
-                                <div class="col-6 col-md-6">
-                                    <button class="requestMore request-more-btn" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info</button>
+                                <div class="row">
+                                    <div class="col-6 col-md-6">
+                                        <button class="requestMore request-more-btn" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info <div class="loader"></div></button>
+                                    </div>
+                                    <div class="col-6 col-md-6"></div>
                                 </div>
-                                <div class="col-6 col-md-6"></div>
-                            </div>
                             @endauth
 
                         </div>
@@ -178,17 +198,32 @@
                 <div class="col-md-5 mb-4">
                     <div class="card" style="height: 100%;">
                       <div class="card-body">
+                        @if ($property->vr_url)
+                          <div class="float-right">
+                              @auth
+                                  <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
+                              @else
+                                  <span style="font-size:16px;"><mark><i>VR</i></mark></span>
+                              @endauth
+                          </div>
+                        @endif
                         <h5 class="card-title">{{$property->title}}</h5>
                         <hr>
                         <br>
 
                         <h6 class="card-info-text">Features</h6>
                         <div><p>{!!html_entity_decode($property->features)!!}</p></div>
+                        @if ( !empty($property->facilities) )
+                            <hr>
+                            @foreach ($property->facilities as $key => $facility)
+                                <div>{{$facility}}</div>
+                            @endforeach
+                        @endif
                         <br>
                         @auth
                         <div class="row">
                             <div class="col-6 col-md-6">
-                                <button class="requestMore request-more-btn" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info</button>
+                                <button class="requestMore request-more-btn" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info <div class="loader"></div></button>
                             </div>
                             <div class="col-6 col-md-6"></div>
                         </div>
@@ -269,9 +304,11 @@
 
     <script type="text/javascript">
 
-
+        $('.loader').css("display", "none");
         $(".requestMore").click(function(e){
             e.preventDefault();
+            $('.loader').css("display", "inline-block");
+
 
             $.ajax({
                 type:'POST',
@@ -280,20 +317,17 @@
                 url:'{{ route('request_more', app()->getLocale())}}',
                 data:{
                    _token:'{{csrf_token()}}',
-                   propertyURL: window.location.href
+                   propertyURL: window.location.href,
+                   propertyID: "{{$property->property_id}}"
                 },
                 success:function(data){
-                    console.log(data);
+                    $('.loader').css("display", "none");
                 }
             });
     	});
     </script>
 
     <style>
-        video {
-            width: 100%;
-            /* height: auto; */
-        }
 
         ul,
         ol {
@@ -343,6 +377,27 @@
             background-color: #947054;
             border-radius: 0;
             text-transform: uppercase;
+        }
+
+        .loader {
+            /* display: inline-block; */
+            border: 2px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 2px solid #3498db;
+            width: 9px;
+            height: 9px;
+            -webkit-animation: spin .5s linear infinite;
+            animation: spin .5s linear infinite;
+        }
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 

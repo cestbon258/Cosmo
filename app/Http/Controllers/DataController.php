@@ -76,7 +76,7 @@ class DataController extends Controller
             $district->city = json_decode($district->city);
         }
 
-        // echo '<pre>'.print_r($districts, 1).'</pre>';
+        // echo '<pre>'.print_r($allProperties, 1).'</pre>';
 
         return View::make('pages/index')->with(array("properties"=>$allProperties, "districts"=>$districts));
     }
@@ -545,6 +545,9 @@ class DataController extends Controller
 
         if ($myProperty->features) {
             $myProperty->features = json_decode($myProperty->features);
+        }
+        if ($myProperty->facilities) {
+            $myProperty->facilities = json_decode($myProperty->facilities);
         }
         if ($myProperty->videos) {
             $myProperty->videos = json_decode($myProperty->videos);
