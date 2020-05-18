@@ -146,7 +146,7 @@
                         </div>
                         <hr>
                         <div class="text-center">
-                            Have an account? <a class="small" href="{{ url('login') }}">Go to login</a>
+                            Have an account? <a class="small" href="{{ route('login', app()->getLocale()) }}">Go to login</a>
                         </div>
                     </form>
                 </div>

@@ -8,7 +8,7 @@
 
 @section('content')
 
-
+    <div style="height:70px;"></div>
     <section class="breadcumb-area bg-img" style="background-image: url({{ url('logo/banner.jpg') }});"></section>
 
     <!-- ##### Advance Search Area Start ##### -->
@@ -515,7 +515,7 @@
 
         function scrollWin() {
             // window.scrollTo(0, 600);
-            window.scrollBy(0, 320);
+            window.scrollBy(0, 390);
         }
 
         scrollWin();
