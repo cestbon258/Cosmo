@@ -37,12 +37,16 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('style.css')}}">
     <link rel="stylesheet" href="{{ asset('css/custom-style.css')}}">
-    <style>
 
-
-
-
-    </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166983837-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'UA-166983837-1');
+    </script>
 </head>
 <body>
         <!-- ##### Header Area Start ##### -->

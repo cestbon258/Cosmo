@@ -377,7 +377,9 @@
                                             <p style="font-size:16px;">{{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
                                         </div>
                                     @endauth
-
+                                    <div class="like">
+                                        <i class="fa fa-heart" onclick="favorite(this)"></i>
+                                    </div>
                                     <div>
 
                                     </div>
@@ -980,5 +982,55 @@
                 sizeText.innerHTML = new Intl.NumberFormat().format(this.value);
             }
         }
+
+        function favorite (e){
+            console.log(e);
+            // x.classList.toggle("fa-thumbs-down");
+            // e.preventDefault();
+
+            // $.ajax({
+            //     type:'POST',
+            //     // dataType: 'JSON',
+            //     // url:'https://postb.in/1588855925699-7338490695692',
+            //     url:'{{ route('request_more', app()->getLocale())}}',
+            //     data:{
+            //        _token:'{{csrf_token()}}',
+            //        propertyURL: window.location.href,
+            //        propertyID: "{{$property->property_id}}"
+            //     },
+            //     success:function(data){
+            //         $('.loader').css("display", "none");
+            //     }
+            // });
+            console.log('alalal');
+        }
     </script>
+    <style>
+        .like {
+            /* height: 35px; */
+            /* padding: 0 20px; */
+            /* background-color: #947054; */
+            color: #ffffff;
+            /* font-size: 60px; */
+            /* font-weight: 600; */
+            display: inline-block;
+            /* line-height: 35px; */
+            cursor: pointer;
+            position: absolute;
+            bottom: 42%;
+            right: 40%;
+            z-index: 10;
+            -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+            opacity: .9;
+
+        }
+        .like i:hover {
+            color:red;
+            opacity: 1;
+        }
+        .like i {
+            font-size: 72px;
+        }
+    </style>
 @stop
