@@ -146,7 +146,7 @@
                             @auth
                                 <div class="row">
                                     <div class="col-6 col-md-6">
-                                        <button class="requestMore request-more-btn" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info <div class="loader"></div></button>
+                                        <button class="requestMore request-more-btn" style="border-radius:6px;" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info <i class="loader fa fa-spinner fa-pulse"></i></button>
                                     </div>
                                     <div class="col-6 col-md-6"></div>
                                 </div>
@@ -223,7 +223,7 @@
                         @auth
                         <div class="row">
                             <div class="col-6 col-md-6">
-                                <button class="requestMore request-more-btn" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info <div class="loader"></div></button>
+                                <button class="requestMore request-more-btn" style="border-radius:6px;" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info <i class="loader fa fa-spinner fa-pulse"></i></button>
                             </div>
                             <div class="col-6 col-md-6"></div>
                         </div>
@@ -372,32 +372,11 @@
         .request-more-btn {
             border: 0px;
             color: #ffffff;
-            font-size: 10px;
-            padding: 4px;
+            font-size: 14px;
+            padding: 14px;
             background-color: #947054;
             border-radius: 0;
             text-transform: uppercase;
-        }
-
-        .loader {
-            /* display: inline-block; */
-            border: 2px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 2px solid #3498db;
-            width: 9px;
-            height: 9px;
-            -webkit-animation: spin .5s linear infinite;
-            animation: spin .5s linear infinite;
-        }
-        /* Safari */
-        @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
     </style>
 

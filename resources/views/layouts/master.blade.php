@@ -44,7 +44,7 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        
+
         gtag('config', 'UA-166983837-1');
     </script>
 </head>
@@ -160,7 +160,7 @@
         @auth
             <li><a href="#">@lang('master.my_account')</a>
                 <ul class="dropdown">
-                    <li><a href="{{ route('dashboard', app()->getLocale()) }}">@lang('master.dashboard')</a></li>
+                    <li><a href="{{ route('property-list', app()->getLocale()) }}">My Properties</a></li>
                     <li><a href="{{ route('profile', app()->getLocale()) }}">@lang('master.profile')</a></li>
                     <li><a href="{{ route('logout', app()->getLocale()) }}">@lang('master.signout')</a></li>
                 </ul>
@@ -242,7 +242,7 @@
                             <a href="https://www.facebook.com/icosmo.co/" target="_blank"><i class="fa fa-facebook-square fa-2x fb"></i></a>
                             <a href="https://www.instagram.com/icosmo.co/?fbclid=IwAR1tD44E-iESdx10U8a38jgaWocXDLitukGxYi_KN2NmFZcNFbZPalxBtRw" target="_blank"><i class="fa fa-instagram fa-2x ig"></i></a>
                             <a href="https://www.linkedin.com/company/icosmo" target="_blank"><i class="fa fa-linkedin-square fa-2x linkedin"></i></a>
-                            <i class="fa fa-youtube fa-2x youtube"></i>
+                            <a href="https://www.youtube.com/channel/UCweufzFWJuXng4Mwmfrxlvg" target="_blank"><i class="fa fa-youtube fa-2x youtube"></i></a>
                         </div>
                         <div class="mt-3">
                             <h6 style="color:#fff;"><i class="fa fa-envelope"></i> cs@icosmo.co</h6>

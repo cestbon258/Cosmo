@@ -160,7 +160,7 @@
                     <div class="single-team-member mb-100 wow fadeInUp" data-wow-delay="500ms">
                         <!-- Team Member Thumb -->
                         <div class="team-member-thumb">
-                            <img src="img/bg-img/cto.jpg" alt="">
+                            <img src="{{ url('img/core-img/cto.jpg')}}" alt="">
                         </div>
                         <!-- Team Member Info -->
                         <div class="team-member-info">
@@ -180,7 +180,7 @@
                     <article class="content-wrapper">
                         <button class="close"></button>
                         <header class="modal-header">
-                            <div class="founder-img"><img src="img/bg-img/cto.jpg" alt=""></div>
+                            <div class="founder-img"><img src="{{ url('img/core-img/cto.jpg')}}" alt=""></div>
                             <div class="founder-bio">
                                 <h2>Stephen Poon</h2>
                                 <p>CTO and Co-Founder</p>

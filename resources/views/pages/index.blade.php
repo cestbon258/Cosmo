@@ -388,8 +388,8 @@
                                 <div class="meida-buttons">
                                     <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i></a>
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
-                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a>
-                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a> --}}
+                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a>
                                 </div>
 
                                 <!-- Property Content -->
@@ -467,8 +467,8 @@
                                 <div class="meida-buttons">
                                     <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i></a>
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
-                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a>
-                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a> --}}
+                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a>
                                 </div>
 
                                 <!-- Property Content -->
@@ -911,42 +911,36 @@
 
         var districts = {!! json_encode($districts) !!};
 
-        var cityList = document.getElementById("city");
-        var city = new Option('All Cities', 'All Cities');
-        cityList.options.add(city);
-
         function getCities (){
             var selectedCountry = document.getElementById("country").value;
             var cityList = document.getElementById("city");
 
+            if (selectedCountry != "All Countries") {
+                for (var i = 0; i < districts.length; i++) {
+                    if (selectedCountry == districts[i]['country']) {
+                        var citiesArray = districts[i]['city'];
 
-            for (var i = 0; i < districts.length; i++) {
-                if (selectedCountry == districts[i]['country']) {
-                    // console.log(districts[i]['city']);
-                    var citiesArray = districts[i]['city'];
+                        var checkExist = citiesArray.includes("All Cities");
+                        if (!checkExist) {
+                            citiesArray.unshift("All Cities");
+                        }
 
-                    var checkExist = citiesArray.includes("All Cities");
-                    if (!checkExist) {
-                        citiesArray.unshift("All Cities");
+                        while (cityList.options.length) {
+                            cityList.remove(0);
+                        }
+
+                        for (var j = 0; j < citiesArray.length; j++) {
+                            var city = new Option(citiesArray[j], citiesArray[j]);
+                            cityList.options.add(city);
+                        }
                     }
-
-                    while (cityList.options.length) {
-                        cityList.remove(0);
-                    }
-
-                    for (i = 0; i < citiesArray.length; i++) {
-                        var city = new Option(citiesArray[i], citiesArray[i]);
-                        cityList.options.add(city);
-                    }
-                } else {
-                    while (cityList.options.length) {
-                        cityList.remove(0);
-                    }
-
-                    var city = new Option('All Cities', 'All Cities');
-                    cityList.options.add(city);
                 }
+            } else {
+                $('#city')
+                .empty()
+                .append('<option selected="selected" value="All Cities">All Cities</option>');
             }
+
         }
 
         // Price range
@@ -1017,7 +1011,7 @@
             /* line-height: 35px; */
             cursor: pointer;
             position: absolute;
-            bottom: 42%;
+            bottom: 35%;
             right: 40%;
             z-index: 10;
             -webkit-transition-duration: 500ms;
