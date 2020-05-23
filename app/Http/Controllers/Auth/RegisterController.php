@@ -108,7 +108,7 @@ class RegisterController extends Controller
         );
 
         $emailArray = array(
-            // $data['email'],
+            $data['email'],
             "angelo@icosmo.co",
             "stephen@icosmo.co",
         );

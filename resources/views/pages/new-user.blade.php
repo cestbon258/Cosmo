@@ -69,6 +69,7 @@
                                                     <input name="email" value="{{$user->email}}" hidden>
                                                     <input name="status" value="{{$user->active_status}}" hidden>
                                                     <input name="to" value="approve" hidden>
+                                                    <input name="name" value="{{$user->name}}" hidden>
                                                     <button type="submit" class="btn btn-outline-primary btn-sm">Approve</button></td>
                                                 </form>
                                             </td>

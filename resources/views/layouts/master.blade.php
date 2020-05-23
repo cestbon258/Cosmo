@@ -160,7 +160,9 @@
         @auth
             <li><a href="#">@lang('master.my_account')</a>
                 <ul class="dropdown">
-                    <li><a href="{{ route('property-list', app()->getLocale()) }}">My Properties</a></li>
+                    @if (Auth::user()->role == 0 || Auth::user()->role == 2)
+                        <li><a href="{{ route('property-list', app()->getLocale()) }}">My Properties</a></li>
+                    @endif
                     <li><a href="{{ route('profile', app()->getLocale()) }}">@lang('master.profile')</a></li>
                     <li><a href="{{ route('logout', app()->getLocale()) }}">@lang('master.signout')</a></li>
                 </ul>
