@@ -513,6 +513,7 @@ class DataController extends Controller
         return View::make('pages/property-list')->with(array('user' => $user, "properties"=>$myProperty));
     }
 
+
     public function publish_property()
     {
 

@@ -46,7 +46,7 @@
 
         gtag('config', 'UA-166983837-1');
     </script>
-    
+
 </head>
 <body id="page-top" class="sidebar-toggled">
 
@@ -92,6 +92,20 @@
                     <a class="nav-link" href="{{ route('property-list', app()->getLocale()) }}">
                     <i class="fas fa-home"></i>
                     <span>My Properties</span></a>
+                </li>
+            @endif
+            @if (Auth::user()->role == 0 )
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    User Group
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('account', app()->getLocale()) }}">
+                    <i class="fas fa-users"></i>
+                    <span>All Users</span></a>
                 </li>
             @endif
 

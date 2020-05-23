@@ -57,6 +57,9 @@ Route::group(['prefix' => '{locale}'], function () {
 
 
 
+        Route::get('/users', 'UserController@all_user')->name('account');
+        Route::post('/update-status', 'UserController@update_status')->name('update-status');
+        Route::post('/delete-user', 'UserController@delete_user')->name('delete-user');
         // Route::get('/property', 'DataController@property')->name('property');
 
         // property
