@@ -83,12 +83,24 @@ class DataController extends Controller
 
     public function search(Request $request)
     {
+
+
         // DB table
         $query = DB::table('houses');
 
-
+        // params
         $country = $request->input('country');
         $city = $request->input('city');
+
+        $priceArray = explode("-",$request->priceRange);
+        $priceArray[0] = str_replace(",", "", $priceArray[0]);
+        $priceArray[1] = str_replace(",", "", $priceArray[1]);
+
+
+        $unitArray = explode("-",$request->unitRange);
+        $unitArray[0] = str_replace(",", "", $unitArray[0]);
+        $unitArray[1] = str_replace(",", "", $unitArray[1]);
+
 
         // search by specific country and All Citites
         if ( !empty($country) && $country != 'All Countries' && $city == 'All Cities') {
@@ -97,20 +109,6 @@ class DataController extends Controller
         // search by city, ignore country
         if ( !empty($city) && $city != 'All Cities' ) {
             $query->where('city', $city);
-        }
-
-        // search by price
-        if ($request->has('price')) {
-            if ($request->price != 0) {
-                $query->where('price', '<=', $request->input('price'));
-            }
-        }
-
-        // search by price
-        if ($request->has('size')) {
-            if ($request->size != 0) {
-                $query->where('size', '<=', $request->input('size'));
-            }
         }
 
         // search by bedroom
@@ -125,12 +123,26 @@ class DataController extends Controller
                 $query->where('bathroom', $request->input('bathroom'));
             }
         }
-        // search by unit
+
+        // search by price range, for getting only property, either one of them not equal to default value, they will run this below logic. Otherwise, will get all properties and projects
+        if ( ($priceArray[0] != 0) || ($priceArray[1] != 1000000) ) {
+            $query->where('price', '>=', $priceArray[0])
+                  ->where('price', '<=', $priceArray[1]);
+        }
+
+        // search by size range, for getting only property, either one of them not equal to default value, they will run this below logic. Otherwise, will get all properties and projects
+        if ( $unitArray[0] != 0 || $unitArray[1] != 1000) {
+            $query->where('size', '>=', $unitArray[0])
+                  ->where('size', '<=', $unitArray[1]);
+        }
+
+        // search by measure
         if ($request->has('unit')) {
-            if ($request->unit != "Unit") {
+            if ($request->unit) {
                 $query->where('measurement', $request->input('unit'));
             }
         }
+
         // search by keyworkds
         // $query->where('text', 'like', '%'.$text.'%');
         $query->where('status', 1)
@@ -168,8 +180,9 @@ class DataController extends Controller
             $district->city = json_decode($district->city);
         }
 
-        // echo '<pre>'.print_r($districts, 1).'</pre>';
-        // echo '<pre>'.print_r($allProperties, 1).'</pre>';
+
+        // echo '<pre>'.print_r($priceArray, 1).'</pre>';
+        // echo '<pre>'.print_r($unitArray, 1).'</pre>';
 
         return View::make('pages/search-result')->with(array("properties"=>$allProperties, "districts"=>$districts));
 

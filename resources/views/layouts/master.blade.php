@@ -38,6 +38,39 @@
     <link rel="stylesheet" href="{{ asset('style.css')}}">
     <link rel="stylesheet" href="{{ asset('css/custom-style.css')}}">
 
+    {{-- noUISlider --}}
+    <link rel="stylesheet" href="{{ asset('css/nouislider.css')}}">
+    <script src="{{ asset('js/nouislider.js') }}"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.0.4/wNumb.min.js'></script>
+    <style>
+
+        .noUi-connect {
+        	background: #947054;
+        }
+
+        .noUi-horizontal {
+            height: 8px;
+        }
+
+        .noUi-horizontal .noUi-handle {
+            width: 20px;
+            height: 20px;
+            right: -17px;
+            top: -6px;
+        }
+
+        .noUi-handle:before, .noUi-handle:after {
+            content: "";
+            display: block;
+            /* position: absolute; */
+            height: 0 px;
+            width: 0px;
+            background: #E8E7E6;
+            /* left: 14px; */
+            /* top: 6px; */
+        }
+
+    </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166983837-1"></script>
     <script>

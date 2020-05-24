@@ -26,10 +26,10 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
     <style>
         .theme-primary {
-            background-color: #212529;
+            background-color: #222d33;
             /* opacity: .8; */
             /* background-image: linear-gradient(180deg,#ff0000 10%,#fb4747 100%); */
-            background-image: linear-gradient(#212529, #737373);
+            background-image: linear-gradient(#222d33, #793f3f);
             background-size: cover;
         }
     </style>
@@ -63,7 +63,7 @@
                     {{-- <i class="fas fa-laugh-wink"></i> --}}
                     <img style="width:80px; height:auto;" src="{{ url('logo/logo.png') }}">
                 </div>
-                <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Cosmo') }}</div>
+                {{-- <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Cosmo') }}</div> --}}
             </a>
 
             <!-- Divider -->

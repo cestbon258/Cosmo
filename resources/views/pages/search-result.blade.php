@@ -93,33 +93,43 @@
 
 
                                 <div class="col-12">
+                                    <br>
                                     <div class="row">
-                                        <div class="col-12 col-md-8 col-sm-12 col-lg-8 col-xl-8 d-flex">
-                                            <div class="form-group" style="width:100%;">
+
+                                        <div class="col-12 col-md-6 col-sm-12 col-lg-6 col-xl-6" style="padding-right: 30px;">
+
+                                            <div style="width:100%;" id="price-slider"></div>
+                                            <label><small>Price: </small><span id="price-tag"></span></label>
+                                            <input name="priceRange" id="price-range" hidden>
+
+                                            {{-- <label><small>Price: </small><span id="price-tag"></span></label> --}}
+
+                                            {{-- <div class="form-group" style="width:100%;">
                                                 <input type="range" class="slider" min="0" max="10000000" value="0" step="5000" id="priceRange" name="price">
                                                 <label class="mt-1" for="formControlRange"><small>Price: </small><span id="priceText"></span></label>
-                                            </div>
+                                            </div> --}}
                                         </div>
 
-                                        <div class="col-12 col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex">
-                                            <div class="col-8 col-md-8 col-lg-8">
-                                                <div class="form-group" style="width:100%;">
-                                                    <input type="range" class="slider" min="0" max="10000" value="0" step="50" id="sizeRange" name="size">
-                                                    <label class="mt-1" for="formControlRange"><small>Size: </small><span id="sizeText"></span></label>
-                                                </div>
+                                        <div class="col-8 col-md-4 col-sm-8 col-lg-4 col-xl-4">
+                                            <div style="width:100%;" id="unit-slider"></div>
+                                            <label><small>Unit: </small><span id="unit-tag"></span></label>
+                                            <input name="unitRange" id="unit-range" hidden>
+                                            {{-- <div class="form-group" style="width:100%;">
+                                                <input type="range" class="slider" min="0" max="10000" value="0" step="50" id="sizeRange" name="size">
+                                                <label class="mt-1" for="formControlRange"><small>Size: </small><span id="sizeText"></span></label>
+                                            </div> --}}
+                                        </div>
+                                        <div class="col-4 col-md-2  col-sm-4 col-lg-2">
+                                            <div class="form-group">
+                                                <select class="form-control" name="unit">
+                                                    <option>sq ft</option>
+                                                    <option>m&#178;</option>
+                                                </select>
                                             </div>
-                                            <div class="col-8 col-md-4 col-lg-4">
-                                                <div class="form-group">
-                                                    <select class="form-control" name="unit">
-                                                        <option>sq ft</option>
-                                                        <option>m&#178;</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
+
 
 
                                 {{-- <div class="col-12 col-md-4 col-lg-3">
@@ -475,39 +485,91 @@
             }
         }
 
-        // Price range
-        var priceSlider = document.getElementById("priceRange");
-        var priceText = document.getElementById("priceText");
-        if (priceSlider.value == 0) {
-            priceText.innerHTML = "Any";
-        } else {
-            priceText.innerHTML = priceSlider.value;
-        }
 
-        priceSlider.oninput = function() {
-            if (this.value == 0) {
-                priceText.innerHTML = "Any";
-            } else {
-                priceText.innerHTML = new Intl.NumberFormat().format(this.value);
-            }
-        }
+        var priceSlider = document.getElementById('price-slider');
+        var priceTag = document.getElementById('price-tag');
+        var priceRange = document.getElementById('price-range');
+        noUiSlider.create(priceSlider, {
+            start: [0, 1000000],
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 1000000
+            },
+            orientation: 'horizontal', // 'horizontal' or 'vertical'
+            step: 5000,
+            behaviour: 'snap',
+            // tooltips: true,
+            format: wNumb({
+                decimals: 0,
+                thousand: ','
+            })
+        });
+        priceSlider.noUiSlider.on('update', function (value) {
+            priceTag.innerHTML = value.join(' - ');
+            priceRange.value = value.join('-');
 
-        // Size range
-        var sizeSlider = document.getElementById("sizeRange");
-        var sizeText = document.getElementById("sizeText");
-        if (sizeSlider.value == 0) {
-            sizeText.innerHTML = "Any";
-        } else {
-            sizeText.innerHTML = sizeSlider.value;
-        }
+        });
 
-        sizeSlider.oninput = function() {
-            if (this.value == 0) {
-                sizeText.innerHTML = "Any";
-            } else {
-                sizeText.innerHTML = new Intl.NumberFormat().format(this.value);
-            }
-        }
+
+        var unitSlider = document.getElementById('unit-slider');
+        var unitTag = document.getElementById('unit-tag');
+        var unitRange = document.getElementById('unit-range');
+        noUiSlider.create(unitSlider, {
+            start: [0, 1000],
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 1000
+            },
+            orientation: 'horizontal', // 'horizontal' or 'vertical'
+            step: 50,
+            behaviour: 'snap',
+            // tooltips: true,
+            format: wNumb({
+                decimals: 0,
+                thousand: ','
+            })
+        });
+        unitSlider.noUiSlider.on('update', function (value) {
+            unitTag.innerHTML = value.join(' - ');
+            unitRange.value = value.join('-');
+
+        });
+
+        // // Price range
+        // var priceSlider = document.getElementById("priceRange");
+        // var priceText = document.getElementById("priceText");
+        // if (priceSlider.value == 0) {
+        //     priceText.innerHTML = "Any";
+        // } else {
+        //     priceText.innerHTML = priceSlider.value;
+        // }
+        //
+        // priceSlider.oninput = function() {
+        //     if (this.value == 0) {
+        //         priceText.innerHTML = "Any";
+        //     } else {
+        //         priceText.innerHTML = new Intl.NumberFormat().format(this.value);
+        //     }
+        // }
+        //
+        // // Size range
+        // var sizeSlider = document.getElementById("sizeRange");
+        // var sizeText = document.getElementById("sizeText");
+        // if (sizeSlider.value == 0) {
+        //     sizeText.innerHTML = "Any";
+        // } else {
+        //     sizeText.innerHTML = sizeSlider.value;
+        // }
+        //
+        // sizeSlider.oninput = function() {
+        //     if (this.value == 0) {
+        //         sizeText.innerHTML = "Any";
+        //     } else {
+        //         sizeText.innerHTML = new Intl.NumberFormat().format(this.value);
+        //     }
+        // }
 
         function scrollWin() {
             // window.scrollTo(0, 600);
