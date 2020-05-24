@@ -46,7 +46,6 @@ Route::group(['prefix' => '{locale}'], function () {
 
 
 
-    Route::post('/request-more', 'MailController@request_more')->name('request_more');
 
     Route::group(['middleware' => 'auth'], function () {
 
@@ -55,8 +54,14 @@ Route::group(['prefix' => '{locale}'], function () {
         Route::get('/property-list', 'DataController@property_list')->name('property-list');
         Route::post('/publish-property', 'DataController@publish_property')->name('publish-property');
 
+        Route::post('/request-more', 'MailController@request_more')->name('request_more');
+
+        Route::get('/like-this', 'DataController@like_this')->name('like_this');
+        Route::post('/unlike-this', 'DataController@unlike_this')->name('unlike_this');
+        Route::get('/favorite', 'DataController@favorite')->name('favorite');
 
 
+        // user control panel
         Route::get('/users', 'UserController@all_user')->name('account');
         Route::post('/update-status', 'UserController@update_status')->name('update-status');
         Route::post('/delete-user', 'UserController@delete_user')->name('delete-user');

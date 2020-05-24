@@ -176,7 +176,62 @@ class DataController extends Controller
 
     }
 
+    public function like_this(Request $request)
+    {
+        $user = Auth::user();
 
+        $isExist = DB::table('subscription')
+            ->where('user_id', $user->id)
+            ->where('property_id', $request->propertyID)
+            ->first();
+
+
+        if ($isExist) {
+            return response()->json(['url' => '$url']);
+
+        } else {
+            DB::table('subscription')->insert(
+                [
+                    'user_id' => $user->id,
+                    'property_id' => $request->propertyID
+                ]
+            );
+            return response()->json(['url' => '$url']);
+        }
+    }
+
+    public function unlike_this (Request $request)
+    {
+        $user = Auth::user();
+        if ( Auth::check() ){
+
+            DB::table('subscription')
+                ->where('property_id', $_POST['propertyID'])
+                ->where('user_id', $user->id)
+                ->delete();
+        }
+
+        Session::flash('status', 'The property has been removed from favorites');
+        Session::flash('alert-class', 'alert-success');
+
+        return back();
+    }
+
+    public function favorite(Request $request)
+    {
+        $user = Auth::user();
+
+        $allProperties = DB::table('subscription')
+            ->join('houses', 'subscription.property_id', '=', 'houses.property_id')
+            ->select('subscription.created_at', 'houses.title', 'houses.property_id', 'houses.property_code', 'houses.price', 'houses.project_type')
+            ->where('subscription.user_id', $user->id)
+            ->where('houses.status', 1)
+            ->get();
+
+        // echo '<pre>'.print_r($allProperties, 1).'</pre>';
+
+        return View::make('pages/favorite')->with(array("properties"=>$allProperties));
+    }
 
     public function about_us()
     {

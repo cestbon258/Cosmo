@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+<div style="height:120px;"></div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -14,7 +15,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" action="{{ route('password.email', app()->getLocale()) }}">
                         @csrf
 
                         <div class="form-group row">
@@ -44,4 +45,5 @@
         </div>
     </div>
 </div>
+<div style="height:120px;"></div>
 @endsection

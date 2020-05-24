@@ -314,7 +314,7 @@
                 type:'POST',
                 // dataType: 'JSON',
                 // url:'https://postb.in/1588855925699-7338490695692',
-                url:'{{ route('request_more', app()->getLocale())}}',
+                url:'{{ route('like_this', app()->getLocale())}}',
                 data:{
                    _token:'{{csrf_token()}}',
                    propertyURL: window.location.href,

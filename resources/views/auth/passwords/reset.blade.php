@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+<div style="height:120px;"></div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,7 +9,7 @@
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
+                    <form method="POST" action="{{ route('password.update', app()->getLocale()) }}">
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">

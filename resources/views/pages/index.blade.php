@@ -377,12 +377,6 @@
                                             <p style="font-size:16px;">{{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
                                         </div>
                                     @endauth
-                                    <div class="like">
-                                        <i class="fa fa-heart" onclick="favorite(this)"></i>
-                                    </div>
-                                    <div>
-
-                                    </div>
                                 </div>
 
                                 <div class="meida-buttons">
@@ -390,6 +384,8 @@
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
                                     {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
                                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    
+                                    @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart"></i></a>@endauth
                                 </div>
 
                                 <!-- Property Content -->
@@ -469,6 +465,8 @@
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
                                     {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
                                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a>
+
+                                    @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart"></i></a>@endauth
                                 </div>
 
                                 <!-- Property Content -->
@@ -943,6 +941,20 @@
 
         }
 
+        function likeThis(pid) {
+            $.ajax({
+                   type:'get',
+                   url: '{{ route('like_this', app()->getLocale())}}',
+                   data: {propertyID: pid},
+                   dataType: "json",
+                   success:function(data) {
+                       console.log(data);
+                   },
+                   error:function() {
+                   }
+               });
+        }
+
         // Price range
         var priceSlider = document.getElementById("priceRange");
         var priceText = document.getElementById("priceText");
@@ -977,54 +989,9 @@
             }
         }
 
-        function favorite (e){
-            console.log(e);
-            // x.classList.toggle("fa-thumbs-down");
-            // e.preventDefault();
 
-            // $.ajax({
-            //     type:'POST',
-            //     // dataType: 'JSON',
-            //     // url:'https://postb.in/1588855925699-7338490695692',
-            //     url:'{{ route('request_more', app()->getLocale())}}',
-            //     data:{
-            //        _token:'{{csrf_token()}}',
-            //        propertyURL: window.location.href,
-            //        propertyID: "{{$property->property_id}}"
-            //     },
-            //     success:function(data){
-            //         $('.loader').css("display", "none");
-            //     }
-            // });
-            console.log('alalal');
-        }
     </script>
     <style>
-        .like {
-            /* height: 35px; */
-            /* padding: 0 20px; */
-            /* background-color: #947054; */
-            color: #ffffff;
-            /* font-size: 60px; */
-            /* font-weight: 600; */
-            display: inline-block;
-            /* line-height: 35px; */
-            cursor: pointer;
-            position: absolute;
-            bottom: 35%;
-            right: 40%;
-            z-index: 10;
-            -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-            opacity: .9;
 
-        }
-        .like i:hover {
-            color:red;
-            opacity: 1;
-        }
-        .like i {
-            font-size: 72px;
-        }
     </style>
 @stop
