@@ -17,7 +17,6 @@
                 <div class="col-12">
                     <div class="breadcumb-content">
                         <h3 style="position:absolute; bottom:50px; color: white;">About us</h3>
-                        <h5 style="position:absolute; bottom:25px; color: white;">We bring overseas real estate near you</h5>
                     </div>
                 </div>
             </div>
@@ -56,7 +55,7 @@
                     <div class="wow fadeInUp"  data-wow-delay="100ms" style="margin:-70px 20px; font-size: 16px !important;">
 
                         Leasing a property requires a lot of work and a high commitment, which many property owners don’t have the time to handle especially when the property is located overseas. COSMO works with top-class property managers and estate agents around the world. Our partners will handle all the leasing paperwork for you, making your life much easier. COSMO is also committed to finding the best agent for your rental property, we will make sure that we find you the right person specializes in property management and works hard to ensure you a sound investment.
-                        <br><br>
+                        <br><br><br><br><br>
                         Our core values are: Commitment, Integrity, Quality, Partnership, and Innovation.
 
                     </div>

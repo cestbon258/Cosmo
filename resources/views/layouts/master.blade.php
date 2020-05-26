@@ -270,9 +270,9 @@
                             <p class="card-text"><i class="fa fa-weixin fa-2x" style="color:#000201"></i></p>
                           </div>
                         </div> --}}
-                        <div>
+                        {{-- <div>
                             <img class="qrcode-wechat" src="{{ url('img/icons/wechat.jpg') }}">
-                        </div>
+                        </div> --}}
                         <div class="mt-3">
                             <a href="https://www.facebook.com/icosmo.co/" target="_blank"><i class="fa fa-facebook-square fa-2x fb"></i></a>
                             <a href="https://www.instagram.com/icosmo.co/?fbclid=IwAR1tD44E-iESdx10U8a38jgaWocXDLitukGxYi_KN2NmFZcNFbZPalxBtRw" target="_blank"><i class="fa fa-instagram fa-2x ig"></i></a>

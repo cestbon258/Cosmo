@@ -464,7 +464,7 @@ img {
 
 .main-header-area {
   width: 100%;
-  height: 90px;
+  height: 100px;
   position: relative;
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.4);
@@ -472,21 +472,21 @@ img {
   transition-duration: 500ms; }
   @media only screen and (min-width: 768px) and (max-width: 991px) {
     .main-header-area {
-      height: 70px; } }
+      height: 90px; } }
   @media only screen and (max-width: 767px) {
     .main-header-area {
-      height: 70px; } }
+      height: 90px; } }
   /* .main-header-area .classy-nav-container {
     background-color: transparent; } */
   .main-header-area .classy-navbar {
-    height: 90px;
+    height: 100px;
     padding: .5em 60px; }
     @media only screen and (min-width: 768px) and (max-width: 991px) {
       .main-header-area .classy-navbar {
-        height: 70px; } }
+        height: 90px; } }
     @media only screen and (max-width: 767px) {
       .main-header-area .classy-navbar {
-        height: 70px;
+        height: 90px;
         padding: 0.5em 30px; } }
   .main-header-area .classynav ul li a {
     color: #ffffff;
@@ -581,15 +581,15 @@ img {
 .is-sticky .main-header-area {
   width: 100%;
   z-index: 10000 !important;
-  height: 90px;
+  height: 101px;
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2);
   background-color: #000000; }
   @media only screen and (min-width: 768px) and (max-width: 991px) {
     .is-sticky .main-header-area {
-      height: 70px; } }
+      height: 90px; } }
   @media only screen and (max-width: 767px) {
     .is-sticky .main-header-area {
-      height: 70px; } }
+      height: 90px; } }
 
 /* :: 9.0 Welcome Area CSS */
 .single-hero-slide {

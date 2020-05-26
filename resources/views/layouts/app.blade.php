@@ -94,11 +94,11 @@
                     <span>My Properties</span></a>
                 </li>
             @endif
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('favorite', app()->getLocale()) }}">
                 <i class="fas fa-heart"></i>
                 <span>Favorites</span></a>
-            </li>
+            </li> --}}
             @if (Auth::user()->role == 0 )
                 <!-- Divider -->
                 <hr class="sidebar-divider">

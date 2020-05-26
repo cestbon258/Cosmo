@@ -14,7 +14,7 @@
                <div class="row h-100 align-items-center">
                    <div class="col-12">
                        <div class="breadcumb-content">
-                           <h3 class="breadcumb-title">Contact</h3>
+                        <h3 style="position:absolute; bottom:10px; color: white;">Contact</h3>
                        </div>
                    </div>
                </div>

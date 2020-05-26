@@ -30,19 +30,19 @@ class DataController extends Controller
                     ->where('purpose', 'rent')
                     ->where('status', 1)
                     ->orderBy('updated_at', 'desc')
-                    ->get();
+                    ->paginate(6);
             } else {
                 $allProperties = DB::table('houses')
                     ->where('status', 1)
                     ->orderBy('updated_at', 'desc')
-                    ->get();
+                    ->paginate(6);
             }
 
         } else {
             $allProperties = DB::table('houses')
                 ->where('status', 1)
                 ->orderBy('updated_at', 'desc')
-                ->get();
+                ->paginate(6);
         }
 
         // get first image from json
@@ -147,7 +147,7 @@ class DataController extends Controller
         // $query->where('text', 'like', '%'.$text.'%');
         $query->where('status', 1)
               ->orderBy('updated_at', 'desc');
-        $allProperties = $query->get();
+        $allProperties = $query->paginate(6);
 
 
         // get first image from json

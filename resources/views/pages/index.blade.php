@@ -162,7 +162,7 @@
                                         <div class="col-12 col-md-6 col-sm-12 col-lg-6 col-xl-6" style="padding-right: 30px;">
 
                                             <div style="width:100%;" id="price-slider"></div>
-                                            <label><small>Price: </small><span id="price-tag"></span></label>
+                                            <label class="mt-2"><small>Price: </small><span id="price-tag"></span></label>
                                             <input name="priceRange" id="price-range" hidden>
 
                                             {{-- <label><small>Price: </small><span id="price-tag"></span></label> --}}
@@ -175,7 +175,7 @@
 
                                         <div class="col-8 col-md-4 col-sm-8 col-lg-4 col-xl-4">
                                             <div style="width:100%;" id="unit-slider"></div>
-                                            <label><small>Unit: </small><span id="unit-tag"></span></label>
+                                            <label class="mt-2"><small>Unit: </small><span id="unit-tag"></span></label>
                                             <input name="unitRange" id="unit-range" hidden>
                                             {{-- <div class="form-group" style="width:100%;">
                                                 <input type="range" class="slider" min="0" max="10000" value="0" step="50" id="sizeRange" name="size">
@@ -400,7 +400,7 @@
                                     {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
                                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a>
 
-                                    @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart"></i></a>@endauth
+                                    @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth
                                 </div>
 
                                 <!-- Property Content -->
@@ -481,7 +481,7 @@
                                     {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
                                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a>
 
-                                    @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart"></i></a>@endauth
+                                    @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth
                                 </div>
 
                                 <!-- Property Content -->
@@ -540,6 +540,8 @@
 
 
 
+
+
                 {{-- <!-- Single Featured Property -->
                 <div class="col-12 col-md-6 col-xl-4">
                     <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="600ms">
@@ -583,23 +585,26 @@
                 </div> --}}
             </div>
         </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                {{ $properties->onEachSide(1)->links() }}
+            </div>
+        </div>
     </section>
     <!-- ##### Featured Properties Area End ##### -->
 
     <!-- ##### Call To Action Area Start ##### -->
-    <section class="call-to-action-area bg-fixed bg-overlay-black" style="background-image: url( {{url('img/bg-img/cta.jpg')}} )">
+    {{-- <section class="call-to-action-area bg-fixed bg-overlay-black" style="background-image: url( {{url('img/bg-img/cta.jpg')}} )">
         <div class="container h-100">
             <div class="row align-items-center h-100">
                 <div class="col-12">
                     <div class="cta-content text-center">
                         <h2 class="wow fadeInUp" data-wow-delay="300ms">@lang('index.are_you_looking_for')</h2>
-                        {{-- <h6 class="wow fadeInUp" data-wow-delay="400ms">Suspendisse dictum enim sit amet libero malesuada feugiat.</h6> --}}
-                        {{-- <a href="#" class="btn south-btn mt-50 wow fadeInUp" data-wow-delay="500ms">Search</a> --}}
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- ##### Call To Action Area End ##### -->
 
     <!-- ##### Testimonials Area Start ##### -->
