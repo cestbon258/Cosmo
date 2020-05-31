@@ -22,11 +22,132 @@
 
 @stop
 
+
+<style>
+/* propert content */
+.facebook {
+    background: url( {{url("img/icons/facebook-off.png")}} );
+
+}
+.facebook:hover {
+    background: url( {{url("img/icons/facebook-on.png")}} );
+}
+.whatsapp {
+    background: url( {{url("img/icons/whatsapp-off.png")}} );
+
+}
+.whatsapp:hover {
+    background: url( {{url("img/icons/whatsapp-on.png")}} );
+}
+.linkedin {
+    background: url( {{url("img/icons/linkedin-off.png")}} );
+
+}
+.linkedin:hover {
+    background: url( {{url("img/icons/linkedin-on.png")}} );
+}
+
+
+.vpt {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 75%; /* 16:9 Aspect Ratio */
+}
+
+.describe {
+  position: absolute;
+  top: 120px;
+
+  width: 100%;
+
+}
+.responsive-iframe {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 80%;
+  height: 80%;
+  border: none;
+}
+@media screen and (min-width: 601px) {
+
+}
+
+@media screen and (max-width: 600px) {
+.container h3 {
+    font-size:18px;
+    }
+.topping {
+    margin-bottom:-250px;
+}
+.describe {
+  position: absolute;
+  top: 10px;
+
+}
+
+.home {
+    margin-top: -200px;
+    padding-top: 0px;
+}
+.featured-properties-area {
+    margin-top: -120px !important;
+    }
+}
+h5 {
+        margin-bottom:  0px !important;
+        margin-top:     -20px !important;
+}
+h6 {
+        margin-bottom:  -5px !important;
+}
+.thumb-space {
+    margin-bottom: 15px !important;
+}
+.social {
+    margin-top:  40px;
+    margin-left: 15px;
+}
+.facebook, .whatsapp, .linkedin{
+    margin: -20px 10px 10px -5px;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+
+}
+
+.center, .social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detail-btn {
+  background-color: #947054;
+  border: 1px solid #947054;
+  color: white;
+  margin-top: 10px;
+  padding: 6px 25px;
+  text-align: center;
+  font-size: 16px;
+  transition: 0.8s;
+  border-radius: 30px;
+}
+
+.detail-btn:hover {
+  background-color: white;
+  color: #947054;
+  border: 1px solid #947054;
+}
+
+
+</style>
 @section('content')
 
 
     <!-- ##### Hero Area Start ##### -->
-    <section class="hero-area">
+    <section class="hero-area" id="bg-video">
         <video autoplay="autoplay" muted="muted" loop="loop" playsinline>
             <source src="{{ URL::asset('logo/cosmo_v4.mp4') }}" type="video/mp4">
         </video>
@@ -71,6 +192,7 @@
     </section>
     <!-- ##### Hero Area End ##### -->
 
+    <div id="nav-placeholder"  style="height:155px; display:none;"></div>
     <!-- ##### Advance Search Area Start ##### -->
     <div class="south-search-area">
         <div class="container">
@@ -92,6 +214,32 @@
                                         <input type="input" class="form-control" name="input" placeholder="Keyword">
                                     </div>
                                 </div> --}}
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        You want to:
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <select class="form-control" name="purpose">
+                                            <option>Buy</option>
+                                            <option>Rent</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <select class="form-control" name="propertyType">
+                                            <option>All Property Type</option>
+                                            <option>Commercial</option>
+                                            <option>Industrial</option>
+                                            <option>Retail</option>
+                                            <option>Residential</option>
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
@@ -159,7 +307,7 @@
                                     <br>
                                     <div class="row">
 
-                                        <div class="col-12 col-md-6 col-sm-12 col-lg-6 col-xl-6" style="padding-right: 30px;">
+                                        <div class="col-12 col-md-6 col-sm-12 col-lg-6 col-xl-6" style="padding-right: 30px; margin-bottom: 20px;">
 
                                             <div style="width:100%;" id="price-slider"></div>
                                             <label class="mt-2"><small>Price: </small><span id="price-tag"></span></label>
@@ -175,7 +323,7 @@
 
                                         <div class="col-8 col-md-4 col-sm-8 col-lg-4 col-xl-4">
                                             <div style="width:100%;" id="unit-slider"></div>
-                                            <label class="mt-2"><small>Unit: </small><span id="unit-tag"></span></label>
+                                            <label class="mt-2"><small>Size: </small><span id="unit-tag"></span></label>
                                             <input name="unitRange" id="unit-range" hidden>
                                             {{-- <div class="form-group" style="width:100%;">
                                                 <input type="range" class="slider" min="0" max="10000" value="0" step="50" id="sizeRange" name="size">
@@ -357,6 +505,7 @@
             <iframe class="embed-responsive-item" src="https://unbranded.youriguide.com/28626_mt_rushmore_rd_rancho_palos_verdes_ca?__avoid-embed-load__=&nosplash=&page=tour&noinitanimation=1&pano=3&rotation=-0.24434609527920614&elevation=0&from=singlemessag"></iframe>
         </div>
     </div> --}}
+    <div style="height:80px; display:none;" id="featured-property"></div>
 
     <!-- ##### Featured Properties Area Start ##### -->
     <section class="featured-properties-area section-padding-100-50">
@@ -376,78 +525,38 @@
                         <!-- Single Featured Property -->
                         <div class="col-12 col-md-6 col-xl-4">
                             <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
+
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
-                                    {{-- @auth --}}
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
-                                    {{-- @else
-                                        <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
-                                    @endauth --}}
+                                    <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
 
                                     <div class="tag">
                                         <span>For {{$property->purpose}}</span>
                                     </div>
-                                    @auth
-                                        <div class="list-price">
-                                            <p style="font-size:16px;">{{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
-                                        </div>
-                                    @endauth
-                                </div>
-
-                                <div class="meida-buttons">
-                                    <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i></a>
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
-                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
-                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a>
-
-                                    @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth
                                 </div>
 
                                 <!-- Property Content -->
-                                <div class="property-content">
+                                <div class="property-content" style="background-color: white;">
+                                    <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:54px;"><h5>{{$property->title}}</h5></div></a>
+                                    <p class="location thumb-space" style="font-size: 16px;">{{$property->city}}</p>
+                                    <h6>Expected Date of Completion</h6>
+                                    <p class="thumb-space">{{$property->time ? $property->time : 'completed' }}</p>
 
-                                    {{-- @auth --}}
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    {{-- @else
-                                        <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    @endauth --}}
+                                    <h6>Price Range</h6>
+                                    <p class="thumb-space">Prices from {{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
+                                    <div class="social">
+                                        <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><div class="whatsapp"></div></a>
 
-                                    <div style="height:80px;"><p class="location"><img src="{{ url('img/icons/location.png') }}" alt="">{{$property->address}}</p></div>
-                                    <div style="height: 120px;">
-                                        {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
-                                        <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
-                                        {{-- @auth --}}
-                                            <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">@lang('index.read_more')</a>
-                                        {{-- @else
-                                            <a href="{{ url('login') }}">Read More</a>
-                                        @endauth --}}
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><div class="facebook"></div></a>
+
+                                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><div class="linkedin"></div></a>
+
+                                        {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
+
+                                        {{-- @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth --}}
                                     </div>
-
-                                    <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                        @if ($property->vr_url)
-                                            <div>
-                                                @auth
-                                                    <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
-                                                @else
-                                                    <span style="font-size:16px;"><mark><i>VR</i></mark></span>
-                                                @endauth
-                                            </div>
-                                        @endif
-                                        <div class="new-tag">
-                                            <img src="{{ url('img/icons/new.png') }}" alt="">
-                                        </div>
-                                        <div class="bathroom">
-                                            <img src="{{ url('img/icons/bathtub.png') }}" alt="">
-                                            <span>{{$property->bathroom}}</span>
-                                        </div>
-                                        <div class="garage">
-                                            <img src="{{ url('img/icons/garage.png') }}" alt="">
-                                            <span>{{$property->bedroom}}</span>
-                                        </div>
-                                        <div class="space">
-                                            <img src="{{ url('img/icons/space.png') }}" alt="">
-                                            <span>{{$property->size}} {{$property->measurement}}</span>
-                                        </div>
+                                    <div class="center">
+                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}"><button class="button detail-btn">Details</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -458,79 +567,31 @@
                             <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
-                                    {{-- @auth --}}
                                         <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
-                                    {{-- @else
-                                        <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
-                                    @endauth --}}
-
-
-                                    {{-- <div class="tag">
-                                        <span>For {{$property->purpose}}</span>
-                                    </div>
-                                    @auth
-                                        <div class="list-price">
-                                            <p>${{$property->price}}</p>
-                                        </div>
-                                    @endauth --}}
-                                </div>
-
-                                <div class="meida-buttons">
-                                    <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i></a>
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
-                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
-                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a>
-
-                                    @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth
                                 </div>
 
                                 <!-- Property Content -->
-                                <div class="property-content">
-                                    {{-- @auth --}}
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    {{-- @else
-                                        <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    @endauth --}}
-                                    <div style="height:80px;"><p class="location"><img src="{{ url('img/icons/location.png') }}" alt="">{{$property->address}}</p></div>
-                                    <div style="height: 120px;">
-                                        {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
-                                        <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
-                                        {{-- @auth --}}
-                                            <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">@lang('index.read_more')</a>
-                                        {{-- @else
-                                            <a href="{{ url('login') }}">Read More</a>
-                                        @endauth --}}
+                                <div class="property-content" style="background-color: white;">
+                                    <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:54px;"><h5>{{$property->title}}</h5></div></a>
+                                    <p class="location thumb-space" style="font-size: 16px;">{{$property->city}}</p>
+                                    <h6>Expected Date of Completion</h6>
+                                    <p class="thumb-space">{{$property->completed_date ? $property->completed_date : 'Completed'}}</p>
+
+                                    <h6>Price Range</h6>
+                                    <p class="thumb-space">login to view more detials</p>
+                                    <div class="social">
+                                        <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><div class="whatsapp"></div></a>
+
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><div class="facebook"></div></a>
+
+                                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><div class="linkedin"></div></a>
+
+                                        {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
+
+                                        {{-- @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth --}}
                                     </div>
-
-                                    <div class="property-meta-data d-flex align-items-end justify-content-between">
-
-                                            @if ($property->vr_url)
-                                                <div>
-                                                    @auth
-                                                        <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
-                                                    @else
-                                                        <span style="font-size:16px;"><mark><i>VR</i></mark></span>
-                                                    @endauth
-                                                </div>
-                                            @else
-                                                <div style="height:27px;"></div>
-                                            @endif
-
-                                        {{-- <div class="new-tag">
-                                            <img src="img/icons/new.png" alt="">
-                                        </div> --}}
-                                        {{-- <div class="bathroom">
-                                            <img src="img/icons/bathtub.png" alt="">
-                                            <span>{{$property->bathroom}}</span>
-                                        </div>
-                                        <div class="garage">
-                                            <img src="img/icons/garage.png" alt="">
-                                            <span>{{$property->bedroom}}</span>
-                                        </div>
-                                        <div class="space">
-                                            <img src="img/icons/space.png" alt="">
-                                            <span>{{$property->size}} {{$property->measurement}}</span>
-                                        </div> --}}
+                                    <div class="center">
+                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}"><button class="button detail-btn">Details</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -587,7 +648,7 @@
         </div>
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                {{ $properties->onEachSide(1)->links() }}
+                {{ $properties->appends(request()->query())->onEachSide(1)->links() }}
             </div>
         </div>
     </section>
@@ -672,137 +733,163 @@
                 </div>
                 <img src="{{url('img/gallery/Australia/perth-1200x720.jpg')}}">
             </div> --}}
+
+            <div class="col-xl-4 col-md-6 px-0 view view-tenth " style=" background-color: #000;">
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=Australia&city=Brisbane']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.brisbane')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/Australia/Brisbane.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.brisbane')</h2>
+                        <p><i>@lang('index.brisbane_text')</i></p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
+            </div>
+
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.brisbane')</h4>
-                </div>
-                <img src="{{url('img/gallery/Australia/Brisbane.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.brisbane')</h2>
-                    <p><i>@lang('index.brisbane_text')</i></p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=Australia&city=gold coast']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.gold_coast')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/Australia/gold-coast.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.gold_coast')</h2>
+                        <p><i>@lang('index.gold_coast_text')</i></p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.gold_coast')</h4>
-                </div>
-                <img src="{{url('img/gallery/Australia/gold-coast.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.gold_coast')</h2>
-                    <p><i>@lang('index.gold_coast_text')</i></p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=Australia&city=melbourne']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.melbourne')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/Australia/melbourne.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.melbourne')</h2>
+                        <p><i>@lang('index.melbourne_text')</i></p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.melbourne')</h4>
-                </div>
-                <img src="{{url('img/gallery/Australia/melbourne.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.melbourne')</h2>
-                    <p><i>@lang('index.melbourne_text')</i></p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=Australia&city=perth']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.perth')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/Australia/perth.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.perth')</h2>
+                        <p><i>@lang('index.perth_text')</i></p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.perth')</h4>
-                </div>
-                <img src="{{url('img/gallery/Australia/perth.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.perth')</h2>
-                    <p><i>@lang('index.perth_text')</i></p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=Australia&city=sydney']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.sydney')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/Australia/sydney.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.sydney')</h2>
+                        <p>@lang('index.sydney_text')</p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.sydney')</h4>
-                </div>
-                <img src="{{url('img/gallery/Australia/sydney.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.sydney')</h2>
-                    <p>@lang('index.sydney_text')</p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=UK&city=leeds']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.leeds')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/UK/leeds.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.leeds')</h2>
+                        <p><i>@lang('index.leeds_text')</i></p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.leeds')</h4>
-                </div>
-                <img src="{{url('img/gallery/UK/leeds.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.leeds')</h2>
-                    <p><i>@lang('index.leeds_text')</i></p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=UK&city=liverpool']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.liverpool')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/UK/liverpool.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.liverpool')</h2>
+                        <p><i>@lang('index.liverpool_text')</i></p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.liverpool')</h4>
-                </div>
-                <img src="{{url('img/gallery/UK/liverpool.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.liverpool')</h2>
-                    <p><i>@lang('index.liverpool_text')</i></p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=UK&city=london']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.london')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/UK/london.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.london')</h2>
+                        <p><i>@lang('index.london_text')</i></p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.london')</h4>
-                </div>
-                <img src="{{url('img/gallery/UK/london.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.london')</h2>
-                    <p><i>@lang('index.london_text')</i></p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=UK&city=manchester']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.manchester')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/UK/manchester.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.manchester')</h2>
+                        <p><i>@lang('index.manchester_text')</i></p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.manchester')</h4>
-                </div>
-                <img src="{{url('img/gallery/UK/manchester.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.manchester')</h2>
-                    <p><i>@lang('index.manchester_text')</i></p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=UK&city=sheffield']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.sheffield')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/UK/sheffield.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.sheffield')</h2>
+                        <p><i>@lang('index.sheffield_text')</i></p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.sheffield')</h4>
-                </div>
-                <img src="{{url('img/gallery/UK/sheffield.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.sheffield')</h2>
-                    <p><i>@lang('index.sheffield_text')</i></p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=US&city=los angeles']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.los_angeles')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/US/los-angeles.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.los_angeles')</h2>
+                        <p><i>@lang('index.los_angeles_text')</i></p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
             </div>
             <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.los_angeles')</h4>
-                </div>
-                <img src="{{url('img/gallery/US/los-angeles.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.los_angeles')</h2>
-                    <p><i>@lang('index.los_angeles_text')</i></p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-6 px-0 view view-tenth" style=" background-color: #000;">
-                <div class="text-center centered" style="z-index: 1;">
-                    <h4 style="color:white;" class="text-uppercase">@lang('index.miami')</h4>
-                </div>
-                <img src="{{url('img/gallery/US/miami.jpg')}}">
-                <div class="mask">
-                    <h2>@lang('index.miami')</h2>
-                    <p><i>@lang('index.miami_text')</i></p>
-                    {{-- <a href="#" class="info">Read More</a> --}}
-                </div>
+                <a href="{{ route('search-by', [app()->getLocale(), 'country=US&city=miami']) }}">
+                    <div class="text-center centered" style="z-index: 1;">
+                        <h4 style="color:white;" class="text-uppercase">@lang('index.miami')</h4>
+                    </div>
+                    <img src="{{url('img/gallery/US/miami.jpg')}}">
+                    <div class="mask">
+                        <h2>@lang('index.miami')</h2>
+                        <p><i>@lang('index.miami_text')</i></p>
+                        {{-- <a href="#" class="info">Read More</a> --}}
+                    </div>
+                </a>
             </div>
 
             {{-- <div class="col-xl-4 col-md-6 px-0 grid-image">
@@ -1006,11 +1093,11 @@
         var unitTag = document.getElementById('unit-tag');
         var unitRange = document.getElementById('unit-range');
         noUiSlider.create(unitSlider, {
-            start: [0, 1000],
+            start: [0, 10000],
             connect: true,
             range: {
                 'min': 0,
-                'max': 1000
+                'max': 10000
             },
             orientation: 'horizontal', // 'horizontal' or 'vertical'
             step: 50,
@@ -1027,6 +1114,27 @@
 
         });
 
+        // if pagination, scroll to specific position and hide video
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var page = url.searchParams.get('page');
+
+        if(page != null) {
+            $('#nav-placeholder').css("display", "block");
+            $('#bg-video').css("display", "none");
+
+            $('#featured-property').css("display", "block");
+
+
+            var elmnt = document.getElementById("featured-property");
+            elmnt.scrollIntoView();
+        }
     </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 
 @stop

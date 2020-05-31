@@ -165,6 +165,10 @@
                                 </div>
                             </div>
 
+                            <div class="form-group mt-3">
+                                <label for="completionDate">Date of Completion</label>
+                                <input type="text" class="form-control" name="completedDate" autocomplete="off" placeholder="Expected Date">
+                            </div>
 
                             <div class="form-group mt-3">
                                 <label for="url">VR URL</label>

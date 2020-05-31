@@ -46,6 +46,16 @@ Route::group(['prefix' => '{locale}'], function () {
 
 
 
+    Route::get('/search-by', 'DataController@search_by')->name('search-by');
+
+    Route::get('/get-districts', 'DataController@get_districts')->name('get_districts');
+
+
+    Route::get('/vr-property', 'DataController@get_vr_property')->name('vr-property');
+
+
+
+
 
     Route::group(['middleware' => 'auth'], function () {
 

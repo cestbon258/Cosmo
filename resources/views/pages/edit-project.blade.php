@@ -210,6 +210,11 @@
                             </div>
 
                             <div class="form-group mt-3">
+                                <label for="completionDate">Date of Completion</label>
+                                <input type="text" class="form-control" name="completedDate" value="{{$property->completed_date ? $property->completed_date :''}}" autocomplete="off" placeholder="Expected Date">
+                            </div>
+
+                            <div class="form-group mt-3">
                                 <label for="url">VR URL</label>
                                 <input type="text" class="form-control" name="url" value="{{$property->vr_url ? $property->vr_url :''}}" autocomplete="off" placeholder="url">
                             </div>

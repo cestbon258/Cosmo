@@ -137,6 +137,7 @@ class ProjectController extends Controller
                         'pictures'     => json_encode($imgArray),
                         'videos'       => json_encode($videoArray),
                         'files'        => json_encode($pdfArray),
+                        'completed_date' => $_POST['completedDate'],
                         'vr_url'       => $vrURL,
                         'description'  => json_encode($_POST['description']),
                         'project_type' => 2,
@@ -423,6 +424,7 @@ class ProjectController extends Controller
                     'pictures'     => $imgJson,
                     'videos'       => $videoJson,
                     'files'        => $pdfJson,
+                    'completed_date' => $_POST['completedDate'],
                     'vr_url'       => $vrURL,
                     'description'  => json_encode($_POST['description'])
                 ]

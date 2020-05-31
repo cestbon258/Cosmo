@@ -5,7 +5,124 @@
 @section('specificScript')
     <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
 @stop
+<style>
+/* propert content */
+.facebook {
+    background: url( {{url("img/icons/facebook-off.png")}} );
 
+}
+.facebook:hover {
+    background: url( {{url("img/icons/facebook-on.png")}} );
+}
+.whatsapp {
+    background: url( {{url("img/icons/whatsapp-off.png")}} );
+
+}
+.whatsapp:hover {
+    background: url( {{url("img/icons/whatsapp-on.png")}} );
+}
+.linkedin {
+    background: url( {{url("img/icons/linkedin-off.png")}} );
+
+}
+.linkedin:hover {
+    background: url( {{url("img/icons/linkedin-on.png")}} );
+}
+
+
+.vpt {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 75%; /* 16:9 Aspect Ratio */
+}
+
+.describe {
+  position: absolute;
+  top: 120px;
+
+  width: 100%;
+
+}
+.responsive-iframe {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 80%;
+  height: 80%;
+  border: none;
+}
+@media screen and (min-width: 601px) {
+
+}
+
+@media screen and (max-width: 600px) {
+.container h3 {
+    font-size:18px;
+    }
+.topping {
+    margin-bottom:-250px;
+}
+.describe {
+  position: absolute;
+  top: 10px;
+
+}
+
+.home {
+    margin-top: -200px;
+    padding-top: 0px;
+}
+.featured-properties-area {
+    margin-top: -120px !important;
+    }
+}
+h5 {
+        margin-bottom:  0px !important;
+        margin-top:     -20px !important;
+}
+h6 {
+        margin-bottom:  -5px !important;
+}
+.thumb-space {
+    margin-bottom: 15px !important;
+}
+.social {
+    margin-top:  40px;
+    margin-left: 15px;
+}
+.facebook, .whatsapp, .linkedin{
+    margin: -20px 10px 10px -5px;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+
+}
+
+.center, .social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detail-btn {
+  background-color: #947054;
+  border: 1px solid #947054;
+  color: white;
+  margin-top: 10px;
+  padding: 6px 25px;
+  text-align: center;
+  font-size: 16px;
+  transition: 0.8s;
+  border-radius: 30px;
+}
+
+.detail-btn:hover {
+  background-color: white;
+  color: #947054;
+  border: 1px solid #947054;
+}
+</style>
 @section('content')
 
     <div style="height:70px;"></div>
@@ -96,7 +213,7 @@
                                     <br>
                                     <div class="row">
 
-                                        <div class="col-12 col-md-6 col-sm-12 col-lg-6 col-xl-6" style="padding-right: 30px;">
+                                        <div class="col-12 col-md-6 col-sm-12 col-lg-6 col-xl-6" style="padding-right: 30px; margin-bottom: 20px;">
 
                                             <div style="width:100%;" id="price-slider"></div>
                                             <label class="mt-2"><small>Price: </small><span id="price-tag"></span></label>
@@ -112,7 +229,7 @@
 
                                         <div class="col-8 col-md-4 col-sm-8 col-lg-4 col-xl-4">
                                             <div style="width:100%;" id="unit-slider"></div>
-                                            <label class="mt-2"><small>Unit: </small><span id="unit-tag"></span></label>
+                                            <label class="mt-2"><small>Size: </small><span id="unit-tag"></span></label>
                                             <input name="unitRange" id="unit-range" hidden>
                                             {{-- <div class="form-group" style="width:100%;">
                                                 <input type="range" class="slider" min="0" max="10000" value="0" step="50" id="sizeRange" name="size">
@@ -275,9 +392,10 @@
     </div>
     <!-- ##### Advance Search Area End ##### -->
 
+    <div style="height:80px; display:none;" id="results"></div>
 
     <!-- ##### Featured Properties Area Start ##### -->
-    <section class="featured-properties-area section-padding-100-50">
+    <section class="featured-properties-area section-padding-100-50" id="results">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -294,75 +412,38 @@
                         <!-- Single Featured Property -->
                         <div class="col-12 col-md-6 col-xl-4">
                             <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
+
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
-                                    {{-- @auth --}}
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
-                                    {{-- @else
-                                        <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
-                                    @endauth --}}
+                                    <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
 
                                     <div class="tag">
                                         <span>For {{$property->purpose}}</span>
                                     </div>
-                                    @auth
-                                        <div class="list-price">
-                                            <p style="font-size:16px;">{{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
-                                        </div>
-                                    @endauth
-                                </div>
-
-                                <div class="meida-buttons">
-                                    <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i></a>
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
-                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
-                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a>
-                                    @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth
                                 </div>
 
                                 <!-- Property Content -->
-                                <div class="property-content">
-                                    {{-- @auth --}}
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    {{-- @else
-                                        <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    @endauth --}}
-                                    <div style="height:80px;"><p class="location"><img src="{{ url('img/icons/location.png') }}" alt="">{{$property->address}}</p></div>
-                                    <div style="height: 120px;">
-                                        {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
-                                        <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
-                                        {{-- @auth --}}
-                                            <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">Read More</a>
-                                        {{-- @else
-                                            <a href="{{ url('login') }}">Read More</a>
-                                        @endauth --}}
-                                    </div>
+                                <div class="property-content" style="background-color: white;">
+                                    <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:54px;"><h5>{{$property->title}}</h5></div></a>
+                                    <p class="location thumb-space" style="font-size: 16px;">{{$property->city}}</p>
+                                    <h6>Expected Date of Completion</h6>
+                                    <p class="thumb-space">{{$property->time ? $property->time : 'completed' }}</p>
 
-                                    <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                        @if ($property->vr_url)
-                                            <div>
-                                                @auth
-                                                    <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
-                                                @else
-                                                    <span style="font-size:16px;"><mark><i>VR</i></mark></span>
-                                                @endauth
-                                            </div>
-                                        @endif
-                                        <div class="new-tag">
-                                            <img src="{{ url('img/icons/new.png') }}" alt="">
-                                        </div>
-                                        <div class="bathroom">
-                                            <img src="{{ url('img/icons/bathtub.png') }}" alt="">
-                                            <span>{{$property->bathroom}}</span>
-                                        </div>
-                                        <div class="garage">
-                                            <img src="{{ url('img/icons/garage.png') }}" alt="">
-                                            <span>{{$property->bedroom}}</span>
-                                        </div>
-                                        <div class="space">
-                                            <img src="{{ url('img/icons/space.png') }}" alt="">
-                                            <span>{{$property->size}} {{$property->measurement}}</span>
-                                        </div>
+                                    <h6>Price Range</h6>
+                                    <p class="thumb-space">Prices from {{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
+                                    <div class="social">
+                                        <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><div class="whatsapp"></div></a>
+
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><div class="facebook"></div></a>
+
+                                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><div class="linkedin"></div></a>
+
+                                        {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
+
+                                        {{-- @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth --}}
+                                    </div>
+                                    <div class="center">
+                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}"><button class="button detail-btn">Details</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -373,76 +454,31 @@
                             <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
-                                    {{-- @auth --}}
                                         <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
-                                    {{-- @else
-                                        <a href="{{ url('login') }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"><a>
-                                    @endauth --}}
-
-
-                                    {{-- <div class="tag">
-                                        <span>For {{$property->purpose}}</span>
-                                    </div>
-                                    @auth
-                                        <div class="list-price">
-                                            <p>${{$property->price}}</p>
-                                        </div>
-                                    @endauth --}}
-                                </div>
-
-                                <div class="meida-buttons">
-                                    <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i></a>
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-facebook-f"></i></a>
-                                    {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
-                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><i class="fa fa-linkedin"></i></a>
-                                    @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth
                                 </div>
 
                                 <!-- Property Content -->
-                                <div class="property-content">
-                                    {{-- @auth --}}
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    {{-- @else
-                                        <a href="{{ url('login') }}"><div style="height:50px;"><h5>{{$property->title}}</h5></div></a>
-                                    @endauth --}}
-                                    <div style="height:80px;"><p class="location"><img src="{{ url('img/icons/location.png') }}" alt="">{{$property->address}}</p></div>
-                                    <div style="height: 120px;">
-                                        {{-- <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags($property->description) }} </p> --}}
-                                        <p class="text-wrapper text-left" style="margin-bottom: 0;">{{ strip_tags(htmlspecialchars_decode($property->description)) }} </p>
-                                        {{-- @auth --}}
-                                            <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">Read More</a>
-                                        {{-- @else
-                                            <a href="{{ url('login') }}">Read More</a>
-                                        @endauth --}}
-                                    </div>
+                                <div class="property-content" style="background-color: white;">
+                                    <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:54px;"><h5>{{$property->title}}</h5></div></a>
+                                    <p class="location thumb-space" style="font-size: 16px;">{{$property->city}}</p>
+                                    <h6>Expected Date of Completion</h6>
+                                    <p class="thumb-space">2022 Q2</p>
 
-                                    <div class="property-meta-data d-flex align-items-end justify-content-between">
-                                        @if ($property->vr_url)
-                                            <div>
-                                                @auth
-                                                    <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
-                                                @else
-                                                    <span style="font-size:16px;"><mark><i>VR</i></mark></span>
-                                                @endauth
-                                            </div>
-                                        @else
-                                            <div style="height:27px;"></div>
-                                        @endif
-                                        {{-- <div class="new-tag">
-                                            <img src="img/icons/new.png" alt="">
-                                        </div> --}}
-                                        {{-- <div class="bathroom">
-                                            <img src="img/icons/bathtub.png" alt="">
-                                            <span>{{$property->bathroom}}</span>
-                                        </div>
-                                        <div class="garage">
-                                            <img src="img/icons/garage.png" alt="">
-                                            <span>{{$property->bedroom}}</span>
-                                        </div>
-                                        <div class="space">
-                                            <img src="img/icons/space.png" alt="">
-                                            <span>{{$property->size}} {{$property->measurement}}</span>
-                                        </div> --}}
+                                    <h6>Price Range</h6>
+                                    <p class="thumb-space">Prices from {{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
+                                    <div class="social">
+                                        <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><div class="whatsapp"></div></a>
+
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><div class="facebook"></div></a>
+
+                                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><div class="linkedin"></div></a>
+
+                                        {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
+
+                                        {{-- @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth --}}
+                                    </div>
+                                    <div class="center">
+                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}"><button class="button detail-btn">Details</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -453,7 +489,7 @@
         </div>
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                {{ $properties->onEachSide(1)->links() }}
+                {{ $properties->appends(request()->query())->onEachSide(1)->links() }}
             </div>
         </div>
     </section>
@@ -538,11 +574,11 @@
         var unitTag = document.getElementById('unit-tag');
         var unitRange = document.getElementById('unit-range');
         noUiSlider.create(unitSlider, {
-            start: [0, 1000],
+            start: [0, 10000],
             connect: true,
             range: {
                 'min': 0,
-                'max': 1000
+                'max': 10000
             },
             orientation: 'horizontal', // 'horizontal' or 'vertical'
             step: 50,
@@ -594,8 +630,9 @@
         // }
 
         function scrollWin() {
-            // window.scrollTo(0, 600);
-            window.scrollBy(0, 390);
+            $('#results').css("display", "block");
+            var elmnt = document.getElementById("results");
+            elmnt.scrollIntoView();
         }
 
         scrollWin();

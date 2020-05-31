@@ -83,7 +83,7 @@
 </head>
 <body>
         <!-- ##### Header Area Start ##### -->
-        <header class="header-area">
+<header class="header-area">
 
         {{-- @auth
             <!-- Top Header Area -->
@@ -104,126 +104,115 @@
             </div>
         @endauth --}}
 
-<!-- Main Header Area -->
-<div class="main-header-area" id="stickyHeader">
-    <div class="classy-nav-container breakpoint-off">
-        <!-- Classy Menu -->
-        <nav class="classy-navbar justify-content-between" id="southNav">
+    <!-- Main Header Area -->
+    <div class="main-header-area" id="stickyHeader">
+        <div class="classy-nav-container breakpoint-off">
+            <!-- Classy Menu -->
+            <nav class="classy-navbar justify-content-between" id="southNav">
 
-            <!-- Logo -->
-            <a class="nav-brand" href="{{ route('/', app()->getLocale()) }}"><img class="w-logo" src="{{ url("logo/logo.png") }}" alt=""></a>
+                <!-- Logo -->
+                <a class="nav-brand" href="{{ route('/', app()->getLocale()) }}"><img class="w-logo" src="{{ url("logo/logo.png") }}" alt=""></a>
 
-            <!-- Navbar Toggler -->
-            <div class="classy-navbar-toggler">
-                <span class="navbarToggler"><span></span><span></span><span></span></span>
-            </div>
-
-            <!-- Menu -->
-            <div class="classy-menu">
-
-                <!-- close btn -->
-                <div class="classycloseIcon">
-                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                <!-- Navbar Toggler -->
+                <div class="classy-navbar-toggler">
+                    <span class="navbarToggler"><span></span><span></span><span></span></span>
                 </div>
 
-                <!-- Nav Start -->
-                <div class="classynav">
-                    <ul>
-                        <li><a href="{{ route('/', app()->getLocale()) }}">@lang('master.home')</a></li>
-                        <!--<li><a href="#">Pages</a>
-                        <ul class="dropdown">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about-us.html">About Us</a></li>
-                        <li><a href="#">Listings</a>
-                        <ul class="dropdown">
-                        <li><a href="listings.html">Listings</a></li>
-                        <li><a href="single-listings.html">Single Listings</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Blog</a>
-                <ul class="dropdown">
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="single-blog.html">Single Blog</a></li>
-            </ul>
-        </li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="elements.html">Elements</a></li>
-            </ul>
-        </li>-->
-        <li><a href="{{ route('about-us', app()->getLocale()) }}">@lang('master.about_us')</a></li>
-        {{-- <li><a href="listings.html">Properties</a></li>
-        <li><a href="blog.html">Blog</a></li> --}}
-        <!--<li><a href="#">Mega Menu</a>
-        <div class="megamenu">
-        <ul class="single-mega cn-col-4">
-        <li class="title">Headline 1</li>
-        <li><a href="#">Mega Menu Item 1</a></li>
-        <li><a href="#">Mega Menu Item 2</a></li>
-        <li><a href="#">Mega Menu Item 3</a></li>
-        <li><a href="#">Mega Menu Item 4</a></li>
-        <li><a href="#">Mega Menu Item 5</a></li>
-        </ul>
-        <ul class="single-mega cn-col-4">
-        <li class="title">Headline 2</li>
-        <li><a href="#">Mega Menu Item 1</a></li>
-        <li><a href="#">Mega Menu Item 2</a></li>
-        <li><a href="#">Mega Menu Item 3</a></li>
-        <li><a href="#">Mega Menu Item 4</a></li>
-        <li><a href="#">Mega Menu Item 5</a></li>
-        </ul>
-        <ul class="single-mega cn-col-4">
-        <li class="title">Headline 3</li>
-        <li><a href="#">Mega Menu Item 1</a></li>
-        <li><a href="#">Mega Menu Item 2</a></li>
-        <li><a href="#">Mega Menu Item 3</a></li>
-        <li><a href="#">Mega Menu Item 4</a></li>
-        <li><a href="#">Mega Menu Item 5</a></li>
-        </ul>
-        <ul class="single-mega cn-col-4">
-        <li class="title">Headline 4</li>
-        <li><a href="#">Mega Menu Item 1</a></li>
-        <li><a href="#">Mega Menu Item 2</a></li>
-        <li><a href="#">Mega Menu Item 3</a></li>
-        <li><a href="#">Mega Menu Item 4</a></li>
-        <li><a href="#">Mega Menu Item 5</a></li>
-        </ul>
-        </div>
-        </li>-->
-        <li><a href="{{ route('contact', app()->getLocale()) }}">@lang('master.contact')</a></li>
-        @auth
-            <li><a href="#">@lang('master.my_account')</a>
-                <ul class="dropdown">
-                    @if (Auth::user()->role == 0 || Auth::user()->role == 2)
-                        <li><a href="{{ route('property-list', app()->getLocale()) }}">My Properties</a></li>
-                    @endif
-                    <li><a href="{{ route('profile', app()->getLocale()) }}">@lang('master.profile')</a></li>
-                    <li><a href="{{ route('logout', app()->getLocale()) }}">@lang('master.signout')</a></li>
-                </ul>
-            </li>
-        @else
-            <li><a href="{{ route('login', app()->getLocale()) }}">@lang('master.login')</a></li>
-            <li><a href="{{ route('register', app()->getLocale()) }}">@lang('master.signup')</a></li>
-        @endauth
+                <!-- Menu -->
+                <div class="classy-menu">
+
+                    <!-- close btn -->
+                    <div class="classycloseIcon">
+                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                    </div>
+
+                    <!-- Nav Start -->
+                    <div class="classynav">
+                        <ul>
+                            <li><a href="{{ route('/', app()->getLocale()) }}">@lang('master.home')</a></li>
+
+                            <li>
+                                <a href="#">Projects</a>
+                                <ul class="dropdown">
+                                    <?php $Australia = ["Brisbane", "Canberra", "Gold Coast", "Melbourne", "Perth", "Sydney"]; ?>
+                                    <li>
+                                        <a href="#">Australia</a>
+                                        <ul class="dropdown">
+                                            @foreach ($Australia as $city)
+                                                <li><a href="{{ route('search-by', [app()->getLocale(), 'project=1&country=Australia&city='.$city]) }}">{{$city}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+
+                                    <?php $China = ["Beijing","Guangzhou", "Shenzhen", "Shanghai", "Zhongshan", "Zhuhai", "Macau"]; ?>
+                                    <li>
+                                        <a href="#">China</a>
+                                        <ul class="dropdown">
+                                            @foreach ($China as $city)
+                                                <li><a href="{{ route('search-by', [app()->getLocale(), 'project=1&country=China&city='.$city]) }}">{{$city}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+
+                                    <?php $USA = ["Los Angeles", "Miami", "New York", "Orlando", "San Francisco"]; ?>
+                                    <li><a href="#">USA</a>
+                                        <ul class="dropdown">
+                                            @foreach ($USA as $city)
+                                                <li><a href="{{ route('search-by', [app()->getLocale(), 'project=1&country=USA&city='.$city]) }}">{{$city}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+
+                                    <?php $UK = ["London", "Liverpool", "Leeds", "Manchester", "Sheffield"]; ?>
+                                    <li><a href="#">UK</a>
+                                        <ul class="dropdown">
+                                            @foreach ($UK as $city)
+                                                <li><a href="{{ route('search-by', [app()->getLocale(), 'project=1&country=UK&city='.$city]) }}">{{$city}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+
+                                    <?php $Singapore = ["Singapore"]; ?>
+                                    <li><a href="#">Singapore</a>
+                                        <ul class="dropdown">
+                                            @foreach ($Singapore as $city)
+                                                <li><a href="{{ route('search-by', [app()->getLocale(), 'project=1&country=Singapore&city='.$city]) }}">{{$city}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li><a href="{{ route('vr-property', app()->getLocale()) }}">VR</a></li>
+
+                            <li><a href="{{ route('about-us', app()->getLocale()) }}">@lang('master.about_us')</a></li>
 
 
-        </ul>
+                            <li><a href="{{ route('contact', app()->getLocale()) }}">@lang('master.contact')</a></li>
+                            @auth
+                                <li><a href="#">@lang('master.my_account')</a>
+                                    <ul class="dropdown">
+                                        @if (Auth::user()->role == 0 || Auth::user()->role == 2)
+                                            <li><a href="{{ route('property-list', app()->getLocale()) }}">My Properties</a></li>
+                                        @endif
+                                        <li><a href="{{ route('profile', app()->getLocale()) }}">@lang('master.profile')</a></li>
+                                        <li><a href="{{ route('logout', app()->getLocale()) }}">@lang('master.signout')</a></li>
+                                    </ul>
+                                </li>
+                            @else
+                                <li><a href="{{ route('login', app()->getLocale()) }}">@lang('master.login')</a></li>
+                                <li><a href="{{ route('register', app()->getLocale()) }}">@lang('master.signup')</a></li>
+                            @endauth
 
-        <!-- Search Form -->
-        {{-- <div class="south-search-form">
-            <form action="#" method="post">
-                <input type="search" name="search" id="search" placeholder="Search Anything ...">
-                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </form>
-        </div> --}}
 
-        <!-- Search Button -->
-        {{-- <a href="#" class="searchbtn"><i class="fa" aria-hidden="true"></i></a> --}}
-        </div>
-        <!-- Nav End -->
-        </div>
+                        </ul>
+
+                    </div>
+                    <!-- Nav End -->
+                </div>
+            </div>
         </nav>
-</div>
-</div>
+    </div>
 </header>
 
 <div>
@@ -372,5 +361,21 @@
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <!-- Active js -->
     <script src="{{ asset('js/active.js') }}"></script>
+
+    <script>
+        // function getDistricts() {
+        //     $.ajax({
+        //         type:'get',
+        //         url: '{{ route('get_districts', app()->getLocale())}}',
+        //         dataType: "json",
+        //         success:function(data) {
+        //            console.log(data);
+        //         },
+        //         error:function() {
+        //         }
+        //     });
+        // }
+
+    </script>
 </body>
 </html>

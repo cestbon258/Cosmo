@@ -42,7 +42,7 @@ class DataController extends Controller
             $allProperties = DB::table('houses')
                 ->where('status', 1)
                 ->orderBy('updated_at', 'desc')
-                ->paginate(6);
+                ->paginate(2);
         }
 
         // get first image from json
@@ -79,6 +79,16 @@ class DataController extends Controller
         // echo '<pre>'.print_r($allProperties, 1).'</pre>';
 
         return View::make('pages/index')->with(array("properties"=>$allProperties, "districts"=>$districts));
+    }
+
+    public function get_districts(Request $request)
+    {
+        $districts = DB::table('districts')
+            ->get();
+
+
+        return response()->json(['allDistricts' => $districts]);
+
     }
 
     public function search(Request $request)
@@ -131,7 +141,7 @@ class DataController extends Controller
         }
 
         // search by size range, for getting only property, either one of them not equal to default value, they will run this below logic. Otherwise, will get all properties and projects
-        if ( $unitArray[0] != 0 || $unitArray[1] != 1000) {
+        if ( $unitArray[0] != 0 || $unitArray[1] != 10000) {
             $query->where('size', '>=', $unitArray[0])
                   ->where('size', '<=', $unitArray[1]);
         }
@@ -147,7 +157,7 @@ class DataController extends Controller
         // $query->where('text', 'like', '%'.$text.'%');
         $query->where('status', 1)
               ->orderBy('updated_at', 'desc');
-        $allProperties = $query->paginate(6);
+        $allProperties = $query->paginate(2);
 
 
         // get first image from json
@@ -187,6 +197,66 @@ class DataController extends Controller
         return View::make('pages/search-result')->with(array("properties"=>$allProperties, "districts"=>$districts));
 
 
+    }
+
+    public function search_by(Request $request)
+    {
+        $city = $request->input('city');
+        $district = array(
+            'country' => $request->input('country'),
+            'city' => $city
+        );
+
+        if ($request->has('project')) {
+            // navigation bar, project
+            $allProperties = DB::table('houses')
+                ->where('city', $city)
+                ->where('status', 1)
+                ->where('project_type', 2)
+                ->orderBy('updated_at', 'desc')
+                ->paginate(2);
+        } else {
+            // index page, thumbnail image
+            $allProperties = DB::table('houses')
+                ->where('city', $city)
+                ->where('status', 1)
+                ->orderBy('updated_at', 'desc')
+                ->paginate(2);
+        }
+
+
+
+        // echo '<pre>'.print_r($allProperties, 1).'</pre>';
+        // echo '<pre>'.print_r($district, 1).'</pre>';
+
+
+        // get first image from json
+        foreach ($allProperties as $key => $property) {
+            if ($property->pictures) {
+                $picArray = json_decode($property->pictures);
+                $property->pictures = $picArray[0];
+            }
+
+            if ($property->features) {
+                $property->features = "";
+            }
+            if ($property->videos) {
+                $property->videos = json_decode($property->videos);
+            }
+            if ($property->files) {
+                $property->files = json_decode($property->files);
+            }
+            if ($property->description) {
+                $description = json_decode($property->description);
+                $removeTag= str_replace("&nbsp;"," ", $description);
+                $removeTag2 = str_replace(".  "," ", $removeTag);
+                $removeTag3 = str_replace("· "," ", $removeTag2);
+                $property->description = substr(strip_tags($removeTag3), 0, 180);
+            }
+        }
+
+
+        return View::make('pages/search-by')->with(array("district"=> $district, "properties"=>$allProperties));
     }
 
     public function like_this(Request $request)
@@ -244,6 +314,46 @@ class DataController extends Controller
         // echo '<pre>'.print_r($allProperties, 1).'</pre>';
 
         return View::make('pages/favorite')->with(array("properties"=>$allProperties));
+    }
+
+
+    public function get_vr_property ()
+    {
+        $allProperties = DB::table('houses')
+            ->whereNotNull('vr_url')
+            ->where('status', 1)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(6);
+
+        // get first image from json
+        foreach ($allProperties as $key => $property) {
+            if ($property->pictures) {
+                $picArray = json_decode($property->pictures);
+                $property->pictures = $picArray[0];
+            }
+
+            if ($property->features) {
+                $property->features = "";
+            }
+            if ($property->videos) {
+                $property->videos = json_decode($property->videos);
+            }
+            if ($property->files) {
+                $property->files = json_decode($property->files);
+            }
+            if ($property->description) {
+                $description = json_decode($property->description);
+                $removeTag= str_replace("&nbsp;"," ", $description);
+                $removeTag2 = str_replace(".  "," ", $removeTag);
+                $removeTag3 = str_replace("· "," ", $removeTag2);
+                $property->description = substr(strip_tags($removeTag3), 0, 180);
+            }
+        }
+
+        // echo '<pre>'.print_r($allProperties, 1).'</pre>';
+
+        return View::make('pages/vr-property')->with(array( "properties"=>$allProperties));
+
     }
 
     public function about_us()

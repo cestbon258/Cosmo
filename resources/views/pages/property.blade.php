@@ -98,15 +98,13 @@
                 <div class="col-md-5 mb-4">
                     <div class="card" style="height: 100%;">
                         <div class="card-body">
-                            @if ($property->vr_url)
+
+                            @auth
                                 <div class="float-right">
-                                    @auth
-                                        <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
-                                    @else
-                                        <span style="font-size:16px;"><mark><i>VR</i></mark></span>
-                                    @endauth
+                                    <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
                                 </div>
-                            @endif
+                            @endauth
+
                             <h5 class="card-title">{{$property->title}}</h5>
                             <hr>
                             @auth
@@ -197,38 +195,34 @@
                 </div>
                 <div class="col-md-5 mb-4">
                     <div class="card" style="height: 100%;">
-                      <div class="card-body">
-                        @if ($property->vr_url)
-                          <div class="float-right">
-                              @auth
-                                  <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
-                              @else
-                                  <span style="font-size:16px;"><mark><i>VR</i></mark></span>
-                              @endauth
-                          </div>
-                        @endif
-                        <h5 class="card-title">{{$property->title}}</h5>
-                        <hr>
-                        <br>
-
-                        <h6 class="card-info-text">Features</h6>
-                        <div><p>{!!html_entity_decode($property->features)!!}</p></div>
-                        @if ( !empty($property->facilities) )
+                        <div class="card-body">
+                            @auth
+                                <div class="float-right">
+                                    <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
+                                </div>
+                            @endauth
+                            <h5 class="card-title">{{$property->title}}</h5>
                             <hr>
-                            @foreach ($property->facilities as $key => $facility)
-                                <div>{{$facility}}</div>
-                            @endforeach
-                        @endif
-                        <br>
-                        @auth
-                        <div class="row">
-                            <div class="col-6 col-md-6">
-                                <button class="requestMore request-more-btn" style="border-radius:6px;" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info <i class="loader fa fa-spinner fa-pulse"></i></button>
+                            <br>
+
+                            <h6 class="card-info-text">Features</h6>
+                            <div><p>{!!html_entity_decode($property->features)!!}</p></div>
+                            @if ( !empty($property->facilities) )
+                                <hr>
+                                @foreach ($property->facilities as $key => $facility)
+                                    <div>{{$facility}}</div>
+                                @endforeach
+                            @endif
+                            <br>
+                            @auth
+                            <div class="row">
+                                <div class="col-6 col-md-6">
+                                    <button class="requestMore request-more-btn" style="border-radius:6px;" data-toggle="tooltip" data-placement="right" title="Click to get more info, we will contact your soon!">Request Info <i class="loader fa fa-spinner fa-pulse"></i></button>
+                                </div>
+                                <div class="col-6 col-md-6"></div>
                             </div>
-                            <div class="col-6 col-md-6"></div>
+                            @endauth
                         </div>
-                        @endauth
-                      </div>
                     </div>
 
                 </div>
