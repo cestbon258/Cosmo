@@ -185,6 +185,8 @@
 
                             <li><a href="{{ route('vr-property', app()->getLocale()) }}">VR</a></li>
 
+                            <li><a href="{{ route('events', app()->getLocale()) }}">Events</a></li>
+
                             <li><a href="{{ route('about-us', app()->getLocale()) }}">@lang('master.about_us')</a></li>
 
 

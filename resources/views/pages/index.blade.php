@@ -530,9 +530,11 @@ h6 {
                                 <div class="property-thumb">
                                     <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
 
-                                    <div class="tag">
-                                        <span>For {{$property->purpose}}</span>
-                                    </div>
+                                    @if ($property->project_status)
+                                        <div class="tag">
+                                            <span>{{$property->project_status}}</span>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <!-- Property Content -->
@@ -568,6 +570,12 @@ h6 {
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
                                         <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
+
+                                        @if ($property->project_status)
+                                            <div class="tag">
+                                                <span>{{$property->project_status}}</span>
+                                            </div>
+                                        @endif
                                 </div>
 
                                 <!-- Property Content -->
@@ -578,7 +586,7 @@ h6 {
                                     <p class="thumb-space">{{$property->completed_date ? $property->completed_date : 'Completed'}}</p>
 
                                     <h6>Price Range</h6>
-                                    <p class="thumb-space">login to view more detials</p>
+                                    <p class="thumb-space">Prices from {{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
                                     <div class="social">
                                         <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><div class="whatsapp"></div></a>
 

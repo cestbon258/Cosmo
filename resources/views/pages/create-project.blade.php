@@ -57,6 +57,28 @@
                                 </div>
                             </div>
 
+                            <label for="date">Property Type</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Residential" checked>
+                                <label class="form-check-label">Residential</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Commercial">
+                                <label class="form-check-label">Commercial</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Industrial">
+                                <label class="form-check-label">Industrial</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Retail">
+                                <label class="form-check-label">Retail</label>
+                            </div>
+
+
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -173,6 +195,34 @@
                             <div class="form-group mt-3">
                                 <label for="url">VR URL</label>
                                 <input type="text" class="form-control" name="url" autocomplete="off" placeholder="url">
+                            </div>
+
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="currency">Currency</label>
+                                        <select class="form-control" name="currency" required>
+                                            <option>AUD</option>
+                                            <option>GBP</option>
+                                            <option>HKD</option>
+                                            <option>RMB</option>
+                                            <option>USD</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please specify the currency.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="price">Price Start From</label>
+                                        <input type="number" class="form-control" name="price" autocomplete="off" required>
+                                        <div class="invalid-feedback">
+                                            Please specify the price.
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
 
@@ -301,6 +351,18 @@
                                 <script>
                                     $(document).ready(function() {
                                         $('#summernote2').summernote({
+                                            height: 220,
+                                        });
+                                    });
+                                </script>
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <label>Price List</label>
+                                <textarea id="summernote3" name="priceList"></textarea>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('#summernote3').summernote({
                                             height: 220,
                                         });
                                     });

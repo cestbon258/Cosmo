@@ -128,6 +128,7 @@ class ProjectController extends Controller
                         'user_id'       => $user->id,
                         'property_code' => $property_code,
                         'title'         => $_POST['title'],
+                        'type'          => $_POST['type'],
                         'carpark'       => $_POST['carpark'],
                         'facilities'    => $facilities,
                         'features'     => json_encode($_POST['features']),
@@ -139,7 +140,10 @@ class ProjectController extends Controller
                         'files'        => json_encode($pdfArray),
                         'completed_date' => $_POST['completedDate'],
                         'vr_url'       => $vrURL,
+                        'currency'     => $_POST['currency'],
+                        'price'        => $_POST['price'],
                         'description'  => json_encode($_POST['description']),
+                        'price_list'  => json_encode($_POST['priceList']),
                         'project_type' => 2,
                     ]
                 );
@@ -195,6 +199,7 @@ class ProjectController extends Controller
         $myProperty->facilities = json_decode($myProperty->facilities);
         $myProperty->features = json_decode($myProperty->features);
         $myProperty->description = json_decode($myProperty->description);
+        $myProperty->price_list = json_decode($myProperty->price_list);
         $myProperty->pictures = json_decode($myProperty->pictures);
         $myProperty->videos = json_decode($myProperty->videos);
         $myProperty->files = json_decode($myProperty->files);
@@ -415,6 +420,7 @@ class ProjectController extends Controller
             ->update(
                 [
                     'title'        => $_POST['title'],
+                    'type'         => $_POST['type'],
                     'carpark'      => $_POST['carpark'],
                     'facilities'   => $facilities,
                     'features'     => json_encode($_POST['features']),
@@ -426,7 +432,10 @@ class ProjectController extends Controller
                     'files'        => $pdfJson,
                     'completed_date' => $_POST['completedDate'],
                     'vr_url'       => $vrURL,
-                    'description'  => json_encode($_POST['description'])
+                    'currency'     => $_POST['currency'],
+                    'price'        => $_POST['price'],
+                    'description'  => json_encode($_POST['description']),
+                    'price_list'  => json_encode($_POST['priceList'])
                 ]
             );
 

@@ -94,6 +94,62 @@ class MailController extends Controller
 
     }
 
+    public function register_event()
+    {
+        $eventID     =   $_POST['eventID'];
+        $eventTitle  =   $_POST['eventTitle'];
+        $eventDate   =   $_POST['eventDate'];
+        $name        =   $_POST['name'];
+        $phone       =   $_POST['phone'];
+        $email       =   $_POST['email'];
+
+        $data = array(
+            'email'         => $email,
+            'phone'         => $phone,
+            'name'          => $name,
+            'event_title'   => $eventTitle,
+            'event_date'     => $eventDate
+        );
+
+        $emailArray = array(
+            $email,
+            'angelo@icosmo.co',
+            'stephen@icosmo.co'
+        );
+
+
+        $userData = array(
+            'email'         => $email,
+            'phone'         => $phone,
+            'name'          => $name
+        );
+
+        DB::table('event_reg')
+            ->insert(
+                [
+                    'event_id'     => $eventID,
+                    'participant'  => json_encode($userData)
+                ]
+            );
+
+
+        foreach ($emailArray as $email) {
+            // Mail::send([], [], function($message) use($html, $data) {
+            Mail::send('register-event', $data, function($message) use($data, $email) {
+                $message->to($email)->subject
+                    ('Cosmo - Global Real Estate');
+                $message->from('admin@icosmo.co', 'Cosmo');
+                // $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
+            });
+        }
+
+        Session::flash('status', 'Thank you for registration! See you!');
+        Session::flash('alert-class', 'alert-success');
+
+        return back();
+
+    }
+
 
 
 }

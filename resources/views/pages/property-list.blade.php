@@ -26,9 +26,9 @@
                                     <th>Creator</th>
                                 @endif
                                 <th>Name of Property</th>
-                                <th>Purpose for</th>
+                                <th>Is Project</th>
                                 <th>Address</th>
-                                <th>Date Modified</th>
+                                <th>Status</th>
                                 <th>Is Public</th>
                                 <th></th>
                                 <th></th>
@@ -41,9 +41,15 @@
                                         <td>{{$property->email}}</td>
                                     @endif
                                     <td> {{$property->title}} </td>
-                                    <td> {{$property->purpose}} </td>
+                                    <td> {{$property->project_type == 1 ? 'No' : 'Yes'}} </td>
                                     <td> {{$property->address}} </td>
-                                    <td> {{$property->updated_at}} </td>
+                                    <td>
+                                        <select onchange="updateProjectStatus(this, '{{$property->property_code}}')">
+                                            <option {{$property->project_status =='Completed' ? 'selected' : ''}}>Completed</option>
+                                            <option {{$property->project_status =='Off plan' ? 'selected' : ''}}>Off plan</option>
+                                            <option {{$property->project_status =='Sold out' ? 'selected' : ''}}>Sold out</option>
+                                        </select>
+                                    </td>
                                     <td>
                                         @if (Auth::user()->role == 0)
                                             <label class="switch">
@@ -131,9 +137,23 @@
             }
         });
 
-
     } );
 
+    function updateProjectStatus(self, propertyCode) {
+        $.ajax({
+               type:'get',
+               url: '{{ route('update_project_status', app()->getLocale())}}',
+               data: { propertyCode: propertyCode, status: self.value},
+               dataType: "json",
+               success:function(data) {
+                   console.log(data);
+               },
+               error:function() {
+               }
+        });
+        console.log(self.value);
+        console.log(propertyCode);
+    }
 
 
 

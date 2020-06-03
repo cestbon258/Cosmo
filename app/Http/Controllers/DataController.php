@@ -42,7 +42,7 @@ class DataController extends Controller
             $allProperties = DB::table('houses')
                 ->where('status', 1)
                 ->orderBy('updated_at', 'desc')
-                ->paginate(2);
+                ->paginate(6);
         }
 
         // get first image from json
@@ -111,6 +111,24 @@ class DataController extends Controller
         $unitArray[0] = str_replace(",", "", $unitArray[0]);
         $unitArray[1] = str_replace(",", "", $unitArray[1]);
 
+        // search by purpose
+        if ($request->has('purpose')) {
+            if ($request->purpose == 'Buy') {
+                $query->where('purpose', '["Sale"]');
+                $query->orWhere('purpose', 'Sale');
+            } else {
+                $query->where('purpose', '["Rent"]');
+                $query->orWhere('purpose', 'Rent');
+            }
+            $query->orWhere('purpose', '["Sale", "Rent"]');
+        }
+
+        // search by project type
+        if ($request->has('propertyType')) {
+            if ($request->propertyType != "All Property Type") {
+                $query->where('type', $request->input('propertyType'));
+            }
+        }
 
         // search by specific country and All Citites
         if ( !empty($country) && $country != 'All Countries' && $city == 'All Cities') {
@@ -157,7 +175,7 @@ class DataController extends Controller
         // $query->where('text', 'like', '%'.$text.'%');
         $query->where('status', 1)
               ->orderBy('updated_at', 'desc');
-        $allProperties = $query->paginate(2);
+        $allProperties = $query->paginate(6);
 
 
         // get first image from json
@@ -192,7 +210,7 @@ class DataController extends Controller
 
 
         // echo '<pre>'.print_r($priceArray, 1).'</pre>';
-        // echo '<pre>'.print_r($unitArray, 1).'</pre>';
+        // echo '<pre>'.print_r($allProperties, 1).'</pre>';
 
         return View::make('pages/search-result')->with(array("properties"=>$allProperties, "districts"=>$districts));
 
@@ -214,14 +232,14 @@ class DataController extends Controller
                 ->where('status', 1)
                 ->where('project_type', 2)
                 ->orderBy('updated_at', 'desc')
-                ->paginate(2);
+                ->paginate(6);
         } else {
             // index page, thumbnail image
             $allProperties = DB::table('houses')
                 ->where('city', $city)
                 ->where('status', 1)
                 ->orderBy('updated_at', 'desc')
-                ->paginate(2);
+                ->paginate(6);
         }
 
 
@@ -257,6 +275,15 @@ class DataController extends Controller
 
 
         return View::make('pages/search-by')->with(array("district"=> $district, "properties"=>$allProperties));
+    }
+
+    public function update_project_status(Request $request)
+    {
+        DB::table('houses')
+            ->where('property_code', $request->propertyCode)
+            ->update([
+                'project_status' => $request->status
+            ]);
     }
 
     public function like_this(Request $request)
@@ -613,6 +640,7 @@ class DataController extends Controller
             $facilities = !empty($_POST['facilities']) ? json_encode($_POST['facilities']) : null;
 
             $vrURL = !empty($_POST['url']) ? $_POST['url'] : null;
+            $usages = !empty($_POST['usage']) ? json_encode($_POST['usage']) : null;
 
             DB::table('houses')
             ->insert(
@@ -620,7 +648,8 @@ class DataController extends Controller
                         'user_id'    => $user->id,
                         'property_code' => $property_code,
                         'title'      => $_POST['title'],
-                        'purpose'    => $_POST['usage'],
+                        'type'       => $_POST['type'],
+                        'purpose'    => $usages,
                         'carpark'    => $_POST['carpark'],
                         'facilities' => $facilities,
                         'time'       => $newDate,
@@ -682,7 +711,7 @@ class DataController extends Controller
         if ($role == 0) {
             $myProperty = DB::table('houses')
             ->join('users', 'houses.user_id', '=', 'users.id')
-            ->select('users.email', 'users.role', 'houses.id', 'houses.property_code', 'houses.title', 'houses.purpose', 'houses.time', 'houses.country', 'houses.city', 'houses.address', 'houses.updated_at', 'houses.created_at', 'houses.status', 'houses.project_type')
+            ->select('users.email', 'users.role', 'houses.id', 'houses.property_code', 'houses.title', 'houses.purpose', 'houses.time', 'houses.country', 'houses.city', 'houses.address', 'houses.updated_at', 'houses.created_at', 'houses.status', 'houses.project_type', 'houses.project_status')
                 ->get();
         }
 
@@ -803,6 +832,8 @@ class DataController extends Controller
         return back();
 
     }
+
+
 
 
     public function update_property(Request $request, $locale, $propertyCode)
@@ -988,11 +1019,14 @@ class DataController extends Controller
 
         $vrURL = !empty($_POST['url']) ? $_POST['url'] : null;
 
+        $usages = !empty($_POST['usage']) ? json_encode($_POST['usage']) : null;
+
         DB::table('houses')
             ->where('property_code', $propertyCode)
             ->update([
                 'title'      => $_POST['title'],
-                'purpose'    => $_POST['usage'],
+                'type'       => $_POST['type'],
+                'purpose'    => $usages,
                 'carpark'    => $_POST['carpark'],
                 'facilities' => $facilities,
                 'time'       => $newDate,
@@ -1024,5 +1058,13 @@ class DataController extends Controller
         // return View::make('pages/edit-property')->with(array('user' => $user, "property"=>$myProperty));
     }
 
+    public function events()
+    {
+        $events = DB::table('events')
+            ->first();
+
+        // echo '<pre>'.print_r($events, 1).'</pre>';
+        return View::make('pages/events')->with(array("events"=>$events));
+    }
 
 }

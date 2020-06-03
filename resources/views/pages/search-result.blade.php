@@ -149,6 +149,32 @@ h6 {
                                         <input type="input" class="form-control" name="input" placeholder="Keyword">
                                     </div>
                                 </div> --}}
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        You want to:
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <select class="form-control" name="purpose">
+                                            <option>Buy</option>
+                                            <option>Rent</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <select class="form-control" name="propertyType">
+                                            <option>All Property Type</option>
+                                            <option>Commercial</option>
+                                            <option>Industrial</option>
+                                            <option>Retail</option>
+                                            <option>Residential</option>
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
@@ -417,9 +443,11 @@ h6 {
                                 <div class="property-thumb">
                                     <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
 
-                                    <div class="tag">
-                                        <span>For {{$property->purpose}}</span>
-                                    </div>
+                                    @if ($property->project_status)
+                                        <div class="tag">
+                                            <span>{{$property->project_status}}</span>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <!-- Property Content -->
@@ -455,6 +483,12 @@ h6 {
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
                                         <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
+
+                                        @if ($property->project_status)
+                                            <div class="tag">
+                                                <span>{{$property->project_status}}</span>
+                                            </div>
+                                        @endif
                                 </div>
 
                                 <!-- Property Content -->

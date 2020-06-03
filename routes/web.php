@@ -54,6 +54,8 @@ Route::group(['prefix' => '{locale}'], function () {
     Route::get('/vr-property', 'DataController@get_vr_property')->name('vr-property');
 
 
+    Route::get('/events', 'DataController@events')->name('events');
+    Route::post('/register-event', 'MailController@register_event')->name('register_event');
 
 
 
@@ -69,6 +71,9 @@ Route::group(['prefix' => '{locale}'], function () {
         Route::get('/like-this', 'DataController@like_this')->name('like_this');
         Route::post('/unlike-this', 'DataController@unlike_this')->name('unlike_this');
         Route::get('/favorite', 'DataController@favorite')->name('favorite');
+
+
+        Route::get('/update-project-status', 'DataController@update_project_status')->name('update_project_status');
 
 
         // user control panel

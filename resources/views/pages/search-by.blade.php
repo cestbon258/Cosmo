@@ -154,9 +154,11 @@ h6 {
                                 <div class="property-thumb">
                                     <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
 
-                                    <div class="tag">
-                                        <span>For {{$property->purpose}}</span>
-                                    </div>
+                                    @if ($property->project_status)
+                                        <div class="tag">
+                                            <span>{{$property->project_status}}</span>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <!-- Property Content -->
@@ -192,6 +194,12 @@ h6 {
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
                                         <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
+
+                                        @if ($property->project_status)
+                                            <div class="tag">
+                                                <span>{{$property->project_status}}</span>
+                                            </div>
+                                        @endif
                                 </div>
 
                                 <!-- Property Content -->

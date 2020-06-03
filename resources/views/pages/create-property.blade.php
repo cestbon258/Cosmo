@@ -58,16 +58,50 @@
                                 </div>
                             </div>
 
-                            <label for="date">Property for</label>
+                            <label for="date">Property Type</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="usage" value="sale" checked>
-                                <label class="form-check-label">Sale</label>
+                                <input class="form-check-input" type="radio" name="type" value="Residential" checked>
+                                <label class="form-check-label">Residential</label>
                             </div>
 
-                            <div class="form-check mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Commercial">
+                                <label class="form-check-label">Commercial</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Industrial">
+                                <label class="form-check-label">Industrial</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Retail">
+                                <label class="form-check-label">Retail</label>
+                            </div>
+
+
+                            <label for="date" class="mt-3">Property for</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Sale" id="forSale" name="usage[]">
+                                <label class="form-check-label" for="forSale">
+                                    Sale
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Rent" id="forRent" name="usage[]">
+                                <label class="form-check-label" for="forRent">
+                                    Rent
+                                </label>
+                            </div>
+                            {{-- <div class="form-check">
+                                <input class="form-check-input" type="radio" name="usage" value="sale" checked>
+                                <label class="form-check-label">Sale</label>
+                            </div> --}}
+
+                            {{-- <div class="form-check mb-2">
                                 <input class="form-check-input" type="radio" name="usage" value="rent">
                                 <label class="form-check-label">Rent</label>
-                            </div>
+                            </div> --}}
 
 
                             <div class="row mt-3">

@@ -99,11 +99,11 @@
                     <div class="card" style="height: 100%;">
                         <div class="card-body">
 
-                            @auth
+                            @if($property->vr_url)
                                 <div class="float-right">
                                     <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
                                 </div>
-                            @endauth
+                            @endif
 
                             <h5 class="card-title">{{$property->title}}</h5>
                             <hr>
@@ -196,11 +196,13 @@
                 <div class="col-md-5 mb-4">
                     <div class="card" style="height: 100%;">
                         <div class="card-body">
-                            @auth
+
+                            @if($property->vr_url)
                                 <div class="float-right">
                                     <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
                                 </div>
-                            @endauth
+                            @endif
+
                             <h5 class="card-title">{{$property->title}}</h5>
                             <hr>
                             <br>

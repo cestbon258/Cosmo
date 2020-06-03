@@ -58,7 +58,41 @@
                                 </div>
                             </div>
 
-                            <label for="date">Property for</label>
+                            <label for="date">Property Type</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Residential" {{$property->type == 'Residential' ? 'checked' : ''}}>
+                                <label class="form-check-label">Residential</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Commercial" {{$property->type == 'Commercial' ? 'checked' : ''}}>
+                                <label class="form-check-label">Commercial</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Industrial" {{$property->type == 'Industrial' ? 'checked' : ''}}>
+                                <label class="form-check-label">Industrial</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Retail" {{$property->type == 'Retail' ? 'checked' : ''}}>
+                                <label class="form-check-label">Retail</label>
+                            </div>
+
+                            <label for="date" class="mt-3">Property for</label>
+                            <div class="form-check">
+                                <input class="form-check-input usages" type="checkbox" value="Sale" id="forSale" name="usage[]">
+                                <label class="form-check-label" for="forSale">
+                                    Sale
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input usages" type="checkbox" value="Rent" id="forRent" name="usage[]">
+                                <label class="form-check-label" for="forRent">
+                                    Rent
+                                </label>
+                            </div>
+                            {{-- <label for="date">Property for</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="usage" value="sale" {{$property->purpose == 'sale' ? 'checked' : ''}}>
                                 <label class="form-check-label">Sale</label>
@@ -67,7 +101,7 @@
                             <div class="form-check mb-2">
                                 <input class="form-check-input" type="radio" name="usage" value="rent" {{$property->purpose == 'rent' ? 'checked' : ''}}>
                                 <label class="form-check-label">Rent</label>
-                            </div>
+                            </div> --}}
 
 
                             <div class="row mt-3">
@@ -459,6 +493,21 @@
                     for (var j = 0; j < facilities.length; j++) {
                         if ( facilityGroup[i].value == facilities[j] ) {
                             facilityGroup[i].checked = true;
+                        }
+                    }
+                }
+            }
+
+            // checked more facilities
+            let usages = {!! $property->purpose !!};
+            console.log(usages);
+            let usagesGroup = document.querySelectorAll(".usages");
+
+            for (var i = 0; i < usagesGroup.length; i++) {
+                if (usages && usages.length) {
+                    for (var j = 0; j < usages.length; j++) {
+                        if ( usagesGroup[i].value == usages[j] ) {
+                            usagesGroup[i].checked = true;
                         }
                     }
                 }

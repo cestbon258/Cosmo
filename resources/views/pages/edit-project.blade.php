@@ -58,6 +58,27 @@
                                 </div>
                             </div>
 
+                            <label for="date">Property Type</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Residential" {{$property->type == 'Residential' ? 'checked' : ''}}>
+                                <label class="form-check-label">Residential</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Commercial" {{$property->type == 'Commercial' ? 'checked' : ''}}>
+                                <label class="form-check-label">Commercial</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Industrial" {{$property->type == 'Industrial' ? 'checked' : ''}}>
+                                <label class="form-check-label">Industrial</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="type" value="Retail" {{$property->type == 'Retail' ? 'checked' : ''}}>
+                                <label class="form-check-label">Retail</label>
+                            </div>
+
 
                             <div class="row mt-3">
                                 <div class="col-md-6">
@@ -219,6 +240,33 @@
                                 <input type="text" class="form-control" name="url" value="{{$property->vr_url ? $property->vr_url :''}}" autocomplete="off" placeholder="url">
                             </div>
 
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="currency">Currency</label>
+                                        <select class="form-control" name="currency" required>
+                                            <option {{$property->currency =='AUD' ? 'selected' : ''}}>AUD</option>
+                                            <option {{$property->currency =='GBP' ? 'selected' : ''}}>GBP</option>
+                                            <option {{$property->currency =='HKD' ? 'selected' : ''}}>HKD</option>
+                                            <option {{$property->currency =='RMB' ? 'selected' : ''}}>RMB</option>
+                                            <option {{$property->currency =='USD' ? 'selected' : ''}}>USD</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please specify the currency.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="price">Price</label>
+                                        <input type="number" class="form-control" name="price" autocomplete="off" value="{{$property->price}}" required>
+                                        <div class="invalid-feedback">
+                                            Please specify the price.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                                 {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="country">Country</label>
@@ -322,6 +370,18 @@
                                 <script>
                                     $(document).ready(function() {
                                         $('#summernote2').summernote({
+                                            height: 220,
+                                        });
+                                    });
+                                </script>
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <label>Price List</label>
+                                <textarea id="summernote3" name="priceList">{{$property->price_list}}</textarea>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('#summernote3').summernote({
                                             height: 220,
                                         });
                                     });
