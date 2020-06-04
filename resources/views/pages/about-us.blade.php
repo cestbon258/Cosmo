@@ -16,7 +16,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-content">
-                        <h3 style="position:absolute; bottom:50px; color: white;">About us</h3>
+                        <h3 style="position:absolute; bottom:50px; left: 150px; color: white;">About us</h3>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     <div class="section-heading wow fadeInUp">
                         <h2>OUR STORY</h2>
                     </div>
-                    <div class="wow fadeInUp"  data-wow-delay="100ms" style="margin:-70px 20px; font-size: 16px !important;">
+                    <div class="wow fadeInUp"  data-wow-delay="100ms" style="margin:-70px 20px; font-size: 16px !important; font-family: arial, helvetica, sans-serif !important;">
 
                         Founded by three alumni of the University of Southern California (USC), COSMO started with the goal of lowering the barrier of overhead through real estate agents. Unlike other platforms in the market, COSMO is a quality network that connects vendors or landlords to qualified buyers and tenants safely and securely, for their ideal choices of properties.
                         <br><br>
@@ -52,7 +52,7 @@
                     <div class="section-heading wow fadeInUp">
                         <h2>Why COSMO?</h2>
                     </div>
-                    <div class="wow fadeInUp"  data-wow-delay="100ms" style="margin:-70px 20px; font-size: 16px !important;">
+                    <div class="wow fadeInUp"  data-wow-delay="100ms" style="margin:-70px 20px; font-size: 16px !important; font-family: arial, helvetica, sans-serif !important;">
 
                         Leasing a property requires a lot of work and a high commitment, which many property owners don’t have the time to handle especially when the property is located overseas. COSMO works with top-class property managers and estate agents around the world. Our partners will handle all the leasing paperwork for you, making your life much easier. COSMO is also committed to finding the best agent for your rental property, we will make sure that we find you the right person specializes in property management and works hard to ensure you a sound investment.
                         <br><br><br><br><br>
@@ -227,6 +227,7 @@
             font-size: 14px;
             color: black;
             font-weight: normal;
+            font-family: arial, helvetica, sans-serif !important;
         }
 
         .trigger {

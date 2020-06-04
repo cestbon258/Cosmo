@@ -33,7 +33,7 @@
 
   <strong>1. <div class="heading">PRIVACY</div></strong>
 
-    <p class="terms">This policy statement applies to the URL www.icomso.co and sets out the policies of Cosmo Real Estate Limited (“Cosmo”) relating to personal information provided to Cosmo, or collected by Cosmo, throughthe icosmo.co.</p>
+    <p class="terms">This policy statement applies to the URL www.icosmo.co and sets out the policies of Cosmo Real Estate Limited (“Cosmo”) relating to personal information provided to Cosmo, or collected by Cosmo, through the icosmo.co.</p>
 
     <p class="terms">Throughout this Privacy Policy, we use the term “personal information” to describe information that can be associated with a specific person and can be used to identify that person. Cosmo does not consider personal information to include information that has been made anonymous or aggregated so that it cannot be used, whether in combination with other information or otherwise, to identify a specific user.</p>
 

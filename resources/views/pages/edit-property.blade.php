@@ -359,7 +359,7 @@
                                             <option {{$property->bedroom =='7' ? 'selected' : ''}}>7</option>
                                             <option {{$property->bedroom =='8' ? 'selected' : ''}}>8</option>
                                             <option {{$property->bedroom =='9' ? 'selected' : ''}}>9</option>
-                                            <option {{$property->bedroom =='10' ? 'selected' : ''}}>10</option>
+                                            {{-- <option {{$property->bedroom =='10' ? 'selected' : ''}}>10</option> --}}
                                             <option {{$property->bedroom =='10+' ? 'selected' : ''}}>10+</option>
 
                                         </select>

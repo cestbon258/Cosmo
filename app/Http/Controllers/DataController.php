@@ -153,7 +153,7 @@ class DataController extends Controller
         }
 
         // search by price range, for getting only property, either one of them not equal to default value, they will run this below logic. Otherwise, will get all properties and projects
-        if ( ($priceArray[0] != 0) || ($priceArray[1] != 1000000) ) {
+        if ( ($priceArray[0] != 0) || ($priceArray[1] != 10000000) ) {
             $query->where('price', '>=', $priceArray[0])
                   ->where('price', '<=', $priceArray[1]);
         }
@@ -771,6 +771,9 @@ class DataController extends Controller
            $myProperty->shortDesc = substr(strip_tags($removeTag3), 0, 180);
         }
 
+        if ($myProperty->price_list) {
+            $myProperty->price_list = json_decode($myProperty->price_list);
+        }
         // echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
         return View::make('pages/property')->with(array('user' => $user, "property"=>$myProperty));

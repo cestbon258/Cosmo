@@ -69,6 +69,15 @@
             /* left: 14px; */
             /* top: 6px; */
         }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        html::-webkit-scrollbar {
+          display: none;
+        }
+
+        /* Hide scrollbar for IE and Edge */
+        html {
+          -ms-overflow-style: none;
+        }
 
     </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -190,7 +199,7 @@
                             <li><a href="{{ route('about-us', app()->getLocale()) }}">@lang('master.about_us')</a></li>
 
 
-                            <li><a href="{{ route('contact', app()->getLocale()) }}">@lang('master.contact')</a></li>
+                            <li><a href="{{ route('contact', app()->getLocale()) }}">@lang('master.contact_us')</a></li>
                             @auth
                                 <li><a href="#">@lang('master.my_account')</a>
                                     <ul class="dropdown">
@@ -306,7 +315,7 @@
                             <li><a href="{{ route('privacy', app()->getLocale()) }}">@lang('master.privacy')</a></li>
                             <li><a href="{{ route('terms', app()->getLocale()) }}">@lang('master.terms')</a></li>
                             <li><a href="{{ route('disclaimer', app()->getLocale()) }}">@lang('master.disclaimer')</a></li>
-                            <li><a href="{{ route('contact', app()->getLocale()) }}">@lang('master.contact')</a></li>
+                            <li><a href="{{ route('contact', app()->getLocale()) }}">@lang('master.contact_us')</a></li>
 
                         </ul>
                     </div>

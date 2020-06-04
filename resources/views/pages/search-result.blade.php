@@ -5,124 +5,7 @@
 @section('specificScript')
     <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
 @stop
-<style>
-/* propert content */
-.facebook {
-    background: url( {{url("img/icons/facebook-off.png")}} );
 
-}
-.facebook:hover {
-    background: url( {{url("img/icons/facebook-on.png")}} );
-}
-.whatsapp {
-    background: url( {{url("img/icons/whatsapp-off.png")}} );
-
-}
-.whatsapp:hover {
-    background: url( {{url("img/icons/whatsapp-on.png")}} );
-}
-.linkedin {
-    background: url( {{url("img/icons/linkedin-off.png")}} );
-
-}
-.linkedin:hover {
-    background: url( {{url("img/icons/linkedin-on.png")}} );
-}
-
-
-.vpt {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding-top: 75%; /* 16:9 Aspect Ratio */
-}
-
-.describe {
-  position: absolute;
-  top: 120px;
-
-  width: 100%;
-
-}
-.responsive-iframe {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 80%;
-  height: 80%;
-  border: none;
-}
-@media screen and (min-width: 601px) {
-
-}
-
-@media screen and (max-width: 600px) {
-.container h3 {
-    font-size:18px;
-    }
-.topping {
-    margin-bottom:-250px;
-}
-.describe {
-  position: absolute;
-  top: 10px;
-
-}
-
-.home {
-    margin-top: -200px;
-    padding-top: 0px;
-}
-.featured-properties-area {
-    margin-top: -120px !important;
-    }
-}
-h5 {
-        margin-bottom:  0px !important;
-        margin-top:     -20px !important;
-}
-h6 {
-        margin-bottom:  -5px !important;
-}
-.thumb-space {
-    margin-bottom: 15px !important;
-}
-.social {
-    margin-top:  40px;
-    margin-left: 15px;
-}
-.facebook, .whatsapp, .linkedin{
-    margin: -20px 10px 10px -5px;
-    width: 25px;
-    height: 25px;
-    display: inline-block;
-
-}
-
-.center, .social {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.detail-btn {
-  background-color: #947054;
-  border: 1px solid #947054;
-  color: white;
-  margin-top: 10px;
-  padding: 6px 25px;
-  text-align: center;
-  font-size: 16px;
-  transition: 0.8s;
-  border-radius: 30px;
-}
-
-.detail-btn:hover {
-  background-color: white;
-  color: #947054;
-  border: 1px solid #947054;
-}
-</style>
 @section('content')
 
     <div style="height:70px;"></div>
@@ -208,7 +91,7 @@ h6 {
                                             <option>7</option>
                                             <option>8</option>
                                             <option>9</option>
-                                            <option>10</option>
+                                            {{-- <option>10</option> --}}
                                             <option>10+</option>
                                         </select>
                                     </div>
@@ -242,7 +125,7 @@ h6 {
                                         <div class="col-12 col-md-6 col-sm-12 col-lg-6 col-xl-6" style="padding-right: 30px; margin-bottom: 20px;">
 
                                             <div style="width:100%;" id="price-slider"></div>
-                                            <label class="mt-2"><small>Price: </small><span id="price-tag"></span></label>
+                                            <label class="mt-4"><small>Price: </small><span id="price-tag"></span></label>
                                             <input name="priceRange" id="price-range" hidden>
 
                                             {{-- <label><small>Price: </small><span id="price-tag"></span></label> --}}
@@ -253,21 +136,21 @@ h6 {
                                             </div> --}}
                                         </div>
 
-                                        <div class="col-8 col-md-4 col-sm-8 col-lg-4 col-xl-4">
+                                        <div class="col-12 col-md-6 col-sm-12 col-lg-6 col-xl-6" style="padding-right: 30px;">
                                             <div style="width:100%;" id="unit-slider"></div>
-                                            <label class="mt-2"><small>Size: </small><span id="unit-tag"></span></label>
-                                            <input name="unitRange" id="unit-range" hidden>
-                                            {{-- <div class="form-group" style="width:100%;">
-                                                <input type="range" class="slider" min="0" max="10000" value="0" step="50" id="sizeRange" name="size">
-                                                <label class="mt-1" for="formControlRange"><small>Size: </small><span id="sizeText"></span></label>
-                                            </div> --}}
-                                        </div>
-                                        <div class="col-4 col-md-2  col-sm-4 col-lg-2">
-                                            <div class="form-group">
-                                                <select class="form-control" name="unit">
-                                                    <option>sq ft</option>
-                                                    <option>m&#178;</option>
-                                                </select>
+                                            <div class="row mt-2">
+                                                <div class="col-6 col-md-6  col-sm-6 col-lg-6">
+                                                    <label class="mt-3"><small>Size: </small><span id="unit-tag"></span></label>
+                                                    <input name="unitRange" id="unit-range" hidden>
+                                                </div>
+                                                <div class="col-6 col-md-6  col-sm-6 col-lg-6 mt-2" style="padding-right:0;">
+                                                    {{-- <div class="form-group"> --}}
+                                                        <select class="form-control" name="unit">
+                                                            <option>sq ft</option>
+                                                            <option>m&#178;</option>
+                                                        </select>
+                                                    {{-- </div> --}}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -470,9 +353,11 @@ h6 {
 
                                         {{-- @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth --}}
                                     </div>
-                                    <div class="center">
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}"><button class="button detail-btn">Details</button></a>
-                                    </div>
+                                    <center>
+                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">
+                                            <button type="button" class="btn south-btn detail-btn">Details</button>
+                                        </a>
+                                    </center>
                                 </div>
                             </div>
                         </div>
@@ -496,7 +381,7 @@ h6 {
                                     <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:54px;"><h5>{{$property->title}}</h5></div></a>
                                     <p class="location thumb-space" style="font-size: 16px;">{{$property->city}}</p>
                                     <h6>Expected Date of Completion</h6>
-                                    <p class="thumb-space">2022 Q2</p>
+                                    <p class="thumb-space">{{$property->completed_date ? $property->completed_date : 'Completed'}}</p>
 
                                     <h6>Price Range</h6>
                                     <p class="thumb-space">Prices from {{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
@@ -511,9 +396,11 @@ h6 {
 
                                         {{-- @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth --}}
                                     </div>
-                                    <div class="center">
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}"><button class="button detail-btn">Details</button></a>
-                                    </div>
+                                    <center>
+                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">
+                                            <button type="button" class="btn south-btn detail-btn">Details</button>
+                                        </a>
+                                    </center>
                                 </div>
                             </div>
                         </div>
@@ -582,11 +469,11 @@ h6 {
         var priceTag = document.getElementById('price-tag');
         var priceRange = document.getElementById('price-range');
         noUiSlider.create(priceSlider, {
-            start: [0, 1000000],
+            start: [0, 10000000],
             connect: true,
             range: {
                 'min': 0,
-                'max': 1000000
+                'max': 10000000
             },
             orientation: 'horizontal', // 'horizontal' or 'vertical'
             step: 5000,
@@ -673,6 +560,48 @@ h6 {
     </script>
 
     <style>
+    .facebook {
+        background: url( {{url("img/icons/facebook-off.png")}} );
 
+    }
+    .facebook:hover {
+        background: url( {{url("img/icons/facebook-on.png")}} );
+    }
+    .whatsapp {
+        background: url( {{url("img/icons/whatsapp-off.png")}} );
+
+    }
+    .whatsapp:hover {
+        background: url( {{url("img/icons/whatsapp-on.png")}} );
+    }
+    .linkedin {
+        background: url( {{url("img/icons/linkedin-off.png")}} );
+
+    }
+    .linkedin:hover {
+        background: url( {{url("img/icons/linkedin-on.png")}} );
+    }
+
+    .thumb-space {
+        margin-bottom: 15px !important;
+    }
+    .social {
+        margin-top:  40px;
+        margin-left: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .facebook, .whatsapp, .linkedin {
+        margin: -20px 10px 10px -5px;
+        width: 25px;
+        height: 25px;
+        display: inline-block;
+    }
+
+    .detail-btn {
+        min-width: 54px !important;
+        border-radius: 35px !important;
+    }
     </style>
 @stop

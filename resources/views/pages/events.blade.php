@@ -16,7 +16,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-content">
-                        <h3 style="position:absolute; bottom:50px; color: white;">Events</h3>
+                        <h3 style="position:absolute; bottom:50px; left: 150px; color: white;">Events</h3>
                     </div>
                 </div>
             </div>
@@ -35,13 +35,14 @@
                     </button>
                 </div>
             @endif
-            
+
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading wow fadeInUp">
-                        <h4 style="color:red;">{{$events->event_title}}</h4>
+                        <img src="{{ url('img/core-img/event-1.jpeg') }}">
+                        {{-- <h4 style="color:red;">{{$events->event_title}}</h4>
                         <h6>Date and Time: {{$events->event_date}} 6:30-8:30pm</h6>
-                        <h6>RSVP</h6>
+                        <h6>RSVP</h6> --}}
                     </div>
                     <div class="wow fadeInUp"  data-wow-delay="100ms" style="margin:-70px 20px; font-size: 16px !important;">
 
