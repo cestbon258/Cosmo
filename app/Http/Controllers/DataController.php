@@ -579,14 +579,14 @@ class DataController extends Controller
                     // $img->resize(120, 120, function ($constraint) {
                     //     $constraint->aspectRatio();
                     // });
-                    $img->resize(1000, 724);
+                    $img->resize(1024, 768);
                     $img->stream(); // <-- Key point
 
                     Storage::disk('public')->put('properties/'.$property_code.'/'.$fileName, $img);
 
                     // should have thumbnails
                     $thumb = Image::make($image->getRealPath());
-                    $thumb->resize(350, 250);
+                    $thumb->resize(550, 350);
                     $thumb->stream(); // <-- Key point
 
                     Storage::disk('public')->put('properties/'.$property_code.'/thumbnails'.'/'.$fileName, $thumb);
@@ -951,7 +951,7 @@ class DataController extends Controller
                 $fileName   = $name . '.' . $image->getClientOriginalExtension();
 
                 $img = Image::make($image->getRealPath());
-                $img->resize(1000, 724);
+                $img->resize(1024, 768);
                 $img->stream(); // <-- Key point
 
                 Storage::disk('public')->put('properties/'.$propertyCode.'/'.$fileName, $img);

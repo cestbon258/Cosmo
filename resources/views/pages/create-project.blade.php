@@ -79,7 +79,7 @@
                             </div>
 
 
-                            <div class="row mt-3">
+                            {{-- <div class="row mt-3">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="carpark">Carpark</label>
@@ -99,9 +99,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <label for="carpark">More Facilities</label>
+                            <label class="mt-3" for="carpark">More Facilities</label>
                             <div class="row" style="margin-left:4px;">
                                     <div class="form-check col-12 col-md-4 col-lg-3">
                                       <input class="form-check-input" type="checkbox" value="Garden" name="facilities[]">
@@ -192,10 +192,23 @@
                                 <input type="text" class="form-control" name="completedDate" autocomplete="off" placeholder="Expected Date">
                             </div>
 
-                            <div class="form-group mt-3">
+                            <div class="control-group mt-3">
+                                <label class="control-label">URLs</label>
+                                <div class="url-controls">
+                                    <div class="url-entry input-group col-sm-12 col-md-12" style="padding:0;">
+                                        <input class="form-control" name="URLs[]">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-success btn-add-url" type="button">
+                                            <i class="fas fa-plus"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="form-group mt-3">
                                 <label for="url">VR URL</label>
                                 <input type="text" class="form-control" name="url" autocomplete="off" placeholder="url">
-                            </div>
+                            </div> --}}
 
 
                             <div class="row mt-3">
@@ -263,7 +276,7 @@
 
 
 
-                            <div class="form-group mt-3">
+                            <div class="form-group mt-2">
                                 <label for="district">District</label>
                                 <select class="form-control" name="district">
                                 @foreach ($districts as $key => $district)
@@ -357,17 +370,52 @@
                                 </script>
                             </div>
 
-                            <div class="form-group mt-3">
-                                <label>Price List</label>
-                                <textarea id="summernote3" name="priceList"></textarea>
-                                <script>
-                                    $(document).ready(function() {
-                                        $('#summernote3').summernote({
-                                            height: 220,
-                                        });
-                                    });
-                                </script>
-                            </div>
+
+                            <div class="table-wrapper">
+                    			<div class="table-title">
+                    				<div class="row">
+                    					<div class="col-sm-8">Project Property Details</div>
+                    					<div class="col-sm-4">
+                    						<button type="button" class="btn btn-info add-new" id="add-new-btn"><i class="fa fa-plus"></i> Add New</button>
+                    					</div>
+                    				</div>
+                    			</div>
+                    			<table class="table table-bordered">
+                    				<thead>
+                    					<tr>
+                    						<th><img src="{{ url('img/table-icons/units.jpg') }}"></th>
+                    						<th><img src="{{ url('img/table-icons/bedrooms.jpg') }}"></th>
+                    						<th><img src="{{ url('img/table-icons/bathrooms.jpg') }}"></th>
+                    						<th><img src="{{ url('img/table-icons/carpark.jpg') }}"></th>
+                    						<th><img src="{{ url('img/table-icons/price.jpg') }}"></th>
+                    						<th><img src="{{ url('img/table-icons/availability.jpg') }}"></th>
+                    						<th><img src="{{ url('img/table-icons/layout-header.jpg') }}"></th>
+                    						<th><img src="{{ url('img/table-icons/images.jpg') }}"></th>
+                    						<th><img src="{{ url('img/table-icons/size.jpg') }}"></th>
+                    						<th>Action</th>
+                    					</tr>
+                    				</thead>
+                    				<tbody class="list-table">
+                    					<tr hidden>
+                    						<td>99</td>
+                    						<td>99</td>
+                    						<td>99</td>
+                    						<td>99</td>
+                    						<td>99</td>
+                    						<td>99</td>
+                    						<td>99</td>
+                    						<td>99</td>
+                    						<td>99</td>
+                    						<td>
+                    							<a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                    							<a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                    							<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                    						</td>
+                    					</tr>
+                    				</tbody>
+                    			</table>
+                    		</div>
+
 
                             <button type="submit" class="btn btn-primary">Create</button>
                         </div>
@@ -383,6 +431,10 @@
                 margin-top: 10px;
             }
             .pdf-entry:not(:first-of-type)
+            {
+                margin-top: 10px;
+            }
+            .url-entry:not(:first-of-type)
             {
                 margin-top: 10px;
             }
@@ -436,6 +488,28 @@
         		return false;
         	});
 
+            // URLs
+            $(document).on('click', '.btn-add-url', function(e)
+            {
+                e.preventDefault();
+
+                var controlForm = $('.url-controls:first'),
+                    currentEntry = $(this).parents('.url-entry:first'),
+                    newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+                newEntry.find('input').val('');
+                controlForm.find('.url-entry:not(:last) .btn-add-url')
+                    .removeClass('btn-add-url').addClass('btn-remove-url')
+                    .removeClass('btn-success').addClass('btn-danger')
+                    .html('<i class="fas fa-minus"></i>');
+            }).on('click', '.btn-remove-url', function(e)
+            {
+              $(this).parents('.url-entry:first').remove();
+
+        		e.preventDefault();
+        		return false;
+        	});
+
             // // Add the following code if you want the name of the file appear on select
             // $(".custom-file-input").on("change", function() {
             //     var fileName = $(this).val().split("\\").pop();
@@ -443,5 +517,202 @@
             // });
         });
         </script>
+
+<style type="text/css">
+	/* body {
+		color: #404E67;
+		background: #F5F7FA;
+		font-family: 'Open Sans', sans-serif;
+	} */
+	th, td {
+		text-align: center;
+	}
+	th>img {
+		height: 60%;
+	}
+	td>img {
+		height: 40%;
+	}
+	tbody tr:hover{
+		background-color:#f5f5f5;
+	}
+	.table-wrapper {
+		/* margin: 30px auto;
+		background: #fff;
+		padding: 20px; */
+		box-shadow: 0 1px 1px rgba(0,0,0,.05);
+	}
+	.table-title {
+		padding-bottom: 10px;
+		margin: 0 0 10px;
+	}
+	.table-title h2 {
+		margin: 6px 0 0;
+		font-size: 22px;
+	}
+	.table-title .add-new {
+		float: right;
+		height: 30px;
+		font-weight: bold;
+		font-size: 12px;
+		text-shadow: none;
+		min-width: 100px;
+		border-radius: 50px;
+		line-height: 13px;
+	}
+	.table-title .add-new i {
+		margin-right: 4px;
+	}
+	table.table {
+		table-layout: fixed;
+	}
+	table.table tr th, table.table tr td {
+		border-color: #e9e9e9;
+	}
+	table.table th i {
+		font-size: 13px;
+		margin: 0 5px;
+		cursor: pointer;
+	}
+	table.table th:last-child {
+		width: 100px;
+	}
+	table.table td a {
+		cursor: pointer;
+		display: inline-block;
+		margin: 0 5px;
+		min-width: 24px;
+	}
+	table.table td a.add {
+		color: #27C46B;
+	}
+	table.table td a.edit {
+		color: #FFC107;
+	}
+	table.table td a.delete {
+		color: #E34724;
+	}
+	table.table td i {
+		font-size: 19px;
+	}
+	table.table td a.add i {
+		font-size: 24px;
+		margin-right: -1px;
+		position: relative;
+		top: 3px;
+	}
+	table.table .form-control {
+		height: 32px;
+		line-height: 32px;
+		box-shadow: none;
+		border-radius: 2px;
+	}
+	table.table .form-control.error {
+		border-color: #f50000;
+	}
+	table.table td .add {
+		display: none;
+	}
+
+	.upload-btn-wrapper {
+		position: relative;
+		overflow: hidden;
+		display: inline-block;
+	}
+
+	table .btn {
+		border: 2px solid gray;
+		color: gray;
+		background-color: white;
+		padding: 4px 6px;
+		border-radius: 8px;
+		font-size: 14px;
+		font-weight: bold;
+	}
+
+	.upload-btn-wrapper input[type=file] {
+		font-size: 100px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		opacity: 0;
+	}
+    .list-table  td  input{
+        width: 100% !important;
+    }
+
+    .list-table  td  .error{
+        font-size: 1rem !important;
+    }
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+		var actions = $("table td:last-child").html();
+  // Append table with add row form on add new button click
+  $(".add-new").click(function(){
+  	$(this).attr("disabled", "disabled");
+  	var index = $("table tbody tr:last-child").index();
+  	var row = '<tr>' +
+  	'<td><input type="text" class="form-control" name="list['+ index +'][unit]" ></td>' +
+  	'<td><input type="text" class="form-control" name="list['+ index +'][bedroom]" ></td>' +
+  	'<td><input type="text" class="form-control" name="list['+ index +'][bathroom]" ></td>' +
+  	'<td><input type="text" class="form-control" name="list['+ index +'][carpark]" ></td>' +
+  	'<td><input type="text" class="form-control" name="list['+ index +'][price]" ></td>' +
+  	'<td><select class="form-control" name="list['+ index +'][availability]"><option value="Available">Available</option><option value="Presale">Presale</option><option value="Sold">Sold</option></select></td>' +
+  	// '<td><input type="text" class="form-control" name="list[row'+ index +'][availability]" ></td>' +
+  	'<td><div class="upload-btn-wrapper"><button class="btn">Upload</button><input type="file" accept="image/*" name="list['+ index +'][layout][]" ></div></td>' +
+  	'<td><div class="upload-btn-wrapper"><button class="btn">Upload</button><input type="file" accept="image/*" name="list['+ index +'][view][]" multiple></div></td>' +
+  	'<td><input type="text" class="form-control" name="list['+ index +'][size]" ></td>' +
+  	'<td>' + actions + '</td>' +
+  	'</tr>';
+  	$("table").append(row);
+  	$("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+  	$('[data-toggle="tooltip"]').tooltip();
+  });
+  // Add row on add button click
+  $(document).on("click", ".add", function(){
+  	var empty = false;
+  	var input = $(this).parents("tr").find('input[type="text"]');
+  	input.each(function(){
+  		if(!$(this).val()){
+  			$(this).addClass("error");
+  			empty = true;
+  		} else{
+  			$(this).removeClass("error");
+  		}
+  	});
+  	$(this).parents("tr").find(".error").first().focus();
+  	if(!empty){
+  		input.each(function(){
+  			// $(this).parent("td").html($(this).val());
+  			$(this).parent("td").find("input").prop('readonly', true);
+  		});
+  		$(this).parents("tr").find(".add, .edit").toggle();
+  		$(".add-new").removeAttr("disabled");
+  	}
+  });
+  // Edit row on edit button click
+  $(document).on("click", ".edit", function(){
+  	$(this).parents("tr").find("td:not(:last-child)").each(function(){
+  		console.log($(this));
+  		$(this).find("input").prop('readonly', false);
+  		// $(this).parent("tr").find("td").find("input").removeAttr("disabled");
+
+
+  		// $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+  	});
+  	$(this).parents("tr").find(".add, .edit").toggle();
+  	$(".add-new").attr("disabled", "disabled");
+  });
+  // Delete row on delete button click
+  $(document).on("click", ".delete", function(){
+  	$(this).parents("tr").remove();
+  	$(".add-new").removeAttr("disabled");
+  });
+
+  document.getElementById("add-new-btn").click();
+});
+</script>
 
 @stop

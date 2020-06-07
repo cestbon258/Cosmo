@@ -265,19 +265,21 @@
             <br>
         @endif
 
-        @if (Auth::user()->role == 0 || Auth::user()->role == 2 || Auth::user()->role == 3)
-            @if ( !empty($property->price_list) )
-                <div class="card mt-3">
-                    <h5 class="card-header">Price List</h5>
-                    <div class="card-body">
-                        <p class="card-text">
-                            <div>{!!html_entity_decode($property->price_list)!!}</div>
-                        </p>
+        @auth
+            @if (Auth::user()->role == 0 || Auth::user()->role == 2 || Auth::user()->role == 3)
+                @if ( !empty($property->price_list) )
+                    <div class="card mt-3">
+                        <h5 class="card-header">Price List</h5>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <div>{!!html_entity_decode($property->price_list)!!}</div>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <br>
+                    <br>
+                @endif
             @endif
-        @endif
+        @endauth
 
         @auth
         @if ( !empty($property->files) )

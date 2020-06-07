@@ -66,14 +66,14 @@ class ProjectController extends Controller
 
                     $img = Image::make($image->getRealPath());
 
-                    $img->resize(1000, 724);
+                    $img->resize(1024, 768);
                     $img->stream(); // <-- Key point
 
                     Storage::disk('public')->put('projects/'.$property_code.'/'.$fileName, $img);
 
                     // should have thumbnails
                     $thumb = Image::make($image->getRealPath());
-                    $thumb->resize(350, 250);
+                    $thumb->resize(550, 350);
                     $thumb->stream(); // <-- Key point
 
                     Storage::disk('public')->put('projects/'.$property_code.'/thumbnails'.'/'.$fileName, $thumb);
@@ -110,6 +110,70 @@ class ProjectController extends Controller
                 }
             }
 
+            if(!empty($_POST['list'])) {
+
+                foreach ($_POST['list'] as $key => $row) {
+                    $layoutArray = [];
+                    $viewArray = [];
+
+                    if ($request->hasFile('list.'.$key.'.layout')) {
+
+                        foreach ($request->file('list.'.$key.'.layout') as $i => $image) {
+
+                            $name = md5($image->getClientOriginalName() . time());
+                            // $image      = $request->file('houseImg');
+                            $fileName   = $name . '.' . $image->getClientOriginalExtension();
+                            echo $i;
+
+                            $img = Image::make($image->getRealPath());
+
+                            $img->resize(1024, 768);
+                            $img->stream(); // <-- Key point
+
+                            // Storage::disk('public')->put('projects/'.$property_code.'/'.$fileName, $img);
+                            Storage::disk('public')->put('projects/'.$property_code.'/layouts'.'/'.$fileName, $img);
+
+                            // should have thumbnails
+                            $thumb = Image::make($image->getRealPath());
+                            $thumb->resize(550, 350);
+                            $thumb->stream(); // <-- Key point
+
+                            Storage::disk('public')->put('projects/'.$property_code.'/layouts-thumbnails'.'/'.$fileName, $thumb);
+                            $layoutArray[] = $fileName; // temp array to store name of images
+                        }
+                        $_POST['list'][$key]['layouts'] = $layoutArray;
+                    }
+
+                    if ($request->hasFile('list.'.$key.'.view')) {
+
+                        foreach ($request->file('list.'.$key.'.view') as $i => $image) {
+
+                            $name = md5($image->getClientOriginalName() . time());
+                            // $image      = $request->file('houseImg');
+                            $fileName   = $name . '.' . $image->getClientOriginalExtension();
+                            echo $i;
+
+                            $img = Image::make($image->getRealPath());
+
+                            $img->resize(1024, 768);
+                            $img->stream(); // <-- Key point
+
+                            // Storage::disk('public')->put('projects/'.$property_code.'/'.$fileName, $img);
+                            Storage::disk('public')->put('projects/'.$property_code.'/views'.'/'.$fileName, $img);
+
+                            // should have thumbnails
+                            $thumb = Image::make($image->getRealPath());
+                            $thumb->resize(550, 350);
+                            $thumb->stream(); // <-- Key point
+
+                            Storage::disk('public')->put('projects/'.$property_code.'/views-thumbnails'.'/'.$fileName, $thumb);
+                            $viewArray[] = $fileName; // temp array to store name of images
+                        }
+                        $_POST['list'][$key]['views'] = $viewArray;
+                    }
+                }
+            }
+
             // // convert to date
             // $date = date_create($_POST['time']);
             // $newDate= date_format($date,"Y-m-d");;
@@ -120,7 +184,14 @@ class ProjectController extends Controller
 
             $facilities = !empty($_POST['facilities']) ? json_encode($_POST['facilities']) : null;
 
-            $vrURL = !empty($_POST['url']) ? $_POST['url'] : null;
+            $urlArray = [];
+            if ($_POST['URLs']) {
+                if ( !empty($_POST['URLs'][0]) ) {
+                    $urlArray = $_POST['URLs'];
+                }
+            }
+
+            $list = ($_POST['list'] && !empty($_POST['list'][0]['unit']) ) ? json_encode($_POST['list']) : null;
 
             DB::table('houses')
             ->insert(
@@ -129,7 +200,7 @@ class ProjectController extends Controller
                         'property_code' => $property_code,
                         'title'         => $_POST['title'],
                         'type'          => $_POST['type'],
-                        'carpark'       => $_POST['carpark'],
+                        // 'carpark'       => $_POST['carpark'],
                         'facilities'    => $facilities,
                         'features'     => json_encode($_POST['features']),
                         'country'      => $districtArray[1],
@@ -139,11 +210,11 @@ class ProjectController extends Controller
                         'videos'       => json_encode($videoArray),
                         'files'        => json_encode($pdfArray),
                         'completed_date' => $_POST['completedDate'],
-                        'vr_url'       => $vrURL,
+                        'vr_url'       => json_encode($urlArray),
                         'currency'     => $_POST['currency'],
                         'price'        => $_POST['price'],
                         'description'  => json_encode($_POST['description']),
-                        'price_list'  => json_encode($_POST['priceList']),
+                        'project_property_list'   => $list,
                         'project_type' => 2,
                     ]
                 );
@@ -199,10 +270,11 @@ class ProjectController extends Controller
         $myProperty->facilities = json_decode($myProperty->facilities);
         $myProperty->features = json_decode($myProperty->features);
         $myProperty->description = json_decode($myProperty->description);
-        $myProperty->price_list = json_decode($myProperty->price_list);
+        $myProperty->project_property_list = json_decode($myProperty->project_property_list);
         $myProperty->pictures = json_decode($myProperty->pictures);
         $myProperty->videos = json_decode($myProperty->videos);
         $myProperty->files = json_decode($myProperty->files);
+        $myProperty->vr_url = json_decode($myProperty->vr_url);
 
         // echo '<pre>'.print_r($myProperty, 1).'</pre>';
 
@@ -342,7 +414,7 @@ class ProjectController extends Controller
                 $fileName   = $name . '.' . $image->getClientOriginalExtension();
 
                 $img = Image::make($image->getRealPath());
-                $img->resize(1000, 724);
+                $img->resize(1024, 768);
                 $img->stream(); // <-- Key point
 
                 Storage::disk('public')->put('projects/'.$propertyCode.'/'.$fileName, $img);
@@ -403,6 +475,232 @@ class ProjectController extends Controller
         //     $newDate = null;
         // }
 
+        $urlArray = [];
+
+        if( !empty($_POST['originURLs']) ) {
+            foreach ($_POST['originURLs'] as $key => $url) {
+                if($url) {
+                    $urlArray[] = $url;
+                }
+            }
+        }
+
+        if ($_POST['URLs']) {
+            if ( !empty($_POST['URLs'][0]) ) {
+                foreach ($_POST['URLs'] as $key => $url) {
+                    if($url) {
+                        $urlArray[] = $url;
+                    }
+                }
+            }
+        }
+
+        $list = [];
+
+        if(!empty($_POST['originList'])) {
+            foreach ($_POST['originList'] as $index => $row) {
+                $layoutArray = [];
+                $viewArray = [];
+
+                // compare
+                if(!empty($row['allViews']) && !empty($row['views'])) {
+                    $result = array_diff($row['allViews'], $row['views']);
+
+                    // delete images
+                    if( !empty($result) ){
+                        foreach ($result as $key => $img) {
+                            Storage::disk('public')->delete('projects/'.$propertyCode.'/views'.'/'.$img);
+                            Storage::disk('public')->delete('projects/'.$propertyCode.'/views-thumbnails'.'/'.$img);
+                        }
+                    }
+                }
+                // all original images are deleted
+                if(!empty($row['allViews']) && empty($row['views'])) {
+                    foreach ($row['allViews'] as $key => $img) {
+                        Storage::disk('public')->delete('projects/'.$propertyCode.'/views'.'/'.$img);
+                        Storage::disk('public')->delete('projects/'.$propertyCode.'/views-thumbnails'.'/'.$img);
+                    }
+                }
+
+                if(!empty($row['allViews'])) {
+                    // remove allViews array
+                    unset($_POST['originList'][$index]['allViews']);
+                }
+
+                // compare
+                if(!empty($row['allLayouts']) && !empty($row['layouts'])) {
+                    $result = array_diff($row['allLayouts'], $row['layouts']);
+
+                    // delete images
+                    if( !empty($result) ){
+                        foreach ($result as $key => $img) {
+                            Storage::disk('public')->delete('projects/'.$propertyCode.'/layouts'.'/'.$img);
+                            Storage::disk('public')->delete('projects/'.$propertyCode.'/layouts-thumbnails'.'/'.$img);
+                        }
+                    }
+
+                }
+                // all original images are deleted
+                if(!empty($row['allLayouts']) && empty($row['layouts'])) {
+                    foreach ($row['allLayouts'] as $key => $img) {
+                        Storage::disk('public')->delete('projects/'.$propertyCode.'/layouts'.'/'.$img);
+                        Storage::disk('public')->delete('projects/'.$propertyCode.'/layouts-thumbnails'.'/'.$img);
+                    }
+                }
+
+                if(!empty($row['allLayouts'])) {
+                    // remove allLayouts array
+                    unset($_POST['originList'][$index]['allLayouts']);
+                }
+
+                if ($request->hasFile('originList.'.$index.'.layout')) {
+
+                    foreach ($request->file('originList.'.$index.'.layout') as $i => $image) {
+
+                        $name = md5($image->getClientOriginalName() . time());
+
+                        $fileName   = $name . '.' . $image->getClientOriginalExtension();
+
+                        $img = Image::make($image->getRealPath());
+
+                        $img->resize(1024, 768);
+                        $img->stream(); // <-- Key point
+
+                        Storage::disk('public')->put('projects/'.$propertyCode.'/layouts'.'/'.$fileName, $img);
+
+                        // should have thumbnails
+                        $thumb = Image::make($image->getRealPath());
+                        $thumb->resize(550, 350);
+                        $thumb->stream(); // <-- Key point
+
+                        Storage::disk('public')->put('projects/'.$propertyCode.'/layouts-thumbnails'.'/'.$fileName, $thumb);
+                        $layoutArray[] = $fileName; // temp array to store name of images
+                        // if not empty, array push
+
+                        if(!empty($_POST['originList'][$index]['layouts'])) {
+                            array_push($_POST['originList'][$index]['layouts'], $fileName);
+                        } else {
+                            $_POST['originList'][$index]['layouts'][] = $fileName;
+                        }
+
+                    }
+                    // // cannot array push
+                    // if (empty($_POST['originList'][$key]['layouts'])) {
+                    //     $_POST['originList'][$key]['layouts'][] = $layoutArray;
+                    // }
+
+                }
+
+                if ($request->hasFile('originList.'.$index.'.view')) {
+
+                    foreach ($request->file('originList.'.$index.'.view') as $i => $image) {
+
+                        $name = md5($image->getClientOriginalName() . time());
+
+                        $fileName   = $name . '.' . $image->getClientOriginalExtension();
+                        echo $i;
+
+                        $img = Image::make($image->getRealPath());
+
+                        $img->resize(1024, 768);
+                        $img->stream(); // <-- Key point
+
+                        Storage::disk('public')->put('projects/'.$propertyCode.'/views'.'/'.$fileName, $img);
+
+                        // should have thumbnails
+                        $thumb = Image::make($image->getRealPath());
+                        $thumb->resize(550, 350);
+                        $thumb->stream(); // <-- Key point
+
+                        Storage::disk('public')->put('projects/'.$propertyCode.'/views-thumbnails'.'/'.$fileName, $thumb);
+                        $viewArray[] = $fileName; // temp array to store name of images
+
+
+
+                        if (!empty($_POST['originList'][$index]['views'])) {
+                            array_push($_POST['originList'][$index]['views'], $fileName);
+                        } else {
+                            $_POST['originList'][$index]['views'][] = $fileName;
+                        }
+                    }
+                    // if (empty($_POST['originList'][$key]['views'])) {
+                    //     $_POST['originList'][$key]['views'] = $viewArray;
+                    // }
+                }
+                array_push($list, $_POST['originList'][$index]);
+            }
+        }
+
+
+
+        if (!empty($_POST['list'])) {
+            foreach ($_POST['list'] as $key => $row) {
+                $layoutArray = [];
+                $viewArray = [];
+
+                if ($request->hasFile('list.'.$key.'.layout')) {
+
+                    foreach ($request->file('list.'.$key.'.layout') as $i => $image) {
+
+                        $name = md5($image->getClientOriginalName() . time());
+
+                        $fileName   = $name . '.' . $image->getClientOriginalExtension();
+                        echo $i;
+
+                        $img = Image::make($image->getRealPath());
+
+                        $img->resize(1024, 768);
+                        $img->stream(); // <-- Key point
+
+                        Storage::disk('public')->put('projects/'.$propertyCode.'/layouts'.'/'.$fileName, $img);
+
+                        // should have thumbnails
+                        $thumb = Image::make($image->getRealPath());
+                        $thumb->resize(550, 350);
+                        $thumb->stream(); // <-- Key point
+
+                        Storage::disk('public')->put('projects/'.$propertyCode.'/layouts-thumbnails'.'/'.$fileName, $thumb);
+                        $layoutArray[] = $fileName; // temp array to store name of images
+                    }
+                    $_POST['list'][$key]['layouts'] = $layoutArray;
+                }
+
+                if ($request->hasFile('list.'.$key.'.view')) {
+
+                    foreach ($request->file('list.'.$key.'.view') as $i => $image) {
+
+                        $name = md5($image->getClientOriginalName() . time());
+                        // $image      = $request->file('houseImg');
+                        $fileName   = $name . '.' . $image->getClientOriginalExtension();
+                        echo $i;
+
+                        $img = Image::make($image->getRealPath());
+
+                        $img->resize(1024, 768);
+                        $img->stream(); // <-- Key point
+
+                        Storage::disk('public')->put('projects/'.$propertyCode.'/views'.'/'.$fileName, $img);
+
+                        // should have thumbnails
+                        $thumb = Image::make($image->getRealPath());
+                        $thumb->resize(550, 350);
+                        $thumb->stream(); // <-- Key point
+
+                        Storage::disk('public')->put('projects/'.$propertyCode.'/views-thumbnails'.'/'.$fileName, $thumb);
+                        $viewArray[] = $fileName; // temp array to store name of images
+                    }
+                    $_POST['list'][$key]['views'] = $viewArray;
+                }
+                if (!empty($_POST['list'][$key]['unit'])) {
+                    array_push($list, $_POST['list'][$key]);
+                }
+            }
+        }
+
+        $list = ( !empty($list) ) ? json_encode($list) : null;
+
+
+        // echo '<pre>'.print_r($urlArray, 1).'</pre>';
 
         // get country and city from district
         $district = $_POST['district'];
@@ -411,9 +709,10 @@ class ProjectController extends Controller
         $imgJson = !empty($imgArray) ? json_encode($imgArray) : null;
         $videoJson = !empty($videoArray) ? json_encode($videoArray) : null;
         $pdfJson = !empty($pdfArray) ? json_encode($pdfArray) : null;
+        $urlJson = !empty($urlArray) ? json_encode($urlArray) : null;
         $facilities = !empty($_POST['facilities']) ? json_encode($_POST['facilities']) : null;
 
-        $vrURL = !empty($_POST['url']) ? $_POST['url'] : null;
+
 
         DB::table('houses')
             ->where('property_code', $propertyCode)
@@ -421,7 +720,7 @@ class ProjectController extends Controller
                 [
                     'title'        => $_POST['title'],
                     'type'         => $_POST['type'],
-                    'carpark'      => $_POST['carpark'],
+                    // 'carpark'      => $_POST['carpark'],
                     'facilities'   => $facilities,
                     'features'     => json_encode($_POST['features']),
                     'country'      => $districtArray[1],
@@ -431,11 +730,11 @@ class ProjectController extends Controller
                     'videos'       => $videoJson,
                     'files'        => $pdfJson,
                     'completed_date' => $_POST['completedDate'],
-                    'vr_url'       => $vrURL,
+                    'vr_url'       => $urlJson,
                     'currency'     => $_POST['currency'],
                     'price'        => $_POST['price'],
                     'description'  => json_encode($_POST['description']),
-                    'price_list'  => json_encode($_POST['priceList'])
+                    'project_property_list'  => $list
                 ]
             );
 
@@ -445,7 +744,8 @@ class ProjectController extends Controller
 
         return back();
 
-        // echo '<pre>'.print_r($request->file('videos'), 1).'</pre>';
+
+        // echo '<pre>'.print_r($request->all(), 1).'</pre>';
         // echo '<pre>'.print_r($_POST, 1).'</pre>';
     }
 
