@@ -764,15 +764,15 @@ class DataController extends Controller
             $myProperty->files = json_decode($myProperty->files);
         }
 
-        if ($myProperty->description) {
-           $removeTag= str_replace("&nbsp;"," ", $myProperty->description);
-           $removeTag2 = str_replace(".  "," ", $removeTag);
-           $removeTag3 = str_replace("· "," ", $removeTag2);
-           $myProperty->shortDesc = substr(strip_tags($removeTag3), 0, 180);
-        }
 
-        if ($myProperty->price_list) {
-            $myProperty->price_list = json_decode($myProperty->price_list);
+       $removeTag= str_replace("&nbsp;"," ", $myProperty->description);
+       $removeTag2 = str_replace(".  "," ", $removeTag);
+       $removeTag3 = str_replace("· "," ", $removeTag2);
+       $myProperty->shortDesc = substr(strip_tags($removeTag3), 0, 180);
+
+
+        if ($myProperty->project_property_list) {
+            $myProperty->project_property_list = json_decode($myProperty->project_property_list);
         }
         // echo '<pre>'.print_r($myProperty, 1).'</pre>';
 

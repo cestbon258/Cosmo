@@ -235,7 +235,7 @@
 
 
 <!-- ##### Footer Area Start ##### -->
-<footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url( {{ url('img/bg-img/cta.jpg') }} );">
+<footer class="footer-area section-padding-100-0 bg-img" style="background-color: black">
     <!-- Main Footer Area -->
     <div class="main-footer-area">
         <div class="container">
@@ -351,7 +351,7 @@
     </div>
 
         <!-- Copywrite Text -->
-        <div class="copywrite-text d-flex align-items-center justify-content-center">
+        <div class="copywrite-text d-flex align-items-center justify-content-center" style="background-color:black;">
             <p>
                 Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a href="{{ route('/', app()->getLocale()) }}">COSMO Real Estate Limited</a>. All rights reserved
             </p>
