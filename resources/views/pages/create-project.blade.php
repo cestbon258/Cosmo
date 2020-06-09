@@ -158,6 +158,21 @@
                                 </script>
                             </div>
 
+                            <div class="control-group mt-3">
+                                <label class="control-label">Upload PDFs</label>
+                                <div class="pdf-controls">
+                                    <div class="pdf-entry input-group col-xs-3">
+                                        <input class="btn btn-light" name="PDFs[]" type="file" accept="application/pdf">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-success btn-add-pdf" type="button">
+                                            <i class="fas fa-plus"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="control-group mt-3" id="fields">
                                 <label class="control-label">Upload Videos (Max. 20MB)</label>
                                 <div class="controls">
@@ -174,12 +189,12 @@
 
 
                             <div class="control-group mt-3">
-                                <label class="control-label">Upload PDFs</label>
-                                <div class="pdf-controls">
-                                    <div class="pdf-entry input-group col-xs-3">
-                                        <input class="btn btn-light" name="PDFs[]" type="file" accept="application/pdf">
+                                <label class="control-label">VR URLs</label>
+                                <div class="url-controls">
+                                    <div class="url-entry input-group col-sm-12 col-md-12" style="padding:0;">
+                                        <input class="form-control" name="URLs[]">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-success btn-add-pdf" type="button">
+                                            <button class="btn btn-success btn-add-url" type="button">
                                             <i class="fas fa-plus"></i>
                                             </button>
                                         </span>
@@ -192,19 +207,6 @@
                                 <input type="text" class="form-control" name="completedDate" autocomplete="off" placeholder="Expected Date">
                             </div>
 
-                            <div class="control-group mt-3">
-                                <label class="control-label">URLs</label>
-                                <div class="url-controls">
-                                    <div class="url-entry input-group col-sm-12 col-md-12" style="padding:0;">
-                                        <input class="form-control" name="URLs[]">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-success btn-add-url" type="button">
-                                            <i class="fas fa-plus"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
                             {{-- <div class="form-group mt-3">
                                 <label for="url">VR URL</label>
                                 <input type="text" class="form-control" name="url" autocomplete="off" placeholder="url">

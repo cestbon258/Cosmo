@@ -99,18 +99,26 @@
                     <div class="card" style="height: 100%;">
                         <div class="card-body">
 
-                            @if($property->vr_url)
+                            {{-- @if(!empty($property->property_id))
+                                <div class="float-right">
+                                    <span style="font-size:16px;">{{$property->property_id}}</span>
+                                </div>
+                            @endif --}}
+                            {{-- @if($property->vr_url)
                                 <div class="float-right">
                                     <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
                                 </div>
-                            @endif
+                            @endif --}}
 
                             <h5 class="card-title">{{$property->title}}</h5>
+                            @if(!empty($property->property_id))
+                                <span style="font-size:12px;"><b>Property ID: {{$property->property_id}}</b></span>
+                            @endif
                             <hr>
-                            @auth
+
                             <div><h6 style="color:red;">{{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</h6></div>
                             <hr>
-                            @endauth
+
                             <br>
 
                             <h6 class="card-info-text">Facilities</h6>
@@ -197,13 +205,19 @@
                     <div class="card" style="height: 100%;">
                         <div class="card-body">
 
-                            @if($property->vr_url)
+
+
+                            {{-- @if($property->vr_url)
                                 <div class="float-right">
                                     <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
                                 </div>
-                            @endif
+                            @endif --}}
 
                             <h5 class="card-title">{{$property->title}}</h5>
+                            @if(!empty($property->property_id))
+                                <span style="font-size:12px;"><b>Property ID: {{$property->property_id}}</b></span>
+                            @endif
+
                             <hr>
                             <br>
 
@@ -270,7 +284,7 @@
                 @if ( !empty($property->project_property_list) )
                     <div class="card mt-3">
                         <h5 class="card-header">Project Property Details</h5>
-                        <div class="card-body">
+                        <div class="card-body table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -296,7 +310,7 @@
                                             <td>{{$row->availability}}</td>
                                             <td>
                                                 @if( !empty($row->layouts) )
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#layoutModal{{$key}}">View</button>
+                                                    <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#layoutModal{{$key}}">View</button>
 
                                                     <div class="modal fade" id="layoutModal{{$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -310,11 +324,13 @@
                                                                 <div class="modal-body">
                                                                     <div id="sliderIndicators{{$key}}" class="carousel slide" data-ride="carousel">
                                                                         <div class="carousel-inner">
+                                                                            @if(!empty($row->layouts))
                                                                             @foreach ($row->layouts as $index => $picture)
                                                                                 <div class="carousel-item {{$index == 0 ? 'active' : ''}}">
                                                                                     <img class="d-block w-100" id="property-images" src="{{url('storage/projects/'.$property->property_code.'/layouts'.'/'.$picture)}}" onerror="this.onerror=null;this.src='{{ url('img/icons/default.png') }}';" style="border-radius:4px;">
                                                                                 </div>
                                                                             @endforeach
+                                                                            @endif
                                                                         </div>
                                                                         <a class="carousel-control-prev" href="#sliderIndicators{{$key}}" role="button" data-slide="prev">
                                                                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -327,9 +343,11 @@
                                                                         <div style="width:100%;">
                                                                             <center>
                                                                                 <ol class="carousel-indicators" style="position: relative; bottom:-4px; overflow-x:auto; margin-left:0; margin-right:0; justify-content: unset !important;">
+                                                                                    @if(!empty($row->layouts))
                                                                                     @foreach ($row->layouts as $index => $picture)
                                                                                         <img data-target="#sliderIndicators{{$key}}" data-slide-to="{{$index}}" class="{{$index==0 ? 'active' : ''}} px-1" src="{{url('storage/projects/'.$property->property_code.'/layouts-thumbnails'.'/'.$picture)}}" style="height:60px; width:100px; border-radius:6px;">
                                                                                     @endforeach
+                                                                                    @endif
                                                                                 </ol>
                                                                             </center>
                                                                         </div>
@@ -342,7 +360,7 @@
                                             </td>
                                             <td>
                                                 @if( !empty($row->views) )
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#layoutModal{{$key}}-{{$key}}">View</button>
+                                                    <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#layoutModal{{$key}}-{{$key}}">View</button>
 
                                                     <div class="modal fade" id="layoutModal{{$key}}-{{$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -356,11 +374,13 @@
                                                                 <div class="modal-body">
                                                                     <div id="sliderIndicators{{$key}}-{{$key}}" class="carousel slide" data-ride="carousel">
                                                                         <div class="carousel-inner">
+                                                                            @if(!empty($row->views))
                                                                             @foreach ($row->views as $index => $picture)
                                                                                 <div class="carousel-item {{$index == 0 ? 'active' : ''}}">
                                                                                     <img class="d-block w-100" id="property-images" src="{{url('storage/projects/'.$property->property_code.'/views'.'/'.$picture)}}" onerror="this.onerror=null;this.src='{{ url('img/icons/default.png') }}';" style="border-radius:4px;">
                                                                                 </div>
                                                                             @endforeach
+                                                                            @endif
                                                                         </div>
                                                                         <a class="carousel-control-prev" href="#sliderIndicators{{$key}}-{{$key}}" role="button" data-slide="prev">
                                                                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -373,9 +393,11 @@
                                                                         <div style="width:100%;">
                                                                             <center>
                                                                                 <ol class="carousel-indicators" style="position: relative; bottom:-4px; overflow-x:auto; margin-left:0; margin-right:0; justify-content: unset !important;">
+                                                                                    @if(!empty($row->views))
                                                                                     @foreach ($row->views as $index => $picture)
                                                                                         <img data-target="#sliderIndicators{{$key}}-{{$key}}" data-slide-to="{{$index}}" class="{{$index==0 ? 'active' : ''}} px-1" src="{{url('storage/projects/'.$property->property_code.'/views-thumbnails'.'/'.$picture)}}" style="height:60px; width:100px; border-radius:6px;">
                                                                                     @endforeach
+                                                                                    @endif
                                                                                 </ol>
                                                                             </center>
                                                                         </div>

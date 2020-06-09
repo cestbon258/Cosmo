@@ -95,6 +95,10 @@ Route::group(['prefix' => '{locale}'], function () {
         Route::get('/edit-project/{propertyCode}', 'ProjectController@edit_project')->name('edit-project');
         Route::post('/edit-project/{propertyCode}', 'ProjectController@update_project')->name('update-project');
         Route::post('/delete-project', 'ProjectController@delete_project')->name('delete-project');
+        // media
+        Route::any('/create-media', 'MediaController@create_media')->name('create-media');
+        Route::any('/update-media', 'MediaController@update_media')->name('update-media');
+
 
         // profile
         Route::get('/profile', 'DataController@profile')->name('profile')->middleware('verified');

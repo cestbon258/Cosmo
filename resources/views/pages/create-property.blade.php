@@ -171,6 +171,19 @@
                                     </div>
                             </div>
 
+                            <div class="control-group mt-3">
+                                <label class="control-label">Upload PDFs</label>
+                                <div class="pdf-controls">
+                                    <div class="pdf-entry input-group col-xs-3">
+                                        <input class="btn btn-light" name="PDFs[]" type="file" accept="application/pdf">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-success btn-add-pdf" type="button">
+                                            <i class="fas fa-plus"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="control-group mt-3" id="fields">
                                 <label class="control-label">Upload Videos (Max. 20MB)</label>
@@ -186,20 +199,6 @@
                                 </div>
                             </div>
 
-
-                            <div class="control-group mt-3">
-                                <label class="control-label">Upload PDFs</label>
-                                <div class="pdf-controls">
-                                    <div class="pdf-entry input-group col-xs-3">
-                                        <input class="btn btn-light" name="PDFs[]" type="file" accept="application/pdf">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-success btn-add-pdf" type="button">
-                                            <i class="fas fa-plus"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="form-group mt-3">
                                 <label for="url">VR URL</label>

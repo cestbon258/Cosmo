@@ -158,6 +158,42 @@
                                 </script>
                             </div>
 
+                            <div class="control-group mt-3">
+                                <label class="control-label">Upload PDFs</label>
+
+                                @if ($property->files)
+                                    @foreach ($property->files as $key => $file)
+
+                                        <div class="pdf-controls" style="margin-bottom:10px;">
+                                            <div class="pdf-entry input-group col-xs-3">
+                                                <div class="scroll-wrapper">
+                                                    <iframe src="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}#view=FitH">
+                                                    </iframe>
+                                                </div>
+                                                <input class="btn btn-light" name="originPDFs[]" readonly value="{{$file}}">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-danger btn-remove-pdf" type="button" style="height:100%;">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    <br>
+                                @endif
+
+                                <div class="pdf-controls">
+                                    <div class="pdf-entry input-group col-xs-3">
+                                        <input class="btn btn-light" name="PDFs[]" type="file" accept="application/pdf">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-success btn-add-pdf" type="button">
+                                            <i class="fas fa-plus"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="control-group mt-3" id="fields">
                                 <label class="control-label">Upload Videos (Max. 20MB)</label>
                                 @if ($property->videos)
@@ -194,50 +230,10 @@
                             </div>
 
 
-                            <div class="control-group mt-3">
-                                <label class="control-label">Upload PDFs</label>
-
-                                @if ($property->files)
-                                    @foreach ($property->files as $key => $file)
-
-                                        <div class="pdf-controls" style="margin-bottom:10px;">
-                                            <div class="pdf-entry input-group col-xs-3">
-                                                <div class="scroll-wrapper">
-                                                	<iframe src="{{ URL::asset('storage/projects/'.$property->property_code.'/pdf'.'/'.$file) }}#view=FitH">
-                                                    </iframe>
-                                                </div>
-                                                <input class="btn btn-light" name="originPDFs[]" readonly value="{{$file}}">
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-danger btn-remove-pdf" type="button" style="height:100%;">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    <br>
-                                @endif
-
-                                <div class="pdf-controls">
-                                    <div class="pdf-entry input-group col-xs-3">
-                                        <input class="btn btn-light" name="PDFs[]" type="file" accept="application/pdf">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-success btn-add-pdf" type="button">
-                                            <i class="fas fa-plus"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group mt-3">
-                                <label for="completionDate">Date of Completion</label>
-                                <input type="text" class="form-control" name="completedDate" value="{{$property->completed_date ? $property->completed_date :''}}" autocomplete="off" placeholder="Expected Date">
-                            </div>
 
 
                             <div class="control-group mt-3">
-                                <label class="control-label">URLs</label>
+                                <label class="control-label">VR URLs</label>
                                 @if ($property->vr_url)
                                     @foreach ($property->vr_url as $key => $url)
                                         <div class="url-controls" style="margin-bottom:10px;">
@@ -266,6 +262,10 @@
                                 </div>
                             </div>
 
+                            <div class="form-group mt-3">
+                                <label for="completionDate">Date of Completion</label>
+                                <input type="text" class="form-control" name="completedDate" value="{{$property->completed_date ? $property->completed_date :''}}" autocomplete="off" placeholder="Expected Date">
+                            </div>
 
 
                             <div class="row mt-3">
