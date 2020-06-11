@@ -19,6 +19,16 @@
                     <h6 class="m-0 font-weight-bold text-primary">All Properties</h6>
                 </div>
                 <div class="card-body">
+                    <div class="card-title">
+                        <a  href="{{ route('create-property', app()->getLocale()) }}">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Create Property</span></a>
+                        &emsp;
+                        <a href="{{ route('create-project', app()->getLocale()) }}">
+                        <i class="fas fa-plus-square"></i>
+                        <span>Create Project</span></a>
+                    </div>
+                    <hr>
                     <table id="propert-table" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>

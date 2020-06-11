@@ -408,8 +408,19 @@
                             <div class="table-wrapper">
                                 <div class="table-title">
                                     <div class="row">
-                                        <div class="col-sm-8">Project Property Details</div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">Project Property Details</div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <select class="form-control" name="measure" required>
+                                                    <option {{$property->measurement =='sq ft' ? 'selected' : ''}}>sq ft</option>
+                                                    <option {{$property->measurement =='m²' ? 'selected' : ''}}>m&#178;</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please specify the unit.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
                                             <button type="button" class="btn btn-info add-new" id="add-new-btn"><i class="fa fa-plus"></i> Add New</button>
                                         </div>
                                     </div>

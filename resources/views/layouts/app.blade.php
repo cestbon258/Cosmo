@@ -26,7 +26,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    
+
     <style>
         .theme-primary {
             background-color: #222d33;
@@ -89,6 +89,11 @@
                     <a class="nav-link" href="{{ route('create-project', app()->getLocale()) }}">
                     <i class="fas fa-plus-square"></i>
                     <span>Create Project</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('create-media', app()->getLocale()) }}">
+                    <i class="fas fa-video"></i>
+                    <span>Media</span></a>
                 </li>
 
                 <li class="nav-item">

@@ -16,6 +16,14 @@ use Image;
 
 class MediaController extends Controller
 {
+    public function media (Request $request)
+    {
+        $data = DB::table('media')
+            ->orderBy('uploaded_date', 'desc')
+            ->paginate(6);
+
+        return View::make('pages/media')->with(array("data"=>$data));
+    }
 
     public function create_media (Request $request)
     {

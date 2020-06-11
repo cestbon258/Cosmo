@@ -340,7 +340,7 @@
                                             <option {{$property->measurement =='m²' ? 'selected' : ''}}>m&#178;</option>
                                         </select>
                                         <div class="invalid-feedback">
-                                            Please specify the No. of bathroom.
+                                            Please specify the unit.
                                         </div>
                                     </div>
                                 </div>

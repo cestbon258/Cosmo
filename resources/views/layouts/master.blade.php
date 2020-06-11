@@ -193,6 +193,7 @@
                             </li>
 
                             <li><a href="{{ route('vr-property', app()->getLocale()) }}">VR</a></li>
+                            <li><a href="{{ route('media', app()->getLocale()) }}">Media</a></li>
 
                             <li><a href="{{ route('events', app()->getLocale()) }}">Events</a></li>
 
