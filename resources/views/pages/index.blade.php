@@ -89,14 +89,16 @@
 
                             <div class="row">
 
-                                {{-- <div class="col-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <input type="input" class="form-control" name="input" placeholder="Keyword">
-                                    </div>
-                                </div> --}}
+
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         You want to:
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <input type="input" class="form-control" name="q" placeholder="Project ID ...">
                                     </div>
                                 </div>
 

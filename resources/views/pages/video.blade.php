@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Media')
+@section('title', 'Video')
 
 @section('specificScript')
     <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
@@ -18,28 +18,29 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading wow fadeInUp">
-                        <h2>Cosmo Media</h2>
+                        <h2>Video</h2>
                         {{-- <p>Suspendisse dictum enim sit amet libero malesuada feugiat.</p> --}}
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                @foreach ($data as $key => $media)
+                @foreach ($data as $key => $record)
+                    @foreach ($record->video as $index => $value)
+
                         <div class="col-12 col-md-6 col-xl-4">
                             <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
                                 <div class="property-thumb" style="bottom:-6px;">
-                                    <iframe style="width:100%;" height="345" src="{{$media->url}}" frameborder="0" allow="accelerometer; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe style="width:100%;" height="345" src="{{ URL::asset('storage/videos/'.$record->video_code.'/'.$value) }}" frameborder="0" allow="accelerometer; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
-
                                 <div class="property-content">
-                                    {{$media->title}}
+                                    {{$record->developer}}
                                     <div></div>
-                                    <span style="color:grey; font-size:12px;">{{$media->uploaded_date}}</span>
+                                    {{-- <span style="color:grey; font-size:12px;">{{$video->created_at}}</span> --}}
                                 </div>
                             </div>
                         </div>
-
+                    @endforeach
                 @endforeach
             </div>
         </div>

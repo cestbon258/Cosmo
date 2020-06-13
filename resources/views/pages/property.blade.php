@@ -244,6 +244,28 @@
                 </div>
             </div>
         @endif
+        @if ( !empty($property->vr_url) )
+            <div class="card mt-3">
+                <h5 class="card-header">VR</h5>
+                <div class="card-body">
+                    <div class="row">
+                        @foreach ($property->vr_url as $index => $vr)
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
+                                    <div class="embed-responsive embed-responsive-4by3 fadeInUp">
+                                        <iframe class="embed-responsive-item" src="{{$vr}}"></iframe>
+                                    </div>
+                                    <a href="{{$vr}}" target="_blank">
+                                        <button type="button" class="btn float-right">Full Screen</button>
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
+
 
         @auth
         @if ( !empty($property->videos) )

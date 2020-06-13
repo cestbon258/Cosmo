@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Media')
+@section('title', 'Create Video')
 
 @section('content')
 
@@ -23,12 +23,13 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard', app()->getLocale()) }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Video</li>
+                    <li class="breadcrumb-item"><a href="{{ route('video-list', app()->getLocale()) }}">All Videos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Create Video</li>
                 </ol>
             </nav>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Video</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Create Video</h6>
                 </div>
                 <div class="card-body">
 

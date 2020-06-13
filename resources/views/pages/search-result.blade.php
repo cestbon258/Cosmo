@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Home')
+@section('title', 'Search Result')
 
 @section('specificScript')
     <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
@@ -35,6 +35,12 @@
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         You want to:
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <input type="input" class="form-control" name="q" placeholder="Project ID ...">
                                     </div>
                                 </div>
 

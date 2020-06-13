@@ -95,6 +95,11 @@
                     <i class="fas fa-video"></i>
                     <span>Media</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('video-list', app()->getLocale()) }}">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span></a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('property-list', app()->getLocale()) }}">

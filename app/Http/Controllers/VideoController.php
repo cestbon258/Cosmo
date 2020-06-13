@@ -16,14 +16,22 @@ use Image;
 
 class VideoController extends Controller
 {
-    // public function media (Request $request)
-    // {
-    //     $data = DB::table('media')
-    //         ->orderBy('uploaded_date', 'desc')
-    //         ->paginate(6);
-    //
-    //     return View::make('pages/media')->with(array("data"=>$data));
-    // }
+    public function video (Request $request)
+    {
+        $data = DB::table('video')
+            ->orderBy('created_at', 'desc')
+            ->paginate(6);
+
+        foreach ($data as $key => $value) {
+            if ($value->video) {
+                $value->video = json_decode($value->video);
+            }
+        }
+
+        // echo '<pre>'.print_r($data, 1).'</pre>';
+
+        return View::make('pages/video')->with(array("data"=>$data));
+    }
 
     public function create_video (Request $request)
     {
@@ -85,7 +93,7 @@ class VideoController extends Controller
             $data->video = json_decode($data->video);
         }
 
-        echo '<pre>'.print_r($data, 1).'</pre>';
+        // echo '<pre>'.print_r($data, 1).'</pre>';
 
         return View::make('pages/edit-video')->with(array('data' => $data));
 
@@ -171,5 +179,52 @@ class VideoController extends Controller
 
     }
 
+
+    public function video_list()
+    {
+        $data = DB::table('video')
+            ->get();
+
+        // echo '<pre>'.print_r($data, 1).'</pre>';
+
+        return View::make('pages/video-list')->with(array("data"=>$data));
+    }
+
+    public function publish_video()
+    {
+
+        $status = ($_POST['publish']==0) ? 1 : 0;
+
+        DB::table('video')
+            ->where('video_code', $_POST['videoCode'])
+            ->update([
+                'status' => $status,
+            ]);
+
+        Session::flash('status', 'Video has been published! ');
+        Session::flash('alert-class', 'alert-success');
+
+        return back();
+    }
+
+    public function delete_video()
+    {
+
+        $user = Auth::user();
+        if ( Auth::check() ){
+
+            DB::table('video')
+                ->where('video_code', $_POST['video'])
+                ->delete();
+
+            Storage::disk('public')->deleteDirectory('videos/'.$_POST['video']);
+        }
+
+        Session::flash('status', 'The video has been deleted');
+        Session::flash('alert-class', 'alert-success');
+
+        return back();
+
+    }
 
 }

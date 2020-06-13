@@ -111,17 +111,21 @@ class DataController extends Controller
         $unitArray[0] = str_replace(",", "", $unitArray[0]);
         $unitArray[1] = str_replace(",", "", $unitArray[1]);
 
-        // search by purpose
-        if ($request->has('purpose')) {
-            if ($request->purpose == 'Buy') {
-                $query->where('purpose', '["Sale"]');
-                $query->orWhere('purpose', 'Sale');
-            } else {
-                $query->where('purpose', '["Rent"]');
-                $query->orWhere('purpose', 'Rent');
-            }
-            $query->orWhere('purpose', '["Sale", "Rent"]');
+        if (!empty($request->q)){
+            $query->where('property_id', $request->input('q'));
         }
+
+        // // search by purpose
+        // if ($request->has('purpose')) {
+        //     if ($request->purpose == 'Buy') {
+        //         $query->where('purpose', '["Sale"]');
+        //         $query->orWhere('purpose', 'Sale');
+        //     } else {
+        //         $query->where('purpose', '["Rent"]');
+        //         $query->orWhere('purpose', 'Rent');
+        //     }
+        //     $query->orWhere('purpose', '["Sale", "Rent"]');
+        // }
 
         // search by project type
         if ($request->has('propertyType')) {
@@ -347,34 +351,39 @@ class DataController extends Controller
     public function get_vr_property ()
     {
         $allProperties = DB::table('houses')
+            ->select('property_id', 'property_code', 'title', 'vr_url')
             ->whereNotNull('vr_url')
+            ->where('project_type', 2)
             ->where('status', 1)
             ->orderBy('updated_at', 'desc')
             ->paginate(6);
 
         // get first image from json
         foreach ($allProperties as $key => $property) {
-            if ($property->pictures) {
-                $picArray = json_decode($property->pictures);
-                $property->pictures = $picArray[0];
+            // if ($property->pictures) {
+            //     $picArray = json_decode($property->pictures);
+            //     $property->pictures = $picArray[0];
+            // }
+            //
+            // if ($property->features) {
+            //     $property->features = "";
+            // }
+            // if ($property->videos) {
+            //     $property->videos = json_decode($property->videos);
+            // }
+            // if ($property->files) {
+            //     $property->files = json_decode($property->files);
+            // }
+            if ($property->vr_url) {
+                $property->vr_url = json_decode($property->vr_url);
             }
-
-            if ($property->features) {
-                $property->features = "";
-            }
-            if ($property->videos) {
-                $property->videos = json_decode($property->videos);
-            }
-            if ($property->files) {
-                $property->files = json_decode($property->files);
-            }
-            if ($property->description) {
-                $description = json_decode($property->description);
-                $removeTag= str_replace("&nbsp;"," ", $description);
-                $removeTag2 = str_replace(".  "," ", $removeTag);
-                $removeTag3 = str_replace("· "," ", $removeTag2);
-                $property->description = substr(strip_tags($removeTag3), 0, 180);
-            }
+            // if ($property->description) {
+            //     $description = json_decode($property->description);
+            //     $removeTag= str_replace("&nbsp;"," ", $description);
+            //     $removeTag2 = str_replace(".  "," ", $removeTag);
+            //     $removeTag3 = str_replace("· "," ", $removeTag2);
+            //     $property->description = substr(strip_tags($removeTag3), 0, 180);
+            // }
         }
 
         // echo '<pre>'.print_r($allProperties, 1).'</pre>';
@@ -763,6 +772,11 @@ class DataController extends Controller
         if ($myProperty->files) {
             $myProperty->files = json_decode($myProperty->files);
         }
+
+        if ($myProperty->vr_url) {
+            $myProperty->vr_url = json_decode($myProperty->vr_url);
+        }
+
 
 
        $removeTag= str_replace("&nbsp;"," ", $myProperty->description);

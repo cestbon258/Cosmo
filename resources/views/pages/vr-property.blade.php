@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Home')
+@section('title', 'VR Property')
 
 @section('specificScript')
     <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
@@ -26,42 +26,23 @@
 
             <div class="row">
                 @foreach ($properties as $key => $property)
-                    @if ($property->project_type == 1)
+                    @foreach ($property->vr_url as $index => $vr)
+
                         <!-- Single Featured Property -->
                         <div class="col-12 col-md-6 col-xl-4">
                             <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
 
                                 <!-- Property Thumbnail -->
-                                <div class="property-thumb">
-                                    <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
-
-                                    @if ($property->project_status)
-                                        <div class="tag">
-                                            <span>{{$property->project_status}}</span>
-                                        </div>
-                                    @endif
+                                <div class="embed-responsive embed-responsive-4by3 fadeInUp">
+                                    <iframe class="embed-responsive-item" src="{{$vr}}"></iframe>
                                 </div>
-
+                                <a href="{{$vr}}" target="_blank">
+                                    <button type="button" class="btn float-right">Full Screen</button>
+                                </a>
                                 <!-- Property Content -->
                                 <div class="property-content" style="background-color: white;">
-                                    <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:54px;"><h5>{{$property->title}}</h5></div></a>
-                                    <p class="location thumb-space" style="font-size: 16px;">{{$property->city}}</p>
-                                    <h6>Expected Date of Completion</h6>
-                                    <p class="thumb-space">{{$property->time ? $property->time : 'completed' }}</p>
-
-                                    <h6>Price Range</h6>
-                                    <p class="thumb-space">Prices from {{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
-                                    <div class="social">
-                                        <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><div class="whatsapp"></div></a>
-
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><div class="facebook"></div></a>
-
-                                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><div class="linkedin"></div></a>
-
-                                        {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
-
-                                        {{-- @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth --}}
-                                    </div>
+                                    <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:64px;"><h5>{{$property->title}}</h5></div></a>
+                                    <div></div>
                                     <center>
                                         <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">
                                             <button type="button" class="btn south-btn detail-btn">Details</button>
@@ -70,50 +51,7 @@
                                 </div>
                             </div>
                         </div>
-                    @else
-                        <!-- Project Featured Property -->
-                        <div class="col-12 col-md-6 col-xl-4">
-                            <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
-                                <!-- Property Thumbnail -->
-                                <div class="property-thumb">
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
-
-                                        @if ($property->project_status)
-                                            <div class="tag">
-                                                <span>{{$property->project_status}}</span>
-                                            </div>
-                                        @endif
-                                </div>
-
-                                <!-- Property Content -->
-                                <div class="property-content" style="background-color: white;">
-                                    <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:54px;"><h5>{{$property->title}}</h5></div></a>
-                                    <p class="location thumb-space" style="font-size: 16px;">{{$property->city}}</p>
-                                    <h6>Expected Date of Completion</h6>
-                                    <p class="thumb-space">{{$property->completed_date ? $property->completed_date : 'Completed'}}</p>
-
-                                    <h6>Price Range</h6>
-                                    <p class="thumb-space">Prices from {{$property->currency}} {{ number_format($property->price, 0, '.', ',') }}</p>
-                                    <div class="social">
-                                        <a id="shareToWP" href="whatsapp://send?text={{ route('property', [app()->getLocale(), $property->property_code]) }}" data-action="share/whatsapp/share"><div class="whatsapp"></div></a>
-
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><div class="facebook"></div></a>
-
-                                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ route('property', [app()->getLocale(), $property->property_code]) }}&title=&summary=&source=" target="_blank"><div class="linkedin"></div></a>
-
-                                        {{-- <a href="https://twitter.com/home?status={{ route('property', [app()->getLocale(), $property->property_code]) }}" target="_blank"><i class="fa fa-twitter"></i></a> --}}
-
-                                        {{-- @auth<a href="#"  onclick="likeThis('{{$property->property_id}}')"><i class="fa fa-heart" hidden></i></a>@endauth --}}
-                                    </div>
-                                    <center>
-                                        <a href="{{ route('property', [app()->getLocale(), $property->property_code])  }}">
-                                            <button type="button" class="btn south-btn detail-btn">Details</button>
-                                        </a>
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
+                    @endforeach
                 @endforeach
             </div>
         </div>

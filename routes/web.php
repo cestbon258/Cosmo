@@ -50,6 +50,7 @@ Route::group(['prefix' => '{locale}'], function () {
 
     Route::get('/get-districts', 'DataController@get_districts')->name('get_districts');
     Route::get('/media', 'MediaController@media')->name('media');
+    Route::get('/video', 'VideoController@video')->name('video');
 
 
     Route::get('/vr-property', 'DataController@get_vr_property')->name('vr-property');
@@ -104,6 +105,9 @@ Route::group(['prefix' => '{locale}'], function () {
         Route::any('/create-video', 'VideoController@create_video')->name('create-video');
         Route::any('/edit-video/{videoCode}', 'VideoController@edit_video')->name('edit-video');
         Route::any('/update-video/{videoCode}', 'VideoController@update_video')->name('update-video');
+        Route::any('/video-list', 'VideoController@video_list')->name('video-list');
+        Route::post('/publish-video', 'VideoController@publish_video')->name('publish-video');
+        Route::post('/delete-video', 'VideoController@delete_video')->name('delete-video');
 
 
 
