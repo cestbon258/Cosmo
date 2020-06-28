@@ -751,4 +751,10 @@ class ProjectController extends Controller
         // echo '<pre>'.print_r($_POST, 1).'</pre>';
     }
 
+
+    public function test ($token, $email) {
+        dd("token");
+        dd($token);
+    }
+
 }

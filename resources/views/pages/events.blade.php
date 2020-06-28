@@ -37,38 +37,43 @@
             @endif
 
             <div class="row">
-                <div class="col-12">
-                    <div class="section-heading wow fadeInUp">
-                        <img src="{{ url('img/core-img/event-1.jpeg') }}">
-                        {{-- <h4 style="color:red;">{{$events->event_title}}</h4>
-                        <h6>Date and Time: {{$events->event_date}} 6:30-8:30pm</h6>
-                        <h6>RSVP</h6> --}}
-                    </div>
-                    <div class="wow fadeInUp"  data-wow-delay="100ms" style="margin:-70px 20px; font-size: 16px !important;">
+                @foreach ($events as $key => $event)
 
-                        <div class="contact-form">
-                            <form action="{{ route('register_event', app()->getLocale()) }}" method="POST">
-                                @csrf
-                                <input name="eventID" value="{{$events->id}}" hidden>
-                                <input name="eventTitle" value="{{$events->event_title}}" hidden>
-                                <input name="eventDate" value="{{$events->event_date}}" hidden>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="name" id="contact-name" placeholder="Your Name" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" class="form-control" name="phone" id="contact-number" placeholder="Your Phone" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" name="email" id="contact-email" placeholder="Your Email" required>
-                                </div>
-                                <center><button type="submit" class="btn south-btn">Send Message</button></center>
-                            </form>
+                    <div class="col-12">
+                        <div class="section-heading wow fadeInUp">
+                            <img src="{{ url('img/core-img/event-'.$event->id.'.jpeg') }}">
+                            {{-- <h4 style="color:red;">{{$events->event_title}}</h4>
+                            <h6>Date and Time: {{$events->event_date}} 6:30-8:30pm</h6>
+                            <h6>RSVP</h6> --}}
+                        </div>
+                        <div class="wow fadeInUp"  data-wow-delay="100ms" style="margin:-70px 20px; font-size: 16px !important;">
+
+                            <div class="contact-form">
+                                <form action="{{ route('register_event', app()->getLocale()) }}" method="POST">
+                                    @csrf
+                                    <input name="eventID" value="{{$event->id}}" hidden>
+                                    <input name="eventTitle" value="{{$event->event_title}}" hidden>
+                                    <input name="eventDate" value="{{$event->event_date}}" hidden>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="name" id="contact-name" placeholder="Your Name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="tel" class="form-control" name="phone" id="contact-number" placeholder="Your Phone" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="email" id="contact-email" placeholder="Your Email" required>
+                                    </div>
+                                    <center><button type="submit" class="btn south-btn">Send Message</button></center>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-12" style="height:120px;"></div>
+
+                @endforeach
             </div>
         </div>
     </section>
 
-    <div style="height:100px;"></div>
+    <div style="height:80px;"></div>
 @stop

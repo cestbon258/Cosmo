@@ -31,7 +31,10 @@
                         <div class="col-12 col-md-6 col-xl-4">
                             <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
                                 <div class="property-thumb" style="bottom:-6px;">
-                                    <iframe style="width:100%;" height="345" src="{{ URL::asset('storage/videos/'.$record->video_code.'/'.$value) }}" frameborder="0" allow="accelerometer; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    {{-- <iframe style="width:100%;" height="345" src="{{ URL::asset('storage/videos/'.$record->video_code.'/'.$value) }}" frameborder="0" allow="accelerometer; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
+                                    <video controls="true" muted poster={{url('logo/logo.png')}}>
+                                        <source src="{{ URL::asset('storage/videos/'.$record->video_code.'/'.$value) }}" >
+                                    </video>
                                 </div>
                                 <div class="property-content">
                                     {{$record->developer}}

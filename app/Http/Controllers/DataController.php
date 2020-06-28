@@ -1078,7 +1078,8 @@ class DataController extends Controller
     public function events()
     {
         $events = DB::table('events')
-            ->first();
+            ->orderBy('id', 'desc')
+            ->get();
 
         // echo '<pre>'.print_r($events, 1).'</pre>';
         return View::make('pages/events')->with(array("events"=>$events));

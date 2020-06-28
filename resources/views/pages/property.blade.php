@@ -104,11 +104,11 @@
                                     <span style="font-size:16px;">{{$property->property_id}}</span>
                                 </div>
                             @endif --}}
-                            {{-- @if($property->vr_url)
-                                <div class="float-right">
-                                    <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
-                                </div>
-                            @endif --}}
+                            @if(!empty($property->vr_url) && $property->vr_url != '[]')
+                               <div class="vr-icon">
+                                   <img src="{{ url('logo/VR360.png') }}">
+                               </div>
+                            @endif
 
                             <h5 class="card-title">{{$property->title}}</h5>
                             @if(!empty($property->property_id))
@@ -207,11 +207,11 @@
 
 
 
-                            {{-- @if($property->vr_url)
-                                <div class="float-right">
-                                    <a href="{{$property->vr_url}}" target="_blank"><span style="font-size:16px;"><mark><i>VR</i></mark></span></a>
-                                </div>
-                            @endif --}}
+                            @if(!empty($property->vr_url) && $property->vr_url != '[]')
+                               <div class="vr-icon">
+                                   <img src="{{ url('logo/VR360.png') }}">
+                               </div>
+                            @endif
 
                             <h5 class="card-title">{{$property->title}}</h5>
                             @if(!empty($property->property_id))

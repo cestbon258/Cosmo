@@ -45,14 +45,13 @@ class ResetPasswordController extends Controller
     //     )->withInput($request->only('email'));
     // }
     //
-    // public function showResetForm(Request $request, $token)
-    // {
-    //     // dd($token);
-    //
-    //     echo '<pre>'.print_r($request->all(), 1).'</pre>';
-    //     return view('auth.passwords.reset')->with(
-    //         ['token' => $token]
-    //         // ['token' => $token, 'email' => decrypt($request->email)]
-    //     );
-    // }
+    public function showResetForm(Request $request, $token)
+    {
+
+        echo '<pre>'.print_r($request->all(), 1).'</pre>';
+        return view('auth.passwords.reset')->with(
+            ['token' => $token]
+            // ['token' => $token, 'email' => decrypt($request->email)]
+        );
+    }
 }

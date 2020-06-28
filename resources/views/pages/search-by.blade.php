@@ -41,6 +41,12 @@
                                             <span>{{$property->project_status}}</span>
                                         </div>
                                     @endif
+
+                                    @if(!empty($property->vr_url) && $property->vr_url != '[]')
+                                       <div class="vr-icon">
+                                           <img src="{{ url('logo/VR360.png') }}">
+                                       </div>
+                                    @endif
                                 </div>
 
                                 <!-- Property Content -->
@@ -84,8 +90,14 @@
                                                 <span>{{$property->project_status}}</span>
                                             </div>
                                         @endif
-                                </div>
 
+                                        @if(!empty($property->vr_url) && $property->vr_url != '[]')
+                                           <div class="vr-icon">
+                                               <img src="{{ url('logo/VR360.png') }}">
+                                           </div>
+                                        @endif
+                                </div>
+                                
                                 <!-- Property Content -->
                                 <div class="property-content" style="background-color: white;">
                                     <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><div style="height:54px;"><h5>{{$property->title}}</h5></div></a>

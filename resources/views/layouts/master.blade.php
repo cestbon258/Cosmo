@@ -1,14 +1,13 @@
-<!-- Stored in resources/views/layouts/master.blade.php -->
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     @yield('sharing')
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>Cosmo - Global Real Estate | @yield('title')</title>
@@ -43,7 +42,6 @@
     <script src="{{ asset('js/nouislider.js') }}"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.0.4/wNumb.min.js'></script>
     <style>
-
         .noUi-connect {
         	background: #947054;
         }
@@ -194,6 +192,7 @@
 
                             <li><a href="{{ route('vr-property', app()->getLocale()) }}">VR</a></li>
                             <li><a href="{{ route('media', app()->getLocale()) }}">Media</a></li>
+                            <li><a href="{{ route('video', app()->getLocale()) }}">Video</a></li>
 
                             <li><a href="{{ route('events', app()->getLocale()) }}">Events</a></li>
 

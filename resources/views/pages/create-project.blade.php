@@ -219,6 +219,7 @@
                                         <label for="currency">Currency</label>
                                         <select class="form-control" name="currency" required>
                                             <option>AUD</option>
+                                            <option>AED</option>
                                             <option>GBP</option>
                                             <option>HKD</option>
                                             <option>RMB</option>

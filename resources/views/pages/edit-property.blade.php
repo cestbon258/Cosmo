@@ -176,6 +176,7 @@
                                         <label for="currency">Currency</label>
                                         <select class="form-control" name="currency" required>
                                             <option {{$property->currency =='AUD' ? 'selected' : ''}}>AUD</option>
+                                            <option {{$property->currency =='AED' ? 'selected' : ''}}>AED</option>
                                             <option {{$property->currency =='GBP' ? 'selected' : ''}}>GBP</option>
                                             <option {{$property->currency =='HKD' ? 'selected' : ''}}>HKD</option>
                                             <option {{$property->currency =='RMB' ? 'selected' : ''}}>RMB</option>

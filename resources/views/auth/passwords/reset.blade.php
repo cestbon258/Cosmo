@@ -1,4 +1,4 @@
-@extends('layouts.master')
+{{-- @extends('layouts.master') --}}
 
 @section('content')
 <div style="height:120px;"></div>
@@ -10,9 +10,11 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.update', app()->getLocale()) }}">
+                    {{-- <form method="POST" action="{{ route('password.update', app()->getLocale()) }}"> --}}
                         @csrf
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+                        <input  name="token" value="{{ $token }}">
+                        {{-- <input type="hidden" name="token" value="{{ $token }}"> --}}
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>

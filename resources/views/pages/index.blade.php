@@ -416,11 +416,20 @@
                                 <!-- Property Thumbnail -->
                                 <div class="property-thumb">
                                     <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/properties/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
+                                    {{-- <div class="tag">
+                                        <span>For Sale</span>
+                                    </div> --}}
 
                                     @if ($property->project_status)
                                         <div class="tag">
                                             <span>{{$property->project_status}}</span>
                                         </div>
+                                    @endif
+
+                                    @if(!empty($property->vr_url) && $property->vr_url != '[]')
+                                       <div class="vr-icon">
+                                           <img src="{{ url('logo/VR360.png') }}">
+                                       </div>
                                     @endif
                                 </div>
 
@@ -457,6 +466,7 @@
                         <div class="col-12 col-md-6 col-xl-4">
                             <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
                                 <!-- Property Thumbnail -->
+
                                 <div class="property-thumb">
                                         <a href="{{ route('property', [app()->getLocale(), $property->property_code]) }}"><img style="width: 100%;" src="{{url('storage/projects/'.$property->property_code.'/thumbnails'.'/'.$property->pictures)}}"></a>
 
@@ -464,6 +474,12 @@
                                             <div class="tag">
                                                 <span>{{$property->project_status}}</span>
                                             </div>
+                                        @endif
+
+                                        @if(!empty($property->vr_url) && $property->vr_url != '[]')
+                                           <div class="vr-icon">
+                                               <img src="{{ url('logo/VR360.png') }}">
+                                           </div>
                                         @endif
                                 </div>
 
@@ -1077,6 +1093,7 @@
             min-width: 54px !important;
             border-radius: 35px !important;
         }
+
     </style>
 
 @stop

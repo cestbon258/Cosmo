@@ -337,7 +337,14 @@
                                             <span>{{$property->project_status}}</span>
                                         </div>
                                     @endif
+
+                                    @if(!empty($property->vr_url) && $property->vr_url != '[]')
+                                       <div class="vr-icon">
+                                           <img src="{{ url('logo/VR360.png') }}">
+                                       </div>
+                                    @endif
                                 </div>
+
 
                                 <!-- Property Content -->
                                 <div class="property-content" style="background-color: white;">
@@ -380,7 +387,14 @@
                                                 <span>{{$property->project_status}}</span>
                                             </div>
                                         @endif
+
+                                        @if(!empty($property->vr_url) && $property->vr_url != '[]')
+                                           <div class="vr-icon">
+                                               <img src="{{ url('logo/VR360.png') }}">
+                                           </div>
+                                        @endif
                                 </div>
+
 
                                 <!-- Property Content -->
                                 <div class="property-content" style="background-color: white;">

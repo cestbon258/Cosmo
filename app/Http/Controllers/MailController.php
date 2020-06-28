@@ -41,7 +41,7 @@ class MailController extends Controller
             Mail::send('mail', $data, function($message) use($data, $email) {
                 $message->to($email)->subject
                     ('Cosmo - Global Real Estate');
-                $message->from('admin@icosmo.co', 'Cosmo');
+                $message->from('cs@icosmo.co', 'Cosmo');
                 // $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
             });
         }
@@ -80,7 +80,7 @@ class MailController extends Controller
             Mail::send('more-info', $data, function($message) use($data, $email) {
                 $message->to($email)->subject
                     ('Cosmo - Global Real Estate');
-                $message->from('admin@icosmo.co', 'Cosmo');
+                $message->from('cs@icosmo.co', 'Cosmo');
                 // $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
             });
         }
@@ -114,7 +114,8 @@ class MailController extends Controller
         $emailArray = array(
             $email,
             'angelo@icosmo.co',
-            'stephen@icosmo.co'
+            'stephen@icosmo.co',
+            'cs@icosmo.co'
         );
 
 
@@ -135,10 +136,10 @@ class MailController extends Controller
 
         foreach ($emailArray as $email) {
             // Mail::send([], [], function($message) use($html, $data) {
-            Mail::send('register-event', $data, function($message) use($data, $email) {
+            Mail::send('register-event', $data, function($message) use($data, $email, $eventTitle) {
                 $message->to($email)->subject
-                    ('Cosmo - Global Real Estate');
-                $message->from('admin@icosmo.co', 'Cosmo');
+                    ('Event registration: '. $eventTitle);
+                $message->from('cs@icosmo.co', 'Cosmo');
                 // $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
             });
         }

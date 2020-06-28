@@ -125,6 +125,7 @@ Route::group(['prefix' => '{locale}'], function () {
 
     });
 
+
     Auth::routes();
 
 
@@ -134,11 +135,17 @@ Route::group(['prefix' => '{locale}'], function () {
 
 });
 
+// Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+// Route::get('/password/reset/{token}/{email}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 
 
 
 
 
+// Route::get('/password/reset/{email}', 'ProjectController@test')->name('password.reset');
+
+Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 
 
 Route::get('storage/{filename}', function ($filename) {

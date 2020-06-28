@@ -304,3 +304,12 @@ video {
     background: #947053;
     cursor: pointer;
 }
+
+.vr-icon {
+    /* padding: 0 20px; */
+    display: inline-block;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 10;
+}
