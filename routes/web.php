@@ -125,6 +125,9 @@ Route::group(['prefix' => '{locale}'], function () {
 
     });
 
+    // Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+
+
 
     Auth::routes();
 
@@ -145,7 +148,7 @@ Route::group(['prefix' => '{locale}'], function () {
 
 // Route::get('/password/reset/{email}', 'ProjectController@test')->name('password.reset');
 
-Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+// Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 
 
 Route::get('storage/{filename}', function ($filename) {
