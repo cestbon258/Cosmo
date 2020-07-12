@@ -138,7 +138,7 @@ class MailController extends Controller
             // Mail::send([], [], function($message) use($html, $data) {
             Mail::send('register-event', $data, function($message) use($data, $email, $eventTitle) {
                 $message->to($email)->subject
-                    ('Event registration: '. $eventTitle);
+                    ('Event registration for '. $eventTitle);
                 $message->from('cs@icosmo.co', 'Cosmo');
                 // $message->setBody($html, 'text/html' ); // dont miss the '<html></html>' or your spam score will increase !
             });

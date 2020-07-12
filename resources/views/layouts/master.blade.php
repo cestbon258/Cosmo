@@ -322,7 +322,7 @@
                 </div>
 
                 <!-- Single Footer Widget -->
-                <div class="col-12 col-sm-6 col-xl-3">
+                {{-- <div class="col-12 col-sm-6 col-xl-3">
                     <div class="footer-widget-area mb-100">
                         <!-- Widget Title -->
                         <div class="widget-title">
@@ -344,7 +344,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>
